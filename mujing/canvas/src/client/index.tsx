@@ -718,6 +718,7 @@ function StudioShell({ mode, renderDirectorChat }: {
   const [renamingTitle, setRenamingTitle] = useState<string | null>(null)
   const [err, setErr] = useState<string | null>(null)
   const [toast, setToast] = useState<string | null>(null)
+  const [sseReconnecting, setSseReconnecting] = useState(false)
 
   const openDirectorDrawer = useCallback((): void => {
     setDirectorEverOpened(true)
@@ -781,17 +782,37 @@ function StudioShell({ mode, renderDirectorChat }: {
 
   // SSE 订阅当前项目实时状态（含画布、短剧流水线、分镜配音、时间线与撤销栈）
   useEffect(() => {
-    if (!activeId) { setProject(null); return }
+    if (!activeId) {
+      setProject(null)
+      setSseReconnecting(false)
+      return
+    }
     let closed = false
+    setSseReconnecting(false)
     const es = new EventSource(`${API}/projects/${activeId}/events`, { withCredentials: true })
+    es.onopen = () => {
+      if (!closed) setSseReconnecting(false)
+    }
+    es.onerror = () => {
+      if (!closed) setSseReconnecting(true)
+    }
     es.addEventListener('snapshot', e => {
       if (closed) return
-      const snap = JSON.parse((e as MessageEvent<string>).data) as ProjectWithHistory
-      setProject(snap)
-      upsertAppProjectSummary(summarizeProject(snap))
+      try {
+        const snap = JSON.parse((e as MessageEvent<string>).data) as ProjectWithHistory
+        setSseReconnecting(false)
+        setProject(snap)
+        upsertAppProjectSummary(summarizeProject(snap))
+      } catch {
+        // 忽略损坏的 SSE 帧，避免整页崩溃
+      }
     })
     es.addEventListener('deleted', () => {
-      if (!closed) { setProject(null); void refreshAppProjects() }
+      if (!closed) {
+        setSseReconnecting(false)
+        setProject(null)
+        void refreshAppProjects()
+      }
     })
     return () => { closed = true; es.close() }
   }, [activeId])
@@ -862,6 +883,7 @@ function StudioShell({ mode, renderDirectorChat }: {
     <div className={`${css.page} ${isSplit ? css.pageSplit : ''}`} data-studio-mode={mode}>
       <section className={css.stage}>
         {err !== null && <div className={css.errorBar} onClick={() => setErr(null)}>{err}（点击关闭）</div>}
+        {sseReconnecting && <div className={css.toastBar}>实时同步连接已断开，正在自动重连…</div>}
         {toast !== null && <div className={css.toastBar} onClick={() => setToast(null)}>{toast}</div>}
 
         {/* 统一顶部工具栏：全屏以当前剧目与「✨ AI 导演」为主角，分屏采用规整双层栏 */}

@@ -51,6 +51,7 @@ function makeTestService(dir: string) {
   Object.assign(svc, {
     dataDir: dir,
     store: new ProjectStore(dir),
+    running: new Map(),
     media: new MediaService(
       dir,
       { apiKeyEnv: 'NONE', model: 'img', size: '1024x1024', flavor: 'openai' },
@@ -202,5 +203,75 @@ test('populateTimelineFromEpisode preserves all per-shot audioClips and exportJi
   } finally {
     await rm(dir, { recursive: true, force: true })
     await rm(exportRoot, { recursive: true, force: true })
+  }
+})
+
+test('renderTimeline does not overwrite concurrent timeline edits made during rendering', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'mujing-render-race-'))
+  try {
+    const svc = makeTestService(dir)
+    const proj = await svc.store.create('并发渲染测试')
+    await svc.saveTimeline(proj.id, {
+      clips: [
+        { id: 'c1', title: '片段1', url: '/mujing/assets/v1.mp4', durationMs: 4000, caption: '旧字幕' },
+      ],
+    })
+
+    // Stub probeMedia and concatVideos; mutate timeline mid-render to simulate concurrent user edit
+    svc.media.probeMedia = async () => ({ durationMs: 4200, width: 720, height: 1280, hasAudio: false })
+    svc.media.concatVideos = async () => {
+      await svc.saveTimeline(proj.id, {
+        clips: [
+          { id: 'c1', title: '片段1', url: '/mujing/assets/v1.mp4', durationMs: 4000, caption: '渲染期间新改的字幕' },
+          { id: 'c2', title: '渲染期间新增的片段2', url: '/mujing/assets/v2.mp4', durationMs: 5000 },
+        ],
+      })
+      return { url: '/mujing/assets/final.mp4', durationMs: 4200, width: 720, height: 1280, subtitlesBurned: false }
+    }
+
+    const after = await svc.renderTimeline(proj.id)
+    assert.equal(after.timeline?.outputUrl, '/mujing/assets/final.mp4')
+    assert.equal(after.timeline?.clips.length, 2, 'concurrently added clip must not be overwritten')
+    assert.equal(after.timeline?.clips[0].caption, '渲染期间新改的字幕', 'concurrently edited caption must be preserved')
+    assert.equal(after.timeline?.clips[0].durationMs, 4200, 'matching clip durationMs should be backfilled')
+    assert.equal(after.timeline?.clips[1].id, 'c2')
+  } finally {
+    await rm(dir, { recursive: true, force: true })
+  }
+})
+
+test('generateDramaShotMedia persists completed shots incrementally even if a later shot fails', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'mujing-shot-inc-'))
+  try {
+    const svc = makeTestService(dir)
+    const proj = await svc.store.create('分镜增量落盘测试')
+    await svc.saveDrama(proj.id, {
+      aspectRatio: '9:16',
+      episodes: [{
+        number: 1,
+        title: '第一集',
+        shots: [
+          { action: '镜头一', dialogue: '第一句', durationMs: 3000 },
+          { action: '镜头二', dialogue: '第二句', durationMs: 3000 },
+        ],
+      }],
+    })
+    const ep = (await svc.store.get(proj.id)).drama!.episodes[0]
+    let callCount = 0
+    svc.media.generateImage = async () => {
+      callCount++
+      if (callCount === 1) return { url: '/mujing/assets/shot1.png', model: 'mock-img' }
+      throw new Error('simulated failure on shot 2')
+    }
+
+    const res = await svc.generateDramaShotMedia(proj.id, ep.id, { kind: 'keyframe' })
+    assert.equal(res.generated.length, 2)
+    const cur = await svc.store.get(proj.id)
+    const updatedEp = cur.drama!.episodes[0]
+    assert.equal(updatedEp.shots[0].keyframeUrl, '/mujing/assets/shot1.png')
+    assert.ok(updatedEp.shots[0].keyframeNodeId)
+    assert.equal(updatedEp.shots[1].keyframeUrl, undefined)
+  } finally {
+    await rm(dir, { recursive: true, force: true })
   }
 })

@@ -23,7 +23,7 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/client/index.tsx
+// mujing/canvas/src/client/index.tsx
 var index_exports = {};
 __export(index_exports, {
   default: () => index_default
@@ -31,7 +31,7 @@ __export(index_exports, {
 module.exports = __toCommonJS(index_exports);
 var import_react7 = require("react");
 
-// src/client/studio-bus.ts
+// mujing/canvas/src/client/studio-bus.ts
 var API = "/mujing/api";
 var PANEL_ID = "mujing.canvas";
 var STUDIO_TAB_ID = "mujing.studio.tab";
@@ -202,6 +202,24 @@ var navBridge = null;
 var listeners = /* @__PURE__ */ new Set();
 var directorSender = null;
 var pendingDirectorPrompt = null;
+var pendingPromptTimer = null;
+function clearPendingPromptTimer() {
+  if (pendingPromptTimer !== null) {
+    clearInterval(pendingPromptTimer);
+    pendingPromptTimer = null;
+  }
+}
+function tryDeliverPendingPrompt() {
+  if (!pendingDirectorPrompt || !directorSender) return false;
+  const prompt = pendingDirectorPrompt;
+  pendingDirectorPrompt = null;
+  if (directorSender(prompt)) {
+    clearPendingPromptTimer();
+    return true;
+  }
+  pendingDirectorPrompt = prompt;
+  return false;
+}
 function setStudioBridge(bridge) {
   navBridge = bridge;
 }
@@ -245,16 +263,13 @@ function emitStudioIntent(intent) {
 function registerDirectorSender(fn) {
   directorSender = fn;
   if (fn && pendingDirectorPrompt) {
-    const prompt = pendingDirectorPrompt;
-    pendingDirectorPrompt = null;
-    if (!fn(prompt)) {
-      pendingDirectorPrompt = prompt;
-    }
+    tryDeliverPendingPrompt();
   }
 }
 function dispatchDirectorPrompt(prompt, options) {
   const clean = prompt.trim();
   if (!clean) return;
+  clearPendingPromptTimer();
   if (options?.freshSession) {
     navBridge?.newDirectorSession();
   }
@@ -263,11 +278,14 @@ function dispatchDirectorPrompt(prompt, options) {
     return;
   }
   pendingDirectorPrompt = clean;
-  setTimeout(() => {
-    if (pendingDirectorPrompt && directorSender && directorSender(pendingDirectorPrompt)) {
-      pendingDirectorPrompt = null;
+  const deadline = Date.now() + 2500;
+  const startAfter = options?.freshSession ? Date.now() + 120 : Date.now();
+  pendingPromptTimer = setInterval(() => {
+    if (Date.now() < startAfter) return;
+    if (!pendingDirectorPrompt || tryDeliverPendingPrompt() || Date.now() >= deadline) {
+      clearPendingPromptTimer();
     }
-  }, options?.freshSession ? 450 : 120);
+  }, 50);
 }
 function summarizeProject(snap) {
   const coverUrl = snap.drama?.casts.find((c) => c.imageUrl)?.imageUrl ?? snap.drama?.episodes[0]?.shots.find((s) => s.keyframeUrl)?.keyframeUrl ?? snap.nodes.find((n) => n.type === "image" && n.url)?.url;
@@ -285,10 +303,10 @@ function summarizeProject(snap) {
   };
 }
 
-// src/client/tool-views.tsx
+// mujing/canvas/src/client/tool-views.tsx
 var import_react = require("react");
 
-// src/client/style.css
+// mujing/canvas/src/client/style.css
 var css = `/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 \u5E55\u5883\u6C38\u4E45\u5168\u5C40\u4E3B\u5E94\u7528\u5916\u58F3\uFF08\u8DE8 \u5E55\u5883\u5DE5\u4F5C\u53F0 / \u6280\u80FD\u4E0E\u63D2\u4EF6 / \u5BFC\u6F14\u4F1A\u8BDD \u7EDF\u4E00\u751F\u6548\uFF0C\u7EDD\u4E0D\u9000\u56DE DSH \u539F\u5E03\u5C40\uFF09 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
 /* \u6CE8\uFF1Abuild.mjs \u4EC5\u5BF9 .className \u52A0 mj- \u524D\u7F00\uFF0C\u5C5E\u6027\u9009\u62E9\u5668\u4FDD\u6301\u5168\u5C40\u751F\u6548\uFF0C\u4E0D\u6539 deepseek-harness \u6838\u5FC3\u4EE3\u7801 */
 
@@ -3796,7 +3814,7 @@ if (typeof document !== "undefined" && !document.getElementById("mujing-style"))
 }
 var style_default = { "page": "mj-page", "pageSplit": "mj-pageSplit", "projects": "mj-projects", "projectsHead": "mj-projectsHead", "brandWrap": "mj-brandWrap", "brand": "mj-brand", "headActions": "mj-headActions", "projectList": "mj-projectList", "projectItem": "mj-projectItem", "projectActive": "mj-projectActive", "projectMain": "mj-projectMain", "projectRowTop": "mj-projectRowTop", "projectThumb": "mj-projectThumb", "projectThumbEmpty": "mj-projectThumbEmpty", "projectTextCol": "mj-projectTextCol", "projectTitle": "mj-projectTitle", "projectMeta": "mj-projectMeta", "ratioTag": "mj-ratioTag", "empty": "mj-empty", "tip": "mj-tip", "tipHead": "mj-tipHead", "linkBtn": "mj-linkBtn", "mediaState": "mj-mediaState", "ok": "mj-ok", "warn": "mj-warn", "stage": "mj-stage", "emptyStageCard": "mj-emptyStageCard", "emptyStageIcon": "mj-emptyStageIcon", "inlineEngineRow": "mj-inlineEngineRow", "toastBar": "mj-toastBar", "errorBar": "mj-errorBar", "topBar": "mj-topBar", "topBarSplit": "mj-topBarSplit", "topBarRow": "mj-topBarRow", "splitProjectBar": "mj-splitProjectBar", "projectSelect": "mj-projectSelect", "splitNavBar": "mj-splitNavBar", "splitTabBtn": "mj-splitTabBtn", "splitTabActive": "mj-splitTabActive", "tabCount": "mj-tabCount", "boardTitle": "mj-boardTitle", "boardTitleBtn": "mj-boardTitleBtn", "renameInput": "mj-renameInput", "modeTabs": "mj-modeTabs", "tabBtn": "mj-tabBtn", "tabActive": "mj-tabActive", "topRight": "mj-topRight", "btnIcon": "mj-btnIcon", "btnAccentGhost": "mj-btnAccentGhost", "boardWrap": "mj-boardWrap", "sep": "mj-sep", "board": "mj-board", "boardDrop": "mj-boardDrop", "boardHint": "mj-boardHint", "boardDock": "mj-boardDock", "dockBtn": "mj-dockBtn", "dockZoom": "mj-dockZoom", "dockIconBtn": "mj-dockIconBtn", "world": "mj-world", "edges": "mj-edges", "edge": "mj-edge", "edgeDraft": "mj-edgeDraft", "node": "mj-node", "nodeSelected": "mj-nodeSelected", "nodeHead": "mj-nodeHead", "nodeType": "mj-nodeType", "nodeTitle": "mj-nodeTitle", "nodeStatus": "mj-nodeStatus", "nodeBody": "mj-nodeBody", "nodeModel": "mj-nodeModel", "textBody": "mj-textBody", "promptPreview": "mj-promptPreview", "media": "mj-media", "audioBody": "mj-audioBody", "audioPlayer": "mj-audioPlayer", "audioCaption": "mj-audioCaption", "loading": "mj-loading", "spinner": "mj-spinner", "errText": "mj-errText", "handle": "mj-handle", "boardEmpty": "mj-boardEmpty", "inspector": "mj-inspector", "inspectorHead": "mj-inspectorHead", "field": "mj-field", "refs": "mj-refs", "refChip": "mj-refChip", "actions": "mj-actions", "btn": "mj-btn", "btnPrimary": "mj-btnPrimary", "btnDanger": "mj-btnDanger", "iconBtn": "mj-iconBtn", "link": "mj-link", "dim": "mj-dim", "panelScroll": "mj-panelScroll", "panelInner": "mj-panelInner", "sectionCard": "mj-sectionCard", "sectionHead": "mj-sectionHead", "sectionTitle": "mj-sectionTitle", "stepNum": "mj-stepNum", "badge": "mj-badge", "badgeOk": "mj-badgeOk", "badgeAccent": "mj-badgeAccent", "bibleBar": "mj-bibleBar", "bibleBarLeft": "mj-bibleBarLeft", "bibleStyleText": "mj-bibleStyleText", "bibleBarRight": "mj-bibleBarRight", "bibleStats": "mj-bibleStats", "gridRow": "mj-gridRow", "inlineEditorBox": "mj-inlineEditorBox", "castGrid": "mj-castGrid", "castCard": "mj-castCard", "castPreview": "mj-castPreview", "castOverlayKind": "mj-castOverlayKind", "castOverlayLock": "mj-castOverlayLock", "castOverlayPending": "mj-castOverlayPending", "castMetaBody": "mj-castMetaBody", "castHeadLine": "mj-castHeadLine", "castName": "mj-castName", "voiceTag": "mj-voiceTag", "castRoleLine": "mj-castRoleLine", "castAppearanceText": "mj-castAppearanceText", "castFootActions": "mj-castFootActions", "epCard": "mj-epCard", "epHeroCard": "mj-epHeroCard", "epHeroVideoPortrait": "mj-epHeroVideoPortrait", "epHeroVideoLandscape": "mj-epHeroVideoLandscape", "epHeroInfo": "mj-epHeroInfo", "epHeroSynopsis": "mj-epHeroSynopsis", "epHeroTags": "mj-epHeroTags", "epTagLine": "mj-epTagLine", "epMetaBanner": "mj-epMetaBanner", "epHookRow": "mj-epHookRow", "subSectionHeader": "mj-subSectionHeader", "shotStripList": "mj-shotStripList", "shotStrip": "mj-shotStrip", "shotStripThumbCol": "mj-shotStripThumbCol", "shotKfBox": "mj-shotKfBox", "shotKfEmpty": "mj-shotKfEmpty", "shotThumbBadge": "mj-shotThumbBadge", "shotStripBody": "mj-shotStripBody", "shotCardTop": "mj-shotCardTop", "shotIdxBadge": "mj-shotIdxBadge", "shotCameraMeta": "mj-shotCameraMeta", "shotSceneChip": "mj-shotSceneChip", "shotMiniBtns": "mj-shotMiniBtns", "miniBtn": "mj-miniBtn", "miniBtnDanger": "mj-miniBtnDanger", "shotActionText": "mj-shotActionText", "shotDialogueBox": "mj-shotDialogueBox", "shotDialogueRow": "mj-shotDialogueRow", "shotDialogueText": "mj-shotDialogueText", "shotAudioPlayer": "mj-shotAudioPlayer", "segList": "mj-segList", "segCard": "mj-segCard", "segVideo": "mj-segVideo", "segPlaceholder": "mj-segPlaceholder", "segHandoffRow": "mj-segHandoffRow", "segHandoffSelect": "mj-segHandoffSelect", "segPromptPreview": "mj-segPromptPreview", "timelineLayout": "mj-timelineLayout", "timelineTracksCol": "mj-timelineTracksCol", "timelineMonitorCol": "mj-timelineMonitorCol", "filmstripBar": "mj-filmstripBar", "filmstripSeg": "mj-filmstripSeg", "filmstripAudioDot": "mj-filmstripAudioDot", "clipRow": "mj-clipRow", "clipThumbWrap": "mj-clipThumbWrap", "clipThumb": "mj-clipThumb", "clipInfo": "mj-clipInfo", "clipTopLine": "mj-clipTopLine", "clipTitle": "mj-clipTitle", "clipFieldRow": "mj-clipFieldRow", "clipInlineInput": "mj-clipInlineInput", "clipAudioSelect": "mj-clipAudioSelect", "monitorVideo": "mj-monitorVideo", "srtDetails": "mj-srtDetails", "srtSummary": "mj-srtSummary", "srtBox": "mj-srtBox", "modalBackdrop": "mj-modalBackdrop", "modalCard": "mj-modalCard", "pillRow": "mj-pillRow", "pillBtn": "mj-pillBtn", "pillActive": "mj-pillActive", "modalFooter": "mj-modalFooter", "headerActionGroup": "mj-headerActionGroup", "headerStudioBtn": "mj-headerStudioBtn", "headerFullBtn": "mj-headerFullBtn", "headerStudioDot": "mj-headerStudioDot", "starterDock": "mj-starterDock", "starterHead": "mj-starterHead", "starterBrand": "mj-starterBrand", "starterHeadRight": "mj-starterHeadRight", "starterStudioBtn": "mj-starterStudioBtn", "starterClose": "mj-starterClose", "starterGrid": "mj-starterGrid", "starterCard": "mj-starterCard", "starterBadge": "mj-starterBadge", "starterTitle": "mj-starterTitle", "starterDesc": "mj-starterDesc", "toolCard": "mj-toolCard", "toolCardHead": "mj-toolCardHead", "toolDotRun": "mj-toolDotRun", "toolDotOk": "mj-toolDotOk", "toolDotErr": "mj-toolDotErr", "toolBadge": "mj-toolBadge", "toolTitle": "mj-toolTitle", "toolStatusText": "mj-toolStatusText", "toolHeadBtns": "mj-toolHeadBtns", "toolActionBtn": "mj-toolActionBtn", "toolGhostBtn": "mj-toolGhostBtn", "toolBodyRow": "mj-toolBodyRow", "toolBodyCol": "mj-toolBodyCol", "toolPills": "mj-toolPills", "toolPill": "mj-toolPill", "toolDimLine": "mj-toolDimLine", "toolEpRow": "mj-toolEpRow", "toolMediaGrid": "mj-toolMediaGrid", "toolMediaTile": "mj-toolMediaTile", "toolThumbImg": "mj-toolThumbImg", "toolThumbVideo": "mj-toolThumbVideo", "toolThumbPlaceholder": "mj-toolThumbPlaceholder", "toolTileCap": "mj-toolTileCap", "toolSingleImg": "mj-toolSingleImg", "toolFinalVideoBox": "mj-toolFinalVideoBox", "toolVideoPlayer": "mj-toolVideoPlayer", "toolAudio": "mj-toolAudio", "toolCode": "mj-toolCode", "toolErrBody": "mj-toolErrBody", "toolRawBox": "mj-toolRawBox", "brandBadge": "mj-brandBadge", "brandTextCol": "mj-brandTextCol", "brandSub": "mj-brandSub", "brandSlotMark": "mj-brandSlotMark", "brandSlotName": "mj-brandSlotName", "railNavGroup": "mj-railNavGroup", "railNavBtn": "mj-railNavBtn", "railNavBtnActive": "mj-railNavBtnActive", "railSectionLabel": "mj-railSectionLabel", "railFooter": "mj-railFooter", "engineBar": "mj-engineBar", "engineDotOk": "mj-engineDotOk", "engineDotWarn": "mj-engineDotWarn", "engineBtnOk": "mj-engineBtnOk", "engineBtnErr": "mj-engineBtnErr", "runtimeBar": "mj-runtimeBar", "runtimeBtn": "mj-runtimeBtn", "studioBody": "mj-studioBody", "studioMain": "mj-studioMain", "btnDirector": "mj-btnDirector", "btnDirectorActive": "mj-btnDirectorActive", "directorBadge": "mj-directorBadge", "directorDrawer": "mj-directorDrawer", "directorDrawerClosed": "mj-directorDrawerClosed", "directorHeader": "mj-directorHeader", "directorTitle": "mj-directorTitle", "directorSub": "mj-directorSub", "directorBody": "mj-directorBody", "directorChatHost": "mj-directorChatHost", "hubWrap": "mj-hubWrap", "hubHero": "mj-hubHero", "hubBadge": "mj-hubBadge", "hubHeading": "mj-hubHeading", "hubSub": "mj-hubSub", "hubComposer": "mj-hubComposer", "hubPromptInput": "mj-hubPromptInput", "hubComposerBar": "mj-hubComposerBar", "hubComposerHint": "mj-hubComposerHint", "hubSection": "mj-hubSection", "hubSectionHead": "mj-hubSectionHead", "hubGrid3": "mj-hubGrid3", "hubTemplateCard": "mj-hubTemplateCard", "hubTemplateCover": "mj-hubTemplateCover", "hubTemplateBadge": "mj-hubTemplateBadge", "hubTemplateRatio": "mj-hubTemplateRatio", "hubTemplateBody": "mj-hubTemplateBody", "hubTemplateTitle": "mj-hubTemplateTitle", "hubTemplateDesc": "mj-hubTemplateDesc", "hubTemplateCta": "mj-hubTemplateCta", "hubProjectGrid": "mj-hubProjectGrid", "hubProjectCard": "mj-hubProjectCard", "hubProjectCover": "mj-hubProjectCover", "hubProjectCoverImg": "mj-hubProjectCoverImg", "hubProjectCoverEmpty": "mj-hubProjectCoverEmpty", "hubProjectRatio": "mj-hubProjectRatio", "hubProjectDel": "mj-hubProjectDel", "hubProjectInfo": "mj-hubProjectInfo", "hubProjectTitle": "mj-hubProjectTitle", "hubProjectMeta": "mj-hubProjectMeta", "hubNewCard": "mj-hubNewCard", "hubNewPlus": "mj-hubNewPlus", "appRail": "mj-appRail", "appRailCollapsed": "mj-appRailCollapsed", "railModalRoot": "mj-railModalRoot", "railErrBar": "mj-railErrBar", "railCollapsedTop": "mj-railCollapsedTop", "railCollapsedFoot": "mj-railCollapsedFoot", "railCollapsedProjects": "mj-railCollapsedProjects", "brandBadgeBtn": "mj-brandBadgeBtn", "railIconBtn": "mj-railIconBtn", "railIconBtnActive": "mj-railIconBtnActive", "railIconProj": "mj-railIconProj", "railIconProjActive": "mj-railIconProjActive", "railIconThumb": "mj-railIconThumb", "railSessionsBox": "mj-railSessionsBox", "railSessionsHead": "mj-railSessionsHead", "railSessionsList": "mj-railSessionsList", "railSessionBtn": "mj-railSessionBtn", "railSessionBtnActive": "mj-railSessionBtnActive", "railSessionTitle": "mj-railSessionTitle", "railSessionEmpty": "mj-railSessionEmpty", "runtimeBtnActive": "mj-runtimeBtnActive", "directorSessionBar": "mj-directorSessionBar", "directorSessionSelect": "mj-directorSessionSelect", "directorChatInner": "mj-directorChatInner", "railIconBtnErr": "mj-railIconBtnErr", "hubEngineRow": "mj-hubEngineRow", "hubEngineLabel": "mj-hubEngineLabel", "hubEngineChipOk": "mj-hubEngineChipOk", "hubEngineChipErr": "mj-hubEngineChipErr", "mediaModalCard": "mj-mediaModalCard", "engineCount": "mj-engineCount", "mediaTabCount": "mj-mediaTabCount", "mediaStatusBar": "mj-mediaStatusBar", "mediaPoolBar": "mj-mediaPoolBar", "mediaPoolHead": "mj-mediaPoolHead", "mediaPoolTitle": "mj-mediaPoolTitle", "mediaStrategyRow": "mj-mediaStrategyRow", "mediaCheckRow": "mj-mediaCheckRow", "mediaEndpointList": "mj-mediaEndpointList", "mediaEndpointCard": "mj-mediaEndpointCard", "mediaEndpointCardDisabled": "mj-mediaEndpointCardDisabled", "mediaEndpointHead": "mj-mediaEndpointHead", "mediaEndpointHeadLeft": "mj-mediaEndpointHeadLeft", "mediaEndpointIdx": "mj-mediaEndpointIdx", "mediaEndpointName": "mj-mediaEndpointName", "mediaEndpointTag": "mj-mediaEndpointTag", "mediaEndpointTagOk": "mj-mediaEndpointTagOk", "mediaEndpointTagWarn": "mj-mediaEndpointTagWarn", "mediaEndpointTagErr": "mj-mediaEndpointTagErr", "mediaEndpointHeadActions": "mj-mediaEndpointHeadActions", "mediaMiniToggle": "mj-mediaMiniToggle", "mediaMiniToggleOff": "mj-mediaMiniToggleOff", "mediaEndpointBody": "mj-mediaEndpointBody", "mediaEndpointSummary": "mj-mediaEndpointSummary", "mediaEndpointUrl": "mj-mediaEndpointUrl", "mediaEndpointErrNote": "mj-mediaEndpointErrNote", "mediaModalSub": "mj-mediaModalSub", "mediaTabRow": "mj-mediaTabRow", "mediaTab": "mj-mediaTab", "mediaTabActive": "mj-mediaTabActive", "mediaTabDotOk": "mj-mediaTabDotOk", "mediaTabDotErr": "mj-mediaTabDotErr", "mediaStatusOk": "mj-mediaStatusOk", "mediaStatusErr": "mj-mediaStatusErr", "mediaPresetRow": "mj-mediaPresetRow", "mediaFieldHint": "mj-mediaFieldHint", "secretInputWrap": "mj-secretInputWrap", "secretToggleBtn": "mj-secretToggleBtn", "mediaFieldRow": "mj-mediaFieldRow", "mediaInlineMsgOk": "mj-mediaInlineMsgOk", "mediaInlineMsgErr": "mj-mediaInlineMsgErr", "mediaLoadingBox": "mj-mediaLoadingBox" };
 
-// src/client/tool-views.tsx
+// mujing/canvas/src/client/tool-views.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
 function MujingStarterDock({ session, input, inputActions }) {
   const [dismissed, setDismissed] = (0, import_react.useState)(false);
@@ -4196,10 +4214,10 @@ function ToolCardSummary({
   return null;
 }
 
-// src/client/BoardView.tsx
+// mujing/canvas/src/client/BoardView.tsx
 var import_react2 = require("react");
 
-// src/client/constants.ts
+// mujing/canvas/src/client/constants.ts
 var LF = String.fromCharCode(10);
 var TYPE_LABEL = { text: "\u6587\u672C", image: "\u56FE\u7247", video: "\u89C6\u9891", audio: "\u914D\u97F3" };
 var STATUS_LABEL = { idle: "\u5F85\u751F\u6210", loading: "\u751F\u6210\u4E2D\u2026", success: "\u5DF2\u5B8C\u6210", error: "\u5931\u8D25" };
@@ -4224,7 +4242,7 @@ var STYLE_PRESETS = [
   { label: "\u90FD\u5E02\u9AD8\u5962\u77ED\u5267", genre: "\u73B0\u4EE3\u90FD\u5E02\u8C6A\u95E8", style: "\u73B0\u4EE3\u90FD\u5E02\u5546\u4E1A\u5927\u7247\u5149\u5F71\uFF0C\u6696\u91D1\u4E0E\u51B7\u7070\u9AD8\u7EA7\u914D\u8272\uFF0C85mm\u4EBA\u50CF\u7535\u5F71\u955C\u5934\uFF0C\u80A4\u8D28\u81EA\u7136\u771F\u5B9E" }
 ];
 
-// src/client/BoardView.tsx
+// mujing/canvas/src/client/BoardView.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
 function BoardView({ project, onError, onNotify }) {
   const [selected, setSelected] = (0, import_react2.useState)(null);
@@ -4409,26 +4427,28 @@ function BoardView({ project, onError, onNotify }) {
       onError(e.message);
     }
   };
-  const pos = (n) => local[n.id] ?? n;
-  const byId = new Map(project.nodes.map((n) => [n.id, n]));
+  const pos = (0, import_react2.useCallback)((n) => local[n.id] ?? n, [local]);
+  const byId = (0, import_react2.useMemo)(() => new Map(project.nodes.map((n) => [n.id, n])), [project.nodes]);
   const selectedNode = selected !== null ? byId.get(selected) : void 0;
-  const svgBounds = (() => {
+  const linkDragX = drag?.kind === "link" ? drag.x : null;
+  const linkDragY = drag?.kind === "link" ? drag.y : null;
+  const svgBounds = (0, import_react2.useMemo)(() => {
     let minX = 0;
     let minY = 0;
     let maxX = 2e3;
     let maxY = 1400;
     for (const n of project.nodes) {
-      const p = pos(n);
+      const p = local[n.id] ?? n;
       if (p.x < minX) minX = p.x;
       if (p.y < minY) minY = p.y;
       if (p.x + n.width > maxX) maxX = p.x + n.width;
       if (p.y + n.height > maxY) maxY = p.y + n.height;
     }
-    if (drag?.kind === "link") {
-      if (drag.x < minX) minX = drag.x;
-      if (drag.y < minY) minY = drag.y;
-      if (drag.x > maxX) maxX = drag.x;
-      if (drag.y > maxY) maxY = drag.y;
+    if (linkDragX !== null && linkDragY !== null) {
+      if (linkDragX < minX) minX = linkDragX;
+      if (linkDragY < minY) minY = linkDragY;
+      if (linkDragX > maxX) maxX = linkDragX;
+      if (linkDragY > maxY) maxY = linkDragY;
     }
     const pad = 400;
     const left = Math.floor(minX - pad);
@@ -4436,7 +4456,7 @@ function BoardView({ project, onError, onNotify }) {
     const width = Math.max(800, Math.ceil(maxX - minX + pad * 2));
     const height = Math.max(600, Math.ceil(maxY - minY + pad * 2));
     return { left, top, width, height };
-  })();
+  }, [project.nodes, local, linkDragX, linkDragY]);
   const zoomBy = (factor) => {
     const el = stageRef.current;
     const cx = (el?.clientWidth ?? 600) / 2;
@@ -4734,7 +4754,7 @@ function Inspector({ project, node, ops, onError, onPushTimeline, onClose }) {
   ] });
 }
 
-// src/client/DramaView.tsx
+// mujing/canvas/src/client/DramaView.tsx
 var import_react3 = require("react");
 var import_jsx_runtime3 = require("react/jsx-runtime");
 function DramaView({ project, onError, onNotify, onSwitchTab }) {
@@ -5536,78 +5556,470 @@ function ShotEditorForm({
   ] });
 }
 
-// src/client/MediaConfigModal.tsx
+// mujing/canvas/src/client/MediaConfigModal.tsx
 var import_react4 = require("react");
 var import_jsx_runtime4 = require("react/jsx-runtime");
+var MODALITY_SPECS = [
+  {
+    key: "image",
+    label: "\u751F\u56FE\u6A21\u578B",
+    icon: "\u{1F5BC}",
+    namePlaceholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B OpenAI / \u5907\u7528\u65B9\u821F",
+    baseURLLabel: "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
+    baseURLPlaceholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1 \u6216 https://ark.cn-beijing.volces.com/api/v3",
+    apiKeyPlaceholder: "\u8BF7\u8F93\u5165 API Key\uFF08\u5982 sk-...\uFF09",
+    modelPlaceholder: "\u4F8B\u5982\uFF1Agpt-image-1",
+    apiKeyEnvPlaceholder: "MUJING_IMAGE_API_KEY",
+    flavors: [
+      { value: "openai", label: "OpenAI \u517C\u5BB9\uFF08/images/generations\uFF09" },
+      { value: "ark", label: "\u706B\u5C71\u65B9\u821F Seedream" }
+    ],
+    presets: [
+      {
+        label: "OpenAI Images",
+        apply: () => ({ flavor: "openai", baseURL: "https://api.openai.com/v1", model: "gpt-image-1", size: "1024x1024" })
+      },
+      {
+        label: "\u706B\u5C71\u65B9\u821F Seedream",
+        apply: () => ({ flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedream-3-0-t2i-250415", size: "1024x1024" })
+      }
+    ],
+    makeDefault: (id, idx) => ({
+      id,
+      name: `\u751F\u56FE\u63A5\u53E3 #${idx}`,
+      enabled: true,
+      weight: 1,
+      baseURL: "",
+      apiKey: "",
+      clearApiKey: false,
+      apiKeyEnv: "",
+      model: "gpt-image-1",
+      size: "1024x1024",
+      flavor: "openai"
+    })
+  },
+  {
+    key: "video",
+    label: "\u89C6\u9891\u6A21\u578B",
+    icon: "\u{1F3AC}",
+    namePlaceholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u65B9\u821F / \u5907\u7528 Sora",
+    baseURLLabel: "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
+    baseURLPlaceholder: "\u4F8B\u5982\uFF1Ahttps://ark.cn-beijing.volces.com/api/v3",
+    apiKeyPlaceholder: "\u8BF7\u8F93\u5165 API Key",
+    modelPlaceholder: "doubao-seedance-1-0-pro-250528",
+    apiKeyEnvPlaceholder: "MUJING_VIDEO_API_KEY",
+    flavors: [
+      { value: "ark", label: "\u706B\u5C71\u65B9\u821F Seedance\uFF08\u9996\u5E27 + \u591A\u53C2\u8003\u56FE\uFF09" },
+      { value: "openai", label: "OpenAI Videos\uFF08/videos\uFF09" }
+    ],
+    presets: [
+      {
+        label: "\u706B\u5C71\u65B9\u821F Seedance",
+        apply: () => ({ flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedance-1-0-pro-250528" })
+      },
+      {
+        label: "OpenAI Videos",
+        apply: () => ({ flavor: "openai", baseURL: "https://api.openai.com/v1", model: "sora-2" })
+      }
+    ],
+    makeDefault: (id, idx) => ({
+      id,
+      name: `\u89C6\u9891\u63A5\u53E3 #${idx}`,
+      enabled: true,
+      weight: 1,
+      baseURL: "",
+      apiKey: "",
+      clearApiKey: false,
+      apiKeyEnv: "",
+      model: "doubao-seedance-1-0-pro-250528",
+      flavor: "ark",
+      duration: 5,
+      ratio: "16:9"
+    })
+  },
+  {
+    key: "audio",
+    label: "\u914D\u97F3\u6A21\u578B",
+    icon: "\u{1F399}",
+    namePlaceholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u914D\u97F3 / \u5907\u7528\u914D\u97F3",
+    baseURLLabel: "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF0COpenAI \u517C\u5BB9 /audio/speech\uFF09",
+    baseURLPlaceholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1",
+    apiKeyPlaceholder: "\u8BF7\u8F93\u5165 API Key",
+    modelPlaceholder: "gpt-4o-mini-tts",
+    apiKeyEnvPlaceholder: "MUJING_AUDIO_API_KEY",
+    presets: [
+      {
+        label: "OpenAI TTS",
+        apply: () => ({ baseURL: "https://api.openai.com/v1", model: "gpt-4o-mini-tts", voice: "alloy", format: "mp3" })
+      },
+      {
+        label: "\u590D\u7528\u751F\u56FE\u63A5\u53E3\u5730\u5740",
+        apply: (ep, draft) => ({ baseURL: draft.image.endpoints[0]?.baseURL || ep.baseURL })
+      }
+    ],
+    makeDefault: (id, idx) => ({
+      id,
+      name: `\u914D\u97F3\u63A5\u53E3 #${idx}`,
+      enabled: true,
+      weight: 1,
+      baseURL: "",
+      apiKey: "",
+      clearApiKey: false,
+      apiKeyEnv: "",
+      model: "gpt-4o-mini-tts",
+      voice: "alloy",
+      format: "mp3"
+    })
+  }
+];
+var SPEC_BY_KIND = {
+  image: MODALITY_SPECS[0],
+  video: MODALITY_SPECS[1],
+  audio: MODALITY_SPECS[2]
+};
+var STRATEGY_META = [
+  { key: "round_robin", label: "\u{1F504} \u52A8\u6001\u8F6E\u8BE2", desc: "\u6309\u6743\u91CD\u4F9D\u6B21\u8F6E\u6D41\u5206\u914D\u8BF7\u6C42\uFF0C\u81EA\u52A8\u8DF3\u8FC7\u6545\u969C\u51B7\u5374\u4E2D\u7684\u63A5\u53E3" },
+  { key: "failover", label: "\u{1F6E1} \u4E3B\u5907\u5BB9\u707E", desc: "\u6309\u5217\u8868\u987A\u5E8F\u4F18\u5148\u4F7F\u7528\u4E3B\u63A5\u53E3\uFF0C\u5F02\u5E38\u65F6\u81EA\u52A8\u5207\u5411\u5907\u7528\u63A5\u53E3" },
+  { key: "random", label: "\u{1F3B2} \u968F\u673A\u5747\u8861", desc: "\u6309\u6743\u91CD\u5728\u5065\u5EB7\u63A5\u53E3\u95F4\u968F\u673A\u5206\u6D41\uFF0C\u5355\u70B9\u6545\u969C\u81EA\u52A8\u5207\u6362" }
+];
 function makeLocalEndpointId(kind) {
   return `${kind}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+}
+function toBaseDraft(ep) {
+  return {
+    id: ep.id,
+    name: ep.name,
+    enabled: ep.enabled,
+    weight: ep.weight,
+    baseURL: ep.baseURL,
+    apiKey: "",
+    clearApiKey: false,
+    apiKeyEnv: ep.apiKeyEnv,
+    model: ep.model
+  };
 }
 function toDraft(cfg) {
   return {
     image: {
       strategy: cfg.image.strategy,
       autoFailover: cfg.image.autoFailover,
-      endpoints: cfg.image.endpoints.map((ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model,
-        size: ep.size,
-        flavor: ep.flavor
-      }))
+      endpoints: cfg.image.endpoints.map((ep) => ({ ...toBaseDraft(ep), size: ep.size, flavor: ep.flavor }))
     },
     video: {
       strategy: cfg.video.strategy,
       autoFailover: cfg.video.autoFailover,
-      endpoints: cfg.video.endpoints.map((ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model,
-        flavor: ep.flavor,
-        duration: ep.duration,
-        ratio: ep.ratio
-      }))
+      endpoints: cfg.video.endpoints.map((ep) => ({ ...toBaseDraft(ep), flavor: ep.flavor, duration: ep.duration, ratio: ep.ratio }))
     },
     audio: {
       strategy: cfg.audio.strategy,
       autoFailover: cfg.audio.autoFailover,
-      endpoints: cfg.audio.endpoints.map((ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model,
-        voice: ep.voice,
-        format: ep.format
-      }))
+      endpoints: cfg.audio.endpoints.map((ep) => ({ ...toBaseDraft(ep), voice: ep.voice, format: ep.format }))
     }
   };
 }
-var MEDIA_TAB_META = [
-  { key: "image", label: "\u751F\u56FE\u6A21\u578B", icon: "\u{1F5BC}" },
-  { key: "video", label: "\u89C6\u9891\u6A21\u578B", icon: "\u{1F3AC}" },
-  { key: "audio", label: "\u914D\u97F3\u6A21\u578B", icon: "\u{1F399}" }
-];
-var STRATEGY_META = [
-  { key: "round_robin", label: "\u{1F504} \u52A8\u6001\u8F6E\u8BE2", desc: "\u6309\u6743\u91CD\u4F9D\u6B21\u8F6E\u6D41\u5206\u914D\u8BF7\u6C42\uFF0C\u81EA\u52A8\u8DF3\u8FC7\u6545\u969C\u51B7\u5374\u4E2D\u7684\u63A5\u53E3" },
-  { key: "failover", label: "\u{1F6E1} \u4E3B\u5907\u5BB9\u707E", desc: "\u6309\u5217\u8868\u987A\u5E8F\u4F18\u5148\u4F7F\u7528\u4E3B\u63A5\u53E3\uFF0C\u5F02\u5E38\u65F6\u81EA\u52A8\u5207\u5411\u5907\u7528\u63A5\u53E3" },
-  { key: "random", label: "\u{1F3B2} \u968F\u673A\u5747\u8861", desc: "\u6309\u6743\u91CD\u5728\u5065\u5EB7\u63A5\u53E3\u95F4\u968F\u673A\u5206\u6D41\uFF0C\u5355\u70B9\u6545\u969C\u81EA\u52A8\u5207\u6362" }
-];
+function serializeBase(ep) {
+  return {
+    id: ep.id,
+    name: ep.name,
+    enabled: ep.enabled,
+    weight: ep.weight,
+    baseURL: ep.baseURL,
+    ...ep.clearApiKey ? { clearApiKey: true } : ep.apiKey.trim() ? { apiKey: ep.apiKey.trim() } : ep.cloneKeyFromId ? { cloneKeyFromId: ep.cloneKeyFromId } : {},
+    apiKeyEnv: ep.apiKeyEnv,
+    model: ep.model
+  };
+}
+function EndpointCard({
+  spec,
+  draft,
+  ep,
+  idx,
+  total,
+  strategy,
+  saved,
+  isExpanded,
+  showKey,
+  onToggleExpand,
+  onToggleShowKey,
+  onPatch,
+  onMove,
+  onDuplicate,
+  onRemove
+}) {
+  const hasPendingKey = Boolean(ep.apiKey.trim()) || !ep.clearApiKey && Boolean(saved?.hasApiKey || ep.cloneKeyFromId);
+  const isLocallyReady = ep.enabled && Boolean(ep.baseURL.trim()) && hasPendingKey;
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHead, onClick: onToggleExpand, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHeadLeft, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointIdx, children: [
+          "#",
+          idx + 1
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: !ep.enabled ? style_default.mediaFieldHint : isLocallyReady ? style_default.mediaTabDotOk : style_default.mediaTabDotErr, children: "\u25CF" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointName, title: ep.name, children: ep.name || `\u63A5\u53E3 #${idx + 1}` }),
+        ep.model && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTag, children: ep.model }),
+        strategy !== "failover" && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTag, title: "\u52A8\u6001\u8C03\u5EA6\u6743\u91CD", children: [
+          "\u6743\u91CD \xD7",
+          ep.weight
+        ] }),
+        saved?.inCooldown ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTagWarn, title: saved.lastError ?? "\u5931\u8D25\u51B7\u5374\u4E2D", children: [
+          "\u51B7\u5374 ",
+          Math.ceil(saved.cooldownRemainingMs / 1e3),
+          "s"
+        ] }) : !ep.enabled ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTag, children: "\u5DF2\u505C\u7528" }) : isLocallyReady ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTagOk, children: "\u5C31\u7EEA" }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTagErr, children: "\u672A\u914D\u7F6E" }),
+        saved && saved.totalRequests > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTag, title: `\u603B\u8BF7\u6C42 ${saved.totalRequests}\uFF0C\u6210\u529F ${saved.successCount}\uFF0C\u5931\u8D25 ${saved.failCount}`, children: [
+          "\u8C03\u7528 ",
+          saved.successCount,
+          "/",
+          saved.totalRequests
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHeadActions, onClick: (e) => e.stopPropagation(), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            "data-ep-toggle": ep.id,
+            className: ep.enabled ? style_default.mediaMiniToggle : style_default.mediaMiniToggleOff,
+            title: ep.enabled ? "\u70B9\u51FB\u505C\u7528\u6B64\u63A5\u53E3" : "\u70B9\u51FB\u542F\u7528\u6B64\u63A5\u53E3",
+            onClick: () => onPatch({ enabled: !ep.enabled }),
+            children: ep.enabled ? "\u542F\u7528" : "\u505C\u7528"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.miniBtn, title: "\u4E0A\u79FB\u4F18\u5148\u7EA7", disabled: idx === 0, onClick: () => onMove(-1), children: "\u2191" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.miniBtn, title: "\u4E0B\u79FB\u4F18\u5148\u7EA7", disabled: idx === total - 1, onClick: () => onMove(1), children: "\u2193" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.miniBtn, title: "\u590D\u5236\u63A5\u53E3\u914D\u7F6E", onClick: onDuplicate, children: "\u590D\u5236" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.miniBtnDanger,
+            title: total <= 1 ? "\u81F3\u5C11\u4FDD\u7559\u4E00\u4E2A\u63A5\u53E3\uFF08\u53EF\u6E05\u7A7A\u914D\u7F6E\uFF09" : "\u5220\u9664\u6B64\u63A5\u53E3",
+            disabled: total <= 1,
+            onClick: onRemove,
+            children: "\u5220\u9664"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.miniBtn, onClick: onToggleExpand, children: isExpanded ? "\u6536\u8D77" : "\u5C55\u5F00" })
+      ] })
+    ] }),
+    !isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointSummary, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointUrl, title: ep.baseURL || "\u672A\u586B\u5199\u5730\u5740", children: [
+        "\u5730\u5740\uFF1A",
+        ep.baseURL || "\u672A\u586B\u5199"
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { children: [
+        "\u5BC6\u94A5\uFF1A",
+        ep.clearApiKey ? "\u5F85\u6E05\u9664" : ep.apiKey.trim() ? "\u5DF2\u586B\u5199\u65B0\u5BC6\u94A5\uFF08\u5F85\u4FDD\u5B58\uFF09" : saved?.hasApiKey ? saved.apiKeyMasked : "\u672A\u914D\u7F6E"
+      ] })
+    ] }),
+    isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
+        spec.presets.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.pillBtn,
+            onClick: () => onPatch(preset.apply(ep, draft)),
+            children: preset.label
+          },
+          preset.label
+        )),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.pillBtn,
+            onClick: () => onPatch({ baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" }),
+            children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+          "\u63A5\u53E3\u540D\u79F0",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "input",
+            {
+              "data-media-field": "name",
+              value: ep.name,
+              onChange: (e) => onPatch({ name: e.target.value }),
+              placeholder: spec.namePlaceholder
+            }
+          )
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+          "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "input",
+            {
+              "data-media-field": "weight",
+              type: "number",
+              min: 1,
+              max: 10,
+              value: ep.weight,
+              onChange: (e) => onPatch({ weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) })
+            }
+          )
+        ] })
+      ] }),
+      spec.flavors && "flavor" in ep && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.pillRow, children: spec.flavors.map((f) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            className: ep.flavor === f.value ? style_default.pillActive : style_default.pillBtn,
+            onClick: () => onPatch({ flavor: f.value }),
+            children: f.label
+          },
+          f.value
+        )) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+        spec.baseURLLabel,
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "input",
+          {
+            "data-media-field": "baseURL",
+            value: ep.baseURL,
+            onChange: (e) => onPatch({ baseURL: e.target.value }),
+            placeholder: spec.baseURLPlaceholder
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "input",
+            {
+              "data-media-field": "apiKey",
+              type: showKey ? "text" : "password",
+              value: ep.apiKey,
+              onChange: (e) => onPatch({ apiKey: e.target.value, clearApiKey: false }),
+              placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : spec.apiKeyPlaceholder
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: onToggleShowKey, children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
+          saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.secretToggleBtn,
+              onClick: () => onPatch({ apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 }),
+              children: "\u6E05\u9664"
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+          "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "input",
+            {
+              "data-media-field": "model",
+              value: ep.model,
+              onChange: (e) => onPatch({ model: e.target.value }),
+              placeholder: spec.modelPlaceholder
+            }
+          )
+        ] }),
+        spec.key === "image" && "size" in ep && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+          "\u9ED8\u8BA4\u5206\u8FA8\u7387\uFF08Size\uFF09",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "input",
+            {
+              "data-media-field": "size",
+              value: ep.size,
+              onChange: (e) => onPatch({ size: e.target.value }),
+              placeholder: "1024x1024"
+            }
+          )
+        ] }),
+        spec.key === "video" && "duration" in ep && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+            "\u9ED8\u8BA4\u65F6\u957F\uFF08\u79D2\uFF09",
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+              "input",
+              {
+                "data-media-field": "duration",
+                type: "number",
+                min: 2,
+                max: 20,
+                value: ep.duration,
+                onChange: (e) => onPatch({ duration: Number(e.target.value) || 5 })
+              }
+            )
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+            "\u9ED8\u8BA4\u753B\u5E45",
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+              "select",
+              {
+                "data-media-field": "ratio",
+                value: ep.ratio,
+                onChange: (e) => onPatch({ ratio: e.target.value }),
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u5F62" })
+                ]
+              }
+            )
+          ] })
+        ] }),
+        spec.key === "audio" && "voice" in ep && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+            "\u9ED8\u8BA4\u97F3\u8272\uFF08Voice\uFF09",
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+              "input",
+              {
+                "data-media-field": "voice",
+                value: ep.voice,
+                onChange: (e) => onPatch({ voice: e.target.value }),
+                placeholder: "alloy / nova / shimmer"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+            "\u8F93\u51FA\u683C\u5F0F",
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+              "select",
+              {
+                "data-media-field": "format",
+                value: ep.format,
+                onChange: (e) => onPatch({ format: e.target.value === "wav" ? "wav" : "mp3" }),
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "mp3", children: "MP3" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "wav", children: "WAV" })
+                ]
+              }
+            )
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+        "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "input",
+          {
+            "data-media-field": "apiKeyEnv",
+            value: ep.apiKeyEnv,
+            onChange: (e) => onPatch({ apiKeyEnv: e.target.value }),
+            placeholder: spec.apiKeyEnvPlaceholder
+          }
+        )
+      ] }),
+      saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
+        "\u6700\u8FD1\u5F02\u5E38\uFF1A",
+        saved.lastError
+      ] })
+    ] })
+  ] });
+}
 function MediaConfigModal({ initialTab, onClose }) {
   const [tab, setTab] = (0, import_react4.useState)(initialTab);
   const [details, setDetails] = (0, import_react4.useState)(null);
@@ -5633,11 +6045,7 @@ function MediaConfigModal({ initialTab, onClose }) {
       if (!alive) return;
       setDetails(data);
       setDraft(toDraft(data));
-      setExpandedId({
-        image: null,
-        video: null,
-        audio: null
-      });
+      setExpandedId({ image: null, video: null, audio: null });
     }).catch((e) => {
       if (!alive) return;
       setErr(e instanceof Error ? e.message : String(e));
@@ -5655,121 +6063,44 @@ function MediaConfigModal({ initialTab, onClose }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
-  const patchImageEp = (id, fn) => {
-    setDraft((d) => d ? {
-      ...d,
-      image: { ...d.image, endpoints: d.image.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
-    } : d);
-  };
-  const patchVideoEp = (id, fn) => {
-    setDraft((d) => d ? {
-      ...d,
-      video: { ...d.video, endpoints: d.video.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
-    } : d);
-  };
-  const patchAudioEp = (id, fn) => {
-    setDraft((d) => d ? {
-      ...d,
-      audio: { ...d.audio, endpoints: d.audio.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
-    } : d);
+  const patchEndpoint = (kind, id, patch) => {
+    setDraft((d) => {
+      if (!d) return d;
+      const pool = d[kind];
+      return {
+        ...d,
+        [kind]: {
+          ...pool,
+          endpoints: pool.endpoints.map((ep) => ep.id === id ? { ...ep, ...patch } : ep)
+        }
+      };
+    });
   };
   const addEndpoint = () => {
     if (!draft) return;
     const newId = makeLocalEndpointId(tab);
-    if (tab === "image") {
-      const idx = draft.image.endpoints.length + 1;
-      const next = {
-        id: newId,
-        name: `\u751F\u56FE\u63A5\u53E3 #${idx}`,
-        enabled: true,
-        weight: 1,
-        baseURL: "",
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: "",
-        model: "gpt-image-1",
-        size: "1024x1024",
-        flavor: "openai"
-      };
-      setDraft({ ...draft, image: { ...draft.image, endpoints: [...draft.image.endpoints, next] } });
-    } else if (tab === "video") {
-      const idx = draft.video.endpoints.length + 1;
-      const next = {
-        id: newId,
-        name: `\u89C6\u9891\u63A5\u53E3 #${idx}`,
-        enabled: true,
-        weight: 1,
-        baseURL: "",
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: "",
-        model: "doubao-seedance-1-0-pro-250528",
-        flavor: "ark",
-        duration: 5,
-        ratio: "16:9"
-      };
-      setDraft({ ...draft, video: { ...draft.video, endpoints: [...draft.video.endpoints, next] } });
-    } else {
-      const idx = draft.audio.endpoints.length + 1;
-      const next = {
-        id: newId,
-        name: `\u914D\u97F3\u63A5\u53E3 #${idx}`,
-        enabled: true,
-        weight: 1,
-        baseURL: "",
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: "",
-        model: "gpt-4o-mini-tts",
-        voice: "alloy",
-        format: "mp3"
-      };
-      setDraft({ ...draft, audio: { ...draft.audio, endpoints: [...draft.audio.endpoints, next] } });
-    }
+    const pool = draft[tab];
+    const next = SPEC_BY_KIND[tab].makeDefault(newId, pool.endpoints.length + 1);
+    setDraft({ ...draft, [tab]: { ...pool, endpoints: [...pool.endpoints, next] } });
     setExpandedId((prev) => ({ ...prev, [tab]: newId }));
     setMsg(null);
     setErr(null);
   };
   const duplicateEndpoint = (idx) => {
     if (!draft) return;
+    const pool = draft[tab];
+    const src = pool.endpoints[idx];
+    if (!src) return;
     const newId = makeLocalEndpointId(tab);
-    if (tab === "image") {
-      const src = draft.image.endpoints[idx];
-      if (!src) return;
-      const copy = {
-        ...src,
-        id: newId,
-        name: `${src.name} \u526F\u672C`,
-        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
-      };
-      const next = [...draft.image.endpoints];
-      next.splice(idx + 1, 0, copy);
-      setDraft({ ...draft, image: { ...draft.image, endpoints: next } });
-    } else if (tab === "video") {
-      const src = draft.video.endpoints[idx];
-      if (!src) return;
-      const copy = {
-        ...src,
-        id: newId,
-        name: `${src.name} \u526F\u672C`,
-        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
-      };
-      const next = [...draft.video.endpoints];
-      next.splice(idx + 1, 0, copy);
-      setDraft({ ...draft, video: { ...draft.video, endpoints: next } });
-    } else {
-      const src = draft.audio.endpoints[idx];
-      if (!src) return;
-      const copy = {
-        ...src,
-        id: newId,
-        name: `${src.name} \u526F\u672C`,
-        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
-      };
-      const next = [...draft.audio.endpoints];
-      next.splice(idx + 1, 0, copy);
-      setDraft({ ...draft, audio: { ...draft.audio, endpoints: next } });
-    }
+    const copy = {
+      ...src,
+      id: newId,
+      name: `${src.name} \u526F\u672C`,
+      cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
+    };
+    const next = [...pool.endpoints];
+    next.splice(idx + 1, 0, copy);
+    setDraft({ ...draft, [tab]: { ...pool, endpoints: next } });
     setExpandedId((prev) => ({ ...prev, [tab]: newId }));
   };
   const moveEndpoint = (idx, delta) => {
@@ -5802,44 +6133,21 @@ function MediaConfigModal({ initialTab, onClose }) {
     setErr(null);
     setMsg(null);
     try {
-      const serializeBase = (ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        ...ep.clearApiKey ? { clearApiKey: true } : ep.apiKey.trim() ? { apiKey: ep.apiKey.trim() } : ep.cloneKeyFromId ? { cloneKeyFromId: ep.cloneKeyFromId } : {},
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model
-      });
       const payload = {
         image: {
           strategy: draft.image.strategy,
           autoFailover: draft.image.autoFailover,
-          endpoints: draft.image.endpoints.map((ep) => ({
-            ...serializeBase(ep),
-            size: ep.size,
-            flavor: ep.flavor
-          }))
+          endpoints: draft.image.endpoints.map((ep) => ({ ...serializeBase(ep), size: ep.size, flavor: ep.flavor }))
         },
         video: {
           strategy: draft.video.strategy,
           autoFailover: draft.video.autoFailover,
-          endpoints: draft.video.endpoints.map((ep) => ({
-            ...serializeBase(ep),
-            flavor: ep.flavor,
-            duration: ep.duration,
-            ratio: ep.ratio
-          }))
+          endpoints: draft.video.endpoints.map((ep) => ({ ...serializeBase(ep), flavor: ep.flavor, duration: ep.duration, ratio: ep.ratio }))
         },
         audio: {
           strategy: draft.audio.strategy,
           autoFailover: draft.audio.autoFailover,
-          endpoints: draft.audio.endpoints.map((ep) => ({
-            ...serializeBase(ep),
-            voice: ep.voice,
-            format: ep.format
-          }))
+          endpoints: draft.audio.endpoints.map((ep) => ({ ...serializeBase(ep), voice: ep.voice, format: ep.format }))
         }
       };
       const res = await call("/media-config", {
@@ -5898,6 +6206,7 @@ function MediaConfigModal({ initialTab, onClose }) {
       setSaving(false);
     }
   };
+  const curSpec = SPEC_BY_KIND[tab];
   const curPoolDetail = details ? details[tab] : null;
   const curPoolDraft = draft ? draft[tab] : null;
   const curDetailById = (0, import_react4.useMemo)(() => {
@@ -5909,124 +6218,6 @@ function MediaConfigModal({ initialTab, onClose }) {
   }, [curPoolDetail]);
   const hasAnyStats = Boolean(curPoolDetail?.endpoints.some((ep) => ep.totalRequests > 0 || ep.inCooldown));
   const curStrategyDesc = STRATEGY_META.find((s) => s.key === (curPoolDraft?.strategy ?? "round_robin"))?.desc ?? "";
-  const toggleShowKey = (id) => {
-    setShowKeyIds((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-  const renderEndpointHeader = (ep, idx, total, saved, onToggleEnabled) => {
-    const isExpanded = expandedId[tab] === ep.id;
-    const hasPendingKey = Boolean(ep.apiKey.trim()) || !ep.clearApiKey && Boolean(saved?.hasApiKey || ep.cloneKeyFromId);
-    const isLocallyReady = ep.enabled && Boolean(ep.baseURL.trim()) && hasPendingKey;
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-        "div",
-        {
-          className: style_default.mediaEndpointHead,
-          onClick: () => setExpandedId((prev) => ({ ...prev, [tab]: isExpanded ? null : ep.id })),
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHeadLeft, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointIdx, children: [
-                "#",
-                idx + 1
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: !ep.enabled ? style_default.mediaFieldHint : isLocallyReady ? style_default.mediaTabDotOk : style_default.mediaTabDotErr, children: "\u25CF" }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointName, title: ep.name, children: ep.name || `\u63A5\u53E3 #${idx + 1}` }),
-              ep.model && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTag, children: ep.model }),
-              curPoolDraft && curPoolDraft.strategy !== "failover" && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTag, title: "\u52A8\u6001\u8C03\u5EA6\u6743\u91CD", children: [
-                "\u6743\u91CD \xD7",
-                ep.weight
-              ] }),
-              saved?.inCooldown ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTagWarn, title: saved.lastError ?? "\u5931\u8D25\u51B7\u5374\u4E2D", children: [
-                "\u51B7\u5374 ",
-                Math.ceil(saved.cooldownRemainingMs / 1e3),
-                "s"
-              ] }) : !ep.enabled ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTag, children: "\u5DF2\u505C\u7528" }) : isLocallyReady ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTagOk, children: "\u5C31\u7EEA" }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTagErr, children: "\u672A\u914D\u7F6E" }),
-              saved && saved.totalRequests > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTag, title: `\u603B\u8BF7\u6C42 ${saved.totalRequests}\uFF0C\u6210\u529F ${saved.successCount}\uFF0C\u5931\u8D25 ${saved.failCount}`, children: [
-                "\u8C03\u7528 ",
-                saved.successCount,
-                "/",
-                saved.totalRequests
-              ] })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHeadActions, onClick: (e) => e.stopPropagation(), children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                "button",
-                {
-                  type: "button",
-                  "data-ep-toggle": ep.id,
-                  className: ep.enabled ? style_default.mediaMiniToggle : style_default.mediaMiniToggleOff,
-                  title: ep.enabled ? "\u70B9\u51FB\u505C\u7528\u6B64\u63A5\u53E3" : "\u70B9\u51FB\u542F\u7528\u6B64\u63A5\u53E3",
-                  onClick: onToggleEnabled,
-                  children: ep.enabled ? "\u542F\u7528" : "\u505C\u7528"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  title: "\u4E0A\u79FB\u4F18\u5148\u7EA7",
-                  disabled: idx === 0,
-                  onClick: () => moveEndpoint(idx, -1),
-                  children: "\u2191"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  title: "\u4E0B\u79FB\u4F18\u5148\u7EA7",
-                  disabled: idx === total - 1,
-                  onClick: () => moveEndpoint(idx, 1),
-                  children: "\u2193"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  title: "\u590D\u5236\u63A5\u53E3\u914D\u7F6E",
-                  onClick: () => duplicateEndpoint(idx),
-                  children: "\u590D\u5236"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtnDanger,
-                  title: total <= 1 ? "\u81F3\u5C11\u4FDD\u7559\u4E00\u4E2A\u63A5\u53E3\uFF08\u53EF\u6E05\u7A7A\u914D\u7F6E\uFF09" : "\u5220\u9664\u6B64\u63A5\u53E3",
-                  disabled: total <= 1,
-                  onClick: () => removeEndpoint(ep.id),
-                  children: "\u5220\u9664"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  onClick: () => setExpandedId((prev) => ({ ...prev, [tab]: isExpanded ? null : ep.id })),
-                  children: isExpanded ? "\u6536\u8D77" : "\u5C55\u5F00"
-                }
-              )
-            ] })
-          ]
-        }
-      ),
-      !isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointSummary, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointUrl, title: ep.baseURL || "\u672A\u586B\u5199\u5730\u5740", children: [
-          "\u5730\u5740\uFF1A",
-          ep.baseURL || "\u672A\u586B\u5199"
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { children: [
-          "\u5BC6\u94A5\uFF1A",
-          ep.clearApiKey ? "\u5F85\u6E05\u9664" : ep.apiKey.trim() ? "\u5DF2\u586B\u5199\u65B0\u5BC6\u94A5\uFF08\u5F85\u4FDD\u5B58\uFF09" : saved?.hasApiKey ? saved.apiKeyMasked : "\u672A\u914D\u7F6E"
-        ] })
-      ] })
-    ] });
-  };
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.modalBackdrop, onClick: onClose, "data-media-modal": "1", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaModalCard, onClick: (e) => e.stopPropagation(), children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.sectionHead, children: [
       /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { children: [
@@ -6035,7 +6226,7 @@ function MediaConfigModal({ initialTab, onClose }) {
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.iconBtn, title: "\u5173\u95ED", onClick: onClose, children: "\xD7" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaTabRow, role: "tablist", children: MEDIA_TAB_META.map((item) => {
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaTabRow, role: "tablist", children: MODALITY_SPECS.map((item) => {
       const p = details ? details[item.key] : null;
       const isReady = Boolean(p?.ready);
       return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
@@ -6086,16 +6277,7 @@ function MediaConfigModal({ initialTab, onClose }) {
       /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPoolBar, children: [
         /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPoolHead, children: [
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaPoolTitle, children: "\u591A\u63A5\u53E3\u8C03\u5EA6\u7B56\u7565" }),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.btnPrimary,
-              "data-media-add-endpoint": "1",
-              onClick: addEndpoint,
-              children: "\uFF0B \u6DFB\u52A0\u63A5\u53E3"
-            }
-          )
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.btnPrimary, "data-media-add-endpoint": "1", onClick: addEndpoint, children: "\uFF0B \u6DFB\u52A0\u63A5\u53E3" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaStrategyRow, children: STRATEGY_META.map((st) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
           "button",
@@ -6122,547 +6304,27 @@ function MediaConfigModal({ initialTab, onClose }) {
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u5931\u8D25\u81EA\u52A8\u5207\u6362\u4E0B\u4E00\u63A5\u53E3\uFF08\u5355\u63A5\u53E3\u62A5\u9519\u65F6\u81EA\u52A8\u7194\u65AD\u51B7\u5374 15\u201360s\uFF0C\u51B7\u5374\u7ED3\u675F\u540E\u81EA\u52A8\u6062\u590D\u53C2\u4E0E\u8F6E\u8BE2\uFF09" })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointList, "data-media-endpoint-list": tab, children: [
-        tab === "image" && draft.image.endpoints.map((ep, idx) => {
-          const saved = curDetailById.get(ep.id);
-          const isExpanded = expandedId.image === ep.id;
-          const showKey = Boolean(showKeyIds[ep.id]);
-          return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
-            renderEndpointHeader(
-              ep,
-              idx,
-              draft.image.endpoints.length,
-              saved,
-              () => patchImageEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
-            ),
-            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "openai", baseURL: "https://api.openai.com/v1", model: "gpt-image-1", size: "1024x1024" })),
-                    children: "OpenAI Images"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedream-3-0-t2i-250415", size: "1024x1024" })),
-                    children: "\u706B\u5C71\u65B9\u821F Seedream"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
-                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u63A5\u53E3\u540D\u79F0",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "name",
-                      value: ep.name,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B OpenAI / \u5907\u7528\u65B9\u821F"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "weight",
-                      type: "number",
-                      min: 1,
-                      max: 10,
-                      value: ep.weight,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.pillRow, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "openai" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "openai" })),
-                      children: "OpenAI \u517C\u5BB9\uFF08/images/generations\uFF09"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "ark" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "ark" })),
-                      children: "\u706B\u5C71\u65B9\u821F Seedream"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "baseURL",
-                    value: ep.baseURL,
-                    onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
-                    placeholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1 \u6216 https://ark.cn-beijing.volces.com/api/v3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "apiKey",
-                      type: showKey ? "text" : "password",
-                      value: ep.apiKey,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
-                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key\uFF08\u5982 sk-...\uFF09"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
-                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: style_default.secretToggleBtn,
-                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
-                      children: "\u6E05\u9664"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "model",
-                      value: ep.model,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1Agpt-image-1"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u5206\u8FA8\u7387\uFF08Size\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "size",
-                      value: ep.size,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, size: e.target.value })),
-                      placeholder: "1024x1024"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "apiKeyEnv",
-                    value: ep.apiKeyEnv,
-                    onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
-                    placeholder: "MUJING_IMAGE_API_KEY"
-                  }
-                )
-              ] }),
-              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
-                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
-                saved.lastError
-              ] })
-            ] })
-          ] }, ep.id);
-        }),
-        tab === "video" && draft.video.endpoints.map((ep, idx) => {
-          const saved = curDetailById.get(ep.id);
-          const isExpanded = expandedId.video === ep.id;
-          const showKey = Boolean(showKeyIds[ep.id]);
-          return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
-            renderEndpointHeader(
-              ep,
-              idx,
-              draft.video.endpoints.length,
-              saved,
-              () => patchVideoEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
-            ),
-            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedance-1-0-pro-250528" })),
-                    children: "\u706B\u5C71\u65B9\u821F Seedance"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "openai", baseURL: "https://api.openai.com/v1", model: "sora-2" })),
-                    children: "OpenAI Videos"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
-                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u63A5\u53E3\u540D\u79F0",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "name",
-                      value: ep.name,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u65B9\u821F / \u5907\u7528 Sora"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "weight",
-                      type: "number",
-                      min: 1,
-                      max: 10,
-                      value: ep.weight,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.pillRow, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "ark" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "ark" })),
-                      children: "\u706B\u5C71\u65B9\u821F Seedance\uFF08\u9996\u5E27 + \u591A\u53C2\u8003\u56FE\uFF09"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "openai" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "openai" })),
-                      children: "OpenAI Videos\uFF08/videos\uFF09"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "baseURL",
-                    value: ep.baseURL,
-                    onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
-                    placeholder: "\u4F8B\u5982\uFF1Ahttps://ark.cn-beijing.volces.com/api/v3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "apiKey",
-                      type: showKey ? "text" : "password",
-                      value: ep.apiKey,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
-                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
-                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: style_default.secretToggleBtn,
-                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
-                      children: "\u6E05\u9664"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "model",
-                      value: ep.model,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
-                      placeholder: "doubao-seedance-1-0-pro-250528"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u65F6\u957F\uFF08\u79D2\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "duration",
-                      type: "number",
-                      min: 2,
-                      max: 20,
-                      value: ep.duration,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, duration: Number(e.target.value) || 5 }))
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u753B\u5E45",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-                    "select",
-                    {
-                      "data-media-field": "ratio",
-                      value: ep.ratio,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, ratio: e.target.value })),
-                      children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u5F62" })
-                      ]
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "apiKeyEnv",
-                    value: ep.apiKeyEnv,
-                    onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
-                    placeholder: "MUJING_VIDEO_API_KEY"
-                  }
-                )
-              ] }),
-              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
-                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
-                saved.lastError
-              ] })
-            ] })
-          ] }, ep.id);
-        }),
-        tab === "audio" && draft.audio.endpoints.map((ep, idx) => {
-          const saved = curDetailById.get(ep.id);
-          const isExpanded = expandedId.audio === ep.id;
-          const showKey = Boolean(showKeyIds[ep.id]);
-          const firstImageBase = draft.image.endpoints[0]?.baseURL ?? "";
-          return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
-            renderEndpointHeader(
-              ep,
-              idx,
-              draft.audio.endpoints.length,
-              saved,
-              () => patchAudioEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
-            ),
-            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: "https://api.openai.com/v1", model: "gpt-4o-mini-tts", voice: "alloy", format: "mp3" })),
-                    children: "OpenAI TTS"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: firstImageBase || cur.baseURL })),
-                    children: "\u590D\u7528\u751F\u56FE\u63A5\u53E3\u5730\u5740"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
-                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u63A5\u53E3\u540D\u79F0",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "name",
-                      value: ep.name,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u914D\u97F3 / \u5907\u7528\u914D\u97F3"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "weight",
-                      type: "number",
-                      min: 1,
-                      max: 10,
-                      value: ep.weight,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF0COpenAI \u517C\u5BB9 /audio/speech\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "baseURL",
-                    value: ep.baseURL,
-                    onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
-                    placeholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "apiKey",
-                      type: showKey ? "text" : "password",
-                      value: ep.apiKey,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
-                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
-                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: style_default.secretToggleBtn,
-                      onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
-                      children: "\u6E05\u9664"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "model",
-                      value: ep.model,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
-                      placeholder: "gpt-4o-mini-tts"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u97F3\u8272\uFF08Voice\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "voice",
-                      value: ep.voice,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, voice: e.target.value })),
-                      placeholder: "alloy / nova / shimmer"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F93\u51FA\u683C\u5F0F",
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-                    "select",
-                    {
-                      "data-media-field": "format",
-                      value: ep.format,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, format: e.target.value === "wav" ? "wav" : "mp3" })),
-                      children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "mp3", children: "MP3" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "wav", children: "WAV" })
-                      ]
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
-                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "apiKeyEnv",
-                    value: ep.apiKeyEnv,
-                    onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
-                    placeholder: "MUJING_AUDIO_API_KEY"
-                  }
-                )
-              ] }),
-              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
-                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
-                saved.lastError
-              ] })
-            ] })
-          ] }, ep.id);
-        })
-      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaEndpointList, "data-media-endpoint-list": tab, children: curPoolDraft.endpoints.map((ep, idx) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+        EndpointCard,
+        {
+          spec: curSpec,
+          draft,
+          ep,
+          idx,
+          total: curPoolDraft.endpoints.length,
+          strategy: curPoolDraft.strategy,
+          saved: curDetailById.get(ep.id),
+          isExpanded: expandedId[tab] === ep.id,
+          showKey: Boolean(showKeyIds[ep.id]),
+          onToggleExpand: () => setExpandedId((prev) => ({ ...prev, [tab]: prev[tab] === ep.id ? null : ep.id })),
+          onToggleShowKey: () => setShowKeyIds((prev) => ({ ...prev, [ep.id]: !prev[ep.id] })),
+          onPatch: (patch) => patchEndpoint(tab, ep.id, patch),
+          onMove: (delta) => moveEndpoint(idx, delta),
+          onDuplicate: () => duplicateEndpoint(idx),
+          onRemove: () => removeEndpoint(ep.id)
+        },
+        ep.id
+      )) }),
       err && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaInlineMsgErr, children: err }),
       msg && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaInlineMsgOk, children: msg })
     ] }),
@@ -6694,7 +6356,7 @@ function MediaConfigModal({ initialTab, onClose }) {
   ] }) });
 }
 
-// src/client/ProjectHub.tsx
+// mujing/canvas/src/client/ProjectHub.tsx
 var import_react5 = require("react");
 var import_jsx_runtime5 = require("react/jsx-runtime");
 function ProjectHub({
@@ -6950,9 +6612,10 @@ function CreateProjectModal({ onClose, onImport, onSubmit }) {
   ] }) });
 }
 
-// src/client/TimelineView.tsx
+// mujing/canvas/src/client/TimelineView.tsx
 var import_react6 = require("react");
 var import_jsx_runtime6 = require("react/jsx-runtime");
+var MULTI_AUDIO_SENTINEL = "__multi_audio__";
 function TimelineView({ project, onError, onNotify }) {
   const clips = project.timeline?.clips ?? [];
   const videoNodes = project.nodes.filter((n) => n.type === "video" && n.url);
@@ -6960,8 +6623,22 @@ function TimelineView({ project, onError, onNotify }) {
   const [busy, setBusy] = (0, import_react6.useState)(null);
   const [draftRoot, setDraftRoot] = (0, import_react6.useState)("");
   const [draftName, setDraftName] = (0, import_react6.useState)("");
+  const [captionDrafts, setCaptionDrafts] = (0, import_react6.useState)({});
   const [draftResult, setDraftResult] = (0, import_react6.useState)(null);
   const burnSubtitles = Boolean(project.timeline?.burnSubtitles);
+  (0, import_react6.useEffect)(() => {
+    setCaptionDrafts((prev) => {
+      const next = {};
+      let changed = false;
+      for (const c of clips) {
+        const val = c.caption ?? "";
+        next[c.id] = val;
+        if (prev[c.id] !== val) changed = true;
+      }
+      if (!changed && Object.keys(prev).length === Object.keys(next).length) return prev;
+      return next;
+    });
+  }, [clips]);
   const saveClips = async (next, nextBurn) => {
     try {
       await call(`/projects/${project.id}/timeline`, {
@@ -7111,10 +6788,16 @@ function TimelineView({ project, onError, onNotify }) {
               "input",
               {
                 className: style_default.clipInlineInput,
-                defaultValue: clip.caption ?? "",
+                value: captionDrafts[clip.id] ?? clip.caption ?? "",
                 placeholder: "\u53F0\u8BCD/\u65C1\u767D\u5B57\u5E55\uFF08\u81EA\u52A8\u5199\u5165 SRT \u4E0E\u526A\u6620\u5B57\u5E55\u8F68\uFF09\u2026",
+                onChange: (e) => setCaptionDrafts((prev) => ({ ...prev, [clip.id]: e.target.value })),
                 onBlur: (e) => {
                   if (e.target.value !== (clip.caption ?? "")) void updateClipField(idx, { caption: e.target.value });
+                },
+                onKeyDown: (e) => {
+                  if (e.key === "Enter") {
+                    e.currentTarget.blur();
+                  }
                 }
               }
             ),
@@ -7122,12 +6805,23 @@ function TimelineView({ project, onError, onNotify }) {
               "select",
               {
                 className: style_default.clipAudioSelect,
-                value: clip.audioNodeId ?? "",
+                value: (clip.audioClips?.length ?? 0) > 1 ? MULTI_AUDIO_SENTINEL : clip.audioNodeId ?? "",
                 onChange: (e) => {
-                  const aNode = audioNodes.find((a) => a.id === e.target.value);
-                  void updateClipField(idx, { audioNodeId: aNode?.id, audioUrl: aNode?.url });
+                  const val = e.target.value;
+                  if (val === MULTI_AUDIO_SENTINEL) return;
+                  const aNode = audioNodes.find((a) => a.id === val);
+                  void updateClipField(idx, {
+                    audioNodeId: aNode?.id,
+                    audioUrl: aNode?.url,
+                    audioClips: void 0
+                  });
                 },
                 children: [
+                  (clip.audioClips?.length ?? 0) > 1 && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("option", { value: MULTI_AUDIO_SENTINEL, children: [
+                    "\u{1F399} \u591A\u955C\u81EA\u52A8\u914D\u97F3 (",
+                    clip.audioClips.length,
+                    " \u6761)"
+                  ] }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("option", { value: "", children: "\u539F\u58F0 / \u9759\u97F3\u8F68" }),
                   audioNodes.map((a) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("option", { value: a.id, children: [
                     "\u{1F399} ",
@@ -7137,7 +6831,14 @@ function TimelineView({ project, onError, onNotify }) {
               }
             )
           ] }),
-          clip.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("audio", { src: clip.audioUrl, controls: true, className: style_default.shotAudioPlayer })
+          (clip.audioUrl || (clip.audioClips?.length ?? 0) > 0) && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+            "audio",
+            {
+              src: clip.audioUrl ?? clip.audioClips?.[0]?.url,
+              controls: true,
+              className: style_default.shotAudioPlayer
+            }
+          )
         ] })
       ] }, clip.id))
     ] }),
@@ -7212,7 +6913,7 @@ function TimelineView({ project, onError, onNotify }) {
   ] }) }) });
 }
 
-// src/client/index.tsx
+// mujing/canvas/src/client/index.tsx
 var import_jsx_runtime7 = require("react/jsx-runtime");
 function useAppShell() {
   return (0, import_react7.useSyncExternalStore)(subscribeAppShell, getAppShellState, getAppShellState);
@@ -7739,6 +7440,7 @@ function StudioShell({ mode, renderDirectorChat }) {
   const [renamingTitle, setRenamingTitle] = (0, import_react7.useState)(null);
   const [err, setErr] = (0, import_react7.useState)(null);
   const [toast, setToast] = (0, import_react7.useState)(null);
+  const [sseReconnecting, setSseReconnecting] = (0, import_react7.useState)(false);
   const openDirectorDrawer = (0, import_react7.useCallback)(() => {
     setDirectorEverOpened(true);
     setDirectorOpen(true);
@@ -7794,18 +7496,31 @@ function StudioShell({ mode, renderDirectorChat }) {
   (0, import_react7.useEffect)(() => {
     if (!activeId) {
       setProject(null);
+      setSseReconnecting(false);
       return;
     }
     let closed = false;
+    setSseReconnecting(false);
     const es = new EventSource(`${API}/projects/${activeId}/events`, { withCredentials: true });
+    es.onopen = () => {
+      if (!closed) setSseReconnecting(false);
+    };
+    es.onerror = () => {
+      if (!closed) setSseReconnecting(true);
+    };
     es.addEventListener("snapshot", (e) => {
       if (closed) return;
-      const snap = JSON.parse(e.data);
-      setProject(snap);
-      upsertAppProjectSummary(summarizeProject(snap));
+      try {
+        const snap = JSON.parse(e.data);
+        setSseReconnecting(false);
+        setProject(snap);
+        upsertAppProjectSummary(summarizeProject(snap));
+      } catch {
+      }
     });
     es.addEventListener("deleted", () => {
       if (!closed) {
+        setSseReconnecting(false);
         setProject(null);
         void refreshAppProjects();
       }
@@ -7880,6 +7595,7 @@ function StudioShell({ mode, renderDirectorChat }) {
       err,
       "\uFF08\u70B9\u51FB\u5173\u95ED\uFF09"
     ] }),
+    sseReconnecting && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.toastBar, children: "\u5B9E\u65F6\u540C\u6B65\u8FDE\u63A5\u5DF2\u65AD\u5F00\uFF0C\u6B63\u5728\u81EA\u52A8\u91CD\u8FDE\u2026" }),
     toast !== null && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.toastBar, onClick: () => setToast(null), children: toast }),
     /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("header", { className: isSplit ? style_default.topBarSplit : style_default.topBar, children: [
       /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.topBarRow, children: [

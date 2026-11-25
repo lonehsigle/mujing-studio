@@ -8,9 +8,11 @@
 
 import { execFile, execFileSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
+import { lookup } from 'node:dns/promises'
 import { existsSync, readFileSync } from 'node:fs'
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
-import { extname, join } from 'node:path'
+import { chmod, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import { isIP } from 'node:net'
+import { extname, join, resolve, sep } from 'node:path'
 import { promisify } from 'node:util'
 
 const execFileAsync = promisify(execFile)
@@ -293,6 +295,170 @@ export function extFromMime(mime: string | null, fallback: string): string {
   return hit?.[0] ?? fallback
 }
 
+const DEFAULT_MAX_DOWNLOAD_BYTES = 100 * 1024 * 1024 // 100 MB
+const DEFAULT_MAX_REF_BYTES = 30 * 1024 * 1024 // 30 MB
+
+const BLOCKED_METADATA_HOSTS = new Set([
+  '169.254.169.254',
+  '169.254.170.2',
+  'metadata.google.internal',
+  'metadata.goog',
+  'fd00:ec2::254',
+  '0.0.0.0',
+  '::',
+])
+
+function maxDownloadBytes(fallback = DEFAULT_MAX_DOWNLOAD_BYTES): number {
+  const raw = Number(process.env.MUJING_MAX_DOWNLOAD_BYTES)
+  return Number.isFinite(raw) && raw > 0 ? Math.floor(raw) : fallback
+}
+
+function stripIpv6Brackets(host: string): string {
+  return host.startsWith('[') && host.endsWith(']') ? host.slice(1, -1) : host
+}
+
+function isPrivateOrReservedIp(rawIp: string): boolean {
+  const ip = stripIpv6Brackets(rawIp).toLowerCase()
+  const mapped = ip.startsWith('::ffff:') ? ip.slice(7) : ip
+  const ver = isIP(mapped)
+  if (ver === 4) {
+    const [a, b] = mapped.split('.').map(n => Number.parseInt(n, 10))
+    if (a === 0 || a === 10 || a === 127) return true
+    if (a === 169 && b === 254) return true
+    if (a === 172 && b >= 16 && b <= 31) return true
+    if (a === 192 && b === 168) return true
+    if (a === 100 && b >= 64 && b <= 127) return true
+    return false
+  }
+  if (isIP(ip) === 6) {
+    if (ip === '::' || ip === '::1') return true
+    if (ip.startsWith('fc') || ip.startsWith('fd')) return true // fc00::/7 ULA
+    if (/^fe[89ab]/i.test(ip)) return true // fe80::/10 link-local
+    return false
+  }
+  return false
+}
+
+/** 校验用户配置的媒体端点 Base URL：仅允许 http/https，并禁止云元数据地址。 */
+export function validateEndpointBaseUrl(rawUrl: string): void {
+  const trimmed = rawUrl.trim()
+  if (!trimmed) return
+  let parsed: URL
+  try {
+    parsed = new URL(trimmed)
+  } catch {
+    throw new MediaConfigError(`接口地址格式无效：${trimmed}`)
+  }
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    throw new MediaConfigError(`接口地址仅支持 http/https 协议：${parsed.protocol}`)
+  }
+  const host = stripIpv6Brackets(parsed.hostname).toLowerCase()
+  if (BLOCKED_METADATA_HOSTS.has(host)) {
+    throw new MediaConfigError(`禁止将云元数据或保留地址配置为媒体端点：${host}`)
+  }
+}
+
+/**
+ * 校验远程下载 / 参考图 URL，防范 SSRF：
+ *  - 仅允许 http / https 协议；
+ *  - 始终拦截云元数据地址（169.254.169.254 等）；
+ *  - 默认拦截内网/回环地址（除非该 origin 已在媒体端点配置中显式信任，或开启 MUJING_ALLOW_PRIVATE_URLS=1）。
+ */
+export async function assertSafeRemoteUrl(
+  rawUrl: string,
+  opts?: { allowedOrigins?: ReadonlySet<string>; allowPrivate?: boolean; label?: string },
+): Promise<URL> {
+  const label = opts?.label ?? '远程资源'
+  let parsed: URL
+  try {
+    parsed = new URL(rawUrl)
+  } catch {
+    throw new MediaUpstreamError(`${label}地址格式无效`)
+  }
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    throw new MediaUpstreamError(`${label}仅允许 http/https 协议（拒绝 ${parsed.protocol}）`)
+  }
+  const host = stripIpv6Brackets(parsed.hostname).toLowerCase()
+  if (!host || BLOCKED_METADATA_HOSTS.has(host)) {
+    throw new MediaUpstreamError(`${label}地址被安全策略拒绝：${host || rawUrl}`)
+  }
+
+  const allowPrivate = Boolean(opts?.allowPrivate)
+    || process.env.MUJING_ALLOW_PRIVATE_URLS === '1'
+    || process.env.MUJING_ALLOW_PRIVATE_URLS === 'true'
+    || Boolean(opts?.allowedOrigins?.has(parsed.origin))
+
+  if (allowPrivate) return parsed
+
+  if (host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') || host.endsWith('.internal')) {
+    throw new MediaUpstreamError(`${label}不允许访问本机或内网域名：${host}`)
+  }
+  if (isIP(host) !== 0) {
+    if (isPrivateOrReservedIp(host)) {
+      throw new MediaUpstreamError(`${label}不允许访问内网或回环地址：${host}`)
+    }
+    return parsed
+  }
+  try {
+    const resolved = await lookup(host, { all: true })
+    for (const entry of resolved) {
+      const addr = entry.address.toLowerCase()
+      if (BLOCKED_METADATA_HOSTS.has(addr) || isPrivateOrReservedIp(addr)) {
+        throw new MediaUpstreamError(`${label}域名解析到受限内网地址：${host} -> ${addr}`)
+      }
+    }
+  } catch (error) {
+    if (error instanceof MediaUpstreamError) throw error
+    // 域名解析失败留给后续 fetch 返回标准网络错误
+  }
+  return parsed
+}
+
+/** 带字节上限的流式响应读取，防止大文件或恶意响应导致内存 OOM。 */
+export async function readResponseBytesWithLimit(
+  res: Response,
+  limitBytes: number,
+  label = '下载内容',
+): Promise<Uint8Array> {
+  const cl = Number(res.headers.get('content-length'))
+  if (Number.isFinite(cl) && cl > limitBytes) {
+    await res.body?.cancel().catch(() => {})
+    throw new MediaUpstreamError(`${label}体积超限（${cl} > ${limitBytes} 字节）`)
+  }
+  if (!res.body) {
+    const buf = new Uint8Array(await res.arrayBuffer())
+    if (buf.byteLength > limitBytes) {
+      throw new MediaUpstreamError(`${label}体积超限（${buf.byteLength} > ${limitBytes} 字节）`)
+    }
+    return buf
+  }
+  const reader = res.body.getReader()
+  const chunks: Uint8Array[] = []
+  let total = 0
+  try {
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) break
+      if (!value) continue
+      total += value.byteLength
+      if (total > limitBytes) {
+        await reader.cancel().catch(() => {})
+        throw new MediaUpstreamError(`${label}体积超限（超过 ${limitBytes} 字节上限）`)
+      }
+      chunks.push(value)
+    }
+  } finally {
+    reader.releaseLock()
+  }
+  const out = new Uint8Array(total)
+  let offset = 0
+  for (const chunk of chunks) {
+    out.set(chunk, offset)
+    offset += chunk.byteLength
+  }
+  return out
+}
+
 export const ASSET_PREFIX = '/mujing/assets/'
 
 export interface ProbedMedia {
@@ -550,7 +716,10 @@ export class MediaService {
         })),
       },
     }
-    await writeFile(this.configFile, JSON.stringify(payload, null, 2), { encoding: 'utf8', mode: 0o600 })
+    const tmpFile = `${this.configFile}.${process.pid}.${randomUUID().slice(0, 8)}.tmp`
+    await writeFile(tmpFile, JSON.stringify(payload, null, 2), { encoding: 'utf8', mode: 0o600 })
+    await rename(tmpFile, this.configFile)
+    await chmod(this.configFile, 0o600).catch(() => {})
   }
 
   private getHealth(id: string): EndpointHealth {
@@ -733,84 +902,65 @@ export class MediaService {
     return undefined
   }
 
+  private applyPoolPatch<
+    TEp extends EndpointMeta & { baseURL?: string; apiKey?: string },
+    TPatch extends { id?: string; baseURL?: string; apiKey?: string; clearApiKey?: boolean; cloneKeyFromId?: string },
+  >(
+    pool: MediaPool<TEp>,
+    kind: MediaKind,
+    patch: { strategy?: RoutingStrategy; autoFailover?: boolean; endpoints?: TPatch[] } & TPatch,
+    normalize: (ep: Partial<TEp>, idx: number) => TEp,
+    makeFallback: () => TEp,
+  ): void {
+    const prevById = new Map(pool.endpoints.map(ep => [ep.id, ep]))
+    if (patch.strategy) pool.strategy = normalizeStrategy(patch.strategy, pool.strategy)
+    if (typeof patch.autoFailover === 'boolean') pool.autoFailover = patch.autoFailover
+    if (Array.isArray(patch.endpoints)) {
+      const next = patch.endpoints.map((ep, idx) => {
+        if (typeof ep.baseURL === 'string') validateEndpointBaseUrl(ep.baseURL)
+        const id = typeof ep.id === 'string' && ep.id.trim() ? ep.id.trim() : makeEndpointId(kind)
+        const prev = prevById.get(id)
+        const apiKey = this.mergeApiKey(ep, prev, prevById)
+        return normalize({ ...prev, ...ep, id, apiKey } as unknown as Partial<TEp>, idx)
+      })
+      pool.endpoints = next
+      pool.cursor = 0
+    } else {
+      if (typeof patch.baseURL === 'string') validateEndpointBaseUrl(patch.baseURL)
+      const first = pool.endpoints[0] ?? makeFallback()
+      const apiKey = this.mergeApiKey(patch, first, prevById)
+      pool.endpoints[0] = normalize({ ...first, ...patch, id: first.id, apiKey } as unknown as Partial<TEp>, 0)
+    }
+    for (const ep of pool.endpoints) this.clearCooldown(ep.id)
+  }
+
   async updateConfig(patch: MediaConfigPatch): Promise<{ status: ReturnType<MediaService['status']>; config: MediaConfigDetails }> {
     if (patch.image) {
-      const p = patch.image
-      const prevById = new Map(this.imagePool.endpoints.map(ep => [ep.id, ep]))
-      if (p.strategy) this.imagePool.strategy = normalizeStrategy(p.strategy, this.imagePool.strategy)
-      if (typeof p.autoFailover === 'boolean') this.imagePool.autoFailover = p.autoFailover
-      if (Array.isArray(p.endpoints)) {
-        this.imagePool.endpoints = p.endpoints.map((ep, idx) => {
-          const id = typeof ep.id === 'string' && ep.id.trim() ? ep.id.trim() : makeEndpointId('image')
-          const prev = prevById.get(id)
-          const apiKey = this.mergeApiKey(ep, prev, prevById)
-          return this.normalizeImageEndpoint({
-            ...prev,
-            ...ep,
-            id,
-            apiKey,
-          }, idx)
-        })
-        this.imagePool.cursor = 0
-      } else {
-        // 兼容单接口补丁更新首位接口
-        const first = this.imagePool.endpoints[0] ?? this.makeDefaultImagePool().endpoints[0]
-        const apiKey = this.mergeApiKey(p, first, prevById)
-        this.imagePool.endpoints[0] = this.normalizeImageEndpoint({ ...first, ...p, id: first.id, apiKey }, 0)
-      }
-      for (const ep of this.imagePool.endpoints) this.clearCooldown(ep.id)
+      this.applyPoolPatch(
+        this.imagePool,
+        'image',
+        patch.image,
+        (ep, idx) => this.normalizeImageEndpoint(ep, idx),
+        () => this.makeDefaultImagePool().endpoints[0],
+      )
     }
-
     if (patch.video) {
-      const p = patch.video
-      const prevById = new Map(this.videoPool.endpoints.map(ep => [ep.id, ep]))
-      if (p.strategy) this.videoPool.strategy = normalizeStrategy(p.strategy, this.videoPool.strategy)
-      if (typeof p.autoFailover === 'boolean') this.videoPool.autoFailover = p.autoFailover
-      if (Array.isArray(p.endpoints)) {
-        this.videoPool.endpoints = p.endpoints.map((ep, idx) => {
-          const id = typeof ep.id === 'string' && ep.id.trim() ? ep.id.trim() : makeEndpointId('video')
-          const prev = prevById.get(id)
-          const apiKey = this.mergeApiKey(ep, prev, prevById)
-          return this.normalizeVideoEndpoint({
-            ...prev,
-            ...ep,
-            id,
-            apiKey,
-          }, idx)
-        })
-        this.videoPool.cursor = 0
-      } else {
-        const first = this.videoPool.endpoints[0] ?? this.makeDefaultVideoPool().endpoints[0]
-        const apiKey = this.mergeApiKey(p, first, prevById)
-        this.videoPool.endpoints[0] = this.normalizeVideoEndpoint({ ...first, ...p, id: first.id, apiKey }, 0)
-      }
-      for (const ep of this.videoPool.endpoints) this.clearCooldown(ep.id)
+      this.applyPoolPatch(
+        this.videoPool,
+        'video',
+        patch.video,
+        (ep, idx) => this.normalizeVideoEndpoint(ep, idx),
+        () => this.makeDefaultVideoPool().endpoints[0],
+      )
     }
-
     if (patch.audio) {
-      const p = patch.audio
-      const prevById = new Map(this.audioPool.endpoints.map(ep => [ep.id, ep]))
-      if (p.strategy) this.audioPool.strategy = normalizeStrategy(p.strategy, this.audioPool.strategy)
-      if (typeof p.autoFailover === 'boolean') this.audioPool.autoFailover = p.autoFailover
-      if (Array.isArray(p.endpoints)) {
-        this.audioPool.endpoints = p.endpoints.map((ep, idx) => {
-          const id = typeof ep.id === 'string' && ep.id.trim() ? ep.id.trim() : makeEndpointId('audio')
-          const prev = prevById.get(id)
-          const apiKey = this.mergeApiKey(ep, prev, prevById)
-          return this.normalizeAudioEndpoint({
-            ...prev,
-            ...ep,
-            id,
-            apiKey,
-          }, idx)
-        })
-        this.audioPool.cursor = 0
-      } else {
-        const first = this.audioPool.endpoints[0] ?? this.makeDefaultAudioPool().endpoints[0]
-        const apiKey = this.mergeApiKey(p, first, prevById)
-        this.audioPool.endpoints[0] = this.normalizeAudioEndpoint({ ...first, ...p, id: first.id, apiKey }, 0)
-      }
-      for (const ep of this.audioPool.endpoints) this.clearCooldown(ep.id)
+      this.applyPoolPatch(
+        this.audioPool,
+        'audio',
+        patch.audio,
+        (ep, idx) => this.normalizeAudioEndpoint(ep, idx),
+        () => this.makeDefaultAudioPool().endpoints[0],
+      )
     }
 
     await this.persistConfig()
@@ -993,32 +1143,56 @@ export class MediaService {
     return `data:${mimeOf(file)};base64,${bytes.toString('base64')}`
   }
 
-  private async download(url: string, fallbackExt: string, signal?: AbortSignal): Promise<string> {
+  /** 收集当前已配置的媒体端点 origin（用于放行本地 Mock / 自建推理服务，同时继续拦截任意第三方 SSRF）。 */
+  private getAllowedDownloadOrigins(): Set<string> {
+    const origins = new Set<string>()
+    const all = [
+      ...this.imagePool.endpoints,
+      ...this.videoPool.endpoints,
+      ...this.audioPool.endpoints,
+    ]
+    for (const ep of all) {
+      if (!ep.baseURL?.trim()) continue
+      try {
+        origins.add(new URL(ep.baseURL.trim()).origin)
+      } catch { /* ignore invalid */ }
+    }
+    return origins
+  }
+
+  private async download(url: string, fallbackExt: string, signal?: AbortSignal, limitBytes = maxDownloadBytes()): Promise<string> {
     if (url.startsWith('data:')) {
       const m = /^data:([^;,]+)?(;base64)?,(.*)$/s.exec(url)
       if (m === null) throw new MediaUpstreamError('上游返回了无法解析的 data URL')
       const bytes = m[2] ? Buffer.from(m[3], 'base64') : Buffer.from(decodeURIComponent(m[3]))
+      if (bytes.byteLength > limitBytes) {
+        throw new MediaUpstreamError(`上游返回的 data URL 体积超限（超过 ${limitBytes} 字节）`)
+      }
       return this.saveAsset(bytes, extFromMime(m[1] ?? null, fallbackExt))
     }
+    await assertSafeRemoteUrl(url, { allowedOrigins: this.getAllowedDownloadOrigins(), label: '下载生成结果' })
     const res = await fetch(url, { signal })
     if (!res.ok) throw new MediaUpstreamError(`下载生成结果失败：HTTP ${res.status}`)
-    return this.saveAsset(new Uint8Array(await res.arrayBuffer()), extFromMime(res.headers.get('content-type'), fallbackExt))
+    const bytes = await readResponseBytesWithLimit(res, limitBytes, '下载生成结果')
+    return this.saveAsset(bytes, extFromMime(res.headers.get('content-type'), fallbackExt))
   }
 
   /** 生成一张图片；refs 为参考图 URL（本地资产或外链）。支持多接口动态轮询与失败自动切换。 */
   async generateImage(input: { prompt: string; size?: string; refs?: string[] }, signal?: AbortSignal): Promise<{ url: string; model: string }> {
-    const refs = await Promise.all((input.refs ?? []).map(r => this.toUpstreamRef(r)))
+    const rawRefs = input.refs ?? []
+    const refs = await Promise.all(rawRefs.map(r => this.toUpstreamRef(r)))
     return this.runWithPool(this.imagePool, '图片', signal, async (ep, { base, key }) => {
       const size = input.size ?? ep.size
       let res: Response
-      if (refs.length > 0 && ep.flavor === 'openai') {
+      if (rawRefs.length > 0 && ep.flavor === 'openai') {
         const form = new FormData()
         form.set('model', ep.model)
         form.set('prompt', input.prompt)
         form.set('size', size)
-        for (const [i, ref] of refs.entries()) {
-          const blob = await (await fetch(ref, { signal })).blob()
-          form.append('image[]', blob, `ref-${i}.png`)
+        for (const [i, rawRef] of rawRefs.entries()) {
+          const { blob, filename } = await this.loadRefBlob(rawRef, signal)
+          const ext = extname(filename) || '.png'
+          form.append('image[]', blob, `ref-${i}${ext}`)
         }
         res = await fetch(`${base}/images/edits`, { method: 'POST', headers: { authorization: `Bearer ${key}` }, body: form, signal })
       } else {
@@ -1042,9 +1216,13 @@ export class MediaService {
 
   /** 把本地资产、data URL 或外链加载为 Blob（供 OpenAI multipart 接口提交首帧/参考图）。 */
   private async loadRefBlob(url: string, signal?: AbortSignal): Promise<{ blob: Blob; filename: string }> {
+    const limitBytes = maxDownloadBytes(DEFAULT_MAX_REF_BYTES)
     const file = this.resolveAssetFile(url)
     if (file !== null) {
       const bytes = await readFile(file)
+      if (bytes.byteLength > limitBytes) {
+        throw new MediaUpstreamError(`本地参考图体积超限（超过 ${limitBytes} 字节）`)
+      }
       const mime = mimeOf(file)
       const ext = extname(file) || extFromMime(mime, '.png')
       return { blob: new Blob([bytes], { type: mime }), filename: `ref${ext}` }
@@ -1054,13 +1232,17 @@ export class MediaService {
       if (!m) throw new MediaUpstreamError('参考图 data URL 格式无效')
       const mime = m[1] || 'image/png'
       const bytes = m[2] ? Buffer.from(m[3], 'base64') : Buffer.from(decodeURIComponent(m[3]))
+      if (bytes.byteLength > limitBytes) {
+        throw new MediaUpstreamError(`参考图 data URL 体积超限（超过 ${limitBytes} 字节）`)
+      }
       return { blob: new Blob([bytes], { type: mime }), filename: `ref${extFromMime(mime, '.png')}` }
     }
+    await assertSafeRemoteUrl(url, { allowedOrigins: this.getAllowedDownloadOrigins(), label: '参考图' })
     const res = await fetch(url, { signal })
     if (!res.ok) throw new MediaUpstreamError(`读取参考图失败：HTTP ${res.status}`)
     const mime = res.headers.get('content-type') || 'image/png'
-    const bytes = await res.arrayBuffer()
-    return { blob: new Blob([bytes], { type: mime }), filename: `ref${extFromMime(mime, '.png')}` }
+    const bytes = await readResponseBytesWithLimit(res, limitBytes, '参考图')
+    return { blob: new Blob([bytes.buffer as ArrayBuffer], { type: mime }), filename: `ref${extFromMime(mime, '.png')}` }
   }
 
   /** 生成一段视频（阻塞到完成或超时）；支持多接口动态轮询与失败自动切换。 */
@@ -1143,7 +1325,8 @@ export class MediaService {
         if (job.status === 'completed') {
           const res = await fetch(`${base}/videos/${encodeURIComponent(videoId)}/content`, { headers: auth, signal })
           if (!res.ok) throw new MediaUpstreamError(`下载视频失败：HTTP ${res.status}`)
-          const saved = await this.saveAsset(new Uint8Array(await res.arrayBuffer()), '.mp4')
+          const bytes = await readResponseBytesWithLimit(res, maxDownloadBytes(), '下载视频')
+          const saved = await this.saveAsset(bytes, '.mp4')
           const probed = await this.probeMedia(saved).catch(() => null)
           return { url: saved, model: ep.model, durationMs: probed?.durationMs ?? duration * 1000 }
         }
@@ -1191,7 +1374,7 @@ export class MediaService {
           throw new MediaUpstreamError(`音频生成 JSON 未包含音频数据：${truncate(JSON.stringify(json))}`)
         }
       } else {
-        const bytes = new Uint8Array(await res.arrayBuffer())
+        const bytes = await readResponseBytesWithLimit(res, maxDownloadBytes(DEFAULT_MAX_REF_BYTES), '下载音频')
         if (bytes.byteLength === 0) throw new MediaUpstreamError('音频生成返回空内容')
         saved = await this.saveAsset(bytes, extFromMime(ct, `.${format}`))
       }
@@ -1200,10 +1383,19 @@ export class MediaService {
     })
   }
 
-  /** 用 ffprobe 探测本地媒体时长、尺寸与是否有音轨。 */
+  /** 用 ffprobe 探测本地资产目录内的媒体时长、尺寸与是否有音轨（严格限制在 assetsDir 边界内）。 */
   async probeMedia(urlOrFile: string): Promise<ProbedMedia> {
-    const file = urlOrFile.startsWith(ASSET_PREFIX) ? this.resolveAssetFile(urlOrFile) : urlOrFile
-    if (!file) throw new MediaUpstreamError(`无法探测非本地资产：${urlOrFile}`)
+    let file: string | null = null
+    if (urlOrFile.startsWith(ASSET_PREFIX)) {
+      file = this.resolveAssetFile(urlOrFile)
+    } else if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(urlOrFile)) {
+      const assetsRoot = resolve(this.assetsDir)
+      const resolved = resolve(urlOrFile)
+      if (resolved.startsWith(assetsRoot + sep)) {
+        file = resolved
+      }
+    }
+    if (!file) throw new MediaUpstreamError(`无法探测资产目录以外的路径或外链：${urlOrFile}`)
     const { stdout } = await execFileAsync(FFPROBE_BIN, [
       '-v', 'error',
       '-show_entries', 'format=duration:stream=codec_type,width,height',

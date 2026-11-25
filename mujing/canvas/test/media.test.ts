@@ -5,7 +5,14 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, it } from 'node:test'
-import { MediaService } from '../src/host/media.ts'
+import {
+  MediaConfigError,
+  MediaService,
+  MediaUpstreamError,
+  assertSafeRemoteUrl,
+  readResponseBytesWithLimit,
+  validateEndpointBaseUrl,
+} from '../src/host/media.ts'
 
 async function startMockServer(): Promise<{
   server: Server
@@ -40,7 +47,7 @@ async function startMockServer(): Promise<{
       return
     }
 
-    if (url.endsWith('/images/generations')) {
+    if (url.endsWith('/images/generations') || url.endsWith('/images/edits')) {
       res.writeHead(200, { 'content-type': 'application/json' })
       res.end(JSON.stringify({ data: [{ b64_json: TINY_PNG.toString('base64') }] }))
       return
@@ -242,6 +249,76 @@ describe('MediaService multi-endpoint pool, OpenAI video input_reference, and FF
       assert.equal(details.image.endpoints[0].baseURL, 'https://legacy.example/v1')
       assert.equal(details.image.endpoints[0].model, 'seedream-4')
       assert.equal(details.image.endpoints[0].hasApiKey, true)
+    } finally {
+      await rm(dir, { recursive: true, force: true })
+    }
+  })
+
+  it('reuses loadRefBlob in OpenAI /images/edits with local assets and preserves extension', async () => {
+    const mock = await startMockServer()
+    const dir = await mkdtemp(join(tmpdir(), 'mujing-media-edit-'))
+    try {
+      const media = new MediaService(
+        dir,
+        { apiKeyEnv: 'NONE', model: 'gpt-image-1', size: '1024x1024', flavor: 'openai' },
+        { apiKeyEnv: 'NONE', model: 'sora-2', flavor: 'openai', duration: 4, ratio: '9:16', pollIntervalMs: 10, timeoutMs: 5000 },
+        { apiKeyEnv: 'NONE', model: 'tts-1', voice: 'nova', format: 'mp3' },
+      )
+      await media.updateConfig({
+        image: {
+          endpoints: [
+            { id: 'img_edit', name: 'OpenAI Edit', baseURL: `http://127.0.0.1:${mock.port}/v1`, apiKey: 'sk-e', model: 'gpt-image-1', flavor: 'openai', size: '1024x1024', enabled: true, weight: 1 },
+          ],
+        },
+      })
+      const refUrl = await media.saveAsset(Buffer.from([0xff, 0xd8, 0xff, 0xe0]), '.jpg')
+      const out = await media.generateImage({ prompt: '换背景', refs: [refUrl] })
+      assert.equal(out.model, 'gpt-image-1')
+      const editHit = mock.hits.find(h => h.method === 'POST' && h.path.endsWith('/images/edits'))
+      assert.ok(editHit, 'should POST /images/edits')
+      assert.match(editHit.contentType, /multipart\/form-data/)
+      assert.ok(editHit.raw.includes(Buffer.from('filename="ref-0.jpg"')), 'should preserve .jpg extension from loadRefBlob')
+    } finally {
+      await mock.close()
+      await rm(dir, { recursive: true, force: true })
+    }
+  })
+
+  it('enforces SSRF guards, download size limits, endpoint baseURL checks, and probeMedia boundary', async () => {
+    await assert.rejects(() => assertSafeRemoteUrl('file:///etc/passwd'), MediaUpstreamError)
+    await assert.rejects(() => assertSafeRemoteUrl('http://169.254.169.254/latest/meta-data/'), MediaUpstreamError)
+    await assert.rejects(() => assertSafeRemoteUrl('http://127.0.0.1:8080/secret'), MediaUpstreamError)
+    await assert.rejects(() => assertSafeRemoteUrl('http://10.0.0.5/internal'), MediaUpstreamError)
+    // Explicitly configured origin is permitted for local mock / self-hosted services
+    const allowed = new Set(['http://127.0.0.1:3199'])
+    const parsed = await assertSafeRemoteUrl('http://127.0.0.1:3199/v1/file.png', { allowedOrigins: allowed })
+    assert.equal(parsed.origin, 'http://127.0.0.1:3199')
+
+    assert.throws(() => validateEndpointBaseUrl('file:///tmp'), MediaConfigError)
+    assert.throws(() => validateEndpointBaseUrl('http://169.254.169.254/v1'), MediaConfigError)
+    assert.doesNotThrow(() => validateEndpointBaseUrl('https://api.openai.com/v1'))
+
+    // Response byte limit enforcement (both content-length and streamed chunks)
+    const oversizedByHeader = new Response(new Uint8Array(10), { headers: { 'content-length': '999999' } })
+    await assert.rejects(() => readResponseBytesWithLimit(oversizedByHeader, 1024, '测试'), MediaUpstreamError)
+    const oversizedStream = new Response(new Uint8Array(2048))
+    await assert.rejects(() => readResponseBytesWithLimit(oversizedStream, 1024, '测试'), MediaUpstreamError)
+    const okResp = new Response(new Uint8Array([1, 2, 3, 4]))
+    const okBytes = await readResponseBytesWithLimit(okResp, 1024, '测试')
+    assert.deepEqual(Array.from(okBytes), [1, 2, 3, 4])
+
+    // probeMedia rejects paths outside assetsDir and remote URLs
+    const dir = await mkdtemp(join(tmpdir(), 'mujing-probe-guard-'))
+    try {
+      const media = new MediaService(
+        dir,
+        { apiKeyEnv: 'NONE', model: 'img', size: '1024x1024', flavor: 'openai' },
+        { apiKeyEnv: 'NONE', model: 'v', flavor: 'ark', duration: 4, ratio: '9:16', pollIntervalMs: 10, timeoutMs: 5000 },
+        { apiKeyEnv: 'NONE', model: 'tts', voice: 'nova', format: 'mp3' },
+      )
+      await assert.rejects(() => media.probeMedia('/etc/passwd'), MediaUpstreamError)
+      await assert.rejects(() => media.probeMedia('http://169.254.169.254/a.mp4'), MediaUpstreamError)
+      await assert.rejects(() => media.probeMedia('/mujing/assets/../../etc/passwd'), MediaUpstreamError)
     } finally {
       await rm(dir, { recursive: true, force: true })
     }

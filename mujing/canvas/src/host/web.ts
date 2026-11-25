@@ -29,7 +29,11 @@ const MAX_JSON_BODY = 10 * 1024 * 1024
 const MAX_UPLOAD_BODY = 80 * 1024 * 1024
 
 class HttpError extends Error {
-  constructor(readonly status: number, message: string) { super(message) }
+  readonly status: number
+  constructor(status: number, message: string) {
+    super(message)
+    this.status = status
+  }
 }
 
 function send(res: ServerResponse, status: number, body: unknown): void {
@@ -74,6 +78,34 @@ function statusOf(error: unknown): number {
   if (error instanceof MediaConfigError) return 412
   if (error instanceof MediaUpstreamError) return 502
   return 500
+}
+
+export type ByteRangeParseResult =
+  | { kind: 'ok'; start: number; end: number }
+  | { kind: 'unsatisfiable' }
+  | { kind: 'ignore' }
+
+/** 按 RFC 9110 解析单段 HTTP Range（支持 bytes=start-end、bytes=start- 与后缀 bytes=-suffix）。 */
+export function parseByteRange(header: string, totalSize: number): ByteRangeParseResult {
+  const m = /^bytes=(\d*)-(\d*)$/.exec(header.trim())
+  if (!m) return { kind: 'ignore' }
+  const [, rawStart, rawEnd] = m
+  if (!rawStart && !rawEnd) return { kind: 'unsatisfiable' }
+  if (totalSize <= 0) return { kind: 'unsatisfiable' }
+
+  if (!rawStart) {
+    // 后缀范围 bytes=-N：取最后 N 个字节
+    const suffix = Number.parseInt(rawEnd, 10)
+    if (!Number.isFinite(suffix) || suffix <= 0) return { kind: 'unsatisfiable' }
+    const start = Math.max(0, totalSize - suffix)
+    return { kind: 'ok', start, end: totalSize - 1 }
+  }
+
+  const start = Number.parseInt(rawStart, 10)
+  if (!Number.isFinite(start) || start < 0 || start >= totalSize) return { kind: 'unsatisfiable' }
+  const end = rawEnd ? Math.min(totalSize - 1, Number.parseInt(rawEnd, 10)) : totalSize - 1
+  if (!Number.isFinite(end) || end < start) return { kind: 'unsatisfiable' }
+  return { kind: 'ok', start, end }
 }
 
 export function apply(ctx: Context): void {
@@ -479,30 +511,41 @@ export function apply(ctx: Context): void {
     path: ASSET_PREFIX.slice(0, -1),
     handler: async (req, res) => {
       const BS = String.fromCharCode(92)
-      const name = decodeURIComponent(new URL(req.url ?? '/', 'http://local').pathname.slice(ASSET_PREFIX.length))
+      let name: string
+      try {
+        name = decodeURIComponent(new URL(req.url ?? '/', 'http://local').pathname.slice(ASSET_PREFIX.length))
+      } catch {
+        send(res, 400, { error: '非法路径编码' })
+        return
+      }
       if (!name || name.includes('/') || name.includes(BS) || name.includes('..')) { send(res, 400, { error: '非法路径' }); return }
       const file = join(mujing.media.assetsDir, name)
       try {
         const info = await stat(file)
         const mime = mimeOf(name)
         const range = req.headers.range
-        if (range && info.size > 0) {
-          const m = /^bytes=(\d*)-(\d*)$/.exec(range)
-          if (m) {
-            const start = m[1] ? Number.parseInt(m[1], 10) : 0
-            const end = m[2] ? Math.min(info.size - 1, Number.parseInt(m[2], 10)) : info.size - 1
-            if (start >= 0 && start <= end && start < info.size) {
-              res.writeHead(206, {
-                'content-type': mime,
-                'content-range': `bytes ${start}-${end}/${info.size}`,
-                'accept-ranges': 'bytes',
-                'content-length': String(end - start + 1),
-                'cache-control': 'private, max-age=31536000, immutable',
-              })
-              if (req.method === 'HEAD') { res.end(); return }
-              createReadStream(file, { start, end }).pipe(res)
-              return
-            }
+        if (range) {
+          const parsed = parseByteRange(range, info.size)
+          if (parsed.kind === 'unsatisfiable') {
+            res.writeHead(416, {
+              'content-range': `bytes */${info.size}`,
+              'accept-ranges': 'bytes',
+            })
+            res.end()
+            return
+          }
+          if (parsed.kind === 'ok') {
+            const { start, end } = parsed
+            res.writeHead(206, {
+              'content-type': mime,
+              'content-range': `bytes ${start}-${end}/${info.size}`,
+              'accept-ranges': 'bytes',
+              'content-length': String(end - start + 1),
+              'cache-control': 'private, max-age=31536000, immutable',
+            })
+            if (req.method === 'HEAD') { res.end(); return }
+            createReadStream(file, { start, end }).pipe(res)
+            return
           }
         }
         res.writeHead(200, {

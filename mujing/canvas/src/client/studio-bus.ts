@@ -300,6 +300,26 @@ const listeners = new Set<StudioListener>()
 
 let directorSender: ((text: string) => boolean) | null = null
 let pendingDirectorPrompt: string | null = null
+let pendingPromptTimer: ReturnType<typeof setInterval> | null = null
+
+function clearPendingPromptTimer(): void {
+  if (pendingPromptTimer !== null) {
+    clearInterval(pendingPromptTimer)
+    pendingPromptTimer = null
+  }
+}
+
+function tryDeliverPendingPrompt(): boolean {
+  if (!pendingDirectorPrompt || !directorSender) return false
+  const prompt = pendingDirectorPrompt
+  pendingDirectorPrompt = null
+  if (directorSender(prompt)) {
+    clearPendingPromptTimer()
+    return true
+  }
+  pendingDirectorPrompt = prompt
+  return false
+}
 
 export function setStudioBridge(bridge: HostNavigationBridge | null): void {
   navBridge = bridge
@@ -344,17 +364,14 @@ export function emitStudioIntent(intent: StudioFocusIntent): void {
 export function registerDirectorSender(fn: ((text: string) => boolean) | null): void {
   directorSender = fn
   if (fn && pendingDirectorPrompt) {
-    const prompt = pendingDirectorPrompt
-    pendingDirectorPrompt = null
-    if (!fn(prompt)) {
-      pendingDirectorPrompt = prompt
-    }
+    tryDeliverPendingPrompt()
   }
 }
 
 export function dispatchDirectorPrompt(prompt: string, options?: { tab?: WorkspaceTab; freshSession?: boolean }): void {
   const clean = prompt.trim()
   if (!clean) return
+  clearPendingPromptTimer()
   if (options?.freshSession) {
     navBridge?.newDirectorSession()
   }
@@ -363,11 +380,14 @@ export function dispatchDirectorPrompt(prompt: string, options?: { tab?: Workspa
     return
   }
   pendingDirectorPrompt = clean
-  setTimeout(() => {
-    if (pendingDirectorPrompt && directorSender && directorSender(pendingDirectorPrompt)) {
-      pendingDirectorPrompt = null
+  const deadline = Date.now() + 2500
+  const startAfter = options?.freshSession ? Date.now() + 120 : Date.now()
+  pendingPromptTimer = setInterval(() => {
+    if (Date.now() < startAfter) return
+    if (!pendingDirectorPrompt || tryDeliverPendingPrompt() || Date.now() >= deadline) {
+      clearPendingPromptTimer()
     }
-  }, options?.freshSession ? 450 : 120)
+  }, 50)
 }
 
 export function summarizeProject(snap: CanvasProject): ProjectSummary {

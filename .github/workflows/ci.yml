@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: Install harness dependencies
+        if: hashFiles('deepseek-harness/package.json') != ''
+        working-directory: deepseek-harness
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: TypeScript typecheck
+        if: hashFiles('deepseek-harness/package.json') != ''
+        run: node mujing/canvas/typecheck.mjs --harness ./deepseek-harness
+
+      - name: Build mujing-canvas
+        if: hashFiles('deepseek-harness/package.json') != ''
+        run: node mujing/canvas/build.mjs --harness ./deepseek-harness
+
+      - name: Run unit and route integration tests
+        working-directory: mujing/canvas
+        run: node --test test/*.test.ts

@@ -463,9 +463,27 @@ export class MujingService extends Service {
     }
 
     const size = drama.aspectRatio === '9:16' ? '1024x1536' : drama.aspectRatio === '16:9' ? '1536x1024' : '1024x1024'
-    const results: Array<{ shotId: string; shotNumber: number; nodeId?: string; url?: string; error?: string }> = []
 
-    for (const { shot, shotNumber } of targets) {
+    const linkShotMedia = async (shotId: string, nodeId?: string, url?: string): Promise<void> => {
+      if (!nodeId && !url) return
+      await this.store.updateDomain(projectId, p => {
+        const targetEp = p.drama?.episodes.find(e => e.id === ep.id)
+        const s = targetEp?.shots.find(item => item.id === shotId)
+        if (!s) return
+        if (options.kind === 'keyframe') {
+          if (nodeId) s.keyframeNodeId = nodeId
+          if (url) s.keyframeUrl = url
+        } else {
+          if (nodeId) s.audioNodeId = nodeId
+          if (url) s.audioUrl = url
+        }
+      }, false)
+    }
+
+    const rawResults = await mapWithConcurrency(targets, 3, async ({ shot, shotNumber }) => {
+      if (signal?.aborted) {
+        return { shotId: shot.id, shotNumber, error: '已取消' }
+      }
       if (options.kind === 'keyframe') {
         const prompt = compileShotKeyframePrompt(drama, shot)
         const refs = collectShotCastRefs(project, [shot])
@@ -481,42 +499,30 @@ export class MujingService extends Service {
           y: 780 + (ep.number - 1) * 360,
         }, signal)
         const finalNode = await done
-        results.push({ shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error })
-      } else {
-        const dlg = shot.dialogue?.trim()
-        if (!dlg) continue
-        const speakerCast = shot.speaker ? drama.casts.find(c => c.name === shot.speaker) : undefined
-        const voice = speakerCast?.voice || undefined
-        const { nodeId, done } = await this.startGeneration({
-          projectId,
-          kind: 'audio',
-          nodeId: shot.audioNodeId,
-          title: `第${ep.number}集·镜${shotNumber}配音${shot.speaker ? `·${shot.speaker}` : ''}`,
-          prompt: dlg,
-          voice,
-          x: 80 + (shotNumber - 1) * 340,
-          y: 1120 + (ep.number - 1) * 200,
-        }, signal)
-        const finalNode = await done
-        results.push({ shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error })
+        await linkShotMedia(shot.id, nodeId, finalNode.url)
+        return { shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error }
       }
-    }
 
-    await this.store.updateDomain(projectId, p => {
-      const targetEp = p.drama?.episodes.find(e => e.id === ep.id)
-      if (!targetEp) return
-      for (const r of results) {
-        const s = targetEp.shots.find(item => item.id === r.shotId)
-        if (!s) continue
-        if (options.kind === 'keyframe') {
-          if (r.nodeId) s.keyframeNodeId = r.nodeId
-          if (r.url) s.keyframeUrl = r.url
-        } else {
-          if (r.nodeId) s.audioNodeId = r.nodeId
-          if (r.url) s.audioUrl = r.url
-        }
-      }
-    }, false)
+      const dlg = shot.dialogue?.trim()
+      if (!dlg) return null
+      const speakerCast = shot.speaker ? drama.casts.find(c => c.name === shot.speaker) : undefined
+      const voice = speakerCast?.voice || undefined
+      const { nodeId, done } = await this.startGeneration({
+        projectId,
+        kind: 'audio',
+        nodeId: shot.audioNodeId,
+        title: `第${ep.number}集·镜${shotNumber}配音${shot.speaker ? `·${shot.speaker}` : ''}`,
+        prompt: dlg,
+        voice,
+        x: 80 + (shotNumber - 1) * 340,
+        y: 1120 + (ep.number - 1) * 200,
+      }, signal)
+      const finalNode = await done
+      await linkShotMedia(shot.id, nodeId, finalNode.url)
+      return { shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error }
+    })
+
+    const results = rawResults.filter((r): r is NonNullable<typeof r> => r !== null)
 
     return {
       episodeId: ep.id,
@@ -933,13 +939,23 @@ export class MujingService extends Service {
       const aspect = project.drama?.aspectRatio
       const dims = aspect === '9:16' ? { width: 720, height: 1280 } : aspect === '1:1' ? { width: 1080, height: 1080 } : undefined
 
+      // 对待渲染片段做只读快照，避免耗时渲染完成后全量覆盖用户期间的并发编辑
+      const renderClips: TimelineClip[] = tl.clips.map(c => ({
+        ...c,
+        ...(c.audioClips ? { audioClips: c.audioClips.map(a => ({ ...a })) } : {}),
+      }))
+      const probedDurations = new Map<string, { url: string; durationMs: number }>()
+
       // 先探测每段视频真实时长并重新生成对齐的 SRT，避免旧字幕时间戳偏移，同时也为字幕硬烧录提供最新 SRT
       const captions: JianyingCaption[] = []
       let cursorUs = 0
-      for (const clip of tl.clips) {
+      for (const clip of renderClips) {
         const probed = await this.media.probeMedia(clip.url).catch(() => null)
         const durMs = probed?.durationMs ?? clip.durationMs
         clip.durationMs = durMs
+        if (probed?.durationMs) {
+          probedDurations.set(clip.id, { url: clip.url, durationMs: probed.durationMs })
+        }
         const durUs = durMs * 1000
         if (clip.caption?.trim()) {
           captions.push({ text: clip.caption.trim(), startUs: cursorUs + 100_000, durationUs: Math.max(400_000, durUs - 200_000) })
@@ -948,7 +964,7 @@ export class MujingService extends Service {
       }
       const srt = captions.length > 0 ? buildSrt(captions) : (tl.subtitleSrt ?? '')
 
-      const out = await this.media.concatVideos(tl.clips, {
+      const out = await this.media.concatVideos(renderClips, {
         ...dims,
         subtitleSrt: srt,
         burnSubtitles: Boolean(tl.burnSubtitles),
@@ -956,7 +972,13 @@ export class MujingService extends Service {
       const subtitleAssetUrl = srt.trim() ? await this.media.saveAsset(Buffer.from(srt, 'utf8'), '.srt') : undefined
       return await this.store.updateDomain(projectId, p => {
         if (!p.timeline) return
-        p.timeline.clips = tl.clips
+        // 仅按 clip.id + url 回填探测到的真实时长，不覆盖渲染期间的增删改排序
+        for (const existing of p.timeline.clips) {
+          const hit = probedDurations.get(existing.id)
+          if (hit && existing.url === hit.url) {
+            existing.durationMs = hit.durationMs
+          }
+        }
         p.timeline.outputUrl = out.url
         p.timeline.subtitleSrt = srt
         p.timeline.subtitleAssetUrl = subtitleAssetUrl

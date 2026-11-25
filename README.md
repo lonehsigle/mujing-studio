@@ -3,6 +3,7 @@
 > 基于 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 构建的开源 AI 影视与短剧全链路创作工作台。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![CI](https://github.com/lonehsigle/mujing-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/lonehsigle/mujing-studio/actions/workflows/ci.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A524.22.3-brightgreen.svg)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-11-orange.svg)](https://pnpm.io/)
 
@@ -133,7 +134,7 @@ node mujing/canvas/build.mjs --harness ./deepseek-harness
 # TypeScript 类型检查
 node mujing/canvas/typecheck.mjs --harness ./deepseek-harness
 
-# 运行单元测试（短剧分镜、多接口池调度、剪映导出、项目持久化与服务契约）
+# 运行单元测试与路由/工具集成测试（短剧分镜、多接口池与 SSRF 防护、剪映导出、项目持久化、HTTP Range 与服务契约）
 node --test mujing/canvas/test/*.test.ts
 ```
 

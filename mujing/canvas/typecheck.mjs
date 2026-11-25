@@ -12,7 +12,8 @@ import { fileURLToPath } from 'node:url'
 const root = dirname(fileURLToPath(import.meta.url))
 const argv = process.argv.slice(2)
 const hi = argv.indexOf('--harness')
-const harness = resolve(root, hi >= 0 && argv[hi + 1] ? argv[hi + 1] : '../../deepseek-harness')
+const rawHarness = (hi >= 0 && argv[hi + 1]) || process.env.DSH_HARNESS_DIR
+const harness = rawHarness ? resolve(process.cwd(), rawHarness) : resolve(root, '../../deepseek-harness')
 const pnpmStore = join(harness, 'node_modules/.pnpm')
 
 function findStorePkg(prefix, pkgSubpath) {

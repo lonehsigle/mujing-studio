@@ -1,8 +1,8 @@
-// src/tools.ts
+// mujing/canvas/src/tools.ts
 import { createUserMessage, HarnessError } from "@deepseek-ai/dsh-llm";
 import { defineTool } from "@deepseek-ai/dsh-tools";
 
-// src/host/digest.ts
+// mujing/canvas/src/host/digest.ts
 function digestProject(project) {
   return {
     project_id: project.id,
@@ -89,7 +89,7 @@ function digestProject(project) {
   };
 }
 
-// src/tools.ts
+// mujing/canvas/src/tools.ts
 var name = "mujing-tools";
 var inject = ["tools", "mujing", "agents"];
 function formatStudioContext(p, mediaReady) {

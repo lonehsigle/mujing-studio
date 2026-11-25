@@ -221,28 +221,30 @@ export function BoardView({ project, onError, onNotify }: {
     }
   }
 
-  const pos = (n: CanvasNode): { x: number; y: number } => local[n.id] ?? n
-  const byId = new Map(project.nodes.map(n => [n.id, n]))
+  const pos = useCallback((n: CanvasNode): { x: number; y: number } => local[n.id] ?? n, [local])
+  const byId = useMemo(() => new Map(project.nodes.map(n => [n.id, n])), [project.nodes])
   const selectedNode = selected !== null ? byId.get(selected) : undefined
 
   // 动态计算连线 SVG 包围盒，避免节点拖到负坐标或超过 8000px 时连线被裁剪
-  const svgBounds = (() => {
+  const linkDragX = drag?.kind === 'link' ? drag.x : null
+  const linkDragY = drag?.kind === 'link' ? drag.y : null
+  const svgBounds = useMemo(() => {
     let minX = 0
     let minY = 0
     let maxX = 2000
     let maxY = 1400
     for (const n of project.nodes) {
-      const p = pos(n)
+      const p = local[n.id] ?? n
       if (p.x < minX) minX = p.x
       if (p.y < minY) minY = p.y
       if (p.x + n.width > maxX) maxX = p.x + n.width
       if (p.y + n.height > maxY) maxY = p.y + n.height
     }
-    if (drag?.kind === 'link') {
-      if (drag.x < minX) minX = drag.x
-      if (drag.y < minY) minY = drag.y
-      if (drag.x > maxX) maxX = drag.x
-      if (drag.y > maxY) maxY = drag.y
+    if (linkDragX !== null && linkDragY !== null) {
+      if (linkDragX < minX) minX = linkDragX
+      if (linkDragY < minY) minY = linkDragY
+      if (linkDragX > maxX) maxX = linkDragX
+      if (linkDragY > maxY) maxY = linkDragY
     }
     const pad = 400
     const left = Math.floor(minX - pad)
@@ -250,7 +252,7 @@ export function BoardView({ project, onError, onNotify }: {
     const width = Math.max(800, Math.ceil(maxX - minX + pad * 2))
     const height = Math.max(600, Math.ceil(maxY - minY + pad * 2))
     return { left, top, width, height }
-  })()
+  }, [project.nodes, local, linkDragX, linkDragY])
 
   const zoomBy = (factor: number): void => {
     const el = stageRef.current

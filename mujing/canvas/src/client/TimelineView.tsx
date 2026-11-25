@@ -1,9 +1,11 @@
-import { useState, type ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import type { TimelineClip } from "../host/types.ts"
 import { call, type ProjectWithHistory } from "./studio-bus.ts"
 import css from "./style.css"
 
 /* ───────────────────────── 视图 3：时间线剪辑合成 & 剪映专业版草稿导出 ───────────────────────── */
+
+const MULTI_AUDIO_SENTINEL = '__multi_audio__'
 
 export function TimelineView({ project, onError, onNotify }: {
   project: ProjectWithHistory
@@ -16,6 +18,7 @@ export function TimelineView({ project, onError, onNotify }: {
   const [busy, setBusy] = useState<string | null>(null)
   const [draftRoot, setDraftRoot] = useState('')
   const [draftName, setDraftName] = useState('')
+  const [captionDrafts, setCaptionDrafts] = useState<Record<string, string>>({})
   const [draftResult, setDraftResult] = useState<{
     draftDir: string
     clipCount: number
@@ -25,6 +28,21 @@ export function TimelineView({ project, onError, onNotify }: {
     reason?: string
   } | null>(null)
   const burnSubtitles = Boolean(project.timeline?.burnSubtitles)
+
+  // SSE 推送或撤销/重做变更时间线时，同步重置字幕输入草稿，避免展示陈旧值
+  useEffect(() => {
+    setCaptionDrafts(prev => {
+      const next: Record<string, string> = {}
+      let changed = false
+      for (const c of clips) {
+        const val = c.caption ?? ''
+        next[c.id] = val
+        if (prev[c.id] !== val) changed = true
+      }
+      if (!changed && Object.keys(prev).length === Object.keys(next).length) return prev
+      return next
+    })
+  }, [clips])
 
   const saveClips = async (next: TimelineClip[], nextBurn?: boolean): Promise<void> => {
     try {
@@ -175,28 +193,54 @@ export function TimelineView({ project, onError, onNotify }: {
                     <div className={css.clipFieldRow}>
                       <input
                         className={css.clipInlineInput}
-                        defaultValue={clip.caption ?? ''}
+                        value={captionDrafts[clip.id] ?? clip.caption ?? ''}
                         placeholder="台词/旁白字幕（自动写入 SRT 与剪映字幕轨）…"
+                        onChange={e => setCaptionDrafts(prev => ({ ...prev, [clip.id]: e.target.value }))}
                         onBlur={e => {
                           if (e.target.value !== (clip.caption ?? '')) void updateClipField(idx, { caption: e.target.value })
+                        }}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                            e.currentTarget.blur()
+                          }
                         }}
                       />
                       <select
                         className={css.clipAudioSelect}
-                        value={clip.audioNodeId ?? ''}
+                        value={
+                          (clip.audioClips?.length ?? 0) > 1
+                            ? MULTI_AUDIO_SENTINEL
+                            : (clip.audioNodeId ?? '')
+                        }
                         onChange={e => {
-                          const aNode = audioNodes.find(a => a.id === e.target.value)
-                          void updateClipField(idx, { audioNodeId: aNode?.id, audioUrl: aNode?.url })
+                          const val = e.target.value
+                          if (val === MULTI_AUDIO_SENTINEL) return
+                          const aNode = audioNodes.find(a => a.id === val)
+                          // 手动切换配音或清空为原声时，同步清除多镜 audioClips，避免后端仍优先读取旧的多镜配音轨
+                          void updateClipField(idx, {
+                            audioNodeId: aNode?.id,
+                            audioUrl: aNode?.url,
+                            audioClips: undefined,
+                          })
                         }}
                       >
+                        {(clip.audioClips?.length ?? 0) > 1 && (
+                          <option value={MULTI_AUDIO_SENTINEL}>
+                            🎙 多镜自动配音 ({clip.audioClips!.length} 条)
+                          </option>
+                        )}
                         <option value="">原声 / 静音轨</option>
                         {audioNodes.map(a => (
                           <option key={a.id} value={a.id}>🎙 {a.title ?? a.id}</option>
                         ))}
                       </select>
                     </div>
-                    {clip.audioUrl && (
-                      <audio src={clip.audioUrl} controls className={css.shotAudioPlayer} />
+                    {(clip.audioUrl || (clip.audioClips?.length ?? 0) > 0) && (
+                      <audio
+                        src={clip.audioUrl ?? clip.audioClips?.[0]?.url}
+                        controls
+                        className={css.shotAudioPlayer}
+                      />
                     )}
                   </div>
                 </div>

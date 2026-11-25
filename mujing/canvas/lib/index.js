@@ -4,13 +4,13 @@ var __export = (target, all) => {
     __defProp(target, name3, { get: all[name3], enumerable: true });
 };
 
-// src/host/service.ts
+// mujing/canvas/src/host/service.ts
 import { homedir as homedir2 } from "node:os";
 import { extname as extname2, join as join4 } from "node:path";
 import { Service } from "@deepseek-ai/cordis";
 import z from "@deepseek-ai/schemastery";
 
-// src/host/store.ts
+// mujing/canvas/src/host/store.ts
 import { randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { mkdir, readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
@@ -470,7 +470,7 @@ function applyOp(p, op, created) {
   }
 }
 
-// src/host/jianying.ts
+// mujing/canvas/src/host/jianying.ts
 import { randomBytes } from "node:crypto";
 import { copyFile, mkdir as mkdir2, writeFile as writeFile2 } from "node:fs/promises";
 import { homedir } from "node:os";
@@ -683,9 +683,9 @@ function buildJianyingDraftJson(input) {
   const root = normalizeDraftRoot(input.root);
   const draftName = safeName(input.name, "\u5E55\u5883\u6210\u7247\u8349\u7A3F", 100);
   if (input.clips.length === 0) throw new CanvasOpError("\u6CA1\u6709\u53EF\u5BFC\u51FA\u5230\u526A\u6620\u7684\u89C6\u9891\u7247\u6BB5");
-  const sep = WINDOWS_ROOT.test(root) || root.startsWith(UNC_PREFIX) ? BS : "/";
-  const folderPath = `${root}${sep}${draftName}`;
-  const materialPath = (fileName) => `${folderPath}${sep}${MATERIALS_DIR}${sep}${fileName}`;
+  const sep2 = WINDOWS_ROOT.test(root) || root.startsWith(UNC_PREFIX) ? BS : "/";
+  const folderPath = `${root}${sep2}${draftName}`;
+  const materialPath = (fileName) => `${folderPath}${sep2}${MATERIALS_DIR}${sep2}${fileName}`;
   const draftId = newUpperUUID();
   const fps = input.fps && input.fps > 0 ? input.fps : 30;
   const nowSec = Math.floor(Date.now() / 1e3);
@@ -824,7 +824,7 @@ function buildJianyingDraftJson(input) {
   materials.audios = audios;
   materials.speeds = speeds;
   materials.texts = texts;
-  const platform = { app_id: 3704, app_source: "lv", app_version: "5.9.0", os: sep === BS ? "windows" : "mac" };
+  const platform = { app_id: 3704, app_source: "lv", app_version: "5.9.0", os: sep2 === BS ? "windows" : "mac" };
   const content = {
     canvas_config: { height: input.height, ratio: "original", width: input.width },
     color_space: 0,
@@ -941,8 +941,8 @@ async function writeJianyingDraftToDisk(input) {
   }
   const resolvedRoot = resolve(normalizeDraftRoot(input.root));
   const resolvedFolder = resolve(built.folderPath);
-  const sep = process.platform === "win32" ? BS : "/";
-  if (!resolvedFolder.startsWith(resolvedRoot + sep)) {
+  const sep2 = process.platform === "win32" ? BS : "/";
+  if (!resolvedFolder.startsWith(resolvedRoot + sep2)) {
     throw new CanvasOpError("\u8349\u7A3F\u843D\u76D8\u8DEF\u5F84\u8D8A\u754C\uFF0C\u5DF2\u62D2\u7EDD\u5199\u5165");
   }
   const materialsDir = join2(built.folderPath, MATERIALS_DIR);
@@ -988,7 +988,7 @@ function srtTime(us) {
   return `${h}:${m}:${s},${rem}`;
 }
 
-// src/host/drama.ts
+// mujing/canvas/src/host/drama.ts
 var NL = String.fromCharCode(10);
 var ORDINALS = ["\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D", "\u4E03", "\u516B", "\u4E5D", "\u5341", "\u5341\u4E00", "\u5341\u4E8C"];
 var SHOT_LENS = {
@@ -1242,12 +1242,14 @@ function formatEpisodeMarkdown(ep) {
   return lines.join(NL);
 }
 
-// src/host/media.ts
+// mujing/canvas/src/host/media.ts
 import { execFile, execFileSync } from "node:child_process";
 import { randomUUID as randomUUID2 } from "node:crypto";
+import { lookup } from "node:dns/promises";
 import { existsSync, readFileSync } from "node:fs";
-import { mkdir as mkdir3, readFile as readFile2, rm as rm2, writeFile as writeFile3 } from "node:fs/promises";
-import { extname, join as join3 } from "node:path";
+import { chmod, mkdir as mkdir3, readFile as readFile2, rename as rename2, rm as rm2, writeFile as writeFile3 } from "node:fs/promises";
+import { isIP } from "node:net";
+import { extname, join as join3, resolve as resolve2, sep } from "node:path";
 import { promisify } from "node:util";
 var execFileAsync = promisify(execFile);
 function resolveWorkingBinary(envVars, defaultCmd, fallbacks) {
@@ -1339,6 +1341,142 @@ function extFromMime(mime, fallback) {
   const clean = mime?.split(";")[0]?.trim().toLowerCase() ?? null;
   const hit = Object.entries(MIME).find(([, m]) => clean !== null && m.split(";")[0] === clean);
   return hit?.[0] ?? fallback;
+}
+var DEFAULT_MAX_DOWNLOAD_BYTES = 100 * 1024 * 1024;
+var DEFAULT_MAX_REF_BYTES = 30 * 1024 * 1024;
+var BLOCKED_METADATA_HOSTS = /* @__PURE__ */ new Set([
+  "169.254.169.254",
+  "169.254.170.2",
+  "metadata.google.internal",
+  "metadata.goog",
+  "fd00:ec2::254",
+  "0.0.0.0",
+  "::"
+]);
+function maxDownloadBytes(fallback = DEFAULT_MAX_DOWNLOAD_BYTES) {
+  const raw = Number(process.env.MUJING_MAX_DOWNLOAD_BYTES);
+  return Number.isFinite(raw) && raw > 0 ? Math.floor(raw) : fallback;
+}
+function stripIpv6Brackets(host) {
+  return host.startsWith("[") && host.endsWith("]") ? host.slice(1, -1) : host;
+}
+function isPrivateOrReservedIp(rawIp) {
+  const ip = stripIpv6Brackets(rawIp).toLowerCase();
+  const mapped = ip.startsWith("::ffff:") ? ip.slice(7) : ip;
+  const ver = isIP(mapped);
+  if (ver === 4) {
+    const [a, b] = mapped.split(".").map((n) => Number.parseInt(n, 10));
+    if (a === 0 || a === 10 || a === 127) return true;
+    if (a === 169 && b === 254) return true;
+    if (a === 172 && b >= 16 && b <= 31) return true;
+    if (a === 192 && b === 168) return true;
+    if (a === 100 && b >= 64 && b <= 127) return true;
+    return false;
+  }
+  if (isIP(ip) === 6) {
+    if (ip === "::" || ip === "::1") return true;
+    if (ip.startsWith("fc") || ip.startsWith("fd")) return true;
+    if (/^fe[89ab]/i.test(ip)) return true;
+    return false;
+  }
+  return false;
+}
+function validateEndpointBaseUrl(rawUrl) {
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return;
+  let parsed;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    throw new MediaConfigError(`\u63A5\u53E3\u5730\u5740\u683C\u5F0F\u65E0\u6548\uFF1A${trimmed}`);
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    throw new MediaConfigError(`\u63A5\u53E3\u5730\u5740\u4EC5\u652F\u6301 http/https \u534F\u8BAE\uFF1A${parsed.protocol}`);
+  }
+  const host = stripIpv6Brackets(parsed.hostname).toLowerCase();
+  if (BLOCKED_METADATA_HOSTS.has(host)) {
+    throw new MediaConfigError(`\u7981\u6B62\u5C06\u4E91\u5143\u6570\u636E\u6216\u4FDD\u7559\u5730\u5740\u914D\u7F6E\u4E3A\u5A92\u4F53\u7AEF\u70B9\uFF1A${host}`);
+  }
+}
+async function assertSafeRemoteUrl(rawUrl, opts) {
+  const label = opts?.label ?? "\u8FDC\u7A0B\u8D44\u6E90";
+  let parsed;
+  try {
+    parsed = new URL(rawUrl);
+  } catch {
+    throw new MediaUpstreamError(`${label}\u5730\u5740\u683C\u5F0F\u65E0\u6548`);
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    throw new MediaUpstreamError(`${label}\u4EC5\u5141\u8BB8 http/https \u534F\u8BAE\uFF08\u62D2\u7EDD ${parsed.protocol}\uFF09`);
+  }
+  const host = stripIpv6Brackets(parsed.hostname).toLowerCase();
+  if (!host || BLOCKED_METADATA_HOSTS.has(host)) {
+    throw new MediaUpstreamError(`${label}\u5730\u5740\u88AB\u5B89\u5168\u7B56\u7565\u62D2\u7EDD\uFF1A${host || rawUrl}`);
+  }
+  const allowPrivate = Boolean(opts?.allowPrivate) || process.env.MUJING_ALLOW_PRIVATE_URLS === "1" || process.env.MUJING_ALLOW_PRIVATE_URLS === "true" || Boolean(opts?.allowedOrigins?.has(parsed.origin));
+  if (allowPrivate) return parsed;
+  if (host === "localhost" || host.endsWith(".localhost") || host.endsWith(".local") || host.endsWith(".internal")) {
+    throw new MediaUpstreamError(`${label}\u4E0D\u5141\u8BB8\u8BBF\u95EE\u672C\u673A\u6216\u5185\u7F51\u57DF\u540D\uFF1A${host}`);
+  }
+  if (isIP(host) !== 0) {
+    if (isPrivateOrReservedIp(host)) {
+      throw new MediaUpstreamError(`${label}\u4E0D\u5141\u8BB8\u8BBF\u95EE\u5185\u7F51\u6216\u56DE\u73AF\u5730\u5740\uFF1A${host}`);
+    }
+    return parsed;
+  }
+  try {
+    const resolved = await lookup(host, { all: true });
+    for (const entry of resolved) {
+      const addr = entry.address.toLowerCase();
+      if (BLOCKED_METADATA_HOSTS.has(addr) || isPrivateOrReservedIp(addr)) {
+        throw new MediaUpstreamError(`${label}\u57DF\u540D\u89E3\u6790\u5230\u53D7\u9650\u5185\u7F51\u5730\u5740\uFF1A${host} -> ${addr}`);
+      }
+    }
+  } catch (error) {
+    if (error instanceof MediaUpstreamError) throw error;
+  }
+  return parsed;
+}
+async function readResponseBytesWithLimit(res, limitBytes, label = "\u4E0B\u8F7D\u5185\u5BB9") {
+  const cl = Number(res.headers.get("content-length"));
+  if (Number.isFinite(cl) && cl > limitBytes) {
+    await res.body?.cancel().catch(() => {
+    });
+    throw new MediaUpstreamError(`${label}\u4F53\u79EF\u8D85\u9650\uFF08${cl} > ${limitBytes} \u5B57\u8282\uFF09`);
+  }
+  if (!res.body) {
+    const buf = new Uint8Array(await res.arrayBuffer());
+    if (buf.byteLength > limitBytes) {
+      throw new MediaUpstreamError(`${label}\u4F53\u79EF\u8D85\u9650\uFF08${buf.byteLength} > ${limitBytes} \u5B57\u8282\uFF09`);
+    }
+    return buf;
+  }
+  const reader = res.body.getReader();
+  const chunks = [];
+  let total = 0;
+  try {
+    for (; ; ) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!value) continue;
+      total += value.byteLength;
+      if (total > limitBytes) {
+        await reader.cancel().catch(() => {
+        });
+        throw new MediaUpstreamError(`${label}\u4F53\u79EF\u8D85\u9650\uFF08\u8D85\u8FC7 ${limitBytes} \u5B57\u8282\u4E0A\u9650\uFF09`);
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const out = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    out.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return out;
 }
 var ASSET_PREFIX = "/mujing/assets/";
 var MediaService = class {
@@ -1567,7 +1705,11 @@ var MediaService = class {
         }))
       }
     };
-    await writeFile3(this.configFile, JSON.stringify(payload, null, 2), { encoding: "utf8", mode: 384 });
+    const tmpFile = `${this.configFile}.${process.pid}.${randomUUID2().slice(0, 8)}.tmp`;
+    await writeFile3(tmpFile, JSON.stringify(payload, null, 2), { encoding: "utf8", mode: 384 });
+    await rename2(tmpFile, this.configFile);
+    await chmod(this.configFile, 384).catch(() => {
+    });
   }
   getHealth(id) {
     let h = this.health.get(id);
@@ -1731,81 +1873,55 @@ var MediaService = class {
     }
     return void 0;
   }
+  applyPoolPatch(pool, kind, patch, normalize, makeFallback) {
+    const prevById = new Map(pool.endpoints.map((ep) => [ep.id, ep]));
+    if (patch.strategy) pool.strategy = normalizeStrategy(patch.strategy, pool.strategy);
+    if (typeof patch.autoFailover === "boolean") pool.autoFailover = patch.autoFailover;
+    if (Array.isArray(patch.endpoints)) {
+      const next = patch.endpoints.map((ep, idx) => {
+        if (typeof ep.baseURL === "string") validateEndpointBaseUrl(ep.baseURL);
+        const id = typeof ep.id === "string" && ep.id.trim() ? ep.id.trim() : makeEndpointId(kind);
+        const prev = prevById.get(id);
+        const apiKey = this.mergeApiKey(ep, prev, prevById);
+        return normalize({ ...prev, ...ep, id, apiKey }, idx);
+      });
+      pool.endpoints = next;
+      pool.cursor = 0;
+    } else {
+      if (typeof patch.baseURL === "string") validateEndpointBaseUrl(patch.baseURL);
+      const first = pool.endpoints[0] ?? makeFallback();
+      const apiKey = this.mergeApiKey(patch, first, prevById);
+      pool.endpoints[0] = normalize({ ...first, ...patch, id: first.id, apiKey }, 0);
+    }
+    for (const ep of pool.endpoints) this.clearCooldown(ep.id);
+  }
   async updateConfig(patch) {
     if (patch.image) {
-      const p = patch.image;
-      const prevById = new Map(this.imagePool.endpoints.map((ep) => [ep.id, ep]));
-      if (p.strategy) this.imagePool.strategy = normalizeStrategy(p.strategy, this.imagePool.strategy);
-      if (typeof p.autoFailover === "boolean") this.imagePool.autoFailover = p.autoFailover;
-      if (Array.isArray(p.endpoints)) {
-        this.imagePool.endpoints = p.endpoints.map((ep, idx) => {
-          const id = typeof ep.id === "string" && ep.id.trim() ? ep.id.trim() : makeEndpointId("image");
-          const prev = prevById.get(id);
-          const apiKey = this.mergeApiKey(ep, prev, prevById);
-          return this.normalizeImageEndpoint({
-            ...prev,
-            ...ep,
-            id,
-            apiKey
-          }, idx);
-        });
-        this.imagePool.cursor = 0;
-      } else {
-        const first = this.imagePool.endpoints[0] ?? this.makeDefaultImagePool().endpoints[0];
-        const apiKey = this.mergeApiKey(p, first, prevById);
-        this.imagePool.endpoints[0] = this.normalizeImageEndpoint({ ...first, ...p, id: first.id, apiKey }, 0);
-      }
-      for (const ep of this.imagePool.endpoints) this.clearCooldown(ep.id);
+      this.applyPoolPatch(
+        this.imagePool,
+        "image",
+        patch.image,
+        (ep, idx) => this.normalizeImageEndpoint(ep, idx),
+        () => this.makeDefaultImagePool().endpoints[0]
+      );
     }
     if (patch.video) {
-      const p = patch.video;
-      const prevById = new Map(this.videoPool.endpoints.map((ep) => [ep.id, ep]));
-      if (p.strategy) this.videoPool.strategy = normalizeStrategy(p.strategy, this.videoPool.strategy);
-      if (typeof p.autoFailover === "boolean") this.videoPool.autoFailover = p.autoFailover;
-      if (Array.isArray(p.endpoints)) {
-        this.videoPool.endpoints = p.endpoints.map((ep, idx) => {
-          const id = typeof ep.id === "string" && ep.id.trim() ? ep.id.trim() : makeEndpointId("video");
-          const prev = prevById.get(id);
-          const apiKey = this.mergeApiKey(ep, prev, prevById);
-          return this.normalizeVideoEndpoint({
-            ...prev,
-            ...ep,
-            id,
-            apiKey
-          }, idx);
-        });
-        this.videoPool.cursor = 0;
-      } else {
-        const first = this.videoPool.endpoints[0] ?? this.makeDefaultVideoPool().endpoints[0];
-        const apiKey = this.mergeApiKey(p, first, prevById);
-        this.videoPool.endpoints[0] = this.normalizeVideoEndpoint({ ...first, ...p, id: first.id, apiKey }, 0);
-      }
-      for (const ep of this.videoPool.endpoints) this.clearCooldown(ep.id);
+      this.applyPoolPatch(
+        this.videoPool,
+        "video",
+        patch.video,
+        (ep, idx) => this.normalizeVideoEndpoint(ep, idx),
+        () => this.makeDefaultVideoPool().endpoints[0]
+      );
     }
     if (patch.audio) {
-      const p = patch.audio;
-      const prevById = new Map(this.audioPool.endpoints.map((ep) => [ep.id, ep]));
-      if (p.strategy) this.audioPool.strategy = normalizeStrategy(p.strategy, this.audioPool.strategy);
-      if (typeof p.autoFailover === "boolean") this.audioPool.autoFailover = p.autoFailover;
-      if (Array.isArray(p.endpoints)) {
-        this.audioPool.endpoints = p.endpoints.map((ep, idx) => {
-          const id = typeof ep.id === "string" && ep.id.trim() ? ep.id.trim() : makeEndpointId("audio");
-          const prev = prevById.get(id);
-          const apiKey = this.mergeApiKey(ep, prev, prevById);
-          return this.normalizeAudioEndpoint({
-            ...prev,
-            ...ep,
-            id,
-            apiKey
-          }, idx);
-        });
-        this.audioPool.cursor = 0;
-      } else {
-        const first = this.audioPool.endpoints[0] ?? this.makeDefaultAudioPool().endpoints[0];
-        const apiKey = this.mergeApiKey(p, first, prevById);
-        this.audioPool.endpoints[0] = this.normalizeAudioEndpoint({ ...first, ...p, id: first.id, apiKey }, 0);
-      }
-      for (const ep of this.audioPool.endpoints) this.clearCooldown(ep.id);
+      this.applyPoolPatch(
+        this.audioPool,
+        "audio",
+        patch.audio,
+        (ep, idx) => this.normalizeAudioEndpoint(ep, idx),
+        () => this.makeDefaultAudioPool().endpoints[0]
+      );
     }
     await this.persistConfig();
     return { status: this.status(), config: this.getConfigDetails() };
@@ -1979,31 +2095,55 @@ var MediaService = class {
     const bytes = await readFile2(file);
     return `data:${mimeOf(file)};base64,${bytes.toString("base64")}`;
   }
-  async download(url, fallbackExt, signal) {
+  /** 收集当前已配置的媒体端点 origin（用于放行本地 Mock / 自建推理服务，同时继续拦截任意第三方 SSRF）。 */
+  getAllowedDownloadOrigins() {
+    const origins = /* @__PURE__ */ new Set();
+    const all = [
+      ...this.imagePool.endpoints,
+      ...this.videoPool.endpoints,
+      ...this.audioPool.endpoints
+    ];
+    for (const ep of all) {
+      if (!ep.baseURL?.trim()) continue;
+      try {
+        origins.add(new URL(ep.baseURL.trim()).origin);
+      } catch {
+      }
+    }
+    return origins;
+  }
+  async download(url, fallbackExt, signal, limitBytes = maxDownloadBytes()) {
     if (url.startsWith("data:")) {
       const m = /^data:([^;,]+)?(;base64)?,(.*)$/s.exec(url);
       if (m === null) throw new MediaUpstreamError("\u4E0A\u6E38\u8FD4\u56DE\u4E86\u65E0\u6CD5\u89E3\u6790\u7684 data URL");
-      const bytes = m[2] ? Buffer.from(m[3], "base64") : Buffer.from(decodeURIComponent(m[3]));
-      return this.saveAsset(bytes, extFromMime(m[1] ?? null, fallbackExt));
+      const bytes2 = m[2] ? Buffer.from(m[3], "base64") : Buffer.from(decodeURIComponent(m[3]));
+      if (bytes2.byteLength > limitBytes) {
+        throw new MediaUpstreamError(`\u4E0A\u6E38\u8FD4\u56DE\u7684 data URL \u4F53\u79EF\u8D85\u9650\uFF08\u8D85\u8FC7 ${limitBytes} \u5B57\u8282\uFF09`);
+      }
+      return this.saveAsset(bytes2, extFromMime(m[1] ?? null, fallbackExt));
     }
+    await assertSafeRemoteUrl(url, { allowedOrigins: this.getAllowedDownloadOrigins(), label: "\u4E0B\u8F7D\u751F\u6210\u7ED3\u679C" });
     const res = await fetch(url, { signal });
     if (!res.ok) throw new MediaUpstreamError(`\u4E0B\u8F7D\u751F\u6210\u7ED3\u679C\u5931\u8D25\uFF1AHTTP ${res.status}`);
-    return this.saveAsset(new Uint8Array(await res.arrayBuffer()), extFromMime(res.headers.get("content-type"), fallbackExt));
+    const bytes = await readResponseBytesWithLimit(res, limitBytes, "\u4E0B\u8F7D\u751F\u6210\u7ED3\u679C");
+    return this.saveAsset(bytes, extFromMime(res.headers.get("content-type"), fallbackExt));
   }
   /** 生成一张图片；refs 为参考图 URL（本地资产或外链）。支持多接口动态轮询与失败自动切换。 */
   async generateImage(input, signal) {
-    const refs = await Promise.all((input.refs ?? []).map((r) => this.toUpstreamRef(r)));
+    const rawRefs = input.refs ?? [];
+    const refs = await Promise.all(rawRefs.map((r) => this.toUpstreamRef(r)));
     return this.runWithPool(this.imagePool, "\u56FE\u7247", signal, async (ep, { base, key }) => {
       const size = input.size ?? ep.size;
       let res;
-      if (refs.length > 0 && ep.flavor === "openai") {
+      if (rawRefs.length > 0 && ep.flavor === "openai") {
         const form = new FormData();
         form.set("model", ep.model);
         form.set("prompt", input.prompt);
         form.set("size", size);
-        for (const [i, ref] of refs.entries()) {
-          const blob = await (await fetch(ref, { signal })).blob();
-          form.append("image[]", blob, `ref-${i}.png`);
+        for (const [i, rawRef] of rawRefs.entries()) {
+          const { blob, filename } = await this.loadRefBlob(rawRef, signal);
+          const ext = extname(filename) || ".png";
+          form.append("image[]", blob, `ref-${i}${ext}`);
         }
         res = await fetch(`${base}/images/edits`, { method: "POST", headers: { authorization: `Bearer ${key}` }, body: form, signal });
       } else {
@@ -2029,9 +2169,13 @@ var MediaService = class {
   }
   /** 把本地资产、data URL 或外链加载为 Blob（供 OpenAI multipart 接口提交首帧/参考图）。 */
   async loadRefBlob(url, signal) {
+    const limitBytes = maxDownloadBytes(DEFAULT_MAX_REF_BYTES);
     const file = this.resolveAssetFile(url);
     if (file !== null) {
       const bytes2 = await readFile2(file);
+      if (bytes2.byteLength > limitBytes) {
+        throw new MediaUpstreamError(`\u672C\u5730\u53C2\u8003\u56FE\u4F53\u79EF\u8D85\u9650\uFF08\u8D85\u8FC7 ${limitBytes} \u5B57\u8282\uFF09`);
+      }
       const mime2 = mimeOf(file);
       const ext = extname(file) || extFromMime(mime2, ".png");
       return { blob: new Blob([bytes2], { type: mime2 }), filename: `ref${ext}` };
@@ -2041,13 +2185,17 @@ var MediaService = class {
       if (!m) throw new MediaUpstreamError("\u53C2\u8003\u56FE data URL \u683C\u5F0F\u65E0\u6548");
       const mime2 = m[1] || "image/png";
       const bytes2 = m[2] ? Buffer.from(m[3], "base64") : Buffer.from(decodeURIComponent(m[3]));
+      if (bytes2.byteLength > limitBytes) {
+        throw new MediaUpstreamError(`\u53C2\u8003\u56FE data URL \u4F53\u79EF\u8D85\u9650\uFF08\u8D85\u8FC7 ${limitBytes} \u5B57\u8282\uFF09`);
+      }
       return { blob: new Blob([bytes2], { type: mime2 }), filename: `ref${extFromMime(mime2, ".png")}` };
     }
+    await assertSafeRemoteUrl(url, { allowedOrigins: this.getAllowedDownloadOrigins(), label: "\u53C2\u8003\u56FE" });
     const res = await fetch(url, { signal });
     if (!res.ok) throw new MediaUpstreamError(`\u8BFB\u53D6\u53C2\u8003\u56FE\u5931\u8D25\uFF1AHTTP ${res.status}`);
     const mime = res.headers.get("content-type") || "image/png";
-    const bytes = await res.arrayBuffer();
-    return { blob: new Blob([bytes], { type: mime }), filename: `ref${extFromMime(mime, ".png")}` };
+    const bytes = await readResponseBytesWithLimit(res, limitBytes, "\u53C2\u8003\u56FE");
+    return { blob: new Blob([bytes.buffer], { type: mime }), filename: `ref${extFromMime(mime, ".png")}` };
   }
   /** 生成一段视频（阻塞到完成或超时）；支持多接口动态轮询与失败自动切换。 */
   async generateVideo(input, signal) {
@@ -2125,7 +2273,8 @@ var MediaService = class {
         if (job.status === "completed") {
           const res = await fetch(`${base}/videos/${encodeURIComponent(videoId)}/content`, { headers: auth, signal });
           if (!res.ok) throw new MediaUpstreamError(`\u4E0B\u8F7D\u89C6\u9891\u5931\u8D25\uFF1AHTTP ${res.status}`);
-          const saved = await this.saveAsset(new Uint8Array(await res.arrayBuffer()), ".mp4");
+          const bytes = await readResponseBytesWithLimit(res, maxDownloadBytes(), "\u4E0B\u8F7D\u89C6\u9891");
+          const saved = await this.saveAsset(bytes, ".mp4");
           const probed = await this.probeMedia(saved).catch(() => null);
           return { url: saved, model: ep.model, durationMs: probed?.durationMs ?? duration * 1e3 };
         }
@@ -2169,7 +2318,7 @@ var MediaService = class {
           throw new MediaUpstreamError(`\u97F3\u9891\u751F\u6210 JSON \u672A\u5305\u542B\u97F3\u9891\u6570\u636E\uFF1A${truncate(JSON.stringify(json))}`);
         }
       } else {
-        const bytes = new Uint8Array(await res.arrayBuffer());
+        const bytes = await readResponseBytesWithLimit(res, maxDownloadBytes(DEFAULT_MAX_REF_BYTES), "\u4E0B\u8F7D\u97F3\u9891");
         if (bytes.byteLength === 0) throw new MediaUpstreamError("\u97F3\u9891\u751F\u6210\u8FD4\u56DE\u7A7A\u5185\u5BB9");
         saved = await this.saveAsset(bytes, extFromMime(ct, `.${format}`));
       }
@@ -2177,10 +2326,19 @@ var MediaService = class {
       return { url: saved, model: ep.model, ...probed?.durationMs ? { durationMs: probed.durationMs } : {} };
     });
   }
-  /** 用 ffprobe 探测本地媒体时长、尺寸与是否有音轨。 */
+  /** 用 ffprobe 探测本地资产目录内的媒体时长、尺寸与是否有音轨（严格限制在 assetsDir 边界内）。 */
   async probeMedia(urlOrFile) {
-    const file = urlOrFile.startsWith(ASSET_PREFIX) ? this.resolveAssetFile(urlOrFile) : urlOrFile;
-    if (!file) throw new MediaUpstreamError(`\u65E0\u6CD5\u63A2\u6D4B\u975E\u672C\u5730\u8D44\u4EA7\uFF1A${urlOrFile}`);
+    let file = null;
+    if (urlOrFile.startsWith(ASSET_PREFIX)) {
+      file = this.resolveAssetFile(urlOrFile);
+    } else if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(urlOrFile)) {
+      const assetsRoot = resolve2(this.assetsDir);
+      const resolved = resolve2(urlOrFile);
+      if (resolved.startsWith(assetsRoot + sep)) {
+        file = resolved;
+      }
+    }
+    if (!file) throw new MediaUpstreamError(`\u65E0\u6CD5\u63A2\u6D4B\u8D44\u4EA7\u76EE\u5F55\u4EE5\u5916\u7684\u8DEF\u5F84\u6216\u5916\u94FE\uFF1A${urlOrFile}`);
     const { stdout } = await execFileAsync(FFPROBE_BIN, [
       "-v",
       "error",
@@ -2422,14 +2580,14 @@ function truncate(s, n = 400) {
   return s.length > n ? `${s.slice(0, n)}\u2026` : s;
 }
 function sleep(ms, signal) {
-  return new Promise((resolve2, reject) => {
+  return new Promise((resolve3, reject) => {
     if (signal?.aborted) {
       reject(signal.reason);
       return;
     }
     const t = setTimeout(() => {
       signal?.removeEventListener("abort", onAbort);
-      resolve2();
+      resolve3();
     }, ms);
     const onAbort = () => {
       clearTimeout(t);
@@ -2439,7 +2597,7 @@ function sleep(ms, signal) {
   });
 }
 
-// src/host/service.ts
+// mujing/canvas/src/host/service.ts
 async function mapWithConcurrency(items, limit, worker) {
   const results = new Array(items.length);
   let nextIndex = 0;
@@ -2772,12 +2930,29 @@ var MujingService = class extends Service {
       throw new CanvasOpError(options.kind === "audio" ? "\u76EE\u6807\u955C\u5934\u6CA1\u6709\u53EF\u6717\u8BFB\u7684\u53F0\u8BCD" : "\u627E\u4E0D\u5230\u76EE\u6807\u5206\u955C");
     }
     const size = drama.aspectRatio === "9:16" ? "1024x1536" : drama.aspectRatio === "16:9" ? "1536x1024" : "1024x1024";
-    const results = [];
-    for (const { shot, shotNumber } of targets) {
+    const linkShotMedia = async (shotId, nodeId, url) => {
+      if (!nodeId && !url) return;
+      await this.store.updateDomain(projectId, (p) => {
+        const targetEp = p.drama?.episodes.find((e) => e.id === ep.id);
+        const s = targetEp?.shots.find((item) => item.id === shotId);
+        if (!s) return;
+        if (options.kind === "keyframe") {
+          if (nodeId) s.keyframeNodeId = nodeId;
+          if (url) s.keyframeUrl = url;
+        } else {
+          if (nodeId) s.audioNodeId = nodeId;
+          if (url) s.audioUrl = url;
+        }
+      }, false);
+    };
+    const rawResults = await mapWithConcurrency(targets, 3, async ({ shot, shotNumber }) => {
+      if (signal?.aborted) {
+        return { shotId: shot.id, shotNumber, error: "\u5DF2\u53D6\u6D88" };
+      }
       if (options.kind === "keyframe") {
         const prompt = compileShotKeyframePrompt(drama, shot);
         const refs = collectShotCastRefs(project, [shot]);
-        const { nodeId, done } = await this.startGeneration({
+        const { nodeId: nodeId2, done: done2 } = await this.startGeneration({
           projectId,
           kind: "image",
           nodeId: shot.keyframeNodeId,
@@ -2788,42 +2963,29 @@ var MujingService = class extends Service {
           x: 80 + (shotNumber - 1) * 340,
           y: 780 + (ep.number - 1) * 360
         }, signal);
-        const finalNode = await done;
-        results.push({ shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error });
-      } else {
-        const dlg = shot.dialogue?.trim();
-        if (!dlg) continue;
-        const speakerCast = shot.speaker ? drama.casts.find((c) => c.name === shot.speaker) : void 0;
-        const voice = speakerCast?.voice || void 0;
-        const { nodeId, done } = await this.startGeneration({
-          projectId,
-          kind: "audio",
-          nodeId: shot.audioNodeId,
-          title: `\u7B2C${ep.number}\u96C6\xB7\u955C${shotNumber}\u914D\u97F3${shot.speaker ? `\xB7${shot.speaker}` : ""}`,
-          prompt: dlg,
-          voice,
-          x: 80 + (shotNumber - 1) * 340,
-          y: 1120 + (ep.number - 1) * 200
-        }, signal);
-        const finalNode = await done;
-        results.push({ shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error });
+        const finalNode2 = await done2;
+        await linkShotMedia(shot.id, nodeId2, finalNode2.url);
+        return { shotId: shot.id, shotNumber, nodeId: nodeId2, url: finalNode2.url, error: finalNode2.error };
       }
-    }
-    await this.store.updateDomain(projectId, (p) => {
-      const targetEp = p.drama?.episodes.find((e) => e.id === ep.id);
-      if (!targetEp) return;
-      for (const r of results) {
-        const s = targetEp.shots.find((item) => item.id === r.shotId);
-        if (!s) continue;
-        if (options.kind === "keyframe") {
-          if (r.nodeId) s.keyframeNodeId = r.nodeId;
-          if (r.url) s.keyframeUrl = r.url;
-        } else {
-          if (r.nodeId) s.audioNodeId = r.nodeId;
-          if (r.url) s.audioUrl = r.url;
-        }
-      }
-    }, false);
+      const dlg = shot.dialogue?.trim();
+      if (!dlg) return null;
+      const speakerCast = shot.speaker ? drama.casts.find((c) => c.name === shot.speaker) : void 0;
+      const voice = speakerCast?.voice || void 0;
+      const { nodeId, done } = await this.startGeneration({
+        projectId,
+        kind: "audio",
+        nodeId: shot.audioNodeId,
+        title: `\u7B2C${ep.number}\u96C6\xB7\u955C${shotNumber}\u914D\u97F3${shot.speaker ? `\xB7${shot.speaker}` : ""}`,
+        prompt: dlg,
+        voice,
+        x: 80 + (shotNumber - 1) * 340,
+        y: 1120 + (ep.number - 1) * 200
+      }, signal);
+      const finalNode = await done;
+      await linkShotMedia(shot.id, nodeId, finalNode.url);
+      return { shotId: shot.id, shotNumber, nodeId, url: finalNode.url, error: finalNode.error };
+    });
+    const results = rawResults.filter((r) => r !== null);
     return {
       episodeId: ep.id,
       kind: options.kind,
@@ -3182,12 +3344,20 @@ var MujingService = class extends Service {
     try {
       const aspect = project.drama?.aspectRatio;
       const dims = aspect === "9:16" ? { width: 720, height: 1280 } : aspect === "1:1" ? { width: 1080, height: 1080 } : void 0;
+      const renderClips = tl.clips.map((c) => ({
+        ...c,
+        ...c.audioClips ? { audioClips: c.audioClips.map((a) => ({ ...a })) } : {}
+      }));
+      const probedDurations = /* @__PURE__ */ new Map();
       const captions = [];
       let cursorUs = 0;
-      for (const clip of tl.clips) {
+      for (const clip of renderClips) {
         const probed = await this.media.probeMedia(clip.url).catch(() => null);
         const durMs = probed?.durationMs ?? clip.durationMs;
         clip.durationMs = durMs;
+        if (probed?.durationMs) {
+          probedDurations.set(clip.id, { url: clip.url, durationMs: probed.durationMs });
+        }
         const durUs = durMs * 1e3;
         if (clip.caption?.trim()) {
           captions.push({ text: clip.caption.trim(), startUs: cursorUs + 1e5, durationUs: Math.max(4e5, durUs - 2e5) });
@@ -3195,7 +3365,7 @@ var MujingService = class extends Service {
         cursorUs += durUs;
       }
       const srt = captions.length > 0 ? buildSrt(captions) : tl.subtitleSrt ?? "";
-      const out = await this.media.concatVideos(tl.clips, {
+      const out = await this.media.concatVideos(renderClips, {
         ...dims,
         subtitleSrt: srt,
         burnSubtitles: Boolean(tl.burnSubtitles)
@@ -3203,7 +3373,12 @@ var MujingService = class extends Service {
       const subtitleAssetUrl = srt.trim() ? await this.media.saveAsset(Buffer.from(srt, "utf8"), ".srt") : void 0;
       return await this.store.updateDomain(projectId, (p) => {
         if (!p.timeline) return;
-        p.timeline.clips = tl.clips;
+        for (const existing of p.timeline.clips) {
+          const hit = probedDurations.get(existing.id);
+          if (hit && existing.url === hit.url) {
+            existing.durationMs = hit.durationMs;
+          }
+        }
         p.timeline.outputUrl = out.url;
         p.timeline.subtitleSrt = srt;
         p.timeline.subtitleAssetUrl = subtitleAssetUrl;
@@ -3307,12 +3482,13 @@ var MujingService = class extends Service {
   }
 };
 
-// src/host/web.ts
+// mujing/canvas/src/host/web.ts
 var web_exports = {};
 __export(web_exports, {
   apply: () => apply,
   inject: () => inject,
-  name: () => name
+  name: () => name,
+  parseByteRange: () => parseByteRange
 });
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
@@ -3323,11 +3499,11 @@ var API = "/mujing/api";
 var MAX_JSON_BODY = 10 * 1024 * 1024;
 var MAX_UPLOAD_BODY = 80 * 1024 * 1024;
 var HttpError = class extends Error {
+  status;
   constructor(status, message) {
     super(message);
     this.status = status;
   }
-  status;
 };
 function send(res, status, body) {
   const text = JSON.stringify(body);
@@ -3368,6 +3544,24 @@ function statusOf(error) {
   if (error instanceof MediaConfigError) return 412;
   if (error instanceof MediaUpstreamError) return 502;
   return 500;
+}
+function parseByteRange(header, totalSize) {
+  const m = /^bytes=(\d*)-(\d*)$/.exec(header.trim());
+  if (!m) return { kind: "ignore" };
+  const [, rawStart, rawEnd] = m;
+  if (!rawStart && !rawEnd) return { kind: "unsatisfiable" };
+  if (totalSize <= 0) return { kind: "unsatisfiable" };
+  if (!rawStart) {
+    const suffix = Number.parseInt(rawEnd, 10);
+    if (!Number.isFinite(suffix) || suffix <= 0) return { kind: "unsatisfiable" };
+    const start2 = Math.max(0, totalSize - suffix);
+    return { kind: "ok", start: start2, end: totalSize - 1 };
+  }
+  const start = Number.parseInt(rawStart, 10);
+  if (!Number.isFinite(start) || start < 0 || start >= totalSize) return { kind: "unsatisfiable" };
+  const end = rawEnd ? Math.min(totalSize - 1, Number.parseInt(rawEnd, 10)) : totalSize - 1;
+  if (!Number.isFinite(end) || end < start) return { kind: "unsatisfiable" };
+  return { kind: "ok", start, end };
 }
 function apply(ctx) {
   const mujing = ctx.mujing;
@@ -3700,7 +3894,13 @@ function apply(ctx) {
     path: ASSET_PREFIX.slice(0, -1),
     handler: async (req, res) => {
       const BS2 = String.fromCharCode(92);
-      const name3 = decodeURIComponent(new URL(req.url ?? "/", "http://local").pathname.slice(ASSET_PREFIX.length));
+      let name3;
+      try {
+        name3 = decodeURIComponent(new URL(req.url ?? "/", "http://local").pathname.slice(ASSET_PREFIX.length));
+      } catch {
+        send(res, 400, { error: "\u975E\u6CD5\u8DEF\u5F84\u7F16\u7801" });
+        return;
+      }
       if (!name3 || name3.includes("/") || name3.includes(BS2) || name3.includes("..")) {
         send(res, 400, { error: "\u975E\u6CD5\u8DEF\u5F84" });
         return;
@@ -3710,26 +3910,31 @@ function apply(ctx) {
         const info = await stat(file);
         const mime = mimeOf(name3);
         const range = req.headers.range;
-        if (range && info.size > 0) {
-          const m = /^bytes=(\d*)-(\d*)$/.exec(range);
-          if (m) {
-            const start = m[1] ? Number.parseInt(m[1], 10) : 0;
-            const end = m[2] ? Math.min(info.size - 1, Number.parseInt(m[2], 10)) : info.size - 1;
-            if (start >= 0 && start <= end && start < info.size) {
-              res.writeHead(206, {
-                "content-type": mime,
-                "content-range": `bytes ${start}-${end}/${info.size}`,
-                "accept-ranges": "bytes",
-                "content-length": String(end - start + 1),
-                "cache-control": "private, max-age=31536000, immutable"
-              });
-              if (req.method === "HEAD") {
-                res.end();
-                return;
-              }
-              createReadStream(file, { start, end }).pipe(res);
+        if (range) {
+          const parsed = parseByteRange(range, info.size);
+          if (parsed.kind === "unsatisfiable") {
+            res.writeHead(416, {
+              "content-range": `bytes */${info.size}`,
+              "accept-ranges": "bytes"
+            });
+            res.end();
+            return;
+          }
+          if (parsed.kind === "ok") {
+            const { start, end } = parsed;
+            res.writeHead(206, {
+              "content-type": mime,
+              "content-range": `bytes ${start}-${end}/${info.size}`,
+              "accept-ranges": "bytes",
+              "content-length": String(end - start + 1),
+              "cache-control": "private, max-age=31536000, immutable"
+            });
+            if (req.method === "HEAD") {
+              res.end();
               return;
             }
+            createReadStream(file, { start, end }).pipe(res);
+            return;
           }
         }
         res.writeHead(200, {
@@ -3750,7 +3955,7 @@ function apply(ctx) {
   }));
 }
 
-// src/host/index.ts
+// mujing/canvas/src/host/index.ts
 var name2 = "mujing";
 function apply2(ctx, config) {
   ctx.plugin(MujingService, config);
