@@ -1,0 +1,4 @@
+# 消费心理转化设计：安装即启用本技能。
+- insert:
+    - id: mujing-skill-consumer-psychology-conversion
+      name: mujing-skill-consumer-psychology-conversion

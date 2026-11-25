@@ -1,0 +1,4 @@
+# 角色精灵图动画产线：安装即启用本技能。
+- insert:
+    - id: mujing-skill-character-sprite-animation
+      name: mujing-skill-character-sprite-animation

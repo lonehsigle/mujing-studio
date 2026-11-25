@@ -1,0 +1,118 @@
+# mujing-canvas bundle 层：幕境画布 host 服务 + 「幕境导演」Agent 预设。
+# 技能由独立的 mujing-skill-* 插件注册到全局技能注册表，导演预设通过 tool-skill 使用它们。
+# 用户可在 profile 的 cordis.patch.yml 中按 id 覆盖 `mujing` 行（覆盖需重写整个 config）。
+- insert:
+    - id: mujing
+      name: mujing-canvas
+      config:
+        image:
+          # OpenAI 兼容图片服务（含 /v1）；flavor: ark 时为火山方舟 https://ark.cn-beijing.volces.com/api/v3
+          baseURL: !!js process.env.MUJING_IMAGE_BASE_URL
+          apiKeyEnv: MUJING_IMAGE_API_KEY
+          model: !!js process.env.MUJING_IMAGE_MODEL ?? 'gpt-image-1'
+          flavor: !!js process.env.MUJING_IMAGE_FLAVOR ?? 'openai'
+          size: '1024x1024'
+        video:
+          baseURL: !!js process.env.MUJING_VIDEO_BASE_URL
+          apiKeyEnv: MUJING_VIDEO_API_KEY
+          model: !!js process.env.MUJING_VIDEO_MODEL ?? 'doubao-seedance-1-0-pro-250528'
+          flavor: !!js process.env.MUJING_VIDEO_FLAVOR ?? 'ark'
+          duration: 5
+          ratio: '16:9'
+        audio:
+          baseURL: !!js process.env.MUJING_AUDIO_BASE_URL ?? process.env.MUJING_IMAGE_BASE_URL
+          apiKeyEnv: !!js >-
+            process.env.MUJING_AUDIO_API_KEY ? 'MUJING_AUDIO_API_KEY' : 'MUJING_IMAGE_API_KEY'
+          model: !!js process.env.MUJING_AUDIO_MODEL ?? 'gpt-4o-mini-tts'
+          voice: !!js process.env.MUJING_AUDIO_VOICE ?? 'alloy'
+          format: 'mp3'
+
+    - id: preset-mujing-director
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: mujing-director
+        name: 幕境导演
+        description: AI 影视与短剧创作 Agent：小说拆集分镜、角色三视图锁定、尾帧接续生视频、配音与时间线剪映导出
+        order: 5
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |
+                主语言声明：本项目与工作台主语言为简体中文（`zh-CN`）。所有对话回复、剧本拆集、分镜表、资产说明、状态汇报与提示词说明默认使用简体中文输出（除非用户明确要求其他语言）。
+
+                你是「幕境导演」，一个由 {{model}} 模型驱动的 AI 影视与短剧创作总导演 Agent，工作在幕境常驻主工作台（剧目广场 / 短剧分镜台 / 无限画布 / 成片与剪映导出 / 可折叠 AI 导演副驾抽屉）上。
+
+                系统会自动向你注入 `<mujing_studio_context>` 实时快照（包含当前活动项目、画幅画风、角色锁定进度、分镜与时间线状态）。
+
+                你的核心创作路径：
+                一、【小说 → 成片结构化短剧流水线】（当用户提供小说、长故事或明确要求做分集短剧时优先使用）：
+                1. 查看 `<mujing_studio_context>`（无活动项目时调用 canvas_create_project 新建）。
+                2. 调用 drama_save_plan 一次性规划全剧世界观风格（style）、画幅（竖屏短剧选 9:16，横屏选 16:9）、核心角色/常驻场景/关键道具设定（casts）以及分集镜头表（episodes/shots，同场戏保持相同 scene 名以启用尾帧接续）。
+                3. 调用 drama_generate_casts 为核心角色与主场景生成三视图设定卡并自动锁定，确保全剧长相服装一致。
+                4. （可选精修）调用 drama_generate_shot_media 生成单镜故事板关键帧（kind=keyframe）或角色对白配音（kind=audio）。
+                5. 调用 drama_run_episode 按分段顺序执行视频生成（系统会自动用 FFmpeg 抽取上一段真实尾帧作为下一段首帧，并在全部完成后合成整集 MP4 与 SRT 字幕）。
+                6. 如需交付后期精剪，调用 timeline_export_jianying 一键导出剪映专业版草稿。
+
+                二、【自由无限画布创作】（单镜头、概念设计、广告片、角色试妆、配音测试）：
+                1. 用 canvas_apply_ops 编排 text / image / video / audio 节点与连线（source → target）。
+                2. 用 generate_media 生成图片（kind=image）、视频（kind=video，支持 reference_node_ids 首帧/参考图）或语音配音（kind=audio，支持 voice 音色选择）。
+                3. 多段视频就绪后可用 timeline_compose 混流配音并拼接完整 MP4 成片。
+
+                三、【专业技能调用】：
+                遇到影视专业问题（短剧三幕钩子、分镜调度、微表情表演、Seedance 提示词工程、电商广告等）先查看技能目录，加载对应技能再动手。
+
+                约束：生成图片和视频会消耗额度，批量生成（超过 4 个分段或镜头）前先简要告知计划；若报未配置错误，调用 media_status 并清晰告知环境变量配置方式，不要盲目重试。
+          - id: agent-instructions
+            name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: mujing-tools
+            name: mujing-canvas/tools
+          - id: tool-skill
+            name: '@deepseek-ai/dsh-tool-skill'
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+              toolResultPruner: true
+            config:
+              - id: compaction-basic
+                name: '@deepseek-ai/dsh-compaction-basic'
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'
+              - id: tool-result-pruner
+                name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+                config:
+                  thresholdChars: 8192
+                  headChars: 4096
+                  tailChars: 1024
+          - id: delegation
+            name: cordis:group
+            group: true
+            isolate:
+              workflowEngine: true
+            config:
+              - id: tool-subagent-control
+                name: '@deepseek-ai/dsh-tool-subagent-control'
+                config:
+                  interrupt: false
+              - id: tool-subagent
+                name: '@deepseek-ai/dsh-tool-subagent'
+                config:
+                  provider: fork
+                  toolName: subagent_fork
+          - id: tool-ask-user
+            name: '@deepseek-ai/dsh-tool-ask-user'
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: true
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: true
+              searchTimeoutMs: 60000

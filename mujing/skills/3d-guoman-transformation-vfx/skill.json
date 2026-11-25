@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-3d-guoman-transformation-vfx",
+  "name": "3d-guoman-transformation-vfx",
+  "title": "3D国漫风转身变身特效",
+  "description": "【3D国漫风转身变身特效】本技能根据用户上传的角色底图、选择的视觉阵营与主题世界观，批量生成具有360度旋转变身特效的3D国漫风视频脚本及生成提示词。强制基于图生视频逻辑，确保元素深度变异融合，并要求按分组成员逐一独立生成。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14889292801804",
+    "tag": "creative",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782219677199",
+    "updatedAt": "1783062173620",
+    "initialLikeCount": "38",
+    "initialAddedCount": "133",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v02870g10004d8v1n2nog65kkoeqk3hg\",\"showcase_url\":\"https://v9-artist.vlabvod.com/b92de9acf3231b4b4484e2f2ecd9874e/6a7824f2/video/tos/cn/tos-cn-v-148450/oMHeKTuEsDBtgIqIjBFqSGRDgGC1mAK4fhPHUp/\"}]"
+  }
+}

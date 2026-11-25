@@ -1,0 +1,4 @@
+# 剧本撰写：安装即启用本技能。
+- insert:
+    - id: mujing-skill-screenwriting
+      name: mujing-skill-screenwriting

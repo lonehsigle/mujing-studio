@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-sitcom-workshop",
+  "name": "sitcom-workshop",
+  "title": "情景喜剧工坊",
+  "description": "【情景喜剧工坊】写出能连播的情景喜剧：家庭摩擦、暖场钩子与人物关系配方。当写情景喜剧/系列短剧、桥段重复，或人物冲突撑不起一集时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000082",
+    "tag": "drama",
+    "sortWeight": "210",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-sitcom-lab.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-sitcom-lab.png\"}]"
+  }
+}

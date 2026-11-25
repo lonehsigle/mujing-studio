@@ -1,0 +1,18 @@
+# 本地联调：把模型与图片生成都指向 scripts/mock-upstream.mjs（不消耗任何真实额度）。
+# 启动：node scripts/mock-upstream.mjs 3199，然后 dsh 加 --patch dev/mock.patch.yml，
+# 并设置环境变量 MOCK_LLM_KEY=mock MUJING_IMAGE_BASE_URL=http://127.0.0.1:3199/v1 MUJING_IMAGE_API_KEY=mock
+- id: llm-pi-ai
+  config:
+    providers:
+      mock:
+        displayName: Mock 导演
+        apiKeyEnv: MOCK_LLM_KEY
+        api: openai-completions
+        baseURL: http://127.0.0.1:3199/v1
+        retryPolicy:
+          mode: normal
+          maxRetries: 0
+        models:
+          - id: mock-director
+            name: Mock Director
+            contextWindow: 128000

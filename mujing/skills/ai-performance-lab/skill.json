@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-ai-performance-lab",
+  "name": "ai-performance-lab",
+  "title": "AI 表演实验室",
+  "description": "【AI 表演实验室】把僵硬的 AI 演员调出活人感：微表情、眼神、表演基本功与面部特写。当 AI 演员表演僵硬、表情失控、微表情写不进提示词时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000086",
+    "tag": "drama",
+    "sortWeight": "214",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-ai-performance-lab.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-ai-performance-lab.png\"}]"
+  }
+}

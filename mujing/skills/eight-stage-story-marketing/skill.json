@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-eight-stage-story-marketing",
+  "name": "eight-stage-story-marketing",
+  "title": "故事营销八阶段",
+  "description": "【故事营销八阶段】让顾客追着听你的品牌故事：需求内容、故事设计与八阶段推进。当内容没人看、品牌讲不出故事，或营销只会在硬广里打转时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000104",
+    "tag": "social",
+    "sortWeight": "233",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-story-marketing.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-story-marketing.png\"}]"
+  }
+}

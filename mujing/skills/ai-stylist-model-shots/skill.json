@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-ai-stylist-model-shots",
+  "name": "ai-stylist-model-shots",
+  "title": "AI造型师高转化模特图",
+  "description": "【AI造型师高转化模特图】本技能输出5种不同风格的高端时尚大片级服装模特展示图，专为提升电商产品转化率设计。当用户上传服装产品图，希望生成专业模特展示图时调用，不处理非服装类产品展示需求。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14811816962572",
+    "tag": "ecommerce",
+    "sortWeight": "999",
+    "source": "3",
+    "createdAt": "1782124757411",
+    "updatedAt": "1783062279831",
+    "initialLikeCount": "23",
+    "initialAddedCount": "191",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/0372dc77c6bb4bf4982af6fc49c2ee41\",\"showcase_url\":\"https://p11-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/0372dc77c6bb4bf4982af6fc49c2ee41~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=Wsr0aX5q1huZHmDAHMpv61sJEIU%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/003a69727a9e427b8ed85e48deeb3e24\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/003a69727a9e427b8ed85e48deeb3e24~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=wCdhS%2FQh23Z8yo7nb6sVoArhuUE%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/8c3ee1bfca8d4d3daed8b4fa96cf7cc6\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/8c3ee1bfca8d4d3daed8b4fa96cf7cc6~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=UJF8iwTUNuuwRmFy9NFF8XPJtk8%3D\"}]"
+  }
+}

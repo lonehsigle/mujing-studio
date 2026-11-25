@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-script-to-video-end-to-end",
+  "name": "script-to-video-end-to-end",
+  "title": "剧本资产视频一条龙创作",
+  "description": "【剧本资产视频一条龙创作】本技能从创意/原始文本出发，一站式完成标准剧本转换、视觉资产提取、设定图生成、分镜运镜设计、资产匹配到最终视频成片，支持每个环节用户确认调整，完成从创意到短片的全流程创作。当用户提供创意或原始文本希望一站式生成短片时调用，不处理非视频创作需求。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "娜乌斯嘉",
+    "owner": "523825634358920",
+    "skillId": "14811816970252",
+    "tag": "drama",
+    "sortWeight": "100",
+    "source": "3",
+    "createdAt": "1782138969285",
+    "updatedAt": "1782387589630",
+    "initialLikeCount": "252",
+    "initialAddedCount": "1427",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-3jr8j4ixpe/7dc09b58122d4e838ff7ec1a414bf86c~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=14BdIGaKqYTkNbxtHhjcAdOJ%2Fd8%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v0d870g10004d8slffnog65k5iserif0\",\"showcase_url\":\"https://v3-artist.vlabvod.com/9361f85df7f5792f3bfaf67659a65c85/6a7824f7/video/tos/cn/tos-cn-v-148450/oMeDocEwHDWR75a7OX9eVSAEDfkMFBQkbCBUqE/\"}]"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "人像捏脸导演",
+    "description": "根据用户选择或自定义的脸谱清单、五官细项、气质、年龄段、性别表达和参考图，生成可用于即梦 text2image/image2image 的人像捏脸 Prom…",
+    "detail": "docs/DETAIL.md"
+  }
+}

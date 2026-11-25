@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-short-drama-playbook",
+  "name": "short-drama-playbook",
+  "title": "短剧实战手册",
+  "description": "【短剧实战手册】把一句话选题编译成可拍的短剧分集方案：钩子前置的开篇、付费墙位、反转结尾与一句立住的人物志。当写短剧分镜/分集、设计开篇钩子或结尾反转、立人物，或手头素材太普通写不出彩时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000081",
+    "tag": "drama",
+    "sortWeight": "209",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-shortform-drama-playbook.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-shortform-drama-playbook.png\"}]"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-futuristic-electronics-ad",
+  "name": "futuristic-electronics-ad",
+  "title": "高能未来电子产品广告视频",
+  "description": "【高能未来电子产品广告视频】本技能输出高能电影感未来风格高级电子产品广告视频；当用户上传电子产品参考图，希望生成专业产品商业广告视频时调用；不处理非电子产品、要求添加场景人物的广告视频创作。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14811816962060",
+    "tag": "ecommerce",
+    "sortWeight": "999",
+    "source": "3",
+    "createdAt": "1782124171063",
+    "updatedAt": "1783062287534",
+    "initialLikeCount": "72",
+    "initialAddedCount": "300",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v03870g10004d8v55a7og65jshcmhht0\",\"showcase_url\":\"https://v26-artist.vlabvod.com/4c1e0624fd25970b3da4e8643bb78740/6a7824f7/video/tos/cn/tos-cn-v-148450/okfqVRBhHbDPLe2EgUFKoIcqA0lLIgBnljgDyS/\"}]"
+  }
+}

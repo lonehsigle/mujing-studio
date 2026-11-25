@@ -1,0 +1,35 @@
+{
+  "name": "mujing-skill-avant-garde-fashion-shoot",
+  "version": "1.0.0",
+  "description": "幕境技能：先锋服装商拍视觉指导",
+  "icon": "./icon.svg",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "skill.json",
+    "skill",
+    "locale",
+    "docs",
+    "icon.svg",
+    "cordis.patch.yml"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "mujing",
+    "skill",
+    "social"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}

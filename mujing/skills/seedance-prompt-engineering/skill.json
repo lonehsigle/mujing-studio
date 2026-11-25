@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-seedance-prompt-engineering",
+  "name": "seedance-prompt-engineering",
+  "title": "Seedance 提示词工程",
+  "description": "【Seedance 提示词工程】把 Seedance 提示词写成可复现的工艺：八块公式、摄影机词库与参考图语法。当 Seedance 出片不稳、运镜描述不清、参考图不会用时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000093",
+    "tag": "creative",
+    "sortWeight": "222",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-seedance-prompt-engineering.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-seedance-prompt-engineering.png\"}]"
+  }
+}

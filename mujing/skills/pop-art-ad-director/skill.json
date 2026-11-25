@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-pop-art-ad-director",
+  "name": "pop-art-ad-director",
+  "title": "顶级波普视觉广告导演",
+  "description": "【顶级波普视觉广告导演】本技能输出12秒高频闪切快消品短视频分镜表，专注Z世代/Y2K波普风格创作。当用户提供快消产品信息、视觉元素和氛围关键词时调用，不处理非快消品类或长视频广告创作",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14519800321292",
+    "tag": "ecommerce",
+    "sortWeight": "1000",
+    "source": "3",
+    "createdAt": "1781699762154",
+    "updatedAt": "1783062210034",
+    "initialLikeCount": "123",
+    "initialAddedCount": "483",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v0d870g10004d8tucs7og65of6n9u6ng\",\"showcase_url\":\"https://v6-artist.vlabvod.com/c353bddc4ca47e37514fb3ce2c93faeb/6a7824f4/video/tos/cn/tos-cn-v-148450/oUvDwdEU0S8KB7anO1Zw5hAEDfkDFBQGfCRUeE/\"}]"
+  }
+}

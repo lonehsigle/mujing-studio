@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-storyboard-grammar",
+  "name": "storyboard-grammar",
+  "title": "分镜语法",
+  "description": "【分镜语法】把剧本变成可拍的分镜：屏幕方向、运动镜头、预演与镜头卡。当定机位拿不准、多人对话屏幕关系混乱，或分镜缺乏可执行细节时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000094",
+    "tag": "drama",
+    "sortWeight": "223",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-shot-grammar.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-shot-grammar.png\"}]"
+  }
+}

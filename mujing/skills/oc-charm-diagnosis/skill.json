@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-oc-charm-diagnosis",
+  "name": "oc-charm-diagnosis",
+  "title": "OC魅力诊断师",
+  "description": "【OC魅力诊断师】本技能针对30秒内微短剧/短视频的原创角色出场剧本，通过\"OC魅力5大开关\"诊断并爆改剧本，确保主角瞬间抓住观众情绪；当用户需要优化微短剧角色出场剧本时调用，不处理完整长片剧本创作。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14889899551756",
+    "tag": "others",
+    "sortWeight": "10",
+    "source": "3",
+    "createdAt": "1782291022531",
+    "updatedAt": "1783062259032",
+    "initialLikeCount": "24",
+    "initialAddedCount": "148",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/ebb18292a6f34b7d9c223083e0c9a5df\",\"showcase_url\":\"https://p11-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/ebb18292a6f34b7d9c223083e0c9a5df~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=YNRRnHylGIIQtZbDOusktNRWpc4%3D\"}]"
+  }
+}

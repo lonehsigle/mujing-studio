@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-prose-texture-craft",
+  "name": "prose-texture-craft",
+  "title": "散文质地工艺",
+  "description": "【散文质地工艺】把空泛的散文写出质地：此在感观察、结构安排与词语打磨。当写散文/随笔/品牌文案觉得'空'，或文字只有结论没有质感时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000078",
+    "tag": "creative",
+    "sortWeight": "206",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-prose-craft.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-prose-craft.png\"}]"
+  }
+}

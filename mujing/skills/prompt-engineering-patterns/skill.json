@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-prompt-engineering-patterns",
+  "name": "prompt-engineering-patterns",
+  "title": "提示词工程模式",
+  "description": "【提示词工程模式】让提示词从'看运气'变成可复现：模式库、引用系统、循环架构与人格设定。当提示词效果不稳、无法归因，或想沉淀自己的提示词方法论时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000103",
+    "tag": "creative",
+    "sortWeight": "232",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-prompt-engineering-patterns.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-prompt-engineering-patterns.png\"}]"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-full-funnel-advertising",
+  "name": "full-funnel-advertising",
+  "title": "广告全链路打法",
+  "description": "【广告全链路打法】从分析到投放一条龙搭起广告链路：竞品识别、战役规划、演员选角与脚本预算。当广告没章法、预算花不明白、竞品打法看不清时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000105",
+    "tag": "ecommerce",
+    "sortWeight": "234",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-supercmo-ad-chain.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-supercmo-ad-chain.png\"}]"
+  }
+}

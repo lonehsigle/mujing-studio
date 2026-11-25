@@ -1,0 +1,4 @@
+# 图片编辑工作流：安装即启用本技能。
+- insert:
+    - id: mujing-skill-image-editing-workflow
+      name: mujing-skill-image-editing-workflow

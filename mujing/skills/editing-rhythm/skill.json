@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-editing-rhythm",
+  "name": "editing-rhythm",
+  "title": "剪辑节奏",
+  "description": "【剪辑节奏】把静态对话戏剪得有节奏：连续性、平行剪辑与转场。当片子拖沓、对话戏闷、转场生硬时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000088",
+    "tag": "drama",
+    "sortWeight": "216",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-editing-rhythm.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-editing-rhythm.png\"}]"
+  }
+}

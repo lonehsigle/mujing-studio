@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-launch-film-trio",
+  "name": "launch-film-trio",
+  "title": "发布片三件套",
+  "description": "【发布片三件套】一条素材打全平台：A/B 变体、卡点揭晓与多画幅适配。当新品发布片平铺直叙、要一素材多发，或竖屏版主体被裁时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000101",
+    "tag": "ecommerce",
+    "sortWeight": "230",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-iart-launch-trio.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-iart-launch-trio.png\"}]"
+  }
+}

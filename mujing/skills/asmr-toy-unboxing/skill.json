@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-asmr-toy-unboxing",
+  "name": "asmr-toy-unboxing",
+  "title": "ASMR沉浸式潮玩开箱导演",
+  "description": "【ASMR沉浸式潮玩开箱导演】本技能输出符合TikTok/小红书风格的10秒竖版沉浸式ASMR开箱视频prompt，当用户提供潮玩开箱产品信息，需要创作ASMR沉浸式开箱视频时调用，不处理非开箱类视频创作。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14811816961804",
+    "tag": "social",
+    "sortWeight": "10",
+    "source": "3",
+    "createdAt": "1782123192040",
+    "updatedAt": "1783062245027",
+    "initialLikeCount": "47",
+    "initialAddedCount": "120",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v0d870g10004d8turjnog65qk9eg8lo0\",\"showcase_url\":\"https://v3-artist.vlabvod.com/bd26bd043e13237ae648dc092f36d88e/6a7824f2/video/tos/cn/tos-cn-v-148450/oUjAE76EvcTk0E7iORVoJIh7QwiBNzQltavEw/\"}]"
+  }
+}

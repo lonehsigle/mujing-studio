@@ -1,0 +1,4 @@
+# 剧本资产视频一条龙创作：安装即启用本技能。
+- insert:
+    - id: mujing-skill-script-to-video-end-to-end
+      name: mujing-skill-script-to-video-end-to-end

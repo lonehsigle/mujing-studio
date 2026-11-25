@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-avant-garde-fashion-shoot",
+  "name": "avant-garde-fashion-shoot",
+  "title": "先锋服装商拍视觉指导",
+  "description": "【先锋服装商拍视觉指导】本技能根据用户上传的服装商品图或服装描述，生成先锋时装杂志大片 Prompt。技能固定只做“先锋氛围大片”，不生成普通电商陈列图或甜美种草图。核心是先做因地制宜的造型、场景、镜头和光影创意，再用表单收集最后修改意见，输出五段短 Prompt。适用于服装商家图高级化、品牌视觉、小红书封面和 Avant-Garde 商拍，不适用于淘宝模特图、干净棚拍、证件照或小清新写真。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "15434297644556",
+    "tag": "social",
+    "sortWeight": "99",
+    "source": "3",
+    "createdAt": "1783345532926",
+    "updatedAt": "1783426769678",
+    "initialLikeCount": "17",
+    "initialAddedCount": "135",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/294959d727254d0aa0e0d98201dc7f9a\",\"showcase_url\":\"https://p11-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/294959d727254d0aa0e0d98201dc7f9a~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=E0U2dEJjpWbtz7HNt2sK%2F89%2B160%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/e4ee5e10636440b998825cc522c86ec9\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/e4ee5e10636440b998825cc522c86ec9~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=v%2FiBQxpRFZPcYy5VwwJ%2F5XonsUo%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/9bf9dfdc1d154f9eb21dca4ad55b1ee0\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/9bf9dfdc1d154f9eb21dca4ad55b1ee0~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=VEaH3VKmaPhVPrvXvaHRyKadBWc%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/3ca2620df1b349c292961ef29f461760\",\"showcase_url\":\"https://p11-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/3ca2620df1b349c292961ef29f461760~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=4pf%2Fry%2Bh4IKiRm4QdenlmMXlijI%3D\"}]"
+  }
+}

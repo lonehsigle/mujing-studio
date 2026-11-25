@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-audiovisual-theory-basics",
+  "name": "audiovisual-theory-basics",
+  "title": "视听理论基础",
+  "description": "【视听理论基础】搞懂声音与画面为什么动人：视听契约、声画对位、同步合成与三种聆听模式。当剪辑配音总觉得'不对劲'却说不出为什么，或想建立视听判断力时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000087",
+    "tag": "drama",
+    "sortWeight": "215",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-audiovisual-theory.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-audiovisual-theory.png\"}]"
+  }
+}

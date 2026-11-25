@@ -1,0 +1,440 @@
+[
+  {
+    "slug": "ai-performance-lab",
+    "package": "mujing-skill-ai-performance-lab",
+    "title": "AI 表演实验室",
+    "tag": "drama"
+  },
+  {
+    "slug": "ai-actor-micro-expression",
+    "package": "mujing-skill-ai-actor-micro-expression",
+    "title": "AI演员微表情导演",
+    "tag": "drama"
+  },
+  {
+    "slug": "ai-stylist-model-shots",
+    "package": "mujing-skill-ai-stylist-model-shots",
+    "title": "AI造型师高转化模特图",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "asmr-toy-unboxing",
+    "package": "mujing-skill-asmr-toy-unboxing",
+    "title": "ASMR沉浸式潮玩开箱导演",
+    "tag": "social"
+  },
+  {
+    "slug": "freestyle-style-library",
+    "package": "mujing-skill-freestyle-style-library",
+    "title": "Freestyle 风格库",
+    "tag": "creative"
+  },
+  {
+    "slug": "h3-video-prompt-kit",
+    "package": "mujing-skill-h3-video-prompt-kit",
+    "title": "H3 视频提示词套件",
+    "tag": "creative"
+  },
+  {
+    "slug": "oc-charm-diagnosis",
+    "package": "mujing-skill-oc-charm-diagnosis",
+    "title": "OC魅力诊断师",
+    "tag": "others"
+  },
+  {
+    "slug": "seedance-2-5-directing",
+    "package": "mujing-skill-seedance-2-5-directing",
+    "title": "Seedance 2.5 导演工艺",
+    "tag": "creative"
+  },
+  {
+    "slug": "seedance-prompt-engineering",
+    "package": "mujing-skill-seedance-prompt-engineering",
+    "title": "Seedance 提示词工程",
+    "tag": "creative"
+  },
+  {
+    "slug": "tiktok-influencer-sales-video",
+    "package": "mujing-skill-tiktok-influencer-sales-video",
+    "title": "TikTok网红带货视频",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "fifteen-second-twist-prompts",
+    "package": "mujing-skill-fifteen-second-twist-prompts",
+    "title": "15秒极致夸张反转提示词",
+    "tag": "creative"
+  },
+  {
+    "slug": "fifteen-second-vfx",
+    "package": "mujing-skill-fifteen-second-vfx",
+    "title": "15秒视觉特效",
+    "tag": "creative"
+  },
+  {
+    "slug": "one-image-film-ad-director",
+    "package": "mujing-skill-one-image-film-ad-director",
+    "title": "一图成片-电影广告全能导演",
+    "tag": "drama"
+  },
+  {
+    "slug": "one-take-short-drama-pipeline",
+    "package": "mujing-skill-one-take-short-drama-pipeline",
+    "title": "一镜到底短剧流水线",
+    "tag": "drama"
+  },
+  {
+    "slug": "3d-guoman-transformation-vfx",
+    "package": "mujing-skill-3d-guoman-transformation-vfx",
+    "title": "3D国漫风转身变身特效",
+    "tag": "creative"
+  },
+  {
+    "slug": "three-act-short-drama-factory",
+    "package": "mujing-skill-three-act-short-drama-factory",
+    "title": "三幕式短剧工厂",
+    "tag": "drama"
+  },
+  {
+    "slug": "worldbuilding-art-direction",
+    "package": "mujing-skill-worldbuilding-art-direction",
+    "title": "世界观美术设定",
+    "tag": "drama"
+  },
+  {
+    "slug": "2d-lineart-batch-coloring",
+    "package": "mujing-skill-2d-lineart-batch-coloring",
+    "title": "二维动画线稿批量上色",
+    "tag": "others"
+  },
+  {
+    "slug": "portrait-face-sculpting",
+    "package": "mujing-skill-portrait-face-sculpting",
+    "title": "人像捏脸导演",
+    "tag": "social"
+  },
+  {
+    "slug": "five-experience-design-principles",
+    "package": "mujing-skill-five-experience-design-principles",
+    "title": "体验设计五原则",
+    "tag": "creative"
+  },
+  {
+    "slug": "avant-garde-fashion-shoot",
+    "package": "mujing-skill-avant-garde-fashion-shoot",
+    "title": "先锋服装商拍视觉指导",
+    "tag": "social"
+  },
+  {
+    "slug": "decision-thinking-models",
+    "package": "mujing-skill-decision-thinking-models",
+    "title": "决策思维模型格森",
+    "tag": "creative"
+  },
+  {
+    "slug": "storyboard-grammar",
+    "package": "mujing-skill-storyboard-grammar",
+    "title": "分镜语法",
+    "tag": "drama"
+  },
+  {
+    "slug": "script-industrialization",
+    "package": "mujing-skill-script-industrialization",
+    "title": "剧本工业化机器",
+    "tag": "drama"
+  },
+  {
+    "slug": "screenwriting",
+    "package": "mujing-skill-screenwriting",
+    "title": "剧本撰写",
+    "tag": "drama"
+  },
+  {
+    "slug": "script-to-video-end-to-end",
+    "package": "mujing-skill-script-to-video-end-to-end",
+    "title": "剧本资产视频一条龙创作",
+    "tag": "drama"
+  },
+  {
+    "slug": "editing-rhythm",
+    "package": "mujing-skill-editing-rhythm",
+    "title": "剪辑节奏",
+    "tag": "drama"
+  },
+  {
+    "slug": "launch-film-trio",
+    "package": "mujing-skill-launch-film-trio",
+    "title": "发布片三件套",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "narrative-short-storyboard",
+    "package": "mujing-skill-narrative-short-storyboard",
+    "title": "叙事短片导演分镜",
+    "tag": "drama"
+  },
+  {
+    "slug": "auteur-15s-style-engine",
+    "package": "mujing-skill-auteur-15s-style-engine",
+    "title": "名导十五秒视频风格资产引擎",
+    "tag": "creative"
+  },
+  {
+    "slug": "comedy-mechanics",
+    "package": "mujing-skill-comedy-mechanics",
+    "title": "喜剧 Mechanics",
+    "tag": "creative"
+  },
+  {
+    "slug": "image-layer-separation",
+    "package": "mujing-skill-image-layer-separation",
+    "title": "图片图层拆分",
+    "tag": "creative"
+  },
+  {
+    "slug": "image-annotation-editing",
+    "package": "mujing-skill-image-annotation-editing",
+    "title": "图片标注编辑",
+    "tag": "creative"
+  },
+  {
+    "slug": "image-editing-workflow",
+    "package": "mujing-skill-image-editing-workflow",
+    "title": "图片编辑工作流",
+    "tag": "creative"
+  },
+  {
+    "slug": "positioning-and-naming",
+    "package": "mujing-skill-positioning-and-naming",
+    "title": "定位与命名策略",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "dialogue-workshop",
+    "package": "mujing-skill-dialogue-workshop",
+    "title": "对白工坊",
+    "tag": "drama"
+  },
+  {
+    "slug": "xiaohongshu-outfit-recipes",
+    "package": "mujing-skill-xiaohongshu-outfit-recipes",
+    "title": "小红书素人穿搭配方",
+    "tag": "social"
+  },
+  {
+    "slug": "full-funnel-advertising",
+    "package": "mujing-skill-full-funnel-advertising",
+    "title": "广告全链路打法",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "four-step-ad-copy",
+    "package": "mujing-skill-four-step-ad-copy",
+    "title": "广告文案四步系统",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "short-drama-production-workflow",
+    "package": "mujing-skill-short-drama-production-workflow",
+    "title": "幕境短剧制作工作流",
+    "tag": "drama"
+  },
+  {
+    "slug": "film-tv-writing-workshop",
+    "package": "mujing-skill-film-tv-writing-workshop",
+    "title": "影视剧作工坊",
+    "tag": "drama"
+  },
+  {
+    "slug": "sitcom-workshop",
+    "package": "mujing-skill-sitcom-workshop",
+    "title": "情景喜剧工坊",
+    "tag": "drama"
+  },
+  {
+    "slug": "prompt-engineering-patterns",
+    "package": "mujing-skill-prompt-engineering-patterns",
+    "title": "提示词工程模式",
+    "tag": "creative"
+  },
+  {
+    "slug": "story-development",
+    "package": "mujing-skill-story-development",
+    "title": "故事开发",
+    "tag": "drama"
+  },
+  {
+    "slug": "story-structure-engine",
+    "package": "mujing-skill-story-structure-engine",
+    "title": "故事结构引擎",
+    "tag": "drama"
+  },
+  {
+    "slug": "eight-stage-story-marketing",
+    "package": "mujing-skill-eight-stage-story-marketing",
+    "title": "故事营销八阶段",
+    "tag": "social"
+  },
+  {
+    "slug": "prose-texture-craft",
+    "package": "mujing-skill-prose-texture-craft",
+    "title": "散文质地工艺",
+    "tag": "creative"
+  },
+  {
+    "slug": "digital-human-comedy-interview",
+    "package": "mujing-skill-digital-human-comedy-interview",
+    "title": "数字人搞笑采访视频生成",
+    "tag": "social"
+  },
+  {
+    "slug": "model-routing-interaction",
+    "package": "mujing-skill-model-routing-interaction",
+    "title": "模型路由交互",
+    "tag": "creative"
+  },
+  {
+    "slug": "healing-original-ip-incubator",
+    "package": "mujing-skill-healing-original-ip-incubator",
+    "title": "治愈系原创IP孵化助手",
+    "tag": "social"
+  },
+  {
+    "slug": "consumer-psychology-conversion",
+    "package": "mujing-skill-consumer-psychology-conversion",
+    "title": "消费心理转化设计",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "jewelry-ecommerce-media",
+    "package": "mujing-skill-jewelry-ecommerce-media",
+    "title": "珠宝电商图文视频一站式",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "jewelry-design-drafting",
+    "package": "mujing-skill-jewelry-design-drafting",
+    "title": "珠宝设计出款",
+    "tag": "creative"
+  },
+  {
+    "slug": "jewelry-design-evolution",
+    "package": "mujing-skill-jewelry-design-evolution",
+    "title": "珠宝设计进化",
+    "tag": "creative"
+  },
+  {
+    "slug": "crosstalk-craft",
+    "package": "mujing-skill-crosstalk-craft",
+    "title": "相声手艺",
+    "tag": "drama"
+  },
+  {
+    "slug": "short-drama-playbook",
+    "package": "mujing-skill-short-drama-playbook",
+    "title": "短剧实战手册",
+    "tag": "drama"
+  },
+  {
+    "slug": "short-film-five-stages",
+    "package": "mujing-skill-short-film-five-stages",
+    "title": "短片五阶段结构",
+    "tag": "drama"
+  },
+  {
+    "slug": "social-ugc-app-promo",
+    "package": "mujing-skill-social-ugc-app-promo",
+    "title": "社媒素人App宣传",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "outfit-try-on-video",
+    "package": "mujing-skill-outfit-try-on-video",
+    "title": "穿搭上身试穿视频生成",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "image-series-generation",
+    "package": "mujing-skill-image-series-generation",
+    "title": "系列套图生成",
+    "tag": "creative"
+  },
+  {
+    "slug": "series-arc-planning",
+    "package": "mujing-skill-series-arc-planning",
+    "title": "系列弧光规划",
+    "tag": "drama"
+  },
+  {
+    "slug": "greenscreen-cat-dance",
+    "package": "mujing-skill-greenscreen-cat-dance",
+    "title": "绿幕猫咪跳舞素材生成",
+    "tag": "social"
+  },
+  {
+    "slug": "standup-comedy-craft",
+    "package": "mujing-skill-standup-comedy-craft",
+    "title": "脱口秀手艺",
+    "tag": "drama"
+  },
+  {
+    "slug": "audiovisual-theory-basics",
+    "package": "mujing-skill-audiovisual-theory-basics",
+    "title": "视听理论基础",
+    "tag": "drama"
+  },
+  {
+    "slug": "visual-tone-design",
+    "package": "mujing-skill-visual-tone-design",
+    "title": "视觉基调设计",
+    "tag": "creative"
+  },
+  {
+    "slug": "visual-prompt-engineering",
+    "package": "mujing-skill-visual-prompt-engineering",
+    "title": "视觉提示词工程",
+    "tag": "creative"
+  },
+  {
+    "slug": "character-sprite-animation",
+    "package": "mujing-skill-character-sprite-animation",
+    "title": "角色精灵图动画产线",
+    "tag": "creative"
+  },
+  {
+    "slug": "character-design",
+    "package": "mujing-skill-character-design",
+    "title": "角色设计",
+    "tag": "drama"
+  },
+  {
+    "slug": "character-forge",
+    "package": "mujing-skill-character-forge",
+    "title": "角色锻造工坊",
+    "tag": "drama"
+  },
+  {
+    "slug": "doubao-audio-prompts",
+    "package": "mujing-skill-doubao-audio-prompts",
+    "title": "豆包音频提示词",
+    "tag": "creative"
+  },
+  {
+    "slug": "skill-pack-concierge",
+    "package": "mujing-skill-skill-pack-concierge",
+    "title": "选包门房",
+    "tag": "others"
+  },
+  {
+    "slug": "pop-art-ad-director",
+    "package": "mujing-skill-pop-art-ad-director",
+    "title": "顶级波普视觉广告导演",
+    "tag": "ecommerce"
+  },
+  {
+    "slug": "futuristic-electronics-ad",
+    "package": "mujing-skill-futuristic-electronics-ad",
+    "title": "高能未来电子产品广告视频",
+    "tag": "ecommerce"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-four-step-ad-copy",
+  "name": "four-step-ad-copy",
+  "title": "广告文案四步系统",
+  "description": "【广告文案四步系统】把产品卖点写成能转化的文案：钩子句、利益翻译、预算与投放时机、四步成文。当写广告脚本/详情页/投放素材，或文案有曝光无转化时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000097",
+    "tag": "ecommerce",
+    "sortWeight": "226",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-ad-copywriting.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-ad-copywriting.png\"}]"
+  }
+}

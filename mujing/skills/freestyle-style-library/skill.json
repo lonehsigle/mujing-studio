@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-freestyle-style-library",
+  "name": "freestyle-style-library",
+  "title": "Freestyle 风格库",
+  "description": "【Freestyle 风格库】把风格库模板稳定落成最终提示词：模板匹配、六块组装与常见工件排查。当套模板出图风格飘了、提示词缺块导致模型自由发挥，或多概念图互相污染时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000089",
+    "tag": "creative",
+    "sortWeight": "217",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-freestyle-style-library.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-freestyle-style-library.png\"}]"
+  }
+}

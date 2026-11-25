@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-visual-tone-design",
+  "name": "visual-tone-design",
+  "title": "视觉基调设计",
+  "description": "【视觉基调设计】把'画面很脏很杂'调成统一基调：视觉语言、色彩、光线与摄影机运动。当画面风格漂移、色调混乱，或说不出一部片子的视觉气质时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000096",
+    "tag": "creative",
+    "sortWeight": "225",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-visual-tone-design.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-visual-tone-design.png\"}]"
+  }
+}

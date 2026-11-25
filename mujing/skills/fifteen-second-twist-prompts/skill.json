@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-fifteen-second-twist-prompts",
+  "name": "fifteen-second-twist-prompts",
+  "title": "15秒极致夸张反转提示词",
+  "description": "【15秒极致夸张反转提示词】本技能基于三段式能量释放模型，将日常小事夸张到宇宙级极致，制造离谱又好笑的强烈反差，结尾必有真相落点重新解释前序升华。当用户提供日常场景或创意意象，希望生成15秒极致反转视频prompt时调用，不处理多段成片长视频创作与违规内容。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "猫叔",
+    "owner": "716525502212411",
+    "skillId": "14811816981260",
+    "tag": "creative",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782141152432",
+    "updatedAt": "1782444457394",
+    "initialLikeCount": "25",
+    "initialAddedCount": "143",
+    "authorAvatarUrl": "https://p6-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/61a6f2ef23fe459f89783d129dd11724~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=N17PdHktcqZnvuMR4NT9cnbQpl0%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v0d870g10004d8skulfog65gs6ae391g\",\"showcase_url\":\"https://v26-artist.vlabvod.com/fd6c92b4afda357288aece8607647a8a/6a7824f7/video/tos/cn/tos-cn-v-148450/oEUgZpTqS4eHUwNqBFDBAhTE1iELEQi5CADOfB/\"}]"
+  }
+}

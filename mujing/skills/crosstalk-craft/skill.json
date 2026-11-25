@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-crosstalk-craft",
+  "name": "crosstalk-craft",
+  "title": "相声手艺",
+  "description": "【相声手艺】写出能卖的相声段子：反转、包袱与说学逗唱四功。当写相声/曲艺段子、包袱不响，或传统技法不知道怎么用在现代题材时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000085",
+    "tag": "drama",
+    "sortWeight": "213",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-xiangsheng-craft.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-xiangsheng-craft.png\"}]"
+  }
+}

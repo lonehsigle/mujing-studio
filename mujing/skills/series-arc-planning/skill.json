@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-series-arc-planning",
+  "name": "series-arc-planning",
+  "title": "系列弧光规划",
+  "description": "【系列弧光规划】让一部剧越看越想看：季弧规划、试播集设计与分集人物刻画。当系列中段疲软、观众追不下去，或试播集留不住人时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000079",
+    "tag": "drama",
+    "sortWeight": "207",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-series-arc-planning.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-series-arc-planning.png\"}]"
+  }
+}

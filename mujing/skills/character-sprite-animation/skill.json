@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-character-sprite-animation",
+  "name": "character-sprite-animation",
+  "title": "角色精灵图动画产线",
+  "description": "【角色精灵图动画产线】端到端生成游戏角色逐帧动画视频。核心用 multi_modal2video（全能参考）：角色图作为@图片1被提示词引用，构图与占比完全由提示词控制，从根本上防爆框（不用image2video首帧模式，那会锁死构图必爆框）。首图（定妆图）极小占比为防爆框的第一核心要素。支持纯文字无图启动：一句话拆解角色与动作、自动补全锚点、text2image生成定妆图再生视频。提示词精简（80-150字）保证动作还原，限制特效在隐形红框内，时长按动作复杂度4-6秒。链路：request_user_input → text2image（无图时）→ multi_modal2video。触发词：序列帧动画、sprite sheet、精灵图、逐帧动画、让这个角色动起来、白底序列帧、透明底序列帧、打击感动画、IP角色动画、图生视频提示词、做帧动画。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "AIGC炼丹师",
+    "owner": "1146155086906115",
+    "skillId": "14811816969996",
+    "tag": "creative",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782138853623",
+    "updatedAt": "1782387514253",
+    "initialLikeCount": "45",
+    "initialAddedCount": "162",
+    "authorAvatarUrl": "https://p26-passport.byteacctimg.com/img/user-avatar/ae73de8901e41ec10c54cfcfd633dfa0~300x300.image",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v0d870g10004d8t84vvog65uv4qobj60\",\"showcase_url\":\"https://v6-artist.vlabvod.com/568e610cec45d4aba9ce7b9a16993946/6a7824ef/video/tos/cn/tos-cn-v-148450/oIBO8EYDAmHCsTLFfjUDBgk9I81mPdIfQf8Jya/\"}]"
+  }
+}

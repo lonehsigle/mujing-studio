@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-tiktok-influencer-sales-video",
+  "name": "tiktok-influencer-sales-video",
+  "title": "TikTok网红带货视频",
+  "description": "【TikTok网红带货视频】本技能根据模特和产品信息，生成15-30秒符合UGC病毒传播逻辑的TikTok带货短视频脚本，支持四大经典模版匹配，适合原生感带货视频创作；当用户提供模特和产品信息需要创作TikTok UGC带货视频时调用，不处理非带货类长视频创作。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14811816961036",
+    "tag": "ecommerce",
+    "sortWeight": "100",
+    "source": "3",
+    "createdAt": "1782121301224",
+    "updatedAt": "1783062269525",
+    "initialLikeCount": "55",
+    "initialAddedCount": "317",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v03870g10004d8tukdvog65nnsf4ta9g\",\"showcase_url\":\"https://v6-artist.vlabvod.com/283fb2f185406e043fc0c953a297cde3/6a7824f7/video/tos/cn/tos-cn-v-148450/ooq7bvUiaxB5QEjE9BiqS6IBgTDaZAVjffOHO3/\"}]"
+  }
+}

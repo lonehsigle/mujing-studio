@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-consumer-psychology-conversion",
+  "name": "consumer-psychology-conversion",
+  "title": "消费心理转化设计",
+  "description": "【消费心理转化设计】把产品卖点编译成高转化结构：价格锚点、选择架构、对比排序与行动指令。当写带货口播/直播话术/详情页，或转化率低、价格被压、顾客犹豫不决时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000098",
+    "tag": "ecommerce",
+    "sortWeight": "227",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-consumer-psychology.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-consumer-psychology.png\"}]"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "图片图层拆分",
+    "description": "按用户指定的主体或区域拆分图片图层，并把结果回写到画布。",
+    "detail": "docs/DETAIL.zh.md"
+  }
+}

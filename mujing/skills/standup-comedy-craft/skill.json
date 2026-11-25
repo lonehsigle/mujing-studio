@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-standup-comedy-craft",
+  "name": "standup-comedy-craft",
+  "title": "脱口秀手艺",
+  "description": "【脱口秀手艺】从写段子到上台演完整场：笑点结构、暖场、打磨与冷场自救。当脱口秀段子写不出来、开放麦紧张，或段子背熟了台上就散时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000083",
+    "tag": "drama",
+    "sortWeight": "211",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-standup-craft.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-standup-craft.png\"}]"
+  }
+}

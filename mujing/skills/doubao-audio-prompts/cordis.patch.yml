@@ -1,0 +1,4 @@
+# 豆包音频提示词：安装即启用本技能。
+- insert:
+    - id: mujing-skill-doubao-audio-prompts
+      name: mujing-skill-doubao-audio-prompts

@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-three-act-short-drama-factory",
+  "name": "three-act-short-drama-factory",
+  "title": "三幕式短剧工厂",
+  "description": "【三幕式短剧工厂】本技能是自动化短剧工业生成系统，可根据一句话剧情自动完成从概念到视频提示词的完整短剧生产流水线，支持多集连续剧生成与资产一致性控制。当用户提供一句话剧情、类型风格、时长集数、参考资产及替换指令时调用，不处理单集单镜头快速生成。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "BOB 二黑",
+    "owner": "4092861887036432",
+    "skillId": "14811816983308",
+    "tag": "drama",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782142870538",
+    "updatedAt": "1782387762506",
+    "initialLikeCount": "10",
+    "initialAddedCount": "123",
+    "authorAvatarUrl": "https://p3-passport.byteacctimg.com/img/user-avatar/9f0e1dc08b32bc32d8d30c21bcae13ef~300x300.image",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/55964b6fa2ba48b7ada7cd6fd7d751cc\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/55964b6fa2ba48b7ada7cd6fd7d751cc~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=zvIuKwVsncp2odb5ZwkqTDzkQEs%3D\"}]"
+  }
+}

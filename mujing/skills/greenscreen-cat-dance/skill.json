@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-greenscreen-cat-dance",
+  "name": "greenscreen-cat-dance",
+  "title": "绿幕猫咪跳舞素材生成",
+  "description": "【绿幕猫咪跳舞素材生成】本技能输出单个可自定义参数的纯绿幕背景猫咪跳舞视频，固定镜头展示全身，适用于自媒体抠图素材制作。通过表单收集用户偏好，支持自定义猫咪品种、舞蹈风格、时长、比例、画质风格，支持参考用户上传视频的舞蹈动作生成，不处理多段成片需求。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14811816961292",
+    "tag": "social",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782122239046",
+    "updatedAt": "1783062239877",
+    "initialLikeCount": "18",
+    "initialAddedCount": "72",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v0d870g10004d8v20tnog65of6g5p3kg\",\"showcase_url\":\"https://v6-artist.vlabvod.com/240ccf01d506f8a173e51528863ac524/6a7824ed/video/tos/cn/tos-cn-v-148450/o4EBCHIewJ40P1D5BgfSF8SNgBIHHGa2AiPqIH/\"}]"
+  }
+}

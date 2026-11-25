@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-five-experience-design-principles",
+  "name": "five-experience-design-principles",
+  "title": "体验设计五原则",
+  "description": "【体验设计五原则】把门店、活动、课程或内容的体验从'不难看也不惊艳'改到想再来一次：五原则扫描、招牌时刻与人员配置。当体验平庸、复购低、团队执行走样时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000100",
+    "tag": "creative",
+    "sortWeight": "229",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-experience-design.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-experience-design.png\"}]"
+  }
+}

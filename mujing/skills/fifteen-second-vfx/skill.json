@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-fifteen-second-vfx",
+  "name": "fifteen-second-vfx",
+  "title": "15秒视觉特效",
+  "description": "【15秒视觉特效】本技能基于四维解构框架创作15秒单镜头视觉叙事视频prompt，通过视觉锚点、动态矢量、高熵细节构建极具冲击力的视觉内容，拒绝平铺直叙，追求独特且极致的影像表达。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "猫叔",
+    "owner": "716525502212411",
+    "skillId": "14811816981004",
+    "tag": "creative",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782140708603",
+    "updatedAt": "1782464491022",
+    "initialLikeCount": "58",
+    "initialAddedCount": "346",
+    "authorAvatarUrl": "https://p6-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/61a6f2ef23fe459f89783d129dd11724~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=N17PdHktcqZnvuMR4NT9cnbQpl0%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v02870g10004d8v3vpfog65nr9vu39s0\",\"showcase_url\":\"https://v9-artist.vlabvod.com/3ea09b51267e8a98c095ac2cc494bac4/6a7824f7/video/tos/cn/tos-cn-v-148450/oon4XpegtfaeBRZQ6QtjhfDYEggpUIHe4f4wG9/\"}]"
+  }
+}

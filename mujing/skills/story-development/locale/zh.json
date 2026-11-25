@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "故事开发",
+    "description": "通用故事开发skill（跨项目通用，与任何具体项目解耦）。负责故事维度的工作：从零开发（想法→定位声明→logline→人物配置→节拍表→treatment…",
+    "detail": "docs/DETAIL.zh.md"
+  }
+}

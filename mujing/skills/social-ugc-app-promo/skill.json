@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-social-ugc-app-promo",
+  "name": "social-ugc-app-promo",
+  "title": "社媒素人App宣传",
+  "description": "【社媒素人App宣传】本技能生成10秒TikTok竖版UGC风格App宣传视频脚本与生成提示词。当用户上传App静态截图，需要制作原生感素人种草宣传视频时调用，不处理非App类产品或长视频广告创作。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14889292802060",
+    "tag": "ecommerce",
+    "sortWeight": "999",
+    "source": "3",
+    "createdAt": "1782220325128",
+    "updatedAt": "1783073755232",
+    "initialLikeCount": "10",
+    "initialAddedCount": "129",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v02870g10004d8v22ffog65qb2rc7f2g\",\"showcase_url\":\"https://v3-artist.vlabvod.com/206404a2b7970c179e6c5d22b886e3a5/6a7824f2/video/tos/cn/tos-cn-v-148450/os08ceeIGIteOJJUIBAE2RtfQIYospG3p7TCLE/\"}]"
+  }
+}

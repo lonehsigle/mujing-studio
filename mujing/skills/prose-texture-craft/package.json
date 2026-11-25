@@ -1,0 +1,35 @@
+{
+  "name": "mujing-skill-prose-texture-craft",
+  "version": "1.0.0",
+  "description": "幕境技能：散文质地工艺",
+  "icon": "./icon.svg",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "skill.json",
+    "skill",
+    "locale",
+    "docs",
+    "icon.svg",
+    "cordis.patch.yml"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "mujing",
+    "skill",
+    "creative"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}

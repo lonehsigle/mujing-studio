@@ -1,0 +1,19 @@
+{
+  "package": "mujing-skill-image-annotation-editing",
+  "name": "image-annotation-editing",
+  "title": "图片标注编辑",
+  "description": "【图片标注编辑】通过编号标注图片中的多个位置，再按标注生成编辑结果。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "幕境",
+    "owner": "mujing-system",
+    "skillId": "mujing-image-annotation",
+    "tag": "creative",
+    "sortWeight": "890",
+    "source": "3",
+    "createdAt": "1789700000000",
+    "updatedAt": "1789700000000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0"
+  }
+}

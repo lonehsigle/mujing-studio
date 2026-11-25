@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-one-take-short-drama-pipeline",
+  "name": "one-take-short-drama-pipeline",
+  "title": "一镜到底短剧流水线",
+  "description": "【一镜到底短剧流水线】把一镜到底从想法推到成片：三阶段成本、时长变化与失败排查。当拍一镜到底超预算、节奏单调，或拍废了不知道怎么救时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000077",
+    "tag": "drama",
+    "sortWeight": "205",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-onlyshot-shortform-pipeline.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-onlyshot-shortform-pipeline.png\"}]"
+  }
+}

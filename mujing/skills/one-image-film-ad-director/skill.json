@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-one-image-film-ad-director",
+  "name": "one-image-film-ad-director",
+  "title": "一图成片-电影广告全能导演",
+  "description": "【一图成片-电影广告全能导演】本技能基于用户上传的一张或多张图片，生成电影短片、电影预告、TVC广告、品牌广告、产品广告、社媒短片、IP角色预告、潮玩宣发、时尚大片、音乐视觉片、纪录片感短片、电商视频、发布会大屏片等多类型视频。流程包含视觉基因解构、视频类别选择、视频结构规划、对话/旁白/字幕配置、视觉扩展边界、短片方案、高密度分镜表、multi_modal2video\n全能参考分段生成，以及 video_editor 最终拼接。视频生成阶段只注入分镜表镜头内容，不注入分镜表以外的信息，不注入 Markdown 表格符号或格式字符。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "渊静-中意",
+    "owner": "3848725071922103",
+    "skillId": "14811816981772",
+    "tag": "drama",
+    "sortWeight": "101",
+    "source": "3",
+    "createdAt": "1782141497839",
+    "updatedAt": "1782423067700",
+    "initialLikeCount": "300",
+    "initialAddedCount": "1961",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/a85057135bdf47f2a19cc1251bad8c6c~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=nCOgNQVyIGQWkNYdLmNghc5Gde4%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v02870g10004d8uprpnog65qg2rc562g\",\"showcase_url\":\"https://v9-artist.vlabvod.com/38d193fa38b4f78eda256d2d258c4f56/6a7824f7/video/tos/cn/tos-cn-v-148450/oYAqY632iSY1hBOZgIFKPOCDmfWMFeZEAHB57I/\"}]"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "package": "mujing-skill-image-layer-separation",
+  "name": "image-layer-separation",
+  "title": "图片图层拆分",
+  "description": "【图片图层拆分】按用户指定的主体或区域拆分图片图层，并把结果回写到画布。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "幕境",
+    "owner": "mujing-system",
+    "skillId": "mujing-image-layer-split",
+    "tag": "creative",
+    "sortWeight": "880",
+    "source": "3",
+    "createdAt": "1789700000000",
+    "updatedAt": "1789700000000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0"
+  }
+}

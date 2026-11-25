@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-comedy-mechanics",
+  "name": "comedy-mechanics",
+  "title": "喜剧 Mechanics",
+  "description": "【喜剧 Mechanics】把平淡素材磨成好笑的段子与喜剧桥段：铺垫、升级、规则三连与角色笑点。当写喜剧桥段/段子、设计笑点与包袱，或素材明明有冲突却不好笑时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000074",
+    "tag": "creative",
+    "sortWeight": "202",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-comedy-mechanics.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-comedy-mechanics.png\"}]"
+  }
+}

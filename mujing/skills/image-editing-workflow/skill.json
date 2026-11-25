@@ -1,0 +1,19 @@
+{
+  "package": "mujing-skill-image-editing-workflow",
+  "name": "image-editing-workflow",
+  "title": "图片编辑工作流",
+  "description": "【图片编辑工作流】基于画布图片节点，用自然语言和参考图完成图片编辑。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "幕境",
+    "owner": "mujing-system",
+    "skillId": "mujing-image-editing",
+    "tag": "creative",
+    "sortWeight": "900",
+    "source": "3",
+    "createdAt": "1789700000000",
+    "updatedAt": "1789700000000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0"
+  }
+}

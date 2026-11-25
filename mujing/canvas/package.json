@@ -1,0 +1,33 @@
+{
+  "name": "mujing-canvas",
+  "version": "0.3.0",
+  "description": "幕境工作台：基于 DeepSeek Harness 的 AI 影视与短剧创作工作台（无限画布 + 小说→短剧流水线 + 图视音生成 + 时间线合成与剪映草稿导出）",
+  "icon": "./icon.svg",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools": "./lib/tools.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": ["lib", "locale", "docs", "icon.svg", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh-plugin", "mujing", "canvas"],
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": { "platform": "web" }
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@deepseek-ai/dsh-tools": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-auteur-15s-style-engine",
+  "name": "auteur-15s-style-engine",
+  "title": "名导十五秒视频风格资产引擎",
+  "description": "【名导十五秒视频风格资产引擎】本技能从参考图提取底层视觉基因与导演句法，保存为结构化JSON资产，并自动将一句话需求转译为十五秒三段式、带感官联觉的高密度双语词缀视频提示词。当用户提供参考图和一句话动作需求，需要生成定制化十五秒视频脚本时调用，不处理无参考图的纯创意生成。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "即梦AI",
+    "owner": "3389173376777104",
+    "skillId": "14811816960524",
+    "tag": "creative",
+    "sortWeight": "999",
+    "source": "3",
+    "createdAt": "1782120834211",
+    "updatedAt": "1783062159075",
+    "initialLikeCount": "58",
+    "initialAddedCount": "285",
+    "authorAvatarUrl": "https://p3-faceu-img-sign.byteimg.com/tos-cn-i-tb4s082cfz/47672f5db9b146d4b138abf35e8119ca~tplv-resize:200:200.image?lk3s=4eecb9e8&x-expires=1788245864&x-signature=PSTe9IfHbRm8JuJa5VDWqg3x%2FCA%3D",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v02870g10004d8sg2qvog65qlk6u7fag\",\"showcase_url\":\"https://v9-artist.vlabvod.com/9bc7ebc0d3b610584ad6530270ea0873/6a7824f7/video/tos/cn/tos-cn-v-148450/oo5QvAfi3QHW11VhrEACgjJlLQEti3DgB68IA5/\"}]"
+  }
+}

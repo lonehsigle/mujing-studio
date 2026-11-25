@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "角色精灵图动画产线",
+    "description": "端到端生成游戏角色逐帧动画视频。核心用 multi_modal2video（全能参考）：角色图作为@图片1被提示词引用，构图与占比完全由提示词控制，从根本上…",
+    "detail": "docs/DETAIL.md"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-visual-prompt-engineering",
+  "name": "visual-prompt-engineering",
+  "title": "视觉提示词工程",
+  "description": "【视觉提示词工程】把图和视频的提示词写成可控工艺：四层结构、五槽模板、反向解构与场景公式。当生图抽卡不可控、画面油腻、想复刻某条片子的工艺时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000095",
+    "tag": "creative",
+    "sortWeight": "224",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-visual-prompt-engineering.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-visual-prompt-engineering.png\"}]"
+  }
+}

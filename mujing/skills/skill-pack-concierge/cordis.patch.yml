@@ -1,0 +1,4 @@
+# 选包门房：安装即启用本技能。
+- insert:
+    - id: mujing-skill-skill-pack-concierge
+      name: mujing-skill-skill-pack-concierge

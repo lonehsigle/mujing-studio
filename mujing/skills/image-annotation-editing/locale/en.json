@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "图片标注编辑",
+    "description": "通过编号标注图片中的多个位置，再按标注生成编辑结果。",
+    "detail": "docs/DETAIL.md"
+  }
+}

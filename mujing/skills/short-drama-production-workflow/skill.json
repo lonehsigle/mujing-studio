@@ -1,0 +1,15 @@
+{
+  "package": "mujing-skill-short-drama-production-workflow",
+  "name": "short-drama-production-workflow",
+  "title": "幕境短剧制作工作流",
+  "description": "【幕境短剧制作工作流】将小说、故事素材或剧本整理为短剧剧本、分镜和可复用资产，并按实际能力与授权生成、核验视频。",
+  "metadata": {
+    "version": "1.4.0",
+    "author": "幕境",
+    "owner": "mujing-system",
+    "skillId": "mujing-short-drama-workflow",
+    "tag": "drama",
+    "sortWeight": "1000",
+    "source": "3"
+  }
+}

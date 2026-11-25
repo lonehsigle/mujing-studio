@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-decision-thinking-models",
+  "name": "decision-thinking-models",
+  "title": "决策思维模型格森",
+  "description": "【决策思维模型格森】把'凭直觉拍板'换成可检验的判断：思维模型格森、公理化推理与多模型交叉验证。当面临重大选择、论证总被反问住、或团队争论不休时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000099",
+    "tag": "creative",
+    "sortWeight": "228",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-decision-thinking.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-decision-thinking.png\"}]"
+  }
+}

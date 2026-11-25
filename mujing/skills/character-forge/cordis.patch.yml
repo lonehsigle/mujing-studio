@@ -1,0 +1,4 @@
+# 角色锻造工坊：安装即启用本技能。
+- insert:
+    - id: mujing-skill-character-forge
+      name: mujing-skill-character-forge

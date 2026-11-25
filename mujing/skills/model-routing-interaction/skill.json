@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-model-routing-interaction",
+  "name": "model-routing-interaction",
+  "title": "模型路由交互",
+  "description": "【模型路由交互】让用户在面对多个模型时不迷茫：模型族别、选项呈现与失败兜底提示。当用户不知道该选哪个模型、选项堆在一起，或路由失败时用户卡住时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000091",
+    "tag": "creative",
+    "sortWeight": "219",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-model-routing-interaction.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-model-routing-interaction.png\"}]"
+  }
+}

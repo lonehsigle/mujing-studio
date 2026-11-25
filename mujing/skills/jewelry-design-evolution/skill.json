@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-jewelry-design-evolution",
+  "name": "jewelry-design-evolution",
+  "title": "珠宝设计进化",
+  "description": "【珠宝设计进化】选择题驱动的一次性珠宝设计进化技能。用户上传底座珠宝图/草图/元素图或文字描述初始雏形后，通过单选/多选收集结构保留、进化强度、元素主题、形态语言、风格与材质，先生成进化矩阵，再批量生成 4 或 8 张可比较的进化候选图，候选评审后一次性结束。当用户说“做珠宝设计进化”“给这款做几种进化方向”“用选择题帮我迭代”“先出 4 个方向我再选”“把这张图继续演化”时使用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "地质大学博士说AI",
+    "owner": "1814655359525112",
+    "skillId": "14811816969740",
+    "tag": "creative",
+    "sortWeight": "0",
+    "source": "3",
+    "createdAt": "1782137988030",
+    "updatedAt": "1782386863149",
+    "initialLikeCount": "24",
+    "initialAddedCount": "90",
+    "authorAvatarUrl": "https://p3-passport.byteacctimg.com/img/user-avatar/8d157a05737f5fd7a797aa5856494201~300x300.image",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"video\",\"showcase_uri\":\"v02870g10004d8slgqnog65nu9tmgvig\",\"showcase_url\":\"https://v6-artist.vlabvod.com/11c564662b99747854e7f4a47060ce82/6a7824fa/video/tos/cn/tos-cn-v-148450/os5IKEgWNfYHGcBfGkLhtQyC4fIgRoIcs2Ire3/\"}]"
+  }
+}

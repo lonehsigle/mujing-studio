@@ -1,0 +1,4 @@
+# 模型路由交互：安装即启用本技能。
+- insert:
+    - id: mujing-skill-model-routing-interaction
+      name: mujing-skill-model-routing-interaction

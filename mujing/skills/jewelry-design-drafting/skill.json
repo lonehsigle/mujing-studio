@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-jewelry-design-drafting",
+  "name": "jewelry-design-drafting",
+  "title": "珠宝设计出款",
+  "description": "【珠宝设计出款】专业珠宝设计与批量出款技能。面向戒指、项链、耳环、手链、吊坠、胸针及高级珠宝系列，支持从文字描述、风格参考、产品图、草图或主题关键词出发，高效生成真实可信、好看、可延展的珠宝设计图与设计说明。适合单款精品、批量出款、系列化方案、参考图变体、材质替换、风格矩阵。当用户说“设计一款珠宝”“批量出款”“做 20 款戒指”“参考这个风格延展”时使用；纯电商上架素材（九图/详情页/短视频）请移交电商技能。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "地质大学博士说AI",
+    "owner": "1814655359525112",
+    "skillId": "14811816969484",
+    "tag": "creative",
+    "sortWeight": "999",
+    "source": "3",
+    "createdAt": "1782137715030",
+    "updatedAt": "1782386855340",
+    "initialLikeCount": "31",
+    "initialAddedCount": "122",
+    "authorAvatarUrl": "https://p3-passport.byteacctimg.com/img/user-avatar/8d157a05737f5fd7a797aa5856494201~300x300.image",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/5d18368747fd4d458c29ae6aacdb9927\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/5d18368747fd4d458c29ae6aacdb9927~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=dV63woz8nhCStBsVoTJpBV4%2FUMM%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/0575b14b98e340c886e415cc93154046\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/0575b14b98e340c886e415cc93154046~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=2Edq1G78Vssn%2BBXCn6991U16ypw%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/499bb94877834ab2bf5e24eda504ebca\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/499bb94877834ab2bf5e24eda504ebca~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=B8niHdGwHnTgdOyNK0loVbbE5Js%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/105109a39ced4eea950e739595219e35\",\"showcase_url\":\"https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/105109a39ced4eea950e739595219e35~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=YyradhiL68ZoWZR3dtH1DoLJv%2BQ%3D\"},{\"type\":\"image\",\"showcase_uri\":\"tos-cn-i-tb4s082cfz/dd00afa114614dc7bdb46b88a9f2111c\",\"showcase_url\":\"https://p11-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/dd00afa114614dc7bdb46b88a9f2111c~tplv-tb4s082cfz-resize:0:0.image?lk3s=28a09430&x-expires=1817189864&x-signature=K%2B8a31J9CaXyF93LcCi0%2F9Rwju4%3D\"}]"
+  }
+}

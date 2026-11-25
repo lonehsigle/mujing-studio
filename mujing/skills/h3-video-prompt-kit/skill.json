@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-h3-video-prompt-kit",
+  "name": "h3-video-prompt-kit",
+  "title": "H3 视频提示词套件",
+  "description": "【H3 视频提示词套件】用 MiniMax H3 稳定出片：六段式提示词、参考资产绑定与影像风格选定。当写 H3 提示词、时间轴对不上、换镜头变脸，或不知道选哪个风格时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000090",
+    "tag": "creative",
+    "sortWeight": "218",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-h3-video-prompt-suite.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-h3-video-prompt-suite.png\"}]"
+  }
+}

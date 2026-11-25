@@ -1,0 +1,4 @@
+# 故事结构引擎：安装即启用本技能。
+- insert:
+    - id: mujing-skill-story-structure-engine
+      name: mujing-skill-story-structure-engine

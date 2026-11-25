@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-story-structure-engine",
+  "name": "story-structure-engine",
+  "title": "故事结构引擎",
+  "description": "【故事结构引擎】把散的想法搭成能立住的故事：幕设计、节拍、高潮与结尾。当故事结构松散、写到一半塌掉，或想让一个想法长成完整叙事时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000084",
+    "tag": "drama",
+    "sortWeight": "212",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-story-structure-engine.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-story-structure-engine.png\"}]"
+  }
+}

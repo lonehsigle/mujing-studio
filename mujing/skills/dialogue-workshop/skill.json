@@ -1,0 +1,22 @@
+{
+  "package": "mujing-skill-dialogue-workshop",
+  "name": "dialogue-workshop",
+  "title": "对白工坊",
+  "description": "【对白工坊】把'不像人话'的对白改成带行动与潜台词的对话：对白即动作、问诊式修改。当对白空洞、人人一个语气，或台词只负责解释信息时调用。",
+  "metadata": {
+    "version": "1.0.0",
+    "author": "剧典技能库（itsWyatt-K）",
+    "owner": "community-itswyatt-k",
+    "skillId": "16000000000075",
+    "tag": "drama",
+    "sortWeight": "203",
+    "source": "3",
+    "createdAt": "1790049275000",
+    "updatedAt": "1790049275000",
+    "initialLikeCount": "0",
+    "initialAddedCount": "0",
+    "authorAvatarUrl": "",
+    "extraInfo": "",
+    "showcaseMedia": "[{\"type\":\"image\",\"showcase_uri\":\"github:showcase/pack-dialogue-workshop.png\",\"showcase_url\":\"https://raw.githubusercontent.com/itsWyatt-K/judian-skills/main/showcase/pack-dialogue-workshop.png\"}]"
+  }
+}
