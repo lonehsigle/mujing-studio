@@ -305,19 +305,26 @@ function ToolCardSummary({
     }
     return (
       <div className={css.toolMediaGrid}>
-        {list.map((item, idx) => (
-          <div key={idx} className={css.toolMediaTile}>
-            {typeof item.url === 'string' ? (
-              <img src={item.url} alt={String(item.name ?? '')} className={css.toolThumbImg} />
-            ) : (
-              <div className={css.toolThumbPlaceholder}>{String(item.error ?? '未出图')}</div>
-            )}
-            <div className={css.toolTileCap}>
-              <b>{String(item.name ?? '')}</b>
-              <span className={css.badgeOk}>已锁定</span>
+        {list.map((item, idx) => {
+          const ok = typeof item.url === 'string' && item.url.length > 0 && !item.error
+          return (
+            <div key={idx} className={css.toolMediaTile}>
+              {ok ? (
+                <img src={String(item.url)} alt={String(item.name ?? '')} className={css.toolThumbImg} />
+              ) : (
+                <div className={css.toolThumbPlaceholder}>{String(item.error ?? '未出图')}</div>
+              )}
+              <div className={css.toolTileCap}>
+                <b>{String(item.name ?? '')}</b>
+                {ok ? (
+                  <span className={css.badgeOk}>已锁定</span>
+                ) : (
+                  <span className={css.toolStatusText} style={{ color: '#e11d48' }}>生成失败</span>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     )
   }
@@ -377,19 +384,22 @@ function ToolCardSummary({
         )}
         {segs.length > 0 && (
           <div className={css.toolMediaGrid}>
-            {segs.map((s, idx) => (
-              <div key={idx} className={css.toolMediaTile}>
-                {typeof s.url === 'string' ? (
-                  <video src={s.url} controls muted playsInline className={css.toolThumbVideo} />
-                ) : (
-                  <div className={css.toolThumbPlaceholder}>{String(s.status ?? '待生成')}</div>
-                )}
-                <div className={css.toolTileCap}>
-                  <span>分段 S{Number(s.index ?? idx) + 1}</span>
-                  <span>{s.status === 'success' ? '✓ 已接续' : String(s.status ?? '')}</span>
+            {segs.map((s, idx) => {
+              const previewUrl = typeof s.videoUrl === 'string' ? s.videoUrl : typeof s.url === 'string' ? s.url : undefined
+              return (
+                <div key={idx} className={css.toolMediaTile}>
+                  {previewUrl ? (
+                    <video src={previewUrl} controls muted playsInline className={css.toolThumbVideo} />
+                  ) : (
+                    <div className={css.toolThumbPlaceholder}>{String(s.error ?? s.status ?? '待生成')}</div>
+                  )}
+                  <div className={css.toolTileCap}>
+                    <span>分段 S{Number(s.index ?? idx) + 1}</span>
+                    <span>{s.status === 'success' ? '✓ 已接续' : String(s.status ?? '')}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </div>
@@ -427,10 +437,21 @@ function ToolCardSummary({
 
   if (toolName === 'timeline_export_jianying') {
     const draftDir = typeof resultObj?.draftDir === 'string' ? resultObj.draftDir : ''
+    const written = resultObj?.writtenToDisk !== false
+    const audioCount = Number(resultObj?.audioCount ?? 0)
     return (
       <div className={css.toolBodyCol}>
         <div>
-          已生成剪映专业版草稿：写入 <b>{String(resultObj?.clipCount ?? 0)}</b> 段视频轨、<b>{String(resultObj?.captionCount ?? 0)}</b> 条字幕轨。
+          {written ? (
+            <>
+              已生成剪映专业版草稿：写入 <b>{String(resultObj?.clipCount ?? 0)}</b> 段视频轨
+              {audioCount > 0 ? <>、<b>{audioCount}</b> 条配音轨</> : null}、<b>{String(resultObj?.captionCount ?? 0)}</b> 条字幕轨。
+            </>
+          ) : (
+            <span style={{ color: '#d97706' }}>
+              草稿结构已生成，但未写入本机磁盘：{String(resultObj?.reason ?? '目标目录路径与服务器操作系统不匹配')}
+            </span>
+          )}
         </div>
         {draftDir && <code className={css.toolCode}>{draftDir}</code>}
       </div>

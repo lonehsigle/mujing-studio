@@ -5,6 +5,18 @@ import { stat } from 'node:fs/promises'
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import { extname, join } from 'node:path'
 import type { Context } from '@deepseek-ai/cordis'
+
+declare module '@deepseek-ai/cordis' {
+  interface Context {
+    webServer: {
+      register(route: {
+        kind: 'prefix' | 'exact'
+        path: string
+        handler: (req: IncomingMessage, res: ServerResponse) => unknown
+      }): () => void
+    }
+  }
+}
 import { ASSET_PREFIX, extFromMime, MediaConfigError, MediaUpstreamError, mimeOf, type MediaConfigPatch, type MediaKind } from './media.ts'
 import { CanvasOpError, ProjectNotFoundError } from './store.ts'
 import type { CanvasOp, CanvasProject, DramaCast, DramaShot, HandoffMode } from './types.ts'
@@ -316,7 +328,7 @@ export function apply(ctx: Context): void {
         return
       }
 
-      // PATCH /projects/:id/drama/shot  { episode, shotId?, shotIndex?, delete?, patch? }
+      // PATCH /projects/:id/drama/shot  { episode, shotId?, shotIndex?, delete?, resegment?, patch? }
       if (parts[2] === 'drama' && parts[3] === 'shot' && parts.length === 4 && method === 'PATCH') {
         const body = await readBody(req)
         const ep = typeof body.episode === 'number' || typeof body.episode === 'string' ? body.episode : 1
@@ -324,6 +336,7 @@ export function apply(ctx: Context): void {
           shotId: typeof body.shotId === 'string' ? body.shotId : undefined,
           shotIndex: typeof body.shotIndex === 'number' ? body.shotIndex : undefined,
           delete: Boolean(body.delete),
+          resegment: Boolean(body.resegment),
           patch: (typeof body.patch === 'object' && body.patch !== null ? body.patch : undefined) as Partial<DramaShot> | undefined,
         })
         send(res, 200, project)
@@ -398,6 +411,7 @@ export function apply(ctx: Context): void {
             caption?: string
             audioNodeId?: string
             audioUrl?: string
+            audioClips?: Array<{ url?: string; nodeId?: string; startOffsetMs?: number; durationMs?: number; title?: string }>
           }>,
           burnSubtitles: typeof body.burnSubtitles === 'boolean' ? body.burnSubtitles : undefined,
         })

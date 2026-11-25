@@ -28,9 +28,9 @@
 - 支持本地图片/视频/音频文件直接拖拽入画布、缩放自适应（Fit）、撤销/重做（`⌘Z` / `⇧⌘Z`）、`.mujing.json` 工程文件导入导出以及 SSE 实时状态同步。
 
 ### 4. 多轨成片合成与剪映草稿导出
-- 视频主轨道编排与角色配音音轨绑定，支持自动生成标准 **SRT 时间轴字幕**。
-- 通过 **FFmpeg** 一键音画混流输出整集 **MP4 成片**。
-- 支持一键导出**剪映专业版（JianyingPro）草稿包**（含完整本地媒体素材与轨道时间轴 JSON），无缝衔接专业后期精剪。
+- 视频主轨道编排与**同段多镜头偏移配音音轨（`audioClips`）**绑定，支持自动生成标准 **SRT 时间轴字幕**。
+- 通过 **FFmpeg** 一键音画混流输出整集 **MP4 成片**（多音轨混流不截断视频时长）。
+- 支持一键导出**剪映专业版（JianyingPro）草稿包**（自动适配 macOS / Windows / Linux 默认草稿路径，含视频轨、配音音轨、字幕轨与完整本地媒体素材），无缝衔接专业后期精剪。
 
 ### 5. 多模态多接口池与动态调度
 - 生图、视频、配音服务均支持**多接口池可视化配置**（点击界面左下角 `● 生图` / `● 视频` / `● 配音` 即可管理），兼容 OpenAI 规范接口与火山方舟（Seedream / Seedance）接口。
@@ -122,12 +122,19 @@ export DEEPSEEK_API_KEY="sk-你的密钥"
 
 ---
 
-## 二次开发
+## 二次开发与测试
 
-修改 `mujing/canvas/src/` 下的宿主服务、Agent 工具或 Web 客户端代码后，执行以下命令重新构建主插件并重启服务即可：
+修改 `mujing/canvas/src/` 下的宿主服务、Agent 工具或 Web 客户端组件（`BoardView`、`DramaView`、`TimelineView`、`ProjectHub`、`MediaConfigModal`）后，可执行以下命令完成构建、类型检查与单元测试：
 
 ```bash
+# 重新构建主插件
 node mujing/canvas/build.mjs --harness ./deepseek-harness
+
+# TypeScript 类型检查
+node mujing/canvas/typecheck.mjs --harness ./deepseek-harness
+
+# 运行单元测试（短剧分镜、多接口池调度、剪映导出、项目持久化与服务契约）
+node --test mujing/canvas/test/*.test.ts
 ```
 
 更多关于插件槽位、宿主服务架构与工具定义的细节，请参阅 [`mujing/README.md`](./mujing/README.md)。

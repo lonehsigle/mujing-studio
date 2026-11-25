@@ -21,7 +21,9 @@
     "client": { "platform": "web" }
   },
   "scripts": {
-    "build": "node build.mjs"
+    "build": "node build.mjs",
+    "typecheck": "node typecheck.mjs",
+    "test": "node --test test/*.test.ts"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "*",

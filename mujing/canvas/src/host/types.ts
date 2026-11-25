@@ -123,6 +123,16 @@ export interface DramaData {
 
 /* ───────────────────────── 时间线与成片导出模型 ───────────────────────── */
 
+export interface TimelineAudioClip {
+  url: string
+  nodeId?: string
+  /** 相对当前视频片段起点的偏移（毫秒，默认 0）。 */
+  startOffsetMs?: number
+  /** 音频时长（毫秒，可选）。 */
+  durationMs?: number
+  title?: string
+}
+
 export interface TimelineClip {
   id: string
   nodeId?: string
@@ -131,9 +141,11 @@ export interface TimelineClip {
   durationMs: number
   /** 台词/字幕文本（合成或导出剪映草稿时写入字幕轨）。 */
   caption?: string
-  /** 可选配音节点 id 或音频 URL（合成时混流替换或叠加）。 */
+  /** 可选配音节点 id 或音频 URL（合成时混流替换或叠加，兼容单轨）。 */
   audioNodeId?: string
   audioUrl?: string
+  /** 同段多镜头配音列表（支持按镜头偏移混流与剪映音轨导出）。 */
+  audioClips?: TimelineAudioClip[]
 }
 
 export interface TimelineState {

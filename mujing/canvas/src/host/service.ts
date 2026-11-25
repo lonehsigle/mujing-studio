@@ -16,8 +16,10 @@ import {
 } from './drama.ts'
 import {
   buildSrt,
+  defaultJianyingDraftRoot,
   safeName,
   writeJianyingDraftToDisk,
+  type JianyingAudioClip,
   type JianyingCaption,
   type JianyingClip,
 } from './jianying.ts'
@@ -36,9 +38,30 @@ import type {
   DramaEpisode,
   DramaShot,
   HandoffMode,
+  TimelineAudioClip,
   TimelineClip,
   TimelineState,
 } from './types.ts'
+
+/** 有限并发映射，避免对上游生图/音频 API 无上限并发突发触发 429 限流。 */
+export async function mapWithConcurrency<T, R>(
+  items: readonly T[],
+  limit: number,
+  worker: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results = new Array<R>(items.length)
+  let nextIndex = 0
+  const poolSize = Math.max(1, Math.min(limit, items.length))
+  await Promise.all(
+    Array.from({ length: poolSize }, async () => {
+      while (nextIndex < items.length) {
+        const cur = nextIndex++
+        results[cur] = await worker(items[cur], cur)
+      }
+    }),
+  )
+  return results
+}
 
 declare module '@deepseek-ai/cordis' {
   interface Context {
@@ -336,11 +359,12 @@ export class MujingService extends Service {
     return updated
   }
 
-  /** 修改、新增或删除单集中的分镜条目，并自动重算该集剧情分段提示词与字幕。 */
+  /** 修改、新增或删除单集中的分镜条目，并自动重算该集剧情分段提示词与字幕（默认保留既有分段归属）。 */
   async updateDramaShot(projectId: string, episodeIdOrNum: string | number, input: {
     shotId?: string
     shotIndex?: number
     delete?: boolean
+    resegment?: boolean
     patch?: Partial<DramaShot>
   }): Promise<CanvasProject> {
     const updated = await this.store.updateDomain(projectId, p => {
@@ -366,26 +390,46 @@ export class MujingService extends Service {
         if (sp.dialogue !== undefined) cur.dialogue = sp.dialogue.trim() || undefined
         if (typeof sp.durationMs === 'number' && sp.durationMs >= 1500) cur.durationMs = Math.round(sp.durationMs)
         if (sp.transition !== undefined) cur.transition = sp.transition
+        if (typeof sp.segmentIndex === 'number' && Number.isInteger(sp.segmentIndex) && sp.segmentIndex >= 0) {
+          cur.segmentIndex = sp.segmentIndex
+        }
       } else {
         const sp = input.patch ?? {}
         if (!sp.action?.trim()) throw new CanvasOpError('新增分镜必须填写画面动作描述')
-        const lastScene = ep.shots.at(-1)?.scene ?? '主场景'
+        const lastShot = ep.shots.at(-1)
+        const scene = sp.scene?.trim() || lastShot?.scene || '主场景'
+        const durMs = typeof sp.durationMs === 'number' && sp.durationMs >= 1500 ? Math.round(sp.durationMs) : 3500
+        let defaultSegIndex = 0
+        if (typeof sp.segmentIndex === 'number' && Number.isInteger(sp.segmentIndex) && sp.segmentIndex >= 0) {
+          defaultSegIndex = sp.segmentIndex
+        } else if (ep.segments.length > 0 && lastShot) {
+          const lastSegIdx = Math.max(0, lastShot.segmentIndex)
+          const lastSegShots = ep.shots.filter(s => s.segmentIndex === lastSegIdx)
+          const lastSegMs = lastSegShots.reduce((acc, s) => acc + Math.max(1500, s.durationMs || 3000), 0)
+          const maxMs = Math.max(3000, Math.min(15_000, Math.round((d.segmentTargetSec || 8) * 1000)))
+          const sameScene = !lastShot.scene || scene === lastShot.scene
+          defaultSegIndex = sameScene && lastSegMs + durMs <= maxMs && lastSegShots.length < 4
+            ? lastSegIdx
+            : lastSegIdx + 1
+        }
         ep.shots.push({
           id: shortId('shot'),
-          segmentIndex: ep.segments.length > 0 ? Math.max(0, ep.segments.length - 1) : 0,
-          scene: sp.scene?.trim() || lastScene,
+          segmentIndex: defaultSegIndex,
+          scene,
           shotSize: sp.shotSize?.trim() || '中景',
           camera: sp.camera?.trim() || '固定',
           action: sp.action.trim(),
           ...(sp.imagePrompt?.trim() ? { imagePrompt: sp.imagePrompt.trim() } : {}),
           ...(sp.speaker?.trim() ? { speaker: sp.speaker.trim() } : {}),
           ...(sp.dialogue?.trim() ? { dialogue: sp.dialogue.trim() } : {}),
-          durationMs: typeof sp.durationMs === 'number' && sp.durationMs >= 1500 ? Math.round(sp.durationMs) : 3500,
+          durationMs: durMs,
           ...(sp.transition ? { transition: sp.transition } : {}),
         })
       }
-      // 清空显式 segmentIndex 让引擎按场景与时长重新切段（保留已生成段的节点绑定）
-      ep.shots.forEach((s, i) => { if (i === 0) s.segmentIndex = 0; else s.segmentIndex = 0 })
+      // 仅在显式请求 resegment 时才清空手工段号重新自动切段；常规编辑保留每镜既有段归属
+      if (input.resegment) {
+        for (const s of ep.shots) s.segmentIndex = 0
+      }
       ep.segments = buildEpisodeSegments(d, ep, ep.segments)
       ep.subtitleSrt = buildEpisodeCaptions(ep).srt
     })
@@ -578,7 +622,8 @@ export class MujingService extends Service {
               status: 'idle',
             })
           }
-          const upSource = segIdx === 0 ? scriptNodeId : `ep${ep.number}_seg${segIdx}`
+          const prevSeg = segIdx > 0 ? ep.segments[segIdx - 1] : undefined
+          const upSource = segIdx === 0 ? scriptNodeId : (prevSeg?.videoNodeId ?? `ep${ep.number}_seg${segIdx}`)
           if (!p.edges.some(e => e.source === upSource && e.target === vNodeId)) {
             p.edges.push({ id: shortId('e'), source: upSource, target: vNodeId })
           }
@@ -587,7 +632,7 @@ export class MujingService extends Service {
     }, false)
   }
 
-  /** 为单个或全部未锁定的角色/场景生成设定图（三视图卡），完成后自动锁定。 */
+  /** 为单个或全部未锁定的角色/场景生成设定图（三视图卡），完成后自动锁定（限流并发上限 3）。 */
   async generateDramaCastImage(projectId: string, castId?: string, signal?: AbortSignal): Promise<{ generated: Array<{ castId: string; name: string; url?: string; error?: string }> }> {
     await this.syncDramaToCanvas(projectId)
     const project = await this.store.get(projectId)
@@ -599,7 +644,7 @@ export class MujingService extends Service {
     if (targets.length === 0) return { generated: [] }
 
     const size = d.aspectRatio === '9:16' ? '1024x1536' : d.aspectRatio === '16:9' ? '1536x1024' : '1024x1024'
-    const jobs = await Promise.all(targets.map(async cast => {
+    const jobs = await mapWithConcurrency(targets, 3, async cast => {
       const { done } = await this.startGeneration({
         projectId,
         kind: 'image',
@@ -610,7 +655,7 @@ export class MujingService extends Service {
       }, signal)
       const finalNode = await done
       return { castId: cast.id, name: cast.name, url: finalNode.url, error: finalNode.error }
-    }))
+    })
 
     await this.store.updateDomain(projectId, p => {
       const drama = p.drama
@@ -746,7 +791,23 @@ export class MujingService extends Service {
         .filter(s => s.dialogue?.trim())
         .map(s => (s.speaker && s.speaker !== '旁白' ? `${s.speaker}：${s.dialogue!.trim()}` : s.dialogue!.trim()))
         .join(' / ')
-      const firstAudioShot = segShots.find(s => s.audioUrl)
+      const audioClips: TimelineAudioClip[] = []
+      let offsetMs = 0
+      for (const shot of segShots) {
+        const shotDurMs = Math.max(1500, shot.durationMs || 3000)
+        if (shot.audioUrl) {
+          const aNode = shot.audioNodeId ? p.nodes.find(n => n.id === shot.audioNodeId) : undefined
+          audioClips.push({
+            url: shot.audioUrl,
+            ...(shot.audioNodeId ? { nodeId: shot.audioNodeId } : {}),
+            startOffsetMs: offsetMs,
+            durationMs: aNode?.durationMs ?? shotDurMs,
+            ...(shot.speaker ? { title: `${shot.speaker}配音` } : {}),
+          })
+        }
+        offsetMs += shotDurMs
+      }
+      const firstAudio = audioClips[0]
       clips.push({
         id: shortId('clip'),
         nodeId: vNode.id,
@@ -754,8 +815,9 @@ export class MujingService extends Service {
         url: vNode.url,
         durationMs: vNode.durationMs ?? seg.durationMs,
         ...(caption ? { caption } : {}),
-        ...(firstAudioShot?.audioNodeId ? { audioNodeId: firstAudioShot.audioNodeId } : {}),
-        ...(firstAudioShot?.audioUrl ? { audioUrl: firstAudioShot.audioUrl } : {}),
+        ...(firstAudio?.nodeId ? { audioNodeId: firstAudio.nodeId } : {}),
+        ...(firstAudio?.url ? { audioUrl: firstAudio.url } : {}),
+        ...(audioClips.length > 0 ? { audioClips } : {}),
       })
     }
     if (clips.length === 0) throw new CanvasOpError(`第${ep.number}集还没有已生成的视频片段`)
@@ -795,6 +857,7 @@ export class MujingService extends Service {
       caption?: string
       audioNodeId?: string
       audioUrl?: string
+      audioClips?: Array<{ url?: string; nodeId?: string; startOffsetMs?: number; durationMs?: number; title?: string }>
     }>
     burnSubtitles?: boolean
   }): Promise<CanvasProject> {
@@ -805,6 +868,21 @@ export class MujingService extends Service {
       if (!url) throw new CanvasOpError(`时间线第 ${idx + 1} 段缺少视频地址`)
       const aNode = item.audioNodeId ? p.nodes.find(n => n.id === item.audioNodeId) : undefined
       const audioUrl = item.audioUrl || aNode?.url
+      const audioClips: TimelineAudioClip[] = []
+      if (Array.isArray(item.audioClips)) {
+        for (const ac of item.audioClips) {
+          const acNode = ac.nodeId ? p.nodes.find(n => n.id === ac.nodeId) : undefined
+          const acUrl = ac.url || acNode?.url
+          if (!acUrl) continue
+          audioClips.push({
+            url: acUrl,
+            ...(ac.nodeId ? { nodeId: ac.nodeId } : {}),
+            ...(typeof ac.startOffsetMs === 'number' && ac.startOffsetMs >= 0 ? { startOffsetMs: Math.round(ac.startOffsetMs) } : {}),
+            ...(typeof ac.durationMs === 'number' && ac.durationMs > 0 ? { durationMs: Math.round(ac.durationMs) } : {}),
+            ...(ac.title ? { title: ac.title } : {}),
+          })
+        }
+      }
       return {
         id: item.id ?? shortId('clip'),
         ...(item.nodeId ? { nodeId: item.nodeId } : {}),
@@ -814,6 +892,7 @@ export class MujingService extends Service {
         ...(item.caption !== undefined ? { caption: item.caption } : {}),
         ...(item.audioNodeId ? { audioNodeId: item.audioNodeId } : {}),
         ...(audioUrl ? { audioUrl } : {}),
+        ...(audioClips.length > 0 ? { audioClips } : {}),
       }
     })
     const captions: JianyingCaption[] = []
@@ -840,7 +919,7 @@ export class MujingService extends Service {
     })
   }
 
-  /** 使用 FFmpeg 拼接时间线中的所有片段为完整 MP4 成片，同时落盘 SRT 字幕资产。 */
+  /** 使用 FFmpeg 拼接时间线中的所有片段为完整 MP4 成片，同时落盘最新对齐的 SRT 字幕资产（支持硬烧录）。 */
   async renderTimeline(projectId: string): Promise<CanvasProject> {
     const project = await this.store.get(projectId)
     const tl = project.timeline
@@ -853,7 +932,8 @@ export class MujingService extends Service {
     try {
       const aspect = project.drama?.aspectRatio
       const dims = aspect === '9:16' ? { width: 720, height: 1280 } : aspect === '1:1' ? { width: 1080, height: 1080 } : undefined
-      const out = await this.media.concatVideos(tl.clips, dims)
+
+      // 先探测每段视频真实时长并重新生成对齐的 SRT，避免旧字幕时间戳偏移，同时也为字幕硬烧录提供最新 SRT
       const captions: JianyingCaption[] = []
       let cursorUs = 0
       for (const clip of tl.clips) {
@@ -866,7 +946,13 @@ export class MujingService extends Service {
         }
         cursorUs += durUs
       }
-      const srt = tl.subtitleSrt || buildSrt(captions)
+      const srt = captions.length > 0 ? buildSrt(captions) : (tl.subtitleSrt ?? '')
+
+      const out = await this.media.concatVideos(tl.clips, {
+        ...dims,
+        subtitleSrt: srt,
+        burnSubtitles: Boolean(tl.burnSubtitles),
+      })
       const subtitleAssetUrl = srt.trim() ? await this.media.saveAsset(Buffer.from(srt, 'utf8'), '.srt') : undefined
       return await this.store.updateDomain(projectId, p => {
         if (!p.timeline) return
@@ -887,18 +973,30 @@ export class MujingService extends Service {
     }
   }
 
-  /** 导出当前时间线（或指定剧集）到剪映专业版草稿目录。 */
+  /** 导出当前时间线到剪映专业版草稿目录（包含视频轨、配音音频轨与台词字幕轨）。 */
   async exportJianyingDraft(projectId: string, input: {
     draftRoot?: string
     draftName?: string
-  }): Promise<{ folderPath: string; draftDir: string; writtenToDisk: boolean; filesCount: number; clipCount: number; captionCount: number; defaultMacRoot: string }> {
-    const defaultMacRoot = join(homedir(), 'Movies/JianyingPro/User Data/Projects/com.lveditor.draft')
-    const root = input.draftRoot?.trim() || defaultMacRoot
+  }): Promise<{
+    folderPath: string
+    draftDir: string
+    writtenToDisk: boolean
+    reason?: string
+    filesCount: number
+    clipCount: number
+    audioCount: number
+    captionCount: number
+    defaultRoot: string
+    defaultMacRoot: string
+  }> {
+    const defaultRoot = defaultJianyingDraftRoot()
+    const root = input.draftRoot?.trim() || defaultRoot
     const project = await this.store.get(projectId)
     const tl = project.timeline
     if (!tl || tl.clips.length === 0) throw new CanvasOpError('时间线为空：请先添加视频片段再导出剪映草稿')
 
     const jClips: JianyingClip[] = []
+    const jAudios: JianyingAudioClip[] = []
     const captions: JianyingCaption[] = []
     let cursorUs = 0
     let canvasW = project.drama?.aspectRatio === '9:16' ? 1080 : 1920
@@ -927,6 +1025,30 @@ export class MujingService extends Service {
         width: meta.width,
         height: meta.height,
       })
+
+      const clipAudios: TimelineAudioClip[] = clip.audioClips && clip.audioClips.length > 0
+        ? clip.audioClips
+        : clip.audioUrl
+          ? [{ url: clip.audioUrl, nodeId: clip.audioNodeId, startOffsetMs: 0, title: `${clip.title}-配音` }]
+          : []
+      for (const [aIdx, aud] of clipAudios.entries()) {
+        if (!aud.url) continue
+        const { file: audioFile } = await this.media.ensureLocalFile(aud.url, '.mp3')
+        const aMeta = await this.media.probeMedia(audioFile).catch(() => null)
+        const aExt = extname(audioFile) || '.mp3'
+        const aName = aud.title || `${clip.title}-配音${clipAudios.length > 1 ? aIdx + 1 : ''}`
+        const aFileName = `${String(idx + 1).padStart(2, '0')}-a${String(aIdx + 1).padStart(2, '0')}-${safeName(aName, `audio-${idx + 1}-${aIdx + 1}`, 32)}${aExt}`
+        const aStartUs = cursorUs + Math.max(0, Math.round(aud.startOffsetMs ?? 0)) * 1000
+        const aDurUs = Math.max(200, aMeta?.durationMs ?? aud.durationMs ?? meta.durationMs) * 1000
+        jAudios.push({
+          fileName: aFileName,
+          sourceFile: audioFile,
+          name: aName,
+          startUs: aStartUs,
+          durationUs: aDurUs,
+        })
+      }
+
       if (clip.caption?.trim()) {
         captions.push({
           text: clip.caption.trim(),
@@ -944,8 +1066,17 @@ export class MujingService extends Service {
       height: canvasH,
       fps: 30,
       clips: jClips,
+      audios: jAudios,
       captions,
     })
-    return { ...res, draftDir: res.folderPath, clipCount: jClips.length, captionCount: captions.length, defaultMacRoot }
+    return {
+      ...res,
+      draftDir: res.folderPath,
+      clipCount: jClips.length,
+      audioCount: jAudios.length,
+      captionCount: captions.length,
+      defaultRoot,
+      defaultMacRoot: defaultRoot,
+    }
   }
 }

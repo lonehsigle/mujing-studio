@@ -1,8 +1,8 @@
-// mujing/canvas/src/tools.ts
+// src/tools.ts
 import { createUserMessage, HarnessError } from "@deepseek-ai/dsh-llm";
 import { defineTool } from "@deepseek-ai/dsh-tools";
 
-// mujing/canvas/src/host/digest.ts
+// src/host/digest.ts
 function digestProject(project) {
   return {
     project_id: project.id,
@@ -89,7 +89,7 @@ function digestProject(project) {
   };
 }
 
-// mujing/canvas/src/tools.ts
+// src/tools.ts
 var name = "mujing-tools";
 var inject = ["tools", "mujing", "agents"];
 function formatStudioContext(p, mediaReady) {
@@ -185,7 +185,10 @@ function apply(ctx) {
     parameters: {},
     output: { schema: { type: "json" }, render: (_a, v) => json(v) },
     async execute() {
-      return guard(async () => ({ active_project_id: mujing.activeProjectId ?? null, projects: await mujing.store.list() }));
+      return guard(async () => ({
+        active_project_id: mujing.activeProjectId ?? null,
+        projects: (await mujing.store.list()).map((p) => ({ ...p }))
+      }));
     }
   }));
   ctx.tools.register(defineTool({
@@ -288,7 +291,14 @@ function apply(ctx) {
         if (!wait) return { project_id: projectId, node_id: nodeId, status: "loading" };
         const node = await done;
         if (node.status === "error") throw new HarnessError(`\u751F\u6210\u5931\u8D25\uFF08\u8282\u70B9 ${nodeId}\uFF09\uFF1A${node.error ?? "\u672A\u77E5\u9519\u8BEF"}`, "MUJING_GENERATION_FAILED");
-        return { project_id: projectId, node_id: nodeId, status: node.status, url: node.url, model: node.model, durationMs: node.durationMs };
+        return {
+          project_id: projectId,
+          node_id: nodeId,
+          status: node.status ?? "success",
+          ...node.url !== void 0 ? { url: node.url } : {},
+          ...node.model !== void 0 ? { model: node.model } : {},
+          ...node.durationMs !== void 0 ? { durationMs: node.durationMs } : {}
+        };
       });
     }
   }));
@@ -376,7 +386,13 @@ function apply(ctx) {
             title: ep.title,
             shot_count: ep.shots.length,
             segment_count: ep.segments.length,
-            segments: ep.segments.map((s) => ({ index: s.index, title: s.title, handoff: s.handoff, durationMs: s.durationMs, videoNodeId: s.videoNodeId }))
+            segments: ep.segments.map((s) => ({
+              index: s.index,
+              title: s.title,
+              handoff: s.handoff,
+              durationMs: s.durationMs,
+              ...s.videoNodeId !== void 0 ? { videoNodeId: s.videoNodeId } : {}
+            }))
           }))
         };
       });
@@ -491,12 +507,19 @@ function apply(ctx) {
           return {
             project_id: id,
             clip_count: p2.timeline?.clips.length ?? 0,
-            output_url: p2.timeline?.outputUrl,
+            status: p2.timeline?.status ?? "success",
+            output_url: p2.timeline?.outputUrl ?? null,
             has_srt: Boolean(p2.timeline?.subtitleSrt)
           };
         }
         const p = await mujing.store.get(id);
-        return { project_id: id, clip_count: p.timeline?.clips.length ?? 0, status: p.timeline?.status ?? "idle" };
+        return {
+          project_id: id,
+          clip_count: p.timeline?.clips.length ?? 0,
+          status: p.timeline?.status ?? "idle",
+          output_url: p.timeline?.outputUrl ?? null,
+          has_srt: Boolean(p.timeline?.subtitleSrt)
+        };
       });
     }
   }));

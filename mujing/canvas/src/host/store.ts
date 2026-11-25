@@ -4,7 +4,25 @@ import { randomUUID } from 'node:crypto'
 import { EventEmitter } from 'node:events'
 import { mkdir, readdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import type { CanvasEdge, CanvasNode, CanvasOp, CanvasProject, DramaData, NodeType, ProjectSummary, TimelineState } from './types.ts'
+import type {
+  CanvasEdge,
+  CanvasNode,
+  CanvasOp,
+  CanvasProject,
+  DramaCast,
+  DramaCastKind,
+  DramaData,
+  DramaEpisode,
+  DramaSegment,
+  DramaShot,
+  HandoffMode,
+  NodeStatus,
+  NodeType,
+  ProjectSummary,
+  TimelineAudioClip,
+  TimelineClip,
+  TimelineState,
+} from './types.ts'
 
 const ID = /^[A-Za-z0-9_-]{1,64}$/
 const MAX_HISTORY = 40
@@ -53,6 +71,156 @@ function restoreSnapshot(p: CanvasProject, snap: SnapshotEntry): void {
   p.edges = cloned.edges
   p.drama = cloned.drama
   p.timeline = cloned.timeline
+}
+
+function sanitizeStatus(raw: unknown, fallback: NodeStatus = 'idle'): NodeStatus {
+  if (raw === 'success' || raw === 'error' || raw === 'idle') return raw
+  if (raw === 'loading') return 'idle'
+  return fallback
+}
+
+function sanitizeDrama(raw: unknown): DramaData | undefined {
+  if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return undefined
+  const obj = raw as Record<string, unknown>
+  const aspectRatio: DramaData['aspectRatio'] = obj.aspectRatio === '16:9' || obj.aspectRatio === '1:1' ? obj.aspectRatio : '9:16'
+  const rawCasts = Array.isArray(obj.casts) ? obj.casts : []
+  const casts: DramaCast[] = rawCasts
+    .filter((c): c is Record<string, unknown> => typeof c === 'object' && c !== null && !Array.isArray(c) && typeof (c as Record<string, unknown>).name === 'string' && Boolean((c as Record<string, unknown>).name))
+    .map(c => {
+      const kind: DramaCastKind = c.kind === 'scene' || c.kind === 'prop' ? c.kind : 'character'
+      const name = String(c.name).trim()
+      const appearance = typeof c.appearance === 'string' ? c.appearance : ''
+      return {
+        id: typeof c.id === 'string' && ID.test(c.id) ? c.id : shortId('cast'),
+        kind,
+        name,
+        ...(typeof c.role === 'string' && c.role.trim() ? { role: c.role.trim() } : {}),
+        appearance,
+        imagePrompt: typeof c.imagePrompt === 'string' && c.imagePrompt.trim() ? c.imagePrompt : `${name}，${appearance}`,
+        ...(typeof c.voice === 'string' && c.voice.trim() ? { voice: c.voice.trim() } : {}),
+        ...(typeof c.imageNodeId === 'string' && c.imageNodeId ? { imageNodeId: c.imageNodeId } : {}),
+        ...(typeof c.imageUrl === 'string' && c.imageUrl ? { imageUrl: c.imageUrl } : {}),
+        ...(typeof c.locked === 'boolean' ? { locked: c.locked } : {}),
+      }
+    })
+
+  const rawEpisodes = Array.isArray(obj.episodes) ? obj.episodes : []
+  const episodes: DramaEpisode[] = rawEpisodes
+    .filter((e): e is Record<string, unknown> => typeof e === 'object' && e !== null && !Array.isArray(e))
+    .map((e, epIdx) => {
+      const num = typeof e.number === 'number' && Number.isFinite(e.number) && e.number >= 1 ? Math.floor(e.number) : epIdx + 1
+      const rawShots = Array.isArray(e.shots) ? e.shots : []
+      const shots: DramaShot[] = rawShots
+        .filter((s): s is Record<string, unknown> => typeof s === 'object' && s !== null && !Array.isArray(s))
+        .map(s => {
+          const transition = s.transition === 'fadeblack' || s.transition === 'fadewhite' ? s.transition : s.transition === 'cut' ? 'cut' : undefined
+          return {
+            id: typeof s.id === 'string' && ID.test(s.id) ? s.id : shortId('shot'),
+            segmentIndex: typeof s.segmentIndex === 'number' && Number.isFinite(s.segmentIndex) && s.segmentIndex >= 0 ? Math.floor(s.segmentIndex) : 0,
+            scene: typeof s.scene === 'string' ? s.scene : '主场景',
+            shotSize: typeof s.shotSize === 'string' ? s.shotSize : '中景',
+            camera: typeof s.camera === 'string' ? s.camera : '固定',
+            action: typeof s.action === 'string' ? s.action : '',
+            ...(typeof s.imagePrompt === 'string' && s.imagePrompt ? { imagePrompt: s.imagePrompt } : {}),
+            ...(typeof s.videoPrompt === 'string' && s.videoPrompt ? { videoPrompt: s.videoPrompt } : {}),
+            ...(typeof s.speaker === 'string' && s.speaker ? { speaker: s.speaker } : {}),
+            ...(typeof s.dialogue === 'string' && s.dialogue ? { dialogue: s.dialogue } : {}),
+            durationMs: typeof s.durationMs === 'number' && Number.isFinite(s.durationMs) && s.durationMs >= 500 ? Math.round(s.durationMs) : 3500,
+            ...(Array.isArray(s.castIds) ? { castIds: s.castIds.filter((x): x is string => typeof x === 'string') } : {}),
+            ...(transition ? { transition } : {}),
+            ...(typeof s.keyframeNodeId === 'string' && s.keyframeNodeId ? { keyframeNodeId: s.keyframeNodeId } : {}),
+            ...(typeof s.keyframeUrl === 'string' && s.keyframeUrl ? { keyframeUrl: s.keyframeUrl } : {}),
+            ...(typeof s.audioNodeId === 'string' && s.audioNodeId ? { audioNodeId: s.audioNodeId } : {}),
+            ...(typeof s.audioUrl === 'string' && s.audioUrl ? { audioUrl: s.audioUrl } : {}),
+          }
+        })
+      const rawSegs = Array.isArray(e.segments) ? e.segments : []
+      const segments: DramaSegment[] = rawSegs
+        .filter((g): g is Record<string, unknown> => typeof g === 'object' && g !== null && !Array.isArray(g))
+        .map((g, segIdx) => {
+          const handoff: HandoffMode = g.handoff === 'continue' || g.handoff === 'reverse_angle' ? g.handoff : 'scene_cut'
+          return {
+            id: typeof g.id === 'string' && ID.test(g.id) ? g.id : shortId('seg'),
+            index: typeof g.index === 'number' && Number.isFinite(g.index) && g.index >= 0 ? Math.floor(g.index) : segIdx,
+            title: typeof g.title === 'string' && g.title.trim() ? g.title.trim() : `第${num}集·第${segIdx + 1}段`,
+            handoff,
+            durationMs: typeof g.durationMs === 'number' && Number.isFinite(g.durationMs) && g.durationMs >= 500 ? Math.round(g.durationMs) : 5000,
+            prompt: typeof g.prompt === 'string' ? g.prompt : '',
+            ...(typeof g.videoNodeId === 'string' && g.videoNodeId ? { videoNodeId: g.videoNodeId } : {}),
+            ...(typeof g.firstFrameUrl === 'string' && g.firstFrameUrl ? { firstFrameUrl: g.firstFrameUrl } : {}),
+            status: sanitizeStatus(g.status),
+            ...(typeof g.error === 'string' && g.error ? { error: g.error } : {}),
+          }
+        })
+      return {
+        id: typeof e.id === 'string' && ID.test(e.id) ? e.id : shortId('ep'),
+        number: num,
+        title: typeof e.title === 'string' && e.title.trim() ? e.title.trim() : `第${num}集`,
+        synopsis: typeof e.synopsis === 'string' ? e.synopsis : '',
+        ...(typeof e.hook === 'string' && e.hook ? { hook: e.hook } : {}),
+        ...(typeof e.cliffhanger === 'string' && e.cliffhanger ? { cliffhanger: e.cliffhanger } : {}),
+        ...(typeof e.sourceText === 'string' && e.sourceText ? { sourceText: e.sourceText } : {}),
+        shots,
+        segments,
+        ...(typeof e.finalVideoUrl === 'string' && e.finalVideoUrl ? { finalVideoUrl: e.finalVideoUrl } : {}),
+        ...(typeof e.subtitleSrt === 'string' && e.subtitleSrt ? { subtitleSrt: e.subtitleSrt } : {}),
+      }
+    })
+
+  return {
+    ...(typeof obj.genre === 'string' && obj.genre.trim() ? { genre: obj.genre.trim() } : {}),
+    ...(typeof obj.logline === 'string' && obj.logline.trim() ? { logline: obj.logline.trim() } : {}),
+    style: typeof obj.style === 'string' && obj.style.trim() ? obj.style.trim() : '电影级真人短剧，细腻自然光影，8K质感',
+    aspectRatio,
+    language: typeof obj.language === 'string' && obj.language.trim() ? obj.language.trim() : '中文普通话',
+    segmentTargetSec: typeof obj.segmentTargetSec === 'number' && Number.isFinite(obj.segmentTargetSec)
+      ? Math.max(3, Math.min(15, Math.round(obj.segmentTargetSec)))
+      : 8,
+    ...(typeof obj.novelText === 'string' && obj.novelText ? { novelText: obj.novelText } : {}),
+    casts,
+    episodes,
+  }
+}
+
+function sanitizeTimeline(raw: unknown): TimelineState | undefined {
+  if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return undefined
+  const obj = raw as Record<string, unknown>
+  const rawClips = Array.isArray(obj.clips) ? obj.clips : []
+  const clips: TimelineClip[] = rawClips
+    .filter((c): c is Record<string, unknown> => typeof c === 'object' && c !== null && !Array.isArray(c) && typeof (c as Record<string, unknown>).url === 'string' && Boolean((c as Record<string, unknown>).url))
+    .map((c, idx) => {
+      const rawAudioClips = Array.isArray(c.audioClips) ? c.audioClips : []
+      const audioClips: TimelineAudioClip[] = rawAudioClips
+        .filter((a): a is Record<string, unknown> => typeof a === 'object' && a !== null && !Array.isArray(a) && typeof (a as Record<string, unknown>).url === 'string' && Boolean((a as Record<string, unknown>).url))
+        .map(a => ({
+          url: String(a.url),
+          ...(typeof a.nodeId === 'string' && a.nodeId ? { nodeId: a.nodeId } : {}),
+          ...(typeof a.startOffsetMs === 'number' && Number.isFinite(a.startOffsetMs) && a.startOffsetMs >= 0 ? { startOffsetMs: Math.round(a.startOffsetMs) } : {}),
+          ...(typeof a.durationMs === 'number' && Number.isFinite(a.durationMs) && a.durationMs > 0 ? { durationMs: Math.round(a.durationMs) } : {}),
+          ...(typeof a.title === 'string' && a.title ? { title: a.title } : {}),
+        }))
+      return {
+        id: typeof c.id === 'string' && ID.test(c.id) ? c.id : shortId('clip'),
+        ...(typeof c.nodeId === 'string' && c.nodeId ? { nodeId: c.nodeId } : {}),
+        title: typeof c.title === 'string' && c.title.trim() ? c.title.trim() : `片段 ${idx + 1}`,
+        url: String(c.url),
+        durationMs: typeof c.durationMs === 'number' && Number.isFinite(c.durationMs) && c.durationMs >= 500 ? Math.round(c.durationMs) : 5000,
+        ...(typeof c.caption === 'string' ? { caption: c.caption } : {}),
+        ...(typeof c.audioNodeId === 'string' && c.audioNodeId ? { audioNodeId: c.audioNodeId } : {}),
+        ...(typeof c.audioUrl === 'string' && c.audioUrl ? { audioUrl: c.audioUrl } : {}),
+        ...(audioClips.length > 0 ? { audioClips } : {}),
+      }
+    })
+  return {
+    clips,
+    ...(typeof obj.burnSubtitles === 'boolean' ? { burnSubtitles: obj.burnSubtitles } : {}),
+    ...(typeof obj.outputUrl === 'string' && obj.outputUrl ? { outputUrl: obj.outputUrl } : {}),
+    ...(typeof obj.subtitleSrt === 'string' ? { subtitleSrt: obj.subtitleSrt } : {}),
+    ...(typeof obj.subtitleAssetUrl === 'string' && obj.subtitleAssetUrl ? { subtitleAssetUrl: obj.subtitleAssetUrl } : {}),
+    status: sanitizeStatus(obj.status),
+    ...(typeof obj.error === 'string' && obj.error ? { error: obj.error } : {}),
+    updatedAt: typeof obj.updatedAt === 'number' && Number.isFinite(obj.updatedAt) ? obj.updatedAt : Date.now(),
+  }
 }
 
 export class ProjectStore {
@@ -178,6 +346,8 @@ export class ProjectStore {
         target: e.target,
       }))
       : []
+    const drama = sanitizeDrama(payload.drama)
+    const timeline = sanitizeTimeline(payload.timeline)
     const project: CanvasProject = {
       id,
       title: (typeof payload.title === 'string' ? payload.title.trim() : '') || '导入画布',
@@ -186,8 +356,8 @@ export class ProjectStore {
       rev: 1,
       nodes,
       edges,
-      ...(payload.drama ? { drama: payload.drama } : {}),
-      ...(payload.timeline ? { timeline: payload.timeline } : {}),
+      ...(drama ? { drama } : {}),
+      ...(timeline ? { timeline } : {}),
     }
     await this.write(project)
     this.events.emit('change', project)
@@ -228,7 +398,7 @@ export class ProjectStore {
     return this.mutate(id, fn, recordUndo)
   }
 
-  async undo(id: string): Promise<{ project: CanvasProject; undone: boolean }> {
+  async undo(id: string): Promise<{ project: CanvasProject; undone: boolean; changed: boolean }> {
     let undone = false
     const project = await this.serial(id, async () => {
       const p = await this.get(id)
@@ -246,10 +416,10 @@ export class ProjectStore {
       return p
     })
     if (undone) this.events.emit('change', project)
-    return { project, undone }
+    return { project, undone, changed: undone }
   }
 
-  async redo(id: string): Promise<{ project: CanvasProject; redone: boolean }> {
+  async redo(id: string): Promise<{ project: CanvasProject; redone: boolean; changed: boolean }> {
     let redone = false
     const project = await this.serial(id, async () => {
       const p = await this.get(id)
@@ -267,7 +437,7 @@ export class ProjectStore {
       return p
     })
     if (redone) this.events.emit('change', project)
-    return { project, redone }
+    return { project, redone, changed: redone }
   }
 
   private async mutate(id: string, fn: (p: CanvasProject) => void, recordUndo = true): Promise<CanvasProject> {

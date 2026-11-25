@@ -4,13 +4,13 @@ var __export = (target, all) => {
     __defProp(target, name3, { get: all[name3], enumerable: true });
 };
 
-// mujing/canvas/src/host/service.ts
-import { homedir } from "node:os";
+// src/host/service.ts
+import { homedir as homedir2 } from "node:os";
 import { extname as extname2, join as join4 } from "node:path";
 import { Service } from "@deepseek-ai/cordis";
 import z from "@deepseek-ai/schemastery";
 
-// mujing/canvas/src/host/store.ts
+// src/host/store.ts
 import { randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { mkdir, readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
@@ -50,6 +50,137 @@ function restoreSnapshot(p, snap) {
   p.edges = cloned.edges;
   p.drama = cloned.drama;
   p.timeline = cloned.timeline;
+}
+function sanitizeStatus(raw, fallback = "idle") {
+  if (raw === "success" || raw === "error" || raw === "idle") return raw;
+  if (raw === "loading") return "idle";
+  return fallback;
+}
+function sanitizeDrama(raw) {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return void 0;
+  const obj = raw;
+  const aspectRatio = obj.aspectRatio === "16:9" || obj.aspectRatio === "1:1" ? obj.aspectRatio : "9:16";
+  const rawCasts = Array.isArray(obj.casts) ? obj.casts : [];
+  const casts = rawCasts.filter((c) => typeof c === "object" && c !== null && !Array.isArray(c) && typeof c.name === "string" && Boolean(c.name)).map((c) => {
+    const kind = c.kind === "scene" || c.kind === "prop" ? c.kind : "character";
+    const name3 = String(c.name).trim();
+    const appearance = typeof c.appearance === "string" ? c.appearance : "";
+    return {
+      id: typeof c.id === "string" && ID.test(c.id) ? c.id : shortId("cast"),
+      kind,
+      name: name3,
+      ...typeof c.role === "string" && c.role.trim() ? { role: c.role.trim() } : {},
+      appearance,
+      imagePrompt: typeof c.imagePrompt === "string" && c.imagePrompt.trim() ? c.imagePrompt : `${name3}\uFF0C${appearance}`,
+      ...typeof c.voice === "string" && c.voice.trim() ? { voice: c.voice.trim() } : {},
+      ...typeof c.imageNodeId === "string" && c.imageNodeId ? { imageNodeId: c.imageNodeId } : {},
+      ...typeof c.imageUrl === "string" && c.imageUrl ? { imageUrl: c.imageUrl } : {},
+      ...typeof c.locked === "boolean" ? { locked: c.locked } : {}
+    };
+  });
+  const rawEpisodes = Array.isArray(obj.episodes) ? obj.episodes : [];
+  const episodes = rawEpisodes.filter((e) => typeof e === "object" && e !== null && !Array.isArray(e)).map((e, epIdx) => {
+    const num = typeof e.number === "number" && Number.isFinite(e.number) && e.number >= 1 ? Math.floor(e.number) : epIdx + 1;
+    const rawShots = Array.isArray(e.shots) ? e.shots : [];
+    const shots = rawShots.filter((s) => typeof s === "object" && s !== null && !Array.isArray(s)).map((s) => {
+      const transition = s.transition === "fadeblack" || s.transition === "fadewhite" ? s.transition : s.transition === "cut" ? "cut" : void 0;
+      return {
+        id: typeof s.id === "string" && ID.test(s.id) ? s.id : shortId("shot"),
+        segmentIndex: typeof s.segmentIndex === "number" && Number.isFinite(s.segmentIndex) && s.segmentIndex >= 0 ? Math.floor(s.segmentIndex) : 0,
+        scene: typeof s.scene === "string" ? s.scene : "\u4E3B\u573A\u666F",
+        shotSize: typeof s.shotSize === "string" ? s.shotSize : "\u4E2D\u666F",
+        camera: typeof s.camera === "string" ? s.camera : "\u56FA\u5B9A",
+        action: typeof s.action === "string" ? s.action : "",
+        ...typeof s.imagePrompt === "string" && s.imagePrompt ? { imagePrompt: s.imagePrompt } : {},
+        ...typeof s.videoPrompt === "string" && s.videoPrompt ? { videoPrompt: s.videoPrompt } : {},
+        ...typeof s.speaker === "string" && s.speaker ? { speaker: s.speaker } : {},
+        ...typeof s.dialogue === "string" && s.dialogue ? { dialogue: s.dialogue } : {},
+        durationMs: typeof s.durationMs === "number" && Number.isFinite(s.durationMs) && s.durationMs >= 500 ? Math.round(s.durationMs) : 3500,
+        ...Array.isArray(s.castIds) ? { castIds: s.castIds.filter((x) => typeof x === "string") } : {},
+        ...transition ? { transition } : {},
+        ...typeof s.keyframeNodeId === "string" && s.keyframeNodeId ? { keyframeNodeId: s.keyframeNodeId } : {},
+        ...typeof s.keyframeUrl === "string" && s.keyframeUrl ? { keyframeUrl: s.keyframeUrl } : {},
+        ...typeof s.audioNodeId === "string" && s.audioNodeId ? { audioNodeId: s.audioNodeId } : {},
+        ...typeof s.audioUrl === "string" && s.audioUrl ? { audioUrl: s.audioUrl } : {}
+      };
+    });
+    const rawSegs = Array.isArray(e.segments) ? e.segments : [];
+    const segments = rawSegs.filter((g) => typeof g === "object" && g !== null && !Array.isArray(g)).map((g, segIdx) => {
+      const handoff = g.handoff === "continue" || g.handoff === "reverse_angle" ? g.handoff : "scene_cut";
+      return {
+        id: typeof g.id === "string" && ID.test(g.id) ? g.id : shortId("seg"),
+        index: typeof g.index === "number" && Number.isFinite(g.index) && g.index >= 0 ? Math.floor(g.index) : segIdx,
+        title: typeof g.title === "string" && g.title.trim() ? g.title.trim() : `\u7B2C${num}\u96C6\xB7\u7B2C${segIdx + 1}\u6BB5`,
+        handoff,
+        durationMs: typeof g.durationMs === "number" && Number.isFinite(g.durationMs) && g.durationMs >= 500 ? Math.round(g.durationMs) : 5e3,
+        prompt: typeof g.prompt === "string" ? g.prompt : "",
+        ...typeof g.videoNodeId === "string" && g.videoNodeId ? { videoNodeId: g.videoNodeId } : {},
+        ...typeof g.firstFrameUrl === "string" && g.firstFrameUrl ? { firstFrameUrl: g.firstFrameUrl } : {},
+        status: sanitizeStatus(g.status),
+        ...typeof g.error === "string" && g.error ? { error: g.error } : {}
+      };
+    });
+    return {
+      id: typeof e.id === "string" && ID.test(e.id) ? e.id : shortId("ep"),
+      number: num,
+      title: typeof e.title === "string" && e.title.trim() ? e.title.trim() : `\u7B2C${num}\u96C6`,
+      synopsis: typeof e.synopsis === "string" ? e.synopsis : "",
+      ...typeof e.hook === "string" && e.hook ? { hook: e.hook } : {},
+      ...typeof e.cliffhanger === "string" && e.cliffhanger ? { cliffhanger: e.cliffhanger } : {},
+      ...typeof e.sourceText === "string" && e.sourceText ? { sourceText: e.sourceText } : {},
+      shots,
+      segments,
+      ...typeof e.finalVideoUrl === "string" && e.finalVideoUrl ? { finalVideoUrl: e.finalVideoUrl } : {},
+      ...typeof e.subtitleSrt === "string" && e.subtitleSrt ? { subtitleSrt: e.subtitleSrt } : {}
+    };
+  });
+  return {
+    ...typeof obj.genre === "string" && obj.genre.trim() ? { genre: obj.genre.trim() } : {},
+    ...typeof obj.logline === "string" && obj.logline.trim() ? { logline: obj.logline.trim() } : {},
+    style: typeof obj.style === "string" && obj.style.trim() ? obj.style.trim() : "\u7535\u5F71\u7EA7\u771F\u4EBA\u77ED\u5267\uFF0C\u7EC6\u817B\u81EA\u7136\u5149\u5F71\uFF0C8K\u8D28\u611F",
+    aspectRatio,
+    language: typeof obj.language === "string" && obj.language.trim() ? obj.language.trim() : "\u4E2D\u6587\u666E\u901A\u8BDD",
+    segmentTargetSec: typeof obj.segmentTargetSec === "number" && Number.isFinite(obj.segmentTargetSec) ? Math.max(3, Math.min(15, Math.round(obj.segmentTargetSec))) : 8,
+    ...typeof obj.novelText === "string" && obj.novelText ? { novelText: obj.novelText } : {},
+    casts,
+    episodes
+  };
+}
+function sanitizeTimeline(raw) {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return void 0;
+  const obj = raw;
+  const rawClips = Array.isArray(obj.clips) ? obj.clips : [];
+  const clips = rawClips.filter((c) => typeof c === "object" && c !== null && !Array.isArray(c) && typeof c.url === "string" && Boolean(c.url)).map((c, idx) => {
+    const rawAudioClips = Array.isArray(c.audioClips) ? c.audioClips : [];
+    const audioClips = rawAudioClips.filter((a) => typeof a === "object" && a !== null && !Array.isArray(a) && typeof a.url === "string" && Boolean(a.url)).map((a) => ({
+      url: String(a.url),
+      ...typeof a.nodeId === "string" && a.nodeId ? { nodeId: a.nodeId } : {},
+      ...typeof a.startOffsetMs === "number" && Number.isFinite(a.startOffsetMs) && a.startOffsetMs >= 0 ? { startOffsetMs: Math.round(a.startOffsetMs) } : {},
+      ...typeof a.durationMs === "number" && Number.isFinite(a.durationMs) && a.durationMs > 0 ? { durationMs: Math.round(a.durationMs) } : {},
+      ...typeof a.title === "string" && a.title ? { title: a.title } : {}
+    }));
+    return {
+      id: typeof c.id === "string" && ID.test(c.id) ? c.id : shortId("clip"),
+      ...typeof c.nodeId === "string" && c.nodeId ? { nodeId: c.nodeId } : {},
+      title: typeof c.title === "string" && c.title.trim() ? c.title.trim() : `\u7247\u6BB5 ${idx + 1}`,
+      url: String(c.url),
+      durationMs: typeof c.durationMs === "number" && Number.isFinite(c.durationMs) && c.durationMs >= 500 ? Math.round(c.durationMs) : 5e3,
+      ...typeof c.caption === "string" ? { caption: c.caption } : {},
+      ...typeof c.audioNodeId === "string" && c.audioNodeId ? { audioNodeId: c.audioNodeId } : {},
+      ...typeof c.audioUrl === "string" && c.audioUrl ? { audioUrl: c.audioUrl } : {},
+      ...audioClips.length > 0 ? { audioClips } : {}
+    };
+  });
+  return {
+    clips,
+    ...typeof obj.burnSubtitles === "boolean" ? { burnSubtitles: obj.burnSubtitles } : {},
+    ...typeof obj.outputUrl === "string" && obj.outputUrl ? { outputUrl: obj.outputUrl } : {},
+    ...typeof obj.subtitleSrt === "string" ? { subtitleSrt: obj.subtitleSrt } : {},
+    ...typeof obj.subtitleAssetUrl === "string" && obj.subtitleAssetUrl ? { subtitleAssetUrl: obj.subtitleAssetUrl } : {},
+    status: sanitizeStatus(obj.status),
+    ...typeof obj.error === "string" && obj.error ? { error: obj.error } : {},
+    updatedAt: typeof obj.updatedAt === "number" && Number.isFinite(obj.updatedAt) ? obj.updatedAt : Date.now()
+  };
 }
 var ProjectStore = class {
   /** 项目变化事件：`change`(project)、`delete`(id)。 */
@@ -169,6 +300,8 @@ var ProjectStore = class {
       source: e.source,
       target: e.target
     })) : [];
+    const drama = sanitizeDrama(payload.drama);
+    const timeline = sanitizeTimeline(payload.timeline);
     const project = {
       id,
       title: (typeof payload.title === "string" ? payload.title.trim() : "") || "\u5BFC\u5165\u753B\u5E03",
@@ -177,8 +310,8 @@ var ProjectStore = class {
       rev: 1,
       nodes,
       edges,
-      ...payload.drama ? { drama: payload.drama } : {},
-      ...payload.timeline ? { timeline: payload.timeline } : {}
+      ...drama ? { drama } : {},
+      ...timeline ? { timeline } : {}
     };
     await this.write(project);
     this.events.emit("change", project);
@@ -233,7 +366,7 @@ var ProjectStore = class {
       return p;
     });
     if (undone) this.events.emit("change", project);
-    return { project, undone };
+    return { project, undone, changed: undone };
   }
   async redo(id) {
     let redone = false;
@@ -253,7 +386,7 @@ var ProjectStore = class {
       return p;
     });
     if (redone) this.events.emit("change", project);
-    return { project, redone };
+    return { project, redone, changed: redone };
   }
   async mutate(id, fn, recordUndo = true) {
     const project = await this.serial(id, async () => {
@@ -337,29 +470,52 @@ function applyOp(p, op, created) {
   }
 }
 
-// mujing/canvas/src/host/jianying.ts
+// src/host/jianying.ts
 import { randomBytes } from "node:crypto";
 import { copyFile, mkdir as mkdir2, writeFile as writeFile2 } from "node:fs/promises";
-import { join as join2 } from "node:path";
+import { homedir } from "node:os";
+import { isAbsolute, join as join2, resolve } from "node:path";
 var MATERIALS_DIR = "materials";
-var WINDOWS_ROOT = /^[A-Za-z]:[\/]/;
-var UNSAFE_NAME = /[\/:*?"<>|\x00-\x1f]+/g;
+function defaultJianyingDraftRoot(platform = process.platform, env = process.env, home = homedir()) {
+  if (platform === "win32") {
+    const base = env.LOCALAPPDATA?.trim() || `${home}\\AppData\\Local`;
+    return `${base.replace(/[\\/]+$/, "")}\\JianyingPro\\User Data\\Projects\\com.lveditor.draft`;
+  }
+  if (platform === "darwin") {
+    return join2(home, "Movies", "JianyingPro", "User Data", "Projects", "com.lveditor.draft");
+  }
+  return join2(home, "JianyingPro", "Drafts");
+}
+var WINDOWS_ROOT = /^[A-Za-z]:[\\/]/;
+var UNSAFE_NAME = /[\\/:*?"<>|\x00-\x1f]+/g;
 function reservedWindowsName(name3) {
   const base = name3.split(".")[0]?.toUpperCase() ?? "";
   if (base === "CON" || base === "PRN" || base === "AUX" || base === "NUL") return true;
   return base.length === 4 && (base.startsWith("COM") || base.startsWith("LPT")) && base[3] >= "1" && base[3] <= "9";
 }
 function safeName(raw, fallback, limit = 80) {
-  let name3 = raw.replace(UNSAFE_NAME, "-").trim().replace(/^[. ]+|[. ]+$/g, "");
+  let name3 = raw.replace(UNSAFE_NAME, "-").trim().replace(/^[. -]+|[. -]+$/g, "");
   if (!name3) name3 = fallback;
   const chars = [...name3];
-  if (chars.length > limit) name3 = chars.slice(0, limit).join("").trim().replace(/^[. ]+|[. ]+$/g, "");
+  if (chars.length > limit) name3 = chars.slice(0, limit).join("").trim().replace(/^[. -]+|[. -]+$/g, "");
   if (!name3) name3 = fallback;
   if (reservedWindowsName(name3)) name3 = `_${name3}`;
   return name3;
 }
 var BS = String.fromCharCode(92);
 var UNC_PREFIX = BS + BS;
+var FORBIDDEN_POSIX_PREFIXES = ["/etc", "/usr", "/bin", "/sbin", "/System", "/Library", "/private/etc", "/var/root", "/boot", "/proc", "/sys"];
+var FORBIDDEN_WIN_PREFIXES = ["c:/windows", "c:/program files", "c:/program files (x86)", "c:/programdata"];
+function isForbiddenSystemRoot(canonical, windows) {
+  const lower = canonical.toLowerCase();
+  if (windows) {
+    return FORBIDDEN_WIN_PREFIXES.some((p) => lower === p || lower.startsWith(`${p}/`));
+  }
+  return FORBIDDEN_POSIX_PREFIXES.some((p) => {
+    const lp = p.toLowerCase();
+    return lower === lp || lower.startsWith(`${lp}/`);
+  });
+}
 function normalizeDraftRoot(raw) {
   const root = raw.trim();
   if (!root) throw new CanvasOpError("\u8BF7\u586B\u5199\u526A\u6620\u8349\u7A3F\u76EE\u5F55\uFF08\u672C\u673A\u7EDD\u5BF9\u8DEF\u5F84\uFF09");
@@ -379,6 +535,19 @@ function normalizeDraftRoot(raw) {
   const trimmed = canonical.replace(/\/+$/, "");
   if (!trimmed || windows && trimmed.length <= 2) {
     throw new CanvasOpError("\u526A\u6620\u8349\u7A3F\u76EE\u5F55\u4E0D\u80FD\u662F\u78C1\u76D8\u6839\u76EE\u5F55");
+  }
+  if (isForbiddenSystemRoot(trimmed, windows)) {
+    throw new CanvasOpError("\u526A\u6620\u8349\u7A3F\u76EE\u5F55\u4E0D\u80FD\u6307\u5411\u7CFB\u7EDF\u53D7\u4FDD\u62A4\u76EE\u5F55");
+  }
+  const allowedEnv = process.env.MUJING_ALLOWED_EXPORT_ROOTS?.trim();
+  if (allowedEnv) {
+    const allowedList = allowedEnv.split(",").map((s) => s.trim().replaceAll(BS, "/").replace(/\/+$/, "")).filter(Boolean);
+    const lower = trimmed.toLowerCase();
+    const ok = allowedList.some((a) => {
+      const la = a.toLowerCase();
+      return lower === la || lower.startsWith(`${la}/`);
+    });
+    if (!ok) throw new CanvasOpError("\u526A\u6620\u8349\u7A3F\u76EE\u5F55\u4E0D\u5728\u5141\u8BB8\u5BFC\u51FA\u7684\u8DEF\u5F84\u767D\u540D\u5355\u5185\uFF08MUJING_ALLOWED_EXPORT_ROOTS\uFF09");
   }
   return windows || unc ? trimmed.replaceAll("/", BS) : trimmed;
 }
@@ -567,6 +736,63 @@ function buildJianyingDraftJson(input) {
     segments: videoSegments,
     type: "video"
   }];
+  const audios = [];
+  if (input.audios && input.audios.length > 0) {
+    const audioSegments = [];
+    for (const aud of input.audios) {
+      if (aud.durationUs <= 0 || aud.startUs < 0 || aud.startUs >= cursorUs) continue;
+      const durUs = Math.min(Math.max(1e5, Math.round(aud.durationUs)), Math.max(1e5, cursorUs - Math.round(aud.startUs)));
+      const materialId = newUpperUUID();
+      audios.push({
+        app_id: 0,
+        category_id: "",
+        category_name: "local",
+        check_flag: 1,
+        duration: durUs,
+        effect_id: "",
+        formula_id: "",
+        id: materialId,
+        intensifies_path: "",
+        local_material_id: "",
+        music_id: materialId,
+        name: aud.name || aud.fileName,
+        path: materialPath(aud.fileName),
+        query: "",
+        request_id: "",
+        resource_id: "",
+        search_id: "",
+        source_platform: 0,
+        team_id: "",
+        text_id: "",
+        tone_category_id: "",
+        tone_category_name: "",
+        tone_effect_id: "",
+        tone_effect_name: "",
+        tone_speaker: "",
+        tone_type: "",
+        type: "extract_music",
+        video_id: "",
+        wave_points: []
+      });
+      const spd = speedMaterial();
+      speeds.push(spd);
+      const seg = baseSegment(materialId, Math.round(aud.startUs), durUs, 0, [spd.id], clipSettings(0));
+      seg.source_timerange = timerange(0, durUs);
+      seg.clip = null;
+      audioSegments.push(seg);
+    }
+    if (audioSegments.length > 0) {
+      tracks.push({
+        attribute: 0,
+        flag: 0,
+        id: newUpperUUID(),
+        is_default_name: false,
+        name: "\u89D2\u8272\u914D\u97F3",
+        segments: audioSegments,
+        type: "audio"
+      });
+    }
+  }
   const texts = [];
   if (input.captions.length > 0) {
     const textSegments = [];
@@ -595,6 +821,7 @@ function buildJianyingDraftJson(input) {
     }
   }
   materials.videos = videos;
+  materials.audios = audios;
   materials.speeds = speeds;
   materials.texts = texts;
   const platform = { app_id: 3704, app_source: "lv", app_version: "5.9.0", os: sep === BS ? "windows" : "mac" };
@@ -695,16 +922,37 @@ function buildJianyingDraftJson(input) {
     srtText: buildSrt(input.captions)
   };
 }
+function isWritableLocalDraftPath(folderPath, platform = process.platform) {
+  if (platform === "win32") {
+    return WINDOWS_ROOT.test(folderPath) || folderPath.startsWith(UNC_PREFIX) || isAbsolute(folderPath);
+  }
+  return folderPath.startsWith("/");
+}
 async function writeJianyingDraftToDisk(input) {
   const built = buildJianyingDraftJson(input);
-  const isLocalPosix = built.folderPath.startsWith("/");
-  if (!isLocalPosix) {
-    return { folderPath: built.folderPath, writtenToDisk: false, filesCount: 0, srtText: built.srtText };
+  if (!isWritableLocalDraftPath(built.folderPath)) {
+    return {
+      folderPath: built.folderPath,
+      writtenToDisk: false,
+      filesCount: 0,
+      srtText: built.srtText,
+      reason: `\u76EE\u6807\u8DEF\u5F84\u4E0E\u5F53\u524D\u670D\u52A1\u5668\u64CD\u4F5C\u7CFB\u7EDF\uFF08${process.platform}\uFF09\u4E0D\u5339\u914D\uFF0C\u672A\u80FD\u76F4\u63A5\u5199\u5165\u78C1\u76D8`
+    };
+  }
+  const resolvedRoot = resolve(normalizeDraftRoot(input.root));
+  const resolvedFolder = resolve(built.folderPath);
+  const sep = process.platform === "win32" ? BS : "/";
+  if (!resolvedFolder.startsWith(resolvedRoot + sep)) {
+    throw new CanvasOpError("\u8349\u7A3F\u843D\u76D8\u8DEF\u5F84\u8D8A\u754C\uFF0C\u5DF2\u62D2\u7EDD\u5199\u5165");
   }
   const materialsDir = join2(built.folderPath, MATERIALS_DIR);
   await mkdir2(materialsDir, { recursive: true });
   for (const clip of input.clips) {
     await copyFile(clip.sourceFile, join2(materialsDir, clip.fileName));
+  }
+  const audios = input.audios ?? [];
+  for (const aud of audios) {
+    await copyFile(aud.sourceFile, join2(materialsDir, aud.fileName));
   }
   await writeFile2(join2(built.folderPath, "draft_content.json"), built.contentJson, "utf8");
   await writeFile2(join2(built.folderPath, "draft_info.json"), built.contentJson, "utf8");
@@ -715,7 +963,7 @@ async function writeJianyingDraftToDisk(input) {
   return {
     folderPath: built.folderPath,
     writtenToDisk: true,
-    filesCount: input.clips.length + 3 + (built.srtText ? 1 : 0),
+    filesCount: input.clips.length + audios.length + 3 + (built.srtText ? 1 : 0),
     srtText: built.srtText
   };
 }
@@ -740,7 +988,7 @@ function srtTime(us) {
   return `${h}:${m}:${s},${rem}`;
 }
 
-// mujing/canvas/src/host/drama.ts
+// src/host/drama.ts
 var NL = String.fromCharCode(10);
 var ORDINALS = ["\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D", "\u4E03", "\u516B", "\u4E5D", "\u5341", "\u5341\u4E00", "\u5341\u4E8C"];
 var SHOT_LENS = {
@@ -994,7 +1242,7 @@ function formatEpisodeMarkdown(ep) {
   return lines.join(NL);
 }
 
-// mujing/canvas/src/host/media.ts
+// src/host/media.ts
 import { execFile, execFileSync } from "node:child_process";
 import { randomUUID as randomUUID2 } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
@@ -1002,8 +1250,8 @@ import { mkdir as mkdir3, readFile as readFile2, rm as rm2, writeFile as writeFi
 import { extname, join as join3 } from "node:path";
 import { promisify } from "node:util";
 var execFileAsync = promisify(execFile);
-function resolveWorkingBinary(envVar, defaultCmd, fallbacks) {
-  const candidates = [process.env[envVar], defaultCmd, ...fallbacks].filter((x) => Boolean(x));
+function resolveWorkingBinary(envVars, defaultCmd, fallbacks) {
+  const candidates = [...envVars.map((k) => process.env[k]), defaultCmd, ...fallbacks].filter((x) => Boolean(x));
   for (const bin of candidates) {
     try {
       execFileSync(bin, ["-version"], { stdio: "ignore", timeout: 3e3 });
@@ -1013,15 +1261,13 @@ function resolveWorkingBinary(envVar, defaultCmd, fallbacks) {
   }
   return defaultCmd;
 }
-var FFMPEG_BIN = resolveWorkingBinary("MUJING_FFMPEG_BIN", "ffmpeg", [
+var FFMPEG_BIN = resolveWorkingBinary(["MUJING_FFMPEG_BIN", "FFMPEG_PATH"], "ffmpeg", [
   "/opt/homebrew/bin/ffmpeg",
-  "/usr/local/bin/ffmpeg",
-  "/Applications/EVCapture.app/Contents/Frameworks/ffmpeg"
+  "/usr/local/bin/ffmpeg"
 ]);
-var FFPROBE_BIN = resolveWorkingBinary("MUJING_FFPROBE_BIN", "ffprobe", [
+var FFPROBE_BIN = resolveWorkingBinary(["MUJING_FFPROBE_BIN", "FFPROBE_PATH"], "ffprobe", [
   "/opt/homebrew/bin/ffprobe",
-  "/usr/local/bin/ffprobe",
-  "/Applications/EVCapture.app/Contents/Frameworks/ffprobe"
+  "/usr/local/bin/ffprobe"
 ]);
 var COOLDOWN_BASE_MS = 15e3;
 var COOLDOWN_MAX_MS = 6e4;
@@ -1781,10 +2027,33 @@ var MediaService = class {
       throw new MediaUpstreamError(`\u56FE\u7247\u751F\u6210\u8FD4\u56DE\u4E2D\u6CA1\u6709\u56FE\u7247\uFF1A${truncate(JSON.stringify(json))}`);
     });
   }
+  /** 把本地资产、data URL 或外链加载为 Blob（供 OpenAI multipart 接口提交首帧/参考图）。 */
+  async loadRefBlob(url, signal) {
+    const file = this.resolveAssetFile(url);
+    if (file !== null) {
+      const bytes2 = await readFile2(file);
+      const mime2 = mimeOf(file);
+      const ext = extname(file) || extFromMime(mime2, ".png");
+      return { blob: new Blob([bytes2], { type: mime2 }), filename: `ref${ext}` };
+    }
+    if (url.startsWith("data:")) {
+      const m = /^data:([^;,]+)?(;base64)?,(.*)$/s.exec(url);
+      if (!m) throw new MediaUpstreamError("\u53C2\u8003\u56FE data URL \u683C\u5F0F\u65E0\u6548");
+      const mime2 = m[1] || "image/png";
+      const bytes2 = m[2] ? Buffer.from(m[3], "base64") : Buffer.from(decodeURIComponent(m[3]));
+      return { blob: new Blob([bytes2], { type: mime2 }), filename: `ref${extFromMime(mime2, ".png")}` };
+    }
+    const res = await fetch(url, { signal });
+    if (!res.ok) throw new MediaUpstreamError(`\u8BFB\u53D6\u53C2\u8003\u56FE\u5931\u8D25\uFF1AHTTP ${res.status}`);
+    const mime = res.headers.get("content-type") || "image/png";
+    const bytes = await res.arrayBuffer();
+    return { blob: new Blob([bytes], { type: mime }), filename: `ref${extFromMime(mime, ".png")}` };
+  }
   /** 生成一段视频（阻塞到完成或超时）；支持多接口动态轮询与失败自动切换。 */
   async generateVideo(input, signal) {
     const firstFrameRef = input.firstFrame ? await this.toUpstreamRef(input.firstFrame) : void 0;
     const extraRefs = await Promise.all((input.extraRefs ?? []).slice(0, 4).map((r) => this.toUpstreamRef(r)));
+    const openaiPrimaryRef = input.firstFrame ?? input.extraRefs?.[0];
     return this.runWithPool(this.videoPool, "\u89C6\u9891", signal, async (ep, { base, key }) => {
       const duration = input.duration ?? ep.duration;
       const ratio = input.ratio ?? ep.ratio;
@@ -1824,12 +2093,30 @@ var MediaService = class {
         }
       }
       const size = ratio === "9:16" ? "720x1280" : ratio === "1:1" ? "1024x1024" : "1280x720";
-      const created = await readJson(await fetch(`${base}/videos`, {
-        method: "POST",
-        headers: { ...auth, "content-type": "application/json" },
-        body: JSON.stringify({ model: ep.model, prompt: input.prompt, seconds: String(duration), size }),
-        signal
-      }), "\u89C6\u9891\u63D0\u4EA4");
+      let submitRes;
+      if (openaiPrimaryRef) {
+        const { blob, filename } = await this.loadRefBlob(openaiPrimaryRef, signal);
+        const form = new FormData();
+        form.set("model", ep.model);
+        form.set("prompt", input.prompt);
+        form.set("seconds", String(duration));
+        form.set("size", size);
+        form.set("input_reference", blob, filename);
+        submitRes = await fetch(`${base}/videos`, {
+          method: "POST",
+          headers: auth,
+          body: form,
+          signal
+        });
+      } else {
+        submitRes = await fetch(`${base}/videos`, {
+          method: "POST",
+          headers: { ...auth, "content-type": "application/json" },
+          body: JSON.stringify({ model: ep.model, prompt: input.prompt, seconds: String(duration), size }),
+          signal
+        });
+      }
+      const created = await readJson(submitRes, "\u89C6\u9891\u63D0\u4EA4");
       const videoId = String(created.id ?? "");
       if (!videoId) throw new MediaUpstreamError(`\u89C6\u9891\u63D0\u4EA4\u672A\u8FD4\u56DE id\uFF1A${truncate(JSON.stringify(created))}`);
       for (; ; ) {
@@ -1943,7 +2230,8 @@ var MediaService = class {
   }
   /**
    * 使用 FFmpeg 将多段视频按顺序标准化并拼接为一个完整 MP4 成片。
-   * 支持不同分辨率/帧率/有无音轨混拼（统一缩放到首段或指定画幅、30fps、AAC 44.1kHz）。
+   * 支持不同分辨率/帧率/有无音轨混拼（统一缩放到首段或指定画幅、30fps、AAC 44.1kHz）、
+   * 单段内多条配音按偏移混流，以及可选 SRT 字幕硬烧录。
    */
   async concatVideos(clips, options) {
     if (clips.length === 0) throw new MediaUpstreamError("\u6CA1\u6709\u53EF\u5408\u6210\u7684\u89C6\u9891\u7247\u6BB5");
@@ -1957,12 +2245,14 @@ var MediaService = class {
       } catch {
         throw new MediaUpstreamError(`\u89C6\u9891\u7247\u6BB5\u65E0\u6CD5\u89E3\u7801\uFF08\u8BF7\u786E\u4FDD\u662F\u771F\u5B9E\u6709\u6548\u7684 MP4/\u89C6\u9891\u6587\u4EF6\uFF09\uFF1A${clip.url}`);
       }
-      let audioFile;
-      if (clip.audioUrl) {
-        const ensured = await this.ensureLocalFile(clip.audioUrl, ".mp3");
-        audioFile = ensured.file;
+      const rawAudios = clip.audioClips && clip.audioClips.length > 0 ? clip.audioClips : clip.audioUrl ? [{ url: clip.audioUrl, startOffsetMs: 0 }] : [];
+      const audioFiles = [];
+      for (const aud of rawAudios) {
+        if (!aud.url) continue;
+        const ensured = await this.ensureLocalFile(aud.url, ".mp3");
+        audioFiles.push({ file: ensured.file, startOffsetMs: Math.max(0, Math.round(aud.startOffsetMs ?? 0)) });
       }
-      localFiles.push({ file, meta, audioFile });
+      localFiles.push({ file, meta, audioFiles });
     }
     const targetW = options?.width ?? (localFiles[0].meta.width || 1280);
     const targetH = options?.height ?? (localFiles[0].meta.height || 720);
@@ -1971,21 +2261,33 @@ var MediaService = class {
     const normalizedPaths = [];
     const outName = `${Date.now()}-${randomUUID2().slice(0, 8)}-final.mp4`;
     const outPath = join3(this.assetsDir, outName);
+    const mergedPath = join3(this.assetsDir, `${outName}.merged.mp4`);
     const listPath = join3(this.assetsDir, `${outName}.concat.txt`);
+    const burnSrtPath = join3(this.assetsDir, `${outName}.burn.srt`);
     try {
       for (const [idx, item] of localFiles.entries()) {
         const segPath = join3(this.assetsDir, `${outName}.seg-${idx}.mp4`);
         normalizedPaths.push(segPath);
         const vf = `scale=${evenW}:${evenH}:force_original_aspect_ratio=decrease,pad=${evenW}:${evenH}:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30`;
-        if (item.audioFile) {
-          await execFileAsync(FFMPEG_BIN, [
-            "-y",
-            "-i",
-            item.file,
-            "-i",
-            item.audioFile,
+        const durSec = Math.max(0.5, item.meta.durationMs / 1e3);
+        if (item.audioFiles.length > 0) {
+          const args = ["-y", "-i", item.file];
+          const filterParts = [`[0:v]${vf}[v]`];
+          const labels = [];
+          for (const [aIdx, aud] of item.audioFiles.entries()) {
+            args.push("-i", aud.file);
+            const delayPart = aud.startOffsetMs > 0 ? `,adelay=${aud.startOffsetMs}|${aud.startOffsetMs}` : "";
+            filterParts.push(`[${aIdx + 1}:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo${delayPart}[a${aIdx}]`);
+            labels.push(`[a${aIdx}]`);
+          }
+          if (labels.length === 1) {
+            filterParts.push(`${labels[0]}apad=whole_dur=${durSec.toFixed(3)},atrim=0:${durSec.toFixed(3)}[a]`);
+          } else {
+            filterParts.push(`${labels.join("")}amix=inputs=${labels.length}:duration=longest:dropout_transition=0:normalize=0,apad=whole_dur=${durSec.toFixed(3)},atrim=0:${durSec.toFixed(3)}[a]`);
+          }
+          args.push(
             "-filter_complex",
-            `[0:v]${vf}[v];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo[a]`,
+            filterParts.join(";"),
             "-map",
             "[v]",
             "-map",
@@ -2000,9 +2302,11 @@ var MediaService = class {
             "aac",
             "-b:a",
             "128k",
-            "-shortest",
+            "-t",
+            durSec.toFixed(3),
             segPath
-          ]);
+          );
+          await execFileAsync(FFMPEG_BIN, args);
         } else if (item.meta.hasAudio) {
           await execFileAsync(FFMPEG_BIN, [
             "-y",
@@ -2025,7 +2329,6 @@ var MediaService = class {
             segPath
           ]);
         } else {
-          const durSec = Math.max(0.5, item.meta.durationMs / 1e3);
           await execFileAsync(FFMPEG_BIN, [
             "-y",
             "-i",
@@ -2061,11 +2364,45 @@ var MediaService = class {
       const bs = String.fromCharCode(92);
       const listBody = normalizedPaths.map((p) => `file '${p.replaceAll("'", `'${bs}''`)}'`).join(nl) + nl;
       await writeFile3(listPath, listBody, "utf8");
-      await execFileAsync(FFMPEG_BIN, ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", "-movflags", "+faststart", outPath]);
+      const wantBurn = Boolean(options?.burnSubtitles && options.subtitleSrt?.trim());
+      const concatTarget = wantBurn ? mergedPath : outPath;
+      await execFileAsync(FFMPEG_BIN, ["-y", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", "-movflags", "+faststart", concatTarget]);
+      let subtitlesBurned = false;
+      if (wantBurn && options?.subtitleSrt) {
+        await writeFile3(burnSrtPath, options.subtitleSrt, "utf8");
+        const escapedSrt = burnSrtPath.replaceAll(bs, `${bs}${bs}`).replaceAll(":", `${bs}:`).replaceAll("'", `${bs}'`);
+        try {
+          await execFileAsync(FFMPEG_BIN, [
+            "-y",
+            "-i",
+            mergedPath,
+            "-vf",
+            `subtitles='${escapedSrt}':force_style='FontSize=20,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,Outline=1.5'`,
+            "-c:v",
+            "libx264",
+            "-preset",
+            "veryfast",
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "copy",
+            "-movflags",
+            "+faststart",
+            outPath
+          ]);
+          subtitlesBurned = true;
+        } catch {
+          await execFileAsync(FFMPEG_BIN, ["-y", "-i", mergedPath, "-c", "copy", "-movflags", "+faststart", outPath]);
+        }
+      }
       const finalMeta = await this.probeMedia(outPath);
-      return { url: ASSET_PREFIX + outName, durationMs: finalMeta.durationMs, width: evenW, height: evenH };
+      return { url: ASSET_PREFIX + outName, durationMs: finalMeta.durationMs, width: evenW, height: evenH, subtitlesBurned };
     } finally {
       await rm2(listPath, { force: true }).catch(() => {
+      });
+      await rm2(mergedPath, { force: true }).catch(() => {
+      });
+      await rm2(burnSrtPath, { force: true }).catch(() => {
       });
       for (const p of normalizedPaths) await rm2(p, { force: true }).catch(() => {
       });
@@ -2085,14 +2422,14 @@ function truncate(s, n = 400) {
   return s.length > n ? `${s.slice(0, n)}\u2026` : s;
 }
 function sleep(ms, signal) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve2, reject) => {
     if (signal?.aborted) {
       reject(signal.reason);
       return;
     }
     const t = setTimeout(() => {
       signal?.removeEventListener("abort", onAbort);
-      resolve();
+      resolve2();
     }, ms);
     const onAbort = () => {
       clearTimeout(t);
@@ -2102,7 +2439,21 @@ function sleep(ms, signal) {
   });
 }
 
-// mujing/canvas/src/host/service.ts
+// src/host/service.ts
+async function mapWithConcurrency(items, limit, worker) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  const poolSize = Math.max(1, Math.min(limit, items.length));
+  await Promise.all(
+    Array.from({ length: poolSize }, async () => {
+      while (nextIndex < items.length) {
+        const cur = nextIndex++;
+        results[cur] = await worker(items[cur], cur);
+      }
+    })
+  );
+  return results;
+}
 var Config = z.object({
   dataDir: z.string().description("\u753B\u5E03\u4E0E\u8D44\u4EA7\u6570\u636E\u76EE\u5F55\uFF0C\u9ED8\u8BA4 $DSH_HOME/mujing"),
   image: z.object({
@@ -2140,7 +2491,7 @@ var MujingService = class extends Service {
   running = /* @__PURE__ */ new Map();
   constructor(ctx, config) {
     super(ctx, "mujing");
-    this.dataDir = config.dataDir ?? join4(process.env.DSH_HOME ?? join4(homedir(), ".dsh"), "mujing");
+    this.dataDir = config.dataDir ?? join4(process.env.DSH_HOME ?? join4(homedir2(), ".dsh"), "mujing");
     this.store = new ProjectStore(this.dataDir);
     this.media = new MediaService(this.dataDir, config.image, config.video, config.audio);
     ctx.effect(() => () => {
@@ -2339,7 +2690,7 @@ var MujingService = class extends Service {
     }
     return updated;
   }
-  /** 修改、新增或删除单集中的分镜条目，并自动重算该集剧情分段提示词与字幕。 */
+  /** 修改、新增或删除单集中的分镜条目，并自动重算该集剧情分段提示词与字幕（默认保留既有分段归属）。 */
   async updateDramaShot(projectId, episodeIdOrNum, input) {
     const updated = await this.store.updateDomain(projectId, (p) => {
       const d = ensureDrama(p);
@@ -2362,28 +2713,43 @@ var MujingService = class extends Service {
         if (sp.dialogue !== void 0) cur.dialogue = sp.dialogue.trim() || void 0;
         if (typeof sp.durationMs === "number" && sp.durationMs >= 1500) cur.durationMs = Math.round(sp.durationMs);
         if (sp.transition !== void 0) cur.transition = sp.transition;
+        if (typeof sp.segmentIndex === "number" && Number.isInteger(sp.segmentIndex) && sp.segmentIndex >= 0) {
+          cur.segmentIndex = sp.segmentIndex;
+        }
       } else {
         const sp = input.patch ?? {};
         if (!sp.action?.trim()) throw new CanvasOpError("\u65B0\u589E\u5206\u955C\u5FC5\u987B\u586B\u5199\u753B\u9762\u52A8\u4F5C\u63CF\u8FF0");
-        const lastScene = ep.shots.at(-1)?.scene ?? "\u4E3B\u573A\u666F";
+        const lastShot = ep.shots.at(-1);
+        const scene = sp.scene?.trim() || lastShot?.scene || "\u4E3B\u573A\u666F";
+        const durMs = typeof sp.durationMs === "number" && sp.durationMs >= 1500 ? Math.round(sp.durationMs) : 3500;
+        let defaultSegIndex = 0;
+        if (typeof sp.segmentIndex === "number" && Number.isInteger(sp.segmentIndex) && sp.segmentIndex >= 0) {
+          defaultSegIndex = sp.segmentIndex;
+        } else if (ep.segments.length > 0 && lastShot) {
+          const lastSegIdx = Math.max(0, lastShot.segmentIndex);
+          const lastSegShots = ep.shots.filter((s) => s.segmentIndex === lastSegIdx);
+          const lastSegMs = lastSegShots.reduce((acc, s) => acc + Math.max(1500, s.durationMs || 3e3), 0);
+          const maxMs = Math.max(3e3, Math.min(15e3, Math.round((d.segmentTargetSec || 8) * 1e3)));
+          const sameScene = !lastShot.scene || scene === lastShot.scene;
+          defaultSegIndex = sameScene && lastSegMs + durMs <= maxMs && lastSegShots.length < 4 ? lastSegIdx : lastSegIdx + 1;
+        }
         ep.shots.push({
           id: shortId("shot"),
-          segmentIndex: ep.segments.length > 0 ? Math.max(0, ep.segments.length - 1) : 0,
-          scene: sp.scene?.trim() || lastScene,
+          segmentIndex: defaultSegIndex,
+          scene,
           shotSize: sp.shotSize?.trim() || "\u4E2D\u666F",
           camera: sp.camera?.trim() || "\u56FA\u5B9A",
           action: sp.action.trim(),
           ...sp.imagePrompt?.trim() ? { imagePrompt: sp.imagePrompt.trim() } : {},
           ...sp.speaker?.trim() ? { speaker: sp.speaker.trim() } : {},
           ...sp.dialogue?.trim() ? { dialogue: sp.dialogue.trim() } : {},
-          durationMs: typeof sp.durationMs === "number" && sp.durationMs >= 1500 ? Math.round(sp.durationMs) : 3500,
+          durationMs: durMs,
           ...sp.transition ? { transition: sp.transition } : {}
         });
       }
-      ep.shots.forEach((s, i) => {
-        if (i === 0) s.segmentIndex = 0;
-        else s.segmentIndex = 0;
-      });
+      if (input.resegment) {
+        for (const s of ep.shots) s.segmentIndex = 0;
+      }
       ep.segments = buildEpisodeSegments(d, ep, ep.segments);
       ep.subtitleSrt = buildEpisodeCaptions(ep).srt;
     });
@@ -2553,7 +2919,8 @@ var MujingService = class extends Service {
               status: "idle"
             });
           }
-          const upSource = segIdx === 0 ? scriptNodeId : `ep${ep.number}_seg${segIdx}`;
+          const prevSeg = segIdx > 0 ? ep.segments[segIdx - 1] : void 0;
+          const upSource = segIdx === 0 ? scriptNodeId : prevSeg?.videoNodeId ?? `ep${ep.number}_seg${segIdx}`;
           if (!p.edges.some((e) => e.source === upSource && e.target === vNodeId)) {
             p.edges.push({ id: shortId("e"), source: upSource, target: vNodeId });
           }
@@ -2561,7 +2928,7 @@ var MujingService = class extends Service {
       });
     }, false);
   }
-  /** 为单个或全部未锁定的角色/场景生成设定图（三视图卡），完成后自动锁定。 */
+  /** 为单个或全部未锁定的角色/场景生成设定图（三视图卡），完成后自动锁定（限流并发上限 3）。 */
   async generateDramaCastImage(projectId, castId, signal) {
     await this.syncDramaToCanvas(projectId);
     const project = await this.store.get(projectId);
@@ -2570,7 +2937,7 @@ var MujingService = class extends Service {
     const targets = castId ? d.casts.filter((c) => c.id === castId || c.name === castId) : d.casts.filter((c) => !c.locked || !c.imageUrl);
     if (targets.length === 0) return { generated: [] };
     const size = d.aspectRatio === "9:16" ? "1024x1536" : d.aspectRatio === "16:9" ? "1536x1024" : "1024x1024";
-    const jobs = await Promise.all(targets.map(async (cast) => {
+    const jobs = await mapWithConcurrency(targets, 3, async (cast) => {
       const { done } = await this.startGeneration({
         projectId,
         kind: "image",
@@ -2581,7 +2948,7 @@ var MujingService = class extends Service {
       }, signal);
       const finalNode = await done;
       return { castId: cast.id, name: cast.name, url: finalNode.url, error: finalNode.error };
-    }));
+    });
     await this.store.updateDomain(projectId, (p) => {
       const drama = p.drama;
       if (!drama) return;
@@ -2689,7 +3056,23 @@ var MujingService = class extends Service {
       if (!vNode?.url) continue;
       const segShots = ep.shots.filter((s) => s.segmentIndex === seg.index);
       const caption = segShots.filter((s) => s.dialogue?.trim()).map((s) => s.speaker && s.speaker !== "\u65C1\u767D" ? `${s.speaker}\uFF1A${s.dialogue.trim()}` : s.dialogue.trim()).join(" / ");
-      const firstAudioShot = segShots.find((s) => s.audioUrl);
+      const audioClips = [];
+      let offsetMs = 0;
+      for (const shot of segShots) {
+        const shotDurMs = Math.max(1500, shot.durationMs || 3e3);
+        if (shot.audioUrl) {
+          const aNode = shot.audioNodeId ? p.nodes.find((n) => n.id === shot.audioNodeId) : void 0;
+          audioClips.push({
+            url: shot.audioUrl,
+            ...shot.audioNodeId ? { nodeId: shot.audioNodeId } : {},
+            startOffsetMs: offsetMs,
+            durationMs: aNode?.durationMs ?? shotDurMs,
+            ...shot.speaker ? { title: `${shot.speaker}\u914D\u97F3` } : {}
+          });
+        }
+        offsetMs += shotDurMs;
+      }
+      const firstAudio = audioClips[0];
       clips.push({
         id: shortId("clip"),
         nodeId: vNode.id,
@@ -2697,8 +3080,9 @@ var MujingService = class extends Service {
         url: vNode.url,
         durationMs: vNode.durationMs ?? seg.durationMs,
         ...caption ? { caption } : {},
-        ...firstAudioShot?.audioNodeId ? { audioNodeId: firstAudioShot.audioNodeId } : {},
-        ...firstAudioShot?.audioUrl ? { audioUrl: firstAudioShot.audioUrl } : {}
+        ...firstAudio?.nodeId ? { audioNodeId: firstAudio.nodeId } : {},
+        ...firstAudio?.url ? { audioUrl: firstAudio.url } : {},
+        ...audioClips.length > 0 ? { audioClips } : {}
       });
     }
     if (clips.length === 0) throw new CanvasOpError(`\u7B2C${ep.number}\u96C6\u8FD8\u6CA1\u6709\u5DF2\u751F\u6210\u7684\u89C6\u9891\u7247\u6BB5`);
@@ -2734,6 +3118,21 @@ var MujingService = class extends Service {
       if (!url) throw new CanvasOpError(`\u65F6\u95F4\u7EBF\u7B2C ${idx + 1} \u6BB5\u7F3A\u5C11\u89C6\u9891\u5730\u5740`);
       const aNode = item.audioNodeId ? p.nodes.find((n) => n.id === item.audioNodeId) : void 0;
       const audioUrl = item.audioUrl || aNode?.url;
+      const audioClips = [];
+      if (Array.isArray(item.audioClips)) {
+        for (const ac of item.audioClips) {
+          const acNode = ac.nodeId ? p.nodes.find((n) => n.id === ac.nodeId) : void 0;
+          const acUrl = ac.url || acNode?.url;
+          if (!acUrl) continue;
+          audioClips.push({
+            url: acUrl,
+            ...ac.nodeId ? { nodeId: ac.nodeId } : {},
+            ...typeof ac.startOffsetMs === "number" && ac.startOffsetMs >= 0 ? { startOffsetMs: Math.round(ac.startOffsetMs) } : {},
+            ...typeof ac.durationMs === "number" && ac.durationMs > 0 ? { durationMs: Math.round(ac.durationMs) } : {},
+            ...ac.title ? { title: ac.title } : {}
+          });
+        }
+      }
       return {
         id: item.id ?? shortId("clip"),
         ...item.nodeId ? { nodeId: item.nodeId } : {},
@@ -2742,7 +3141,8 @@ var MujingService = class extends Service {
         durationMs: item.durationMs ?? vNode?.durationMs ?? 5e3,
         ...item.caption !== void 0 ? { caption: item.caption } : {},
         ...item.audioNodeId ? { audioNodeId: item.audioNodeId } : {},
-        ...audioUrl ? { audioUrl } : {}
+        ...audioUrl ? { audioUrl } : {},
+        ...audioClips.length > 0 ? { audioClips } : {}
       };
     });
     const captions = [];
@@ -2768,7 +3168,7 @@ var MujingService = class extends Service {
       };
     });
   }
-  /** 使用 FFmpeg 拼接时间线中的所有片段为完整 MP4 成片，同时落盘 SRT 字幕资产。 */
+  /** 使用 FFmpeg 拼接时间线中的所有片段为完整 MP4 成片，同时落盘最新对齐的 SRT 字幕资产（支持硬烧录）。 */
   async renderTimeline(projectId) {
     const project = await this.store.get(projectId);
     const tl = project.timeline;
@@ -2782,7 +3182,6 @@ var MujingService = class extends Service {
     try {
       const aspect = project.drama?.aspectRatio;
       const dims = aspect === "9:16" ? { width: 720, height: 1280 } : aspect === "1:1" ? { width: 1080, height: 1080 } : void 0;
-      const out = await this.media.concatVideos(tl.clips, dims);
       const captions = [];
       let cursorUs = 0;
       for (const clip of tl.clips) {
@@ -2795,7 +3194,12 @@ var MujingService = class extends Service {
         }
         cursorUs += durUs;
       }
-      const srt = tl.subtitleSrt || buildSrt(captions);
+      const srt = captions.length > 0 ? buildSrt(captions) : tl.subtitleSrt ?? "";
+      const out = await this.media.concatVideos(tl.clips, {
+        ...dims,
+        subtitleSrt: srt,
+        burnSubtitles: Boolean(tl.burnSubtitles)
+      });
       const subtitleAssetUrl = srt.trim() ? await this.media.saveAsset(Buffer.from(srt, "utf8"), ".srt") : void 0;
       return await this.store.updateDomain(projectId, (p) => {
         if (!p.timeline) return;
@@ -2818,14 +3222,15 @@ var MujingService = class extends Service {
       throw error;
     }
   }
-  /** 导出当前时间线（或指定剧集）到剪映专业版草稿目录。 */
+  /** 导出当前时间线到剪映专业版草稿目录（包含视频轨、配音音频轨与台词字幕轨）。 */
   async exportJianyingDraft(projectId, input) {
-    const defaultMacRoot = join4(homedir(), "Movies/JianyingPro/User Data/Projects/com.lveditor.draft");
-    const root = input.draftRoot?.trim() || defaultMacRoot;
+    const defaultRoot = defaultJianyingDraftRoot();
+    const root = input.draftRoot?.trim() || defaultRoot;
     const project = await this.store.get(projectId);
     const tl = project.timeline;
     if (!tl || tl.clips.length === 0) throw new CanvasOpError("\u65F6\u95F4\u7EBF\u4E3A\u7A7A\uFF1A\u8BF7\u5148\u6DFB\u52A0\u89C6\u9891\u7247\u6BB5\u518D\u5BFC\u51FA\u526A\u6620\u8349\u7A3F");
     const jClips = [];
+    const jAudios = [];
     const captions = [];
     let cursorUs = 0;
     let canvasW = project.drama?.aspectRatio === "9:16" ? 1080 : 1920;
@@ -2853,6 +3258,24 @@ var MujingService = class extends Service {
         width: meta.width,
         height: meta.height
       });
+      const clipAudios = clip.audioClips && clip.audioClips.length > 0 ? clip.audioClips : clip.audioUrl ? [{ url: clip.audioUrl, nodeId: clip.audioNodeId, startOffsetMs: 0, title: `${clip.title}-\u914D\u97F3` }] : [];
+      for (const [aIdx, aud] of clipAudios.entries()) {
+        if (!aud.url) continue;
+        const { file: audioFile } = await this.media.ensureLocalFile(aud.url, ".mp3");
+        const aMeta = await this.media.probeMedia(audioFile).catch(() => null);
+        const aExt = extname2(audioFile) || ".mp3";
+        const aName = aud.title || `${clip.title}-\u914D\u97F3${clipAudios.length > 1 ? aIdx + 1 : ""}`;
+        const aFileName = `${String(idx + 1).padStart(2, "0")}-a${String(aIdx + 1).padStart(2, "0")}-${safeName(aName, `audio-${idx + 1}-${aIdx + 1}`, 32)}${aExt}`;
+        const aStartUs = cursorUs + Math.max(0, Math.round(aud.startOffsetMs ?? 0)) * 1e3;
+        const aDurUs = Math.max(200, aMeta?.durationMs ?? aud.durationMs ?? meta.durationMs) * 1e3;
+        jAudios.push({
+          fileName: aFileName,
+          sourceFile: audioFile,
+          name: aName,
+          startUs: aStartUs,
+          durationUs: aDurUs
+        });
+      }
       if (clip.caption?.trim()) {
         captions.push({
           text: clip.caption.trim(),
@@ -2869,13 +3292,22 @@ var MujingService = class extends Service {
       height: canvasH,
       fps: 30,
       clips: jClips,
+      audios: jAudios,
       captions
     });
-    return { ...res, draftDir: res.folderPath, clipCount: jClips.length, captionCount: captions.length, defaultMacRoot };
+    return {
+      ...res,
+      draftDir: res.folderPath,
+      clipCount: jClips.length,
+      audioCount: jAudios.length,
+      captionCount: captions.length,
+      defaultRoot,
+      defaultMacRoot: defaultRoot
+    };
   }
 };
 
-// mujing/canvas/src/host/web.ts
+// src/host/web.ts
 var web_exports = {};
 __export(web_exports, {
   apply: () => apply,
@@ -3148,6 +3580,7 @@ function apply(ctx) {
           shotId: typeof body.shotId === "string" ? body.shotId : void 0,
           shotIndex: typeof body.shotIndex === "number" ? body.shotIndex : void 0,
           delete: Boolean(body.delete),
+          resegment: Boolean(body.resegment),
           patch: typeof body.patch === "object" && body.patch !== null ? body.patch : void 0
         });
         send(res, 200, project);
@@ -3317,7 +3750,7 @@ function apply(ctx) {
   }));
 }
 
-// mujing/canvas/src/host/index.ts
+// src/host/index.ts
 var name2 = "mujing";
 function apply2(ctx, config) {
   ctx.plugin(MujingService, config);

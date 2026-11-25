@@ -15,8 +15,8 @@ import { promisify } from 'node:util'
 
 const execFileAsync = promisify(execFile)
 
-function resolveWorkingBinary(envVar: string, defaultCmd: string, fallbacks: string[]): string {
-  const candidates = [process.env[envVar], defaultCmd, ...fallbacks].filter((x): x is string => Boolean(x))
+function resolveWorkingBinary(envVars: string[], defaultCmd: string, fallbacks: string[]): string {
+  const candidates = [...envVars.map(k => process.env[k]), defaultCmd, ...fallbacks].filter((x): x is string => Boolean(x))
   for (const bin of candidates) {
     try {
       execFileSync(bin, ['-version'], { stdio: 'ignore', timeout: 3000 })
@@ -26,16 +26,14 @@ function resolveWorkingBinary(envVar: string, defaultCmd: string, fallbacks: str
   return defaultCmd
 }
 
-const FFMPEG_BIN = resolveWorkingBinary('MUJING_FFMPEG_BIN', 'ffmpeg', [
+const FFMPEG_BIN = resolveWorkingBinary(['MUJING_FFMPEG_BIN', 'FFMPEG_PATH'], 'ffmpeg', [
   '/opt/homebrew/bin/ffmpeg',
   '/usr/local/bin/ffmpeg',
-  '/Applications/EVCapture.app/Contents/Frameworks/ffmpeg',
 ])
 
-const FFPROBE_BIN = resolveWorkingBinary('MUJING_FFPROBE_BIN', 'ffprobe', [
+const FFPROBE_BIN = resolveWorkingBinary(['MUJING_FFPROBE_BIN', 'FFPROBE_PATH'], 'ffprobe', [
   '/opt/homebrew/bin/ffprobe',
   '/usr/local/bin/ffprobe',
-  '/Applications/EVCapture.app/Contents/Frameworks/ffprobe',
 ])
 
 export interface ImageProviderConfig {
@@ -1042,6 +1040,29 @@ export class MediaService {
     })
   }
 
+  /** 把本地资产、data URL 或外链加载为 Blob（供 OpenAI multipart 接口提交首帧/参考图）。 */
+  private async loadRefBlob(url: string, signal?: AbortSignal): Promise<{ blob: Blob; filename: string }> {
+    const file = this.resolveAssetFile(url)
+    if (file !== null) {
+      const bytes = await readFile(file)
+      const mime = mimeOf(file)
+      const ext = extname(file) || extFromMime(mime, '.png')
+      return { blob: new Blob([bytes], { type: mime }), filename: `ref${ext}` }
+    }
+    if (url.startsWith('data:')) {
+      const m = /^data:([^;,]+)?(;base64)?,(.*)$/s.exec(url)
+      if (!m) throw new MediaUpstreamError('参考图 data URL 格式无效')
+      const mime = m[1] || 'image/png'
+      const bytes = m[2] ? Buffer.from(m[3], 'base64') : Buffer.from(decodeURIComponent(m[3]))
+      return { blob: new Blob([bytes], { type: mime }), filename: `ref${extFromMime(mime, '.png')}` }
+    }
+    const res = await fetch(url, { signal })
+    if (!res.ok) throw new MediaUpstreamError(`读取参考图失败：HTTP ${res.status}`)
+    const mime = res.headers.get('content-type') || 'image/png'
+    const bytes = await res.arrayBuffer()
+    return { blob: new Blob([bytes], { type: mime }), filename: `ref${extFromMime(mime, '.png')}` }
+  }
+
   /** 生成一段视频（阻塞到完成或超时）；支持多接口动态轮询与失败自动切换。 */
   async generateVideo(
     input: { prompt: string; duration?: number; ratio?: string; firstFrame?: string; extraRefs?: string[] },
@@ -1049,6 +1070,7 @@ export class MediaService {
   ): Promise<{ url: string; model: string; durationMs?: number }> {
     const firstFrameRef = input.firstFrame ? await this.toUpstreamRef(input.firstFrame) : undefined
     const extraRefs = await Promise.all((input.extraRefs ?? []).slice(0, 4).map(r => this.toUpstreamRef(r)))
+    const openaiPrimaryRef = input.firstFrame ?? input.extraRefs?.[0]
 
     return this.runWithPool(this.videoPool, '视频', signal, async (ep, { base, key }) => {
       const duration = input.duration ?? ep.duration
@@ -1089,10 +1111,30 @@ export class MediaService {
       }
 
       const size = ratio === '9:16' ? '720x1280' : ratio === '1:1' ? '1024x1024' : '1280x720'
-      const created = await readJson(await fetch(`${base}/videos`, {
-        method: 'POST', headers: { ...auth, 'content-type': 'application/json' },
-        body: JSON.stringify({ model: ep.model, prompt: input.prompt, seconds: String(duration), size }), signal,
-      }), '视频提交')
+      let submitRes: Response
+      if (openaiPrimaryRef) {
+        const { blob, filename } = await this.loadRefBlob(openaiPrimaryRef, signal)
+        const form = new FormData()
+        form.set('model', ep.model)
+        form.set('prompt', input.prompt)
+        form.set('seconds', String(duration))
+        form.set('size', size)
+        form.set('input_reference', blob, filename)
+        submitRes = await fetch(`${base}/videos`, {
+          method: 'POST',
+          headers: auth,
+          body: form,
+          signal,
+        })
+      } else {
+        submitRes = await fetch(`${base}/videos`, {
+          method: 'POST',
+          headers: { ...auth, 'content-type': 'application/json' },
+          body: JSON.stringify({ model: ep.model, prompt: input.prompt, seconds: String(duration), size }),
+          signal,
+        })
+      }
+      const created = await readJson(submitRes, '视频提交')
       const videoId = String(created.id ?? '')
       if (!videoId) throw new MediaUpstreamError(`视频提交未返回 id：${truncate(JSON.stringify(created))}`)
       for (;;) {
@@ -1203,16 +1245,26 @@ export class MediaService {
 
   /**
    * 使用 FFmpeg 将多段视频按顺序标准化并拼接为一个完整 MP4 成片。
-   * 支持不同分辨率/帧率/有无音轨混拼（统一缩放到首段或指定画幅、30fps、AAC 44.1kHz）。
+   * 支持不同分辨率/帧率/有无音轨混拼（统一缩放到首段或指定画幅、30fps、AAC 44.1kHz）、
+   * 单段内多条配音按偏移混流，以及可选 SRT 字幕硬烧录。
    */
   async concatVideos(
-    clips: Array<{ url: string; durationMs?: number; audioUrl?: string }>,
-    options?: { width?: number; height?: number },
-  ): Promise<{ url: string; durationMs: number; width: number; height: number }> {
+    clips: Array<{
+      url: string
+      durationMs?: number
+      audioUrl?: string
+      audioClips?: Array<{ url: string; startOffsetMs?: number; durationMs?: number }>
+    }>,
+    options?: { width?: number; height?: number; subtitleSrt?: string; burnSubtitles?: boolean },
+  ): Promise<{ url: string; durationMs: number; width: number; height: number; subtitlesBurned: boolean }> {
     if (clips.length === 0) throw new MediaUpstreamError('没有可合成的视频片段')
     await mkdir(this.assetsDir, { recursive: true })
 
-    const localFiles: Array<{ file: string; meta: ProbedMedia; audioFile?: string }> = []
+    const localFiles: Array<{
+      file: string
+      meta: ProbedMedia
+      audioFiles: Array<{ file: string; startOffsetMs: number }>
+    }> = []
     for (const clip of clips) {
       const { file } = await this.ensureLocalFile(clip.url, '.mp4')
       let meta: ProbedMedia
@@ -1221,12 +1273,18 @@ export class MediaService {
       } catch {
         throw new MediaUpstreamError(`视频片段无法解码（请确保是真实有效的 MP4/视频文件）：${clip.url}`)
       }
-      let audioFile: string | undefined
-      if (clip.audioUrl) {
-        const ensured = await this.ensureLocalFile(clip.audioUrl, '.mp3')
-        audioFile = ensured.file
+      const rawAudios = clip.audioClips && clip.audioClips.length > 0
+        ? clip.audioClips
+        : clip.audioUrl
+          ? [{ url: clip.audioUrl, startOffsetMs: 0 }]
+          : []
+      const audioFiles: Array<{ file: string; startOffsetMs: number }> = []
+      for (const aud of rawAudios) {
+        if (!aud.url) continue
+        const ensured = await this.ensureLocalFile(aud.url, '.mp3')
+        audioFiles.push({ file: ensured.file, startOffsetMs: Math.max(0, Math.round(aud.startOffsetMs ?? 0)) })
       }
-      localFiles.push({ file, meta, audioFile })
+      localFiles.push({ file, meta, audioFiles })
     }
 
     const targetW = options?.width ?? (localFiles[0].meta.width || 1280)
@@ -1237,22 +1295,41 @@ export class MediaService {
     const normalizedPaths: string[] = []
     const outName = `${Date.now()}-${randomUUID().slice(0, 8)}-final.mp4`
     const outPath = join(this.assetsDir, outName)
+    const mergedPath = join(this.assetsDir, `${outName}.merged.mp4`)
     const listPath = join(this.assetsDir, `${outName}.concat.txt`)
+    const burnSrtPath = join(this.assetsDir, `${outName}.burn.srt`)
 
     try {
       for (const [idx, item] of localFiles.entries()) {
         const segPath = join(this.assetsDir, `${outName}.seg-${idx}.mp4`)
         normalizedPaths.push(segPath)
         const vf = `scale=${evenW}:${evenH}:force_original_aspect_ratio=decrease,pad=${evenW}:${evenH}:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30`
-        if (item.audioFile) {
-          await execFileAsync(FFMPEG_BIN, [
-            '-y', '-i', item.file, '-i', item.audioFile,
-            '-filter_complex', `[0:v]${vf}[v];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo[a]`,
+        const durSec = Math.max(0.5, item.meta.durationMs / 1000)
+
+        if (item.audioFiles.length > 0) {
+          const args: string[] = ['-y', '-i', item.file]
+          const filterParts: string[] = [`[0:v]${vf}[v]`]
+          const labels: string[] = []
+          for (const [aIdx, aud] of item.audioFiles.entries()) {
+            args.push('-i', aud.file)
+            const delayPart = aud.startOffsetMs > 0 ? `,adelay=${aud.startOffsetMs}|${aud.startOffsetMs}` : ''
+            filterParts.push(`[${aIdx + 1}:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo${delayPart}[a${aIdx}]`)
+            labels.push(`[a${aIdx}]`)
+          }
+          if (labels.length === 1) {
+            filterParts.push(`${labels[0]}apad=whole_dur=${durSec.toFixed(3)},atrim=0:${durSec.toFixed(3)}[a]`)
+          } else {
+            filterParts.push(`${labels.join('')}amix=inputs=${labels.length}:duration=longest:dropout_transition=0:normalize=0,apad=whole_dur=${durSec.toFixed(3)},atrim=0:${durSec.toFixed(3)}[a]`)
+          }
+          args.push(
+            '-filter_complex', filterParts.join(';'),
             '-map', '[v]', '-map', '[a]',
             '-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
-            '-c:a', 'aac', '-b:a', '128k', '-shortest',
+            '-c:a', 'aac', '-b:a', '128k',
+            '-t', durSec.toFixed(3),
             segPath,
-          ])
+          )
+          await execFileAsync(FFMPEG_BIN, args)
         } else if (item.meta.hasAudio) {
           await execFileAsync(FFMPEG_BIN, [
             '-y', '-i', item.file,
@@ -1263,7 +1340,6 @@ export class MediaService {
             segPath,
           ])
         } else {
-          const durSec = Math.max(0.5, item.meta.durationMs / 1000)
           await execFileAsync(FFMPEG_BIN, [
             '-y', '-i', item.file,
             '-f', 'lavfi', '-t', durSec.toFixed(3), '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
@@ -1280,12 +1356,39 @@ export class MediaService {
       const bs = String.fromCharCode(92)
       const listBody = normalizedPaths.map(p => `file '${p.replaceAll("'", `'${bs}''`)}'`).join(nl) + nl
       await writeFile(listPath, listBody, 'utf8')
-      await execFileAsync(FFMPEG_BIN, ['-y', '-f', 'concat', '-safe', '0', '-i', listPath, '-c', 'copy', '-movflags', '+faststart', outPath])
+
+      const wantBurn = Boolean(options?.burnSubtitles && options.subtitleSrt?.trim())
+      const concatTarget = wantBurn ? mergedPath : outPath
+      await execFileAsync(FFMPEG_BIN, ['-y', '-f', 'concat', '-safe', '0', '-i', listPath, '-c', 'copy', '-movflags', '+faststart', concatTarget])
+
+      let subtitlesBurned = false
+      if (wantBurn && options?.subtitleSrt) {
+        await writeFile(burnSrtPath, options.subtitleSrt, 'utf8')
+        const escapedSrt = burnSrtPath
+          .replaceAll(bs, `${bs}${bs}`)
+          .replaceAll(':', `${bs}:`)
+          .replaceAll("'", `${bs}'`)
+        try {
+          await execFileAsync(FFMPEG_BIN, [
+            '-y', '-i', mergedPath,
+            '-vf', `subtitles='${escapedSrt}':force_style='FontSize=20,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,Outline=1.5'`,
+            '-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
+            '-c:a', 'copy', '-movflags', '+faststart',
+            outPath,
+          ])
+          subtitlesBurned = true
+        } catch {
+          // 若当前系统 FFmpeg 未编入 libass / subtitles 滤镜，则优雅回退到未烧录成片（SRT 仍会独立落盘）
+          await execFileAsync(FFMPEG_BIN, ['-y', '-i', mergedPath, '-c', 'copy', '-movflags', '+faststart', outPath])
+        }
+      }
 
       const finalMeta = await this.probeMedia(outPath)
-      return { url: ASSET_PREFIX + outName, durationMs: finalMeta.durationMs, width: evenW, height: evenH }
+      return { url: ASSET_PREFIX + outName, durationMs: finalMeta.durationMs, width: evenW, height: evenH, subtitlesBurned }
     } finally {
       await rm(listPath, { force: true }).catch(() => {})
+      await rm(mergedPath, { force: true }).catch(() => {})
+      await rm(burnSrtPath, { force: true }).catch(() => {})
       for (const p of normalizedPaths) await rm(p, { force: true }).catch(() => {})
     }
   }

@@ -6,7 +6,8 @@
 
 import { randomBytes } from 'node:crypto'
 import { copyFile, mkdir, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { homedir } from 'node:os'
+import { isAbsolute, join, resolve } from 'node:path'
 import { CanvasOpError } from './store.ts'
 
 export const MATERIALS_DIR = 'materials'
@@ -18,6 +19,14 @@ export interface JianyingClip {
   durationUs: number
   width: number
   height: number
+}
+
+export interface JianyingAudioClip {
+  fileName: string
+  sourceFile: string
+  name: string
+  startUs: number
+  durationUs: number
 }
 
 export interface JianyingCaption {
@@ -33,11 +42,28 @@ export interface JianyingDraftInput {
   height: number
   fps?: number
   clips: JianyingClip[]
+  audios?: JianyingAudioClip[]
   captions: JianyingCaption[]
 }
 
-const WINDOWS_ROOT = /^[A-Za-z]:[\/]/
-const UNSAFE_NAME = /[\/:*?"<>|\x00-\x1f]+/g
+/** 跨平台默认剪映专业版草稿目录（Windows / macOS / Linux）。 */
+export function defaultJianyingDraftRoot(
+  platform: NodeJS.Platform = process.platform,
+  env: NodeJS.ProcessEnv = process.env,
+  home: string = homedir(),
+): string {
+  if (platform === 'win32') {
+    const base = env.LOCALAPPDATA?.trim() || `${home}\\AppData\\Local`
+    return `${base.replace(/[\\/]+$/, '')}\\JianyingPro\\User Data\\Projects\\com.lveditor.draft`
+  }
+  if (platform === 'darwin') {
+    return join(home, 'Movies', 'JianyingPro', 'User Data', 'Projects', 'com.lveditor.draft')
+  }
+  return join(home, 'JianyingPro', 'Drafts')
+}
+
+const WINDOWS_ROOT = /^[A-Za-z]:[\\/]/
+const UNSAFE_NAME = /[\\/:*?"<>|\x00-\x1f]+/g
 
 function reservedWindowsName(name: string): boolean {
   const base = name.split('.')[0]?.toUpperCase() ?? ''
@@ -46,10 +72,10 @@ function reservedWindowsName(name: string): boolean {
 }
 
 export function safeName(raw: string, fallback: string, limit = 80): string {
-  let name = raw.replace(UNSAFE_NAME, '-').trim().replace(/^[. ]+|[. ]+$/g, '')
+  let name = raw.replace(UNSAFE_NAME, '-').trim().replace(/^[. -]+|[. -]+$/g, '')
   if (!name) name = fallback
   const chars = [...name]
-  if (chars.length > limit) name = chars.slice(0, limit).join('').trim().replace(/^[. ]+|[. ]+$/g, '')
+  if (chars.length > limit) name = chars.slice(0, limit).join('').trim().replace(/^[. -]+|[. -]+$/g, '')
   if (!name) name = fallback
   if (reservedWindowsName(name)) name = `_${name}`
   return name
@@ -57,6 +83,20 @@ export function safeName(raw: string, fallback: string, limit = 80): string {
 
 const BS = String.fromCharCode(92)
 const UNC_PREFIX = BS + BS
+
+const FORBIDDEN_POSIX_PREFIXES = ['/etc', '/usr', '/bin', '/sbin', '/System', '/Library', '/private/etc', '/var/root', '/boot', '/proc', '/sys']
+const FORBIDDEN_WIN_PREFIXES = ['c:/windows', 'c:/program files', 'c:/program files (x86)', 'c:/programdata']
+
+function isForbiddenSystemRoot(canonical: string, windows: boolean): boolean {
+  const lower = canonical.toLowerCase()
+  if (windows) {
+    return FORBIDDEN_WIN_PREFIXES.some(p => lower === p || lower.startsWith(`${p}/`))
+  }
+  return FORBIDDEN_POSIX_PREFIXES.some(p => {
+    const lp = p.toLowerCase()
+    return lower === lp || lower.startsWith(`${lp}/`)
+  })
+}
 
 export function normalizeDraftRoot(raw: string): string {
   const root = raw.trim()
@@ -77,6 +117,19 @@ export function normalizeDraftRoot(raw: string): string {
   const trimmed = canonical.replace(/\/+$/, '')
   if (!trimmed || (windows && trimmed.length <= 2)) {
     throw new CanvasOpError('剪映草稿目录不能是磁盘根目录')
+  }
+  if (isForbiddenSystemRoot(trimmed, windows)) {
+    throw new CanvasOpError('剪映草稿目录不能指向系统受保护目录')
+  }
+  const allowedEnv = process.env.MUJING_ALLOWED_EXPORT_ROOTS?.trim()
+  if (allowedEnv) {
+    const allowedList = allowedEnv.split(',').map(s => s.trim().replaceAll(BS, '/').replace(/\/+$/, '')).filter(Boolean)
+    const lower = trimmed.toLowerCase()
+    const ok = allowedList.some(a => {
+      const la = a.toLowerCase()
+      return lower === la || lower.startsWith(`${la}/`)
+    })
+    if (!ok) throw new CanvasOpError('剪映草稿目录不在允许导出的路径白名单内（MUJING_ALLOWED_EXPORT_ROOTS）')
   }
   return windows || unc ? trimmed.replaceAll('/', BS) : trimmed
 }
@@ -195,6 +248,58 @@ export function buildJianyingDraftJson(input: JianyingDraftInput): {
     attribute: 0, flag: 0, id: newUpperUUID(), is_default_name: true, name: '', segments: videoSegments, type: 'video',
   }]
 
+  const audios: unknown[] = []
+  if (input.audios && input.audios.length > 0) {
+    const audioSegments: unknown[] = []
+    for (const aud of input.audios) {
+      if (aud.durationUs <= 0 || aud.startUs < 0 || aud.startUs >= cursorUs) continue
+      const durUs = Math.min(Math.max(100_000, Math.round(aud.durationUs)), Math.max(100_000, cursorUs - Math.round(aud.startUs)))
+      const materialId = newUpperUUID()
+      audios.push({
+        app_id: 0,
+        category_id: '',
+        category_name: 'local',
+        check_flag: 1,
+        duration: durUs,
+        effect_id: '',
+        formula_id: '',
+        id: materialId,
+        intensifies_path: '',
+        local_material_id: '',
+        music_id: materialId,
+        name: aud.name || aud.fileName,
+        path: materialPath(aud.fileName),
+        query: '',
+        request_id: '',
+        resource_id: '',
+        search_id: '',
+        source_platform: 0,
+        team_id: '',
+        text_id: '',
+        tone_category_id: '',
+        tone_category_name: '',
+        tone_effect_id: '',
+        tone_effect_name: '',
+        tone_speaker: '',
+        tone_type: '',
+        type: 'extract_music',
+        video_id: '',
+        wave_points: [],
+      })
+      const spd = speedMaterial()
+      speeds.push(spd)
+      const seg = baseSegment(materialId, Math.round(aud.startUs), durUs, 0, [spd.id], clipSettings(0))
+      seg.source_timerange = timerange(0, durUs)
+      seg.clip = null
+      audioSegments.push(seg)
+    }
+    if (audioSegments.length > 0) {
+      tracks.push({
+        attribute: 0, flag: 0, id: newUpperUUID(), is_default_name: false, name: '角色配音', segments: audioSegments, type: 'audio',
+      })
+    }
+  }
+
   const texts: unknown[] = []
   if (input.captions.length > 0) {
     const textSegments: unknown[] = []
@@ -218,6 +323,7 @@ export function buildJianyingDraftJson(input: JianyingDraftInput): {
   }
 
   materials.videos = videos
+  materials.audios = audios
   materials.speeds = speeds
   materials.texts = texts
 
@@ -263,22 +369,48 @@ export function buildJianyingDraftJson(input: JianyingDraftInput): {
   }
 }
 
-/** 若运行在本机（Unix 路径），直接把剪映草稿文件夹与素材写入目标目录。 */
+/** 判断目标草稿目录是否与当前运行操作系统匹配且可安全落盘。 */
+export function isWritableLocalDraftPath(folderPath: string, platform: NodeJS.Platform = process.platform): boolean {
+  if (platform === 'win32') {
+    return WINDOWS_ROOT.test(folderPath) || folderPath.startsWith(UNC_PREFIX) || isAbsolute(folderPath)
+  }
+  return folderPath.startsWith('/')
+}
+
+/** 若运行在本机且路径格式匹配当前 OS（macOS / Linux / Windows），直接把剪映草稿文件夹与素材写入目标目录。 */
 export async function writeJianyingDraftToDisk(input: JianyingDraftInput): Promise<{
   folderPath: string
   writtenToDisk: boolean
   filesCount: number
   srtText: string
+  reason?: string
 }> {
   const built = buildJianyingDraftJson(input)
-  const isLocalPosix = built.folderPath.startsWith('/')
-  if (!isLocalPosix) {
-    return { folderPath: built.folderPath, writtenToDisk: false, filesCount: 0, srtText: built.srtText }
+  if (!isWritableLocalDraftPath(built.folderPath)) {
+    return {
+      folderPath: built.folderPath,
+      writtenToDisk: false,
+      filesCount: 0,
+      srtText: built.srtText,
+      reason: `目标路径与当前服务器操作系统（${process.platform}）不匹配，未能直接写入磁盘`,
+    }
   }
+  // 防御性校验：解析后的落盘路径必须严格位于 root 之下
+  const resolvedRoot = resolve(normalizeDraftRoot(input.root))
+  const resolvedFolder = resolve(built.folderPath)
+  const sep = process.platform === 'win32' ? BS : '/'
+  if (!resolvedFolder.startsWith(resolvedRoot + sep)) {
+    throw new CanvasOpError('草稿落盘路径越界，已拒绝写入')
+  }
+
   const materialsDir = join(built.folderPath, MATERIALS_DIR)
   await mkdir(materialsDir, { recursive: true })
   for (const clip of input.clips) {
     await copyFile(clip.sourceFile, join(materialsDir, clip.fileName))
+  }
+  const audios = input.audios ?? []
+  for (const aud of audios) {
+    await copyFile(aud.sourceFile, join(materialsDir, aud.fileName))
   }
   await writeFile(join(built.folderPath, 'draft_content.json'), built.contentJson, 'utf8')
   await writeFile(join(built.folderPath, 'draft_info.json'), built.contentJson, 'utf8')
@@ -289,7 +421,7 @@ export async function writeJianyingDraftToDisk(input: JianyingDraftInput): Promi
   return {
     folderPath: built.folderPath,
     writtenToDisk: true,
-    filesCount: input.clips.length + 3 + (built.srtText ? 1 : 0),
+    filesCount: input.clips.length + audios.length + 3 + (built.srtText ? 1 : 0),
     srtText: built.srtText,
   }
 }

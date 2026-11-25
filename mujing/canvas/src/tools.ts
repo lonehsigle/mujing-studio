@@ -118,7 +118,10 @@ export function apply(ctx: Context): void {
     parameters: {},
     output: { schema: { type: 'json' }, render: (_a, v) => json(v) },
     async execute() {
-      return guard(async () => ({ active_project_id: mujing.activeProjectId ?? null, projects: await mujing.store.list() }))
+      return guard(async () => ({
+        active_project_id: mujing.activeProjectId ?? null,
+        projects: (await mujing.store.list()).map(p => ({ ...p })),
+      }))
     },
   }))
 
@@ -212,7 +215,14 @@ export function apply(ctx: Context): void {
         if (!wait) return { project_id: projectId, node_id: nodeId, status: 'loading' }
         const node = await done
         if (node.status === 'error') throw new HarnessError(`生成失败（节点 ${nodeId}）：${node.error ?? '未知错误'}`, 'MUJING_GENERATION_FAILED')
-        return { project_id: projectId, node_id: nodeId, status: node.status, url: node.url, model: node.model, durationMs: node.durationMs }
+        return {
+          project_id: projectId,
+          node_id: nodeId,
+          status: node.status ?? 'success',
+          ...(node.url !== undefined ? { url: node.url } : {}),
+          ...(node.model !== undefined ? { model: node.model } : {}),
+          ...(node.durationMs !== undefined ? { durationMs: node.durationMs } : {}),
+        }
       })
     },
   }))
@@ -307,7 +317,13 @@ export function apply(ctx: Context): void {
             title: ep.title,
             shot_count: ep.shots.length,
             segment_count: ep.segments.length,
-            segments: ep.segments.map(s => ({ index: s.index, title: s.title, handoff: s.handoff, durationMs: s.durationMs, videoNodeId: s.videoNodeId })),
+            segments: ep.segments.map(s => ({
+              index: s.index,
+              title: s.title,
+              handoff: s.handoff,
+              durationMs: s.durationMs,
+              ...(s.videoNodeId !== undefined ? { videoNodeId: s.videoNodeId } : {}),
+            })),
           })),
         }
       })
@@ -427,12 +443,19 @@ export function apply(ctx: Context): void {
           return {
             project_id: id,
             clip_count: p.timeline?.clips.length ?? 0,
-            output_url: p.timeline?.outputUrl,
+            status: p.timeline?.status ?? 'success',
+            output_url: p.timeline?.outputUrl ?? null,
             has_srt: Boolean(p.timeline?.subtitleSrt),
           }
         }
         const p = await mujing.store.get(id)
-        return { project_id: id, clip_count: p.timeline?.clips.length ?? 0, status: p.timeline?.status ?? 'idle' }
+        return {
+          project_id: id,
+          clip_count: p.timeline?.clips.length ?? 0,
+          status: p.timeline?.status ?? 'idle',
+          output_url: p.timeline?.outputUrl ?? null,
+          has_srt: Boolean(p.timeline?.subtitleSrt),
+        }
       })
     },
   }))

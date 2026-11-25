@@ -22,7 +22,13 @@ const MEDIA_CACHE = join(tmpdir(), 'mujing-mock-media')
 mkdirSync(MEDIA_CACHE, { recursive: true })
 
 function resolveFfmpeg() {
-  for (const bin of [process.env.MUJING_FFMPEG_BIN, 'ffmpeg', '/Applications/EVCapture.app/Contents/Frameworks/ffmpeg'].filter(Boolean)) {
+  for (const bin of [
+    process.env.MUJING_FFMPEG_BIN,
+    process.env.FFMPEG_PATH,
+    'ffmpeg',
+    '/opt/homebrew/bin/ffmpeg',
+    '/usr/local/bin/ffmpeg',
+  ].filter(Boolean)) {
     try { execFileSync(bin, ['-version'], { stdio: 'ignore', timeout: 3000 }); return bin } catch {}
   }
   return 'ffmpeg'
@@ -322,6 +328,37 @@ const server = createServer(async (req, res) => {
         ? { id: tm[1], status: 'running' }
         : { id: tm[1], status: 'succeeded', content: { video_url: `http://127.0.0.1:${port}/files/demo-${rec.variant % 4}.mp4` } },
     ))
+    return
+  }
+
+  // OpenAI 兼容视频接口（支持 JSON 与 multipart/form-data input_reference）
+  if (req.method === 'POST' && url.endsWith('/videos')) {
+    const variant = vidSeq++
+    const id = `vid-${Date.now()}-${variant}`
+    const hasInputRef = ct.includes('multipart/form-data') && rawBuf.includes(Buffer.from('name="input_reference"'))
+    tasks.set(id, { polls: 0, variant, hasInputRef })
+    log({ kind: 'openai-video-submit', id, multipart: ct.includes('multipart/form-data'), hasInputRef })
+    res.writeHead(200, { 'content-type': 'application/json' })
+    res.end(JSON.stringify({ id, status: 'queued' }))
+    return
+  }
+
+  const vm = /\/videos\/([^/?]+)$/.exec(url)
+  if (req.method === 'GET' && vm) {
+    const rec = tasks.get(vm[1]) ?? { polls: 0, variant: 0 }
+    rec.polls += 1
+    tasks.set(vm[1], rec)
+    res.writeHead(200, { 'content-type': 'application/json' })
+    res.end(JSON.stringify({ id: vm[1], status: rec.polls < 2 ? 'in_progress' : 'completed' }))
+    return
+  }
+
+  const vcm = /\/videos\/([^/?]+)\/content$/.exec(url)
+  if (req.method === 'GET' && vcm) {
+    const rec = tasks.get(vcm[1]) ?? { variant: 0 }
+    const bytes = ensureDemoMp4(rec.variant)
+    res.writeHead(200, { 'content-type': 'video/mp4', 'content-length': String(bytes.length) })
+    res.end(bytes)
     return
   }
 

@@ -4,6 +4,7 @@ window.__ModuleLoader__.load({
   factory(require) {
     const module = { exports: {} };
     (function (module, exports, require) {
+"use strict";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -22,15 +23,15 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// mujing/canvas/src/client/index.tsx
+// src/client/index.tsx
 var index_exports = {};
 __export(index_exports, {
   default: () => index_default
 });
 module.exports = __toCommonJS(index_exports);
-var import_react2 = require("react");
+var import_react7 = require("react");
 
-// mujing/canvas/src/client/studio-bus.ts
+// src/client/studio-bus.ts
 var API = "/mujing/api";
 var PANEL_ID = "mujing.canvas";
 var STUDIO_TAB_ID = "mujing.studio.tab";
@@ -284,10 +285,10 @@ function summarizeProject(snap) {
   };
 }
 
-// mujing/canvas/src/client/tool-views.tsx
+// src/client/tool-views.tsx
 var import_react = require("react");
 
-// mujing/canvas/src/client/style.css
+// src/client/style.css
 var css = `/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 \u5E55\u5883\u6C38\u4E45\u5168\u5C40\u4E3B\u5E94\u7528\u5916\u58F3\uFF08\u8DE8 \u5E55\u5883\u5DE5\u4F5C\u53F0 / \u6280\u80FD\u4E0E\u63D2\u4EF6 / \u5BFC\u6F14\u4F1A\u8BDD \u7EDF\u4E00\u751F\u6548\uFF0C\u7EDD\u4E0D\u9000\u56DE DSH \u539F\u5E03\u5C40\uFF09 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
 /* \u6CE8\uFF1Abuild.mjs \u4EC5\u5BF9 .className \u52A0 mj- \u524D\u7F00\uFF0C\u5C5E\u6027\u9009\u62E9\u5668\u4FDD\u6301\u5168\u5C40\u751F\u6548\uFF0C\u4E0D\u6539 deepseek-harness \u6838\u5FC3\u4EE3\u7801 */
 
@@ -3795,7 +3796,7 @@ if (typeof document !== "undefined" && !document.getElementById("mujing-style"))
 }
 var style_default = { "page": "mj-page", "pageSplit": "mj-pageSplit", "projects": "mj-projects", "projectsHead": "mj-projectsHead", "brandWrap": "mj-brandWrap", "brand": "mj-brand", "headActions": "mj-headActions", "projectList": "mj-projectList", "projectItem": "mj-projectItem", "projectActive": "mj-projectActive", "projectMain": "mj-projectMain", "projectRowTop": "mj-projectRowTop", "projectThumb": "mj-projectThumb", "projectThumbEmpty": "mj-projectThumbEmpty", "projectTextCol": "mj-projectTextCol", "projectTitle": "mj-projectTitle", "projectMeta": "mj-projectMeta", "ratioTag": "mj-ratioTag", "empty": "mj-empty", "tip": "mj-tip", "tipHead": "mj-tipHead", "linkBtn": "mj-linkBtn", "mediaState": "mj-mediaState", "ok": "mj-ok", "warn": "mj-warn", "stage": "mj-stage", "emptyStageCard": "mj-emptyStageCard", "emptyStageIcon": "mj-emptyStageIcon", "inlineEngineRow": "mj-inlineEngineRow", "toastBar": "mj-toastBar", "errorBar": "mj-errorBar", "topBar": "mj-topBar", "topBarSplit": "mj-topBarSplit", "topBarRow": "mj-topBarRow", "splitProjectBar": "mj-splitProjectBar", "projectSelect": "mj-projectSelect", "splitNavBar": "mj-splitNavBar", "splitTabBtn": "mj-splitTabBtn", "splitTabActive": "mj-splitTabActive", "tabCount": "mj-tabCount", "boardTitle": "mj-boardTitle", "boardTitleBtn": "mj-boardTitleBtn", "renameInput": "mj-renameInput", "modeTabs": "mj-modeTabs", "tabBtn": "mj-tabBtn", "tabActive": "mj-tabActive", "topRight": "mj-topRight", "btnIcon": "mj-btnIcon", "btnAccentGhost": "mj-btnAccentGhost", "boardWrap": "mj-boardWrap", "sep": "mj-sep", "board": "mj-board", "boardDrop": "mj-boardDrop", "boardHint": "mj-boardHint", "boardDock": "mj-boardDock", "dockBtn": "mj-dockBtn", "dockZoom": "mj-dockZoom", "dockIconBtn": "mj-dockIconBtn", "world": "mj-world", "edges": "mj-edges", "edge": "mj-edge", "edgeDraft": "mj-edgeDraft", "node": "mj-node", "nodeSelected": "mj-nodeSelected", "nodeHead": "mj-nodeHead", "nodeType": "mj-nodeType", "nodeTitle": "mj-nodeTitle", "nodeStatus": "mj-nodeStatus", "nodeBody": "mj-nodeBody", "nodeModel": "mj-nodeModel", "textBody": "mj-textBody", "promptPreview": "mj-promptPreview", "media": "mj-media", "audioBody": "mj-audioBody", "audioPlayer": "mj-audioPlayer", "audioCaption": "mj-audioCaption", "loading": "mj-loading", "spinner": "mj-spinner", "errText": "mj-errText", "handle": "mj-handle", "boardEmpty": "mj-boardEmpty", "inspector": "mj-inspector", "inspectorHead": "mj-inspectorHead", "field": "mj-field", "refs": "mj-refs", "refChip": "mj-refChip", "actions": "mj-actions", "btn": "mj-btn", "btnPrimary": "mj-btnPrimary", "btnDanger": "mj-btnDanger", "iconBtn": "mj-iconBtn", "link": "mj-link", "dim": "mj-dim", "panelScroll": "mj-panelScroll", "panelInner": "mj-panelInner", "sectionCard": "mj-sectionCard", "sectionHead": "mj-sectionHead", "sectionTitle": "mj-sectionTitle", "stepNum": "mj-stepNum", "badge": "mj-badge", "badgeOk": "mj-badgeOk", "badgeAccent": "mj-badgeAccent", "bibleBar": "mj-bibleBar", "bibleBarLeft": "mj-bibleBarLeft", "bibleStyleText": "mj-bibleStyleText", "bibleBarRight": "mj-bibleBarRight", "bibleStats": "mj-bibleStats", "gridRow": "mj-gridRow", "inlineEditorBox": "mj-inlineEditorBox", "castGrid": "mj-castGrid", "castCard": "mj-castCard", "castPreview": "mj-castPreview", "castOverlayKind": "mj-castOverlayKind", "castOverlayLock": "mj-castOverlayLock", "castOverlayPending": "mj-castOverlayPending", "castMetaBody": "mj-castMetaBody", "castHeadLine": "mj-castHeadLine", "castName": "mj-castName", "voiceTag": "mj-voiceTag", "castRoleLine": "mj-castRoleLine", "castAppearanceText": "mj-castAppearanceText", "castFootActions": "mj-castFootActions", "epCard": "mj-epCard", "epHeroCard": "mj-epHeroCard", "epHeroVideoPortrait": "mj-epHeroVideoPortrait", "epHeroVideoLandscape": "mj-epHeroVideoLandscape", "epHeroInfo": "mj-epHeroInfo", "epHeroSynopsis": "mj-epHeroSynopsis", "epHeroTags": "mj-epHeroTags", "epTagLine": "mj-epTagLine", "epMetaBanner": "mj-epMetaBanner", "epHookRow": "mj-epHookRow", "subSectionHeader": "mj-subSectionHeader", "shotStripList": "mj-shotStripList", "shotStrip": "mj-shotStrip", "shotStripThumbCol": "mj-shotStripThumbCol", "shotKfBox": "mj-shotKfBox", "shotKfEmpty": "mj-shotKfEmpty", "shotThumbBadge": "mj-shotThumbBadge", "shotStripBody": "mj-shotStripBody", "shotCardTop": "mj-shotCardTop", "shotIdxBadge": "mj-shotIdxBadge", "shotCameraMeta": "mj-shotCameraMeta", "shotSceneChip": "mj-shotSceneChip", "shotMiniBtns": "mj-shotMiniBtns", "miniBtn": "mj-miniBtn", "miniBtnDanger": "mj-miniBtnDanger", "shotActionText": "mj-shotActionText", "shotDialogueBox": "mj-shotDialogueBox", "shotDialogueRow": "mj-shotDialogueRow", "shotDialogueText": "mj-shotDialogueText", "shotAudioPlayer": "mj-shotAudioPlayer", "segList": "mj-segList", "segCard": "mj-segCard", "segVideo": "mj-segVideo", "segPlaceholder": "mj-segPlaceholder", "segHandoffRow": "mj-segHandoffRow", "segHandoffSelect": "mj-segHandoffSelect", "segPromptPreview": "mj-segPromptPreview", "timelineLayout": "mj-timelineLayout", "timelineTracksCol": "mj-timelineTracksCol", "timelineMonitorCol": "mj-timelineMonitorCol", "filmstripBar": "mj-filmstripBar", "filmstripSeg": "mj-filmstripSeg", "filmstripAudioDot": "mj-filmstripAudioDot", "clipRow": "mj-clipRow", "clipThumbWrap": "mj-clipThumbWrap", "clipThumb": "mj-clipThumb", "clipInfo": "mj-clipInfo", "clipTopLine": "mj-clipTopLine", "clipTitle": "mj-clipTitle", "clipFieldRow": "mj-clipFieldRow", "clipInlineInput": "mj-clipInlineInput", "clipAudioSelect": "mj-clipAudioSelect", "monitorVideo": "mj-monitorVideo", "srtDetails": "mj-srtDetails", "srtSummary": "mj-srtSummary", "srtBox": "mj-srtBox", "modalBackdrop": "mj-modalBackdrop", "modalCard": "mj-modalCard", "pillRow": "mj-pillRow", "pillBtn": "mj-pillBtn", "pillActive": "mj-pillActive", "modalFooter": "mj-modalFooter", "headerActionGroup": "mj-headerActionGroup", "headerStudioBtn": "mj-headerStudioBtn", "headerFullBtn": "mj-headerFullBtn", "headerStudioDot": "mj-headerStudioDot", "starterDock": "mj-starterDock", "starterHead": "mj-starterHead", "starterBrand": "mj-starterBrand", "starterHeadRight": "mj-starterHeadRight", "starterStudioBtn": "mj-starterStudioBtn", "starterClose": "mj-starterClose", "starterGrid": "mj-starterGrid", "starterCard": "mj-starterCard", "starterBadge": "mj-starterBadge", "starterTitle": "mj-starterTitle", "starterDesc": "mj-starterDesc", "toolCard": "mj-toolCard", "toolCardHead": "mj-toolCardHead", "toolDotRun": "mj-toolDotRun", "toolDotOk": "mj-toolDotOk", "toolDotErr": "mj-toolDotErr", "toolBadge": "mj-toolBadge", "toolTitle": "mj-toolTitle", "toolStatusText": "mj-toolStatusText", "toolHeadBtns": "mj-toolHeadBtns", "toolActionBtn": "mj-toolActionBtn", "toolGhostBtn": "mj-toolGhostBtn", "toolBodyRow": "mj-toolBodyRow", "toolBodyCol": "mj-toolBodyCol", "toolPills": "mj-toolPills", "toolPill": "mj-toolPill", "toolDimLine": "mj-toolDimLine", "toolEpRow": "mj-toolEpRow", "toolMediaGrid": "mj-toolMediaGrid", "toolMediaTile": "mj-toolMediaTile", "toolThumbImg": "mj-toolThumbImg", "toolThumbVideo": "mj-toolThumbVideo", "toolThumbPlaceholder": "mj-toolThumbPlaceholder", "toolTileCap": "mj-toolTileCap", "toolSingleImg": "mj-toolSingleImg", "toolFinalVideoBox": "mj-toolFinalVideoBox", "toolVideoPlayer": "mj-toolVideoPlayer", "toolAudio": "mj-toolAudio", "toolCode": "mj-toolCode", "toolErrBody": "mj-toolErrBody", "toolRawBox": "mj-toolRawBox", "brandBadge": "mj-brandBadge", "brandTextCol": "mj-brandTextCol", "brandSub": "mj-brandSub", "brandSlotMark": "mj-brandSlotMark", "brandSlotName": "mj-brandSlotName", "railNavGroup": "mj-railNavGroup", "railNavBtn": "mj-railNavBtn", "railNavBtnActive": "mj-railNavBtnActive", "railSectionLabel": "mj-railSectionLabel", "railFooter": "mj-railFooter", "engineBar": "mj-engineBar", "engineDotOk": "mj-engineDotOk", "engineDotWarn": "mj-engineDotWarn", "engineBtnOk": "mj-engineBtnOk", "engineBtnErr": "mj-engineBtnErr", "runtimeBar": "mj-runtimeBar", "runtimeBtn": "mj-runtimeBtn", "studioBody": "mj-studioBody", "studioMain": "mj-studioMain", "btnDirector": "mj-btnDirector", "btnDirectorActive": "mj-btnDirectorActive", "directorBadge": "mj-directorBadge", "directorDrawer": "mj-directorDrawer", "directorDrawerClosed": "mj-directorDrawerClosed", "directorHeader": "mj-directorHeader", "directorTitle": "mj-directorTitle", "directorSub": "mj-directorSub", "directorBody": "mj-directorBody", "directorChatHost": "mj-directorChatHost", "hubWrap": "mj-hubWrap", "hubHero": "mj-hubHero", "hubBadge": "mj-hubBadge", "hubHeading": "mj-hubHeading", "hubSub": "mj-hubSub", "hubComposer": "mj-hubComposer", "hubPromptInput": "mj-hubPromptInput", "hubComposerBar": "mj-hubComposerBar", "hubComposerHint": "mj-hubComposerHint", "hubSection": "mj-hubSection", "hubSectionHead": "mj-hubSectionHead", "hubGrid3": "mj-hubGrid3", "hubTemplateCard": "mj-hubTemplateCard", "hubTemplateCover": "mj-hubTemplateCover", "hubTemplateBadge": "mj-hubTemplateBadge", "hubTemplateRatio": "mj-hubTemplateRatio", "hubTemplateBody": "mj-hubTemplateBody", "hubTemplateTitle": "mj-hubTemplateTitle", "hubTemplateDesc": "mj-hubTemplateDesc", "hubTemplateCta": "mj-hubTemplateCta", "hubProjectGrid": "mj-hubProjectGrid", "hubProjectCard": "mj-hubProjectCard", "hubProjectCover": "mj-hubProjectCover", "hubProjectCoverImg": "mj-hubProjectCoverImg", "hubProjectCoverEmpty": "mj-hubProjectCoverEmpty", "hubProjectRatio": "mj-hubProjectRatio", "hubProjectDel": "mj-hubProjectDel", "hubProjectInfo": "mj-hubProjectInfo", "hubProjectTitle": "mj-hubProjectTitle", "hubProjectMeta": "mj-hubProjectMeta", "hubNewCard": "mj-hubNewCard", "hubNewPlus": "mj-hubNewPlus", "appRail": "mj-appRail", "appRailCollapsed": "mj-appRailCollapsed", "railModalRoot": "mj-railModalRoot", "railErrBar": "mj-railErrBar", "railCollapsedTop": "mj-railCollapsedTop", "railCollapsedFoot": "mj-railCollapsedFoot", "railCollapsedProjects": "mj-railCollapsedProjects", "brandBadgeBtn": "mj-brandBadgeBtn", "railIconBtn": "mj-railIconBtn", "railIconBtnActive": "mj-railIconBtnActive", "railIconProj": "mj-railIconProj", "railIconProjActive": "mj-railIconProjActive", "railIconThumb": "mj-railIconThumb", "railSessionsBox": "mj-railSessionsBox", "railSessionsHead": "mj-railSessionsHead", "railSessionsList": "mj-railSessionsList", "railSessionBtn": "mj-railSessionBtn", "railSessionBtnActive": "mj-railSessionBtnActive", "railSessionTitle": "mj-railSessionTitle", "railSessionEmpty": "mj-railSessionEmpty", "runtimeBtnActive": "mj-runtimeBtnActive", "directorSessionBar": "mj-directorSessionBar", "directorSessionSelect": "mj-directorSessionSelect", "directorChatInner": "mj-directorChatInner", "railIconBtnErr": "mj-railIconBtnErr", "hubEngineRow": "mj-hubEngineRow", "hubEngineLabel": "mj-hubEngineLabel", "hubEngineChipOk": "mj-hubEngineChipOk", "hubEngineChipErr": "mj-hubEngineChipErr", "mediaModalCard": "mj-mediaModalCard", "engineCount": "mj-engineCount", "mediaTabCount": "mj-mediaTabCount", "mediaStatusBar": "mj-mediaStatusBar", "mediaPoolBar": "mj-mediaPoolBar", "mediaPoolHead": "mj-mediaPoolHead", "mediaPoolTitle": "mj-mediaPoolTitle", "mediaStrategyRow": "mj-mediaStrategyRow", "mediaCheckRow": "mj-mediaCheckRow", "mediaEndpointList": "mj-mediaEndpointList", "mediaEndpointCard": "mj-mediaEndpointCard", "mediaEndpointCardDisabled": "mj-mediaEndpointCardDisabled", "mediaEndpointHead": "mj-mediaEndpointHead", "mediaEndpointHeadLeft": "mj-mediaEndpointHeadLeft", "mediaEndpointIdx": "mj-mediaEndpointIdx", "mediaEndpointName": "mj-mediaEndpointName", "mediaEndpointTag": "mj-mediaEndpointTag", "mediaEndpointTagOk": "mj-mediaEndpointTagOk", "mediaEndpointTagWarn": "mj-mediaEndpointTagWarn", "mediaEndpointTagErr": "mj-mediaEndpointTagErr", "mediaEndpointHeadActions": "mj-mediaEndpointHeadActions", "mediaMiniToggle": "mj-mediaMiniToggle", "mediaMiniToggleOff": "mj-mediaMiniToggleOff", "mediaEndpointBody": "mj-mediaEndpointBody", "mediaEndpointSummary": "mj-mediaEndpointSummary", "mediaEndpointUrl": "mj-mediaEndpointUrl", "mediaEndpointErrNote": "mj-mediaEndpointErrNote", "mediaModalSub": "mj-mediaModalSub", "mediaTabRow": "mj-mediaTabRow", "mediaTab": "mj-mediaTab", "mediaTabActive": "mj-mediaTabActive", "mediaTabDotOk": "mj-mediaTabDotOk", "mediaTabDotErr": "mj-mediaTabDotErr", "mediaStatusOk": "mj-mediaStatusOk", "mediaStatusErr": "mj-mediaStatusErr", "mediaPresetRow": "mj-mediaPresetRow", "mediaFieldHint": "mj-mediaFieldHint", "secretInputWrap": "mj-secretInputWrap", "secretToggleBtn": "mj-secretToggleBtn", "mediaFieldRow": "mj-mediaFieldRow", "mediaInlineMsgOk": "mj-mediaInlineMsgOk", "mediaInlineMsgErr": "mj-mediaInlineMsgErr", "mediaLoadingBox": "mj-mediaLoadingBox" };
 
-// mujing/canvas/src/client/tool-views.tsx
+// src/client/tool-views.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
 function MujingStarterDock({ session, input, inputActions }) {
   const [dismissed, setDismissed] = (0, import_react.useState)(false);
@@ -4058,13 +4059,16 @@ function ToolCardSummary({
     if (isRunning && list.length === 0) {
       return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolDimLine, children: "\u6B63\u5728\u5E76\u884C\u6E32\u67D3\u89D2\u8272\u4E09\u89C6\u56FE\u4E0E\u5E38\u9A7B\u573A\u666F\u951A\u70B9\u56FE\uFF0C\u5E76\u5199\u5165\u4E00\u81F4\u6027\u9501\u5B9A\u6C60\u2026" });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolMediaGrid, children: list.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolMediaTile, children: [
-      typeof item.url === "string" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", { src: item.url, alt: String(item.name ?? ""), className: style_default.toolThumbImg }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolThumbPlaceholder, children: String(item.error ?? "\u672A\u51FA\u56FE") }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolTileCap, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: String(item.name ?? "") }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: style_default.badgeOk, children: "\u5DF2\u9501\u5B9A" })
-      ] })
-    ] }, idx)) });
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolMediaGrid, children: list.map((item, idx) => {
+      const ok = typeof item.url === "string" && item.url.length > 0 && !item.error;
+      return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolMediaTile, children: [
+        ok ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", { src: String(item.url), alt: String(item.name ?? ""), className: style_default.toolThumbImg }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolThumbPlaceholder, children: String(item.error ?? "\u672A\u51FA\u56FE") }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolTileCap, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: String(item.name ?? "") }),
+          ok ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: style_default.badgeOk, children: "\u5DF2\u9501\u5B9A" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: style_default.toolStatusText, style: { color: "#e11d48" }, children: "\u751F\u6210\u5931\u8D25" })
+        ] })
+      ] }, idx);
+    }) });
   }
   if (toolName === "drama_generate_shot_media") {
     const kind = (resultObj?.kind ?? argsObj?.kind) === "audio" ? "audio" : "keyframe";
@@ -4106,16 +4110,19 @@ function ToolCardSummary({
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", { src: finalUrl, controls: true, playsInline: true, className: style_default.toolVideoPlayer })
       ] }),
-      segs.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolMediaGrid, children: segs.map((s, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolMediaTile, children: [
-        typeof s.url === "string" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", { src: s.url, controls: true, muted: true, playsInline: true, className: style_default.toolThumbVideo }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolThumbPlaceholder, children: String(s.status ?? "\u5F85\u751F\u6210") }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolTileCap, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-            "\u5206\u6BB5 S",
-            Number(s.index ?? idx) + 1
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: s.status === "success" ? "\u2713 \u5DF2\u63A5\u7EED" : String(s.status ?? "") })
-        ] })
-      ] }, idx)) })
+      segs.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolMediaGrid, children: segs.map((s, idx) => {
+        const previewUrl = typeof s.videoUrl === "string" ? s.videoUrl : typeof s.url === "string" ? s.url : void 0;
+        return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolMediaTile, children: [
+          previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", { src: previewUrl, controls: true, muted: true, playsInline: true, className: style_default.toolThumbVideo }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: style_default.toolThumbPlaceholder, children: String(s.error ?? s.status ?? "\u5F85\u751F\u6210") }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolTileCap, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+              "\u5206\u6BB5 S",
+              Number(s.index ?? idx) + 1
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: s.status === "success" ? "\u2713 \u5DF2\u63A5\u7EED" : String(s.status ?? "") })
+          ] })
+        ] }, idx);
+      }) })
     ] });
   }
   if (toolName === "generate_media") {
@@ -4154,14 +4161,25 @@ function ToolCardSummary({
   }
   if (toolName === "timeline_export_jianying") {
     const draftDir = typeof resultObj?.draftDir === "string" ? resultObj.draftDir : "";
+    const written = resultObj?.writtenToDisk !== false;
+    const audioCount = Number(resultObj?.audioCount ?? 0);
     return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: style_default.toolBodyCol, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: written ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
         "\u5DF2\u751F\u6210\u526A\u6620\u4E13\u4E1A\u7248\u8349\u7A3F\uFF1A\u5199\u5165 ",
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: String(resultObj?.clipCount ?? 0) }),
-        " \u6BB5\u89C6\u9891\u8F68\u3001",
+        " \u6BB5\u89C6\u9891\u8F68",
+        audioCount > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+          "\u3001",
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: audioCount }),
+          " \u6761\u914D\u97F3\u8F68"
+        ] }) : null,
+        "\u3001",
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: String(resultObj?.captionCount ?? 0) }),
         " \u6761\u5B57\u5E55\u8F68\u3002"
-      ] }),
+      ] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { color: "#d97706" }, children: [
+        "\u8349\u7A3F\u7ED3\u6784\u5DF2\u751F\u6210\uFF0C\u4F46\u672A\u5199\u5165\u672C\u673A\u78C1\u76D8\uFF1A",
+        String(resultObj?.reason ?? "\u76EE\u6807\u76EE\u5F55\u8DEF\u5F84\u4E0E\u670D\u52A1\u5668\u64CD\u4F5C\u7CFB\u7EDF\u4E0D\u5339\u914D")
+      ] }) }),
       draftDir && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("code", { className: style_default.toolCode, children: draftDir })
     ] });
   }
@@ -4178,12 +4196,11 @@ function ToolCardSummary({
   return null;
 }
 
-// mujing/canvas/src/client/index.tsx
-var import_jsx_runtime2 = require("react/jsx-runtime");
+// src/client/BoardView.tsx
+var import_react2 = require("react");
+
+// src/client/constants.ts
 var LF = String.fromCharCode(10);
-function useAppShell() {
-  return (0, import_react2.useSyncExternalStore)(subscribeAppShell, getAppShellState, getAppShellState);
-}
 var TYPE_LABEL = { text: "\u6587\u672C", image: "\u56FE\u7247", video: "\u89C6\u9891", audio: "\u914D\u97F3" };
 var STATUS_LABEL = { idle: "\u5F85\u751F\u6210", loading: "\u751F\u6210\u4E2D\u2026", success: "\u5DF2\u5B8C\u6210", error: "\u5931\u8D25" };
 var CAST_KIND_LABEL = { character: "\u89D2\u8272", scene: "\u573A\u666F", prop: "\u9053\u5177" };
@@ -4206,2280 +4223,539 @@ var STYLE_PRESETS = [
   { label: "\u56FD\u98CE3D\u4ED9\u4FA0\u6F2B\u5267", genre: "\u7384\u5E7B\u4FEE\u4ED9\u6F2B\u5267", style: "\u9AD8\u7CBE\u5EA6\u56FD\u98CE3D\u52A8\u753B\u7535\u5F71\u8D28\u611F\uFF0C\u4F53\u79EF\u5149\u4E0E\u6D41\u5149\u7C92\u5B50\uFF0C\u7CBE\u81F4\u5EFA\u6A21\uFF0C\u8272\u5F69\u901A\u900F" },
   { label: "\u90FD\u5E02\u9AD8\u5962\u77ED\u5267", genre: "\u73B0\u4EE3\u90FD\u5E02\u8C6A\u95E8", style: "\u73B0\u4EE3\u90FD\u5E02\u5546\u4E1A\u5927\u7247\u5149\u5F71\uFF0C\u6696\u91D1\u4E0E\u51B7\u7070\u9AD8\u7EA7\u914D\u8272\uFF0C85mm\u4EBA\u50CF\u7535\u5F71\u955C\u5934\uFF0C\u80A4\u8D28\u81EA\u7136\u771F\u5B9E" }
 ];
-function NavIcon({ size = 18 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "3", y: "4", width: "18", height: "16", rx: "2.5" }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { d: "M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4" }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("polygon", { points: "10.5,9.5 14.5,12 10.5,14.5", fill: "currentColor", stroke: "none" })
-  ] });
-}
-function MujingBrandMark({ size = 24 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.brandSlotMark, style: { width: size, height: size }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavIcon, { size: Math.max(14, Math.round(size * 0.64)) }) });
-}
-function MujingBrandName() {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.brandSlotName, children: "\u5E55\u5883 \xB7 Mujing" });
-}
-function FixedChatConversationView(props) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: props.renderSlot("conversation.session", { view: "chat" }) });
-}
-function MujingDirectorChat(props) {
-  const {
-    sessionId,
-    useSession,
-    useConversation,
-    useSessions,
-    inputActions,
-    renderFactorySlot,
-    openWorkspace
-  } = props;
-  const session = useSession((s) => s);
-  const conversation = useConversation((c) => c);
-  const sessionsState = useSessions((state) => state);
-  const summaryBlank = sessionId === void 0 ? void 0 : sessionsState.byId[sessionId]?.blank;
-  const recentSessions = (0, import_react2.useMemo)(() => {
-    const items = [];
-    for (const id of sessionsState.ids) {
-      const row = sessionsState.byId[id];
-      if (!row || row.origin === "subagent") continue;
-      if (row.blank && row.id !== sessionId) continue;
-      items.push(row);
-    }
-    return items.slice(0, 20);
-  }, [sessionsState, sessionId]);
+
+// src/client/BoardView.tsx
+var import_jsx_runtime2 = require("react/jsx-runtime");
+function BoardView({ project, onError, onNotify }) {
+  const [selected, setSelected] = (0, import_react2.useState)(null);
+  const [view, setView] = (0, import_react2.useState)({ x: 32, y: 32, z: 0.78 });
+  const [drag, setDrag] = (0, import_react2.useState)(null);
+  const [local, setLocal] = (0, import_react2.useState)({});
+  const [dropping, setDropping] = (0, import_react2.useState)(false);
+  const stageRef = (0, import_react2.useRef)(null);
+  const uploadInputRef = (0, import_react2.useRef)(null);
+  const autoFittedProjectRef = (0, import_react2.useRef)(null);
   (0, import_react2.useEffect)(() => {
-    if (!inputActions || sessionId === void 0) {
-      registerDirectorSender(null);
-      return () => registerDirectorSender(null);
-    }
-    registerDirectorSender((text) => {
-      try {
-        inputActions.setDraft(text);
-        setTimeout(() => {
-          try {
-            inputActions.submit();
-          } catch {
-          }
-        }, 40);
-        return true;
-      } catch {
-        return false;
-      }
-    });
-    return () => registerDirectorSender(null);
-  }, [inputActions, sessionId]);
-  const active = session !== void 0 && conversation !== void 0 && (conversation.activeTargets.size > 0 || !session.blank && !session.awaitingFirstTurn || session.running);
-  const shellPhase = session === void 0 || conversation === void 0 ? "blank" : active ? "active" : session.promptAttempted ? "engaging" : "blank";
-  const openState = session?.openState;
-  const settling = sessionId !== void 0 && shellPhase === "blank" && openState === "loading" && summaryBlank !== true;
-  const hero = sessionId === void 0 || shellPhase === "blank" && (openState === "open" || summaryBlank === true);
-  const phase = settling ? "settling" : hero ? "hero" : "active";
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.directorChatHost, "data-phase": phase, children: [
-    recentSessions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.directorSessionBar, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      "select",
-      {
-        className: style_default.directorSessionSelect,
-        "aria-label": "\u5207\u6362\u5386\u53F2\u5BFC\u6F14\u4F1A\u8BDD",
-        value: sessionId ?? "",
-        onChange: (e) => {
-          if (e.target.value) getStudioBridge()?.openSessionInStudio(e.target.value);
-        },
-        children: recentSessions.map((item) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: item.id, children: item.blank ? "\u2728 \u5F53\u524D\u65B0\u5BF9\u8BDD" : (item.title || item.displayTitle || item.id).slice(0, 32) }, item.id))
-      }
-    ) }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.directorChatInner, children: renderFactorySlot(
-      "conversation.content",
-      {
-        variant: "embedded",
-        phase,
-        hero,
-        onWorkspaceSelected: openWorkspace
-      },
-      {
-        slots: { views: FixedChatConversationView }
-      }
-    ) })
-  ] });
-}
-function MujingAppRail({ usePanelInfo, useSessions }) {
-  const activePanelId = usePanelInfo((info) => info.activePanelId);
-  const sessionsState = useSessions((state) => state);
-  const shell = useAppShell();
-  const importInputRef = (0, import_react2.useRef)(null);
-  const [railErr, setRailErr] = (0, import_react2.useState)(null);
-  const panelKind = activePanelId === PANEL_ID ? "studio" : activePanelId === "plugins" ? "plugins" : activePanelId === null ? "chat" : "other";
-  (0, import_react2.useEffect)(() => {
-    document.documentElement.dataset.mujingRail = shell.railCollapsed ? "collapsed" : "expanded";
-  }, [shell.railCollapsed]);
-  (0, import_react2.useEffect)(() => {
-    document.documentElement.dataset.mujingPanel = panelKind;
-    const title = panelKind === "plugins" ? "\u6280\u80FD\u4E0E\u63D2\u4EF6 \xB7 \u5E55\u5883\u5DE5\u4F5C\u53F0" : panelKind === "chat" ? "\u5BFC\u6F14\u4F1A\u8BDD \xB7 \u5E55\u5883\u5DE5\u4F5C\u53F0" : "\u5E55\u5883 \xB7 AI \u5F71\u89C6\u5DE5\u4F5C\u53F0";
-    document.title = title;
-    const timer = setTimeout(() => {
-      document.title = title;
-    }, 120);
-    return () => clearTimeout(timer);
-  }, [panelKind]);
-  (0, import_react2.useEffect)(() => {
-    refreshAppProjects().catch((e) => setRailErr(e.message));
-    registerImportTrigger(() => importInputRef.current?.click());
-    return () => registerImportTrigger(null);
-  }, []);
-  const visibleSessions = (0, import_react2.useMemo)(() => {
-    const items = [];
-    for (const id of sessionsState.ids) {
-      const row = sessionsState.byId[id];
-      if (!row || row.origin === "subagent" || row.blank) continue;
-      items.push(row);
-    }
-    return items.slice(0, 12);
-  }, [sessionsState]);
-  const activeSessionId = (0, import_react2.useMemo)(() => {
-    for (const id of sessionsState.ids) {
-      const row = sessionsState.byId[id];
-      if (row && (row.retainedBy?.mainView ?? 0) > 0) return row.id;
-    }
-    return void 0;
-  }, [sessionsState]);
-  const handleCreateProject = async (payload) => {
+    setSelected(null);
+    setLocal({});
+    autoFittedProjectRef.current = null;
+  }, [project.id]);
+  const ops = (0, import_react2.useCallback)(async (list) => {
     try {
-      const created = await call("/projects", { method: "POST", body: payload });
-      patchAppShellState({ createModalOpen: false, showHub: false });
-      await refreshAppProjects();
-      await selectAppProject(created.id, { focusStudio: true });
-      emitStudioIntent({ tab: "drama", projectId: created.id, exitHub: true, openFullscreen: true });
+      return await call(`/projects/${project.id}/ops`, { method: "POST", body: { ops: list } });
     } catch (e) {
-      setRailErr(e.message);
+      onError(e.message);
+      return void 0;
     }
-  };
-  const removeProject = async (id, title) => {
-    if (!window.confirm(`\u5220\u9664\u5267\u76EE\u300C${title}\u300D\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`)) return;
-    try {
-      await call(`/projects/${id}`, { method: "DELETE" });
-      if (shell.activeId === id) patchAppShellState({ activeId: null });
-      await refreshAppProjects();
-    } catch (e) {
-      setRailErr(e.message);
-    }
-  };
-  const onImportJson = async (e) => {
-    const f = e.target.files?.[0];
-    e.target.value = "";
-    if (!f) return;
-    try {
-      const parsed = JSON.parse(await f.text());
-      const imported = await call("/projects/import", { method: "POST", body: { project: parsed } });
-      await refreshAppProjects();
-      await selectAppProject(imported.id, { focusStudio: true });
-      emitStudioIntent({ projectId: imported.id, exitHub: true, openFullscreen: true });
-    } catch (ex) {
-      setRailErr(`\u5BFC\u5165\u5931\u8D25\uFF1A${ex.message}`);
-    }
-  };
-  const isStudio = panelKind === "studio";
-  const isPlugins = panelKind === "plugins";
-  const isChat = panelKind === "chat";
-  const inHub = isStudio && (shell.showHub || shell.projectsLoaded && shell.projects.length === 0);
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { ref: importInputRef, type: "file", accept: ".json,application/json", hidden: true, onChange: (e) => void onImportJson(e) }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("aside", { className: shell.railCollapsed ? style_default.appRailCollapsed : style_default.appRail, "aria-label": "\u5E55\u5883\u4E3B\u5BFC\u822A", children: shell.railCollapsed ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railCollapsedTop, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: style_default.brandBadgeBtn,
-            title: "\u5C55\u5F00\u5E55\u5883\u5DE6\u4FA7\u680F",
-            onClick: () => patchAppShellState({ railCollapsed: false }),
-            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavIcon, { size: 16 })
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: style_default.railIconBtn,
-            title: "\u5C55\u5F00\u5DE6\u4FA7\u680F",
-            onClick: () => patchAppShellState({ railCollapsed: false }),
-            children: "\u25B7"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: inHub ? style_default.railIconBtnActive : style_default.railIconBtn,
-            title: "\u5267\u76EE\u5E7F\u573A \xB7 \u6A21\u677F\u5F00\u62CD",
-            onClick: () => openAppHub(),
-            children: "\u{1F3E0}"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: style_default.railIconBtn,
-            title: "\u65B0\u5EFA\u5267\u76EE\u5DE5\u7A0B",
-            onClick: () => patchAppShellState({ createModalOpen: true }),
-            children: "\uFF0B"
-          }
-        )
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.railCollapsedProjects, children: shell.projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        "button",
-        {
-          type: "button",
-          className: isStudio && !inHub && p.id === shell.activeId ? style_default.railIconProjActive : style_default.railIconProj,
-          title: p.title,
-          onClick: () => void selectAppProject(p.id, { focusStudio: true }),
-          children: p.coverUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: p.coverUrl, alt: "", className: style_default.railIconThumb }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F3AC}" })
-        },
-        p.id
-      )) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railCollapsedFoot, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: isChat ? style_default.railIconBtnActive : style_default.railIconBtn,
-            title: "\u5BFC\u6F14\u4F1A\u8BDD\u8BB0\u5F55",
-            onClick: () => getStudioBridge()?.openClassicChat(),
-            children: "\u{1F4AC}"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: isPlugins ? style_default.railIconBtnActive : style_default.railIconBtn,
-            title: "\u6280\u80FD\u4E0E\u63D2\u4EF6\u4E2D\u5FC3",
-            onClick: () => getStudioBridge()?.openPlugins(),
-            children: "\u{1F9E9}"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: shell.media && (!shell.media.image.ready || !shell.media.video.ready || !shell.media.audio.ready) ? style_default.railIconBtnErr : style_default.railIconBtn,
-            title: shell.media ? `\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E
-\u751F\u56FE\uFF1A${shell.media.image.ready ? shell.media.image.model : "\u672A\u914D\u7F6E"}
-\u89C6\u9891\uFF1A${shell.media.video.ready ? shell.media.video.model : "\u672A\u914D\u7F6E"}
-\u914D\u97F3\uFF1A${shell.media.audio.ready ? shell.media.audio.model : "\u672A\u914D\u7F6E"}` : "\u914D\u7F6E\u751F\u56FE / \u89C6\u9891 / \u914D\u97F3\u6A21\u578B",
-            onClick: () => openMediaConfigModal(
-              shell.media && !shell.media.image.ready ? "image" : shell.media && !shell.media.video.ready ? "video" : shell.media && !shell.media.audio.ready ? "audio" : "image"
-            ),
-            children: "\u{1F39B}"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: style_default.railIconBtn,
-            title: "\u7CFB\u7EDF\u8BBE\u7F6E",
-            onClick: () => getStudioBridge()?.openSettings(),
-            children: "\u2699"
-          }
-        )
-      ] })
-    ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.projectsHead, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.brandWrap, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.brandBadge, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavIcon, { size: 15 }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.brandTextCol, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.brand, children: "\u5E55\u5883\u5DE5\u4F5C\u53F0" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.brandSub, children: "AI \u5F71\u89C6\u4E0E\u6F2B\u5267\u5236\u7247" })
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.headActions, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.btnPrimary,
-              onClick: () => patchAppShellState({ createModalOpen: true }),
-              title: "\u65B0\u5EFA\u5267\u76EE\u6216\u65E0\u9650\u753B\u5E03\u5DE5\u7A0B",
-              children: "\uFF0B \u65B0\u5EFA"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.iconBtn,
-              title: "\u6536\u8D77\u5DE6\u4FA7\u5BFC\u822A\u680F",
-              onClick: () => patchAppShellState({ railCollapsed: true }),
-              children: "\u25C1"
-            }
-          )
-        ] })
-      ] }),
-      railErr && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railErrBar, onClick: () => setRailErr(null), children: [
-        railErr,
-        " \xD7"
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railNavGroup, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: inHub ? style_default.railNavBtnActive : style_default.railNavBtn,
-            onClick: () => openAppHub(),
-            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F3E0} \u5267\u76EE\u5E7F\u573A \xB7 \u6A21\u677F\u5F00\u62CD" })
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            className: style_default.railNavBtn,
-            onClick: () => importInputRef.current?.click(),
-            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F4E5} \u5BFC\u5165 .mujing.json \u5DE5\u7A0B" })
-          }
-        )
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railSectionLabel, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u6211\u7684\u5267\u76EE\u5DE5\u7A0B" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: shell.projects.length })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("ul", { className: style_default.projectList, children: [
-        shell.projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("li", { className: isStudio && !inHub && p.id === shell.activeId ? style_default.projectActive : style_default.projectItem, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.projectMain, onClick: () => void selectAppProject(p.id, { focusStudio: true }), children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.projectRowTop, children: [
-            p.coverUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: p.coverUrl, alt: "", className: style_default.projectThumb }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.projectThumbEmpty, children: "\u{1F3AC}" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.projectTextCol, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.projectTitle, children: p.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.projectMeta, children: [
-                p.aspectRatio && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.ratioTag, children: p.aspectRatio }),
-                Boolean(p.castCount) && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                  p.castCount,
-                  "\u8D44\u4EA7"
-                ] }),
-                Boolean(p.episodeCount) && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                  "\xB7 ",
-                  p.episodeCount,
-                  "\u96C6"
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                  "\xB7 ",
-                  p.nodeCount,
-                  "\u8282\u70B9"
-                ] })
-              ] })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.iconBtn, title: "\u5220\u9664\u5267\u76EE", "aria-label": "\u5220\u9664\u5267\u76EE", onClick: () => void removeProject(p.id, p.title), children: "\xD7" })
-        ] }, p.id)),
-        shell.projectsLoaded && shell.projects.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("li", { className: style_default.empty, children: "\u6682\u65E0\u5DE5\u7A0B\uFF0C\u53EF\u5728\u53F3\u4FA7\u300C\u5267\u76EE\u5E7F\u573A\u300D\u8F93\u5165\u521B\u610F\u6216\u4E00\u952E\u9009\u7528\u6A21\u677F\u5F00\u62CD\u3002" })
-      ] }),
-      isChat && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railSessionsBox, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railSessionsHead, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u5BFC\u6F14\u5386\u53F2\u4F1A\u8BDD" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.linkBtn,
-              onClick: () => getStudioBridge()?.newChatSession(),
-              children: "\uFF0B \u65B0\u4F1A\u8BDD"
-            }
-          )
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railSessionsList, children: [
-          visibleSessions.map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: s.id === activeSessionId ? style_default.railSessionBtnActive : style_default.railSessionBtn,
-              title: s.title || s.displayTitle || s.id,
-              onClick: () => getStudioBridge()?.openSessionInChat(s.id),
-              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.railSessionTitle, children: s.title || s.displayTitle || s.id })
-            },
-            s.id
-          )),
-          visibleSessions.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.railSessionEmpty, children: "\u6682\u65E0\u5386\u53F2\u5BF9\u8BDD" })
-        ] })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.railFooter, children: [
-        shell.media && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.engineBar, role: "group", "aria-label": "\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E\u5165\u53E3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-            "button",
-            {
-              type: "button",
-              "data-media-kind": "image",
-              "data-media-ready": shell.media.image.ready ? "1" : "0",
-              className: shell.media.image.ready ? style_default.engineBtnOk : style_default.engineBtnErr,
-              title: shell.media.image.ready ? `\u751F\u56FE\u6A21\u578B\u5DF2\u5C31\u7EEA\uFF1A${shell.media.image.model}\uFF08${shell.media.image.readyCount}/${shell.media.image.totalCount} \u4E2A\u63A5\u53E3 \xB7 ${STRATEGY_LABEL[shell.media.image.strategy]}\uFF09
-\u70B9\u51FB\u914D\u7F6E\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565` : "\u751F\u56FE\u6A21\u578B\u672A\u914D\u7F6E\n\u70B9\u51FB\u914D\u7F6E\u63A5\u53E3\u5730\u5740\u4E0E API Key",
-              onClick: () => openMediaConfigModal("image"),
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u25CF \u751F\u56FE" }),
-                shell.media.image.readyCount > 1 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.engineCount, children: shell.media.image.readyCount })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-            "button",
-            {
-              type: "button",
-              "data-media-kind": "video",
-              "data-media-ready": shell.media.video.ready ? "1" : "0",
-              className: shell.media.video.ready ? style_default.engineBtnOk : style_default.engineBtnErr,
-              title: shell.media.video.ready ? `\u89C6\u9891\u6A21\u578B\u5DF2\u5C31\u7EEA\uFF1A${shell.media.video.model}\uFF08${shell.media.video.readyCount}/${shell.media.video.totalCount} \u4E2A\u63A5\u53E3 \xB7 ${STRATEGY_LABEL[shell.media.video.strategy]}\uFF09
-\u70B9\u51FB\u914D\u7F6E\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565` : "\u89C6\u9891\u6A21\u578B\u672A\u914D\u7F6E\n\u70B9\u51FB\u914D\u7F6E\u63A5\u53E3\u5730\u5740\u4E0E API Key",
-              onClick: () => openMediaConfigModal("video"),
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u25CF \u89C6\u9891" }),
-                shell.media.video.readyCount > 1 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.engineCount, children: shell.media.video.readyCount })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-            "button",
-            {
-              type: "button",
-              "data-media-kind": "audio",
-              "data-media-ready": shell.media.audio.ready ? "1" : "0",
-              className: shell.media.audio.ready ? style_default.engineBtnOk : style_default.engineBtnErr,
-              title: shell.media.audio.ready ? `\u914D\u97F3\u6A21\u578B\u5DF2\u5C31\u7EEA\uFF1A${shell.media.audio.model}\uFF08${shell.media.audio.readyCount}/${shell.media.audio.totalCount} \u4E2A\u63A5\u53E3 \xB7 ${STRATEGY_LABEL[shell.media.audio.strategy]}\uFF09
-\u70B9\u51FB\u914D\u7F6E\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565` : "\u914D\u97F3\u6A21\u578B\u672A\u914D\u7F6E\n\u70B9\u51FB\u914D\u7F6E\u63A5\u53E3\u5730\u5740\u4E0E API Key",
-              onClick: () => openMediaConfigModal("audio"),
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u25CF \u914D\u97F3" }),
-                shell.media.audio.readyCount > 1 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.engineCount, children: shell.media.audio.readyCount })
-              ]
-            }
-          )
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.runtimeBar, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: isChat ? style_default.runtimeBtnActive : style_default.runtimeBtn,
-              title: "\u67E5\u770B\u5B8C\u6574 AI \u5BFC\u6F14\u4F1A\u8BDD\u4E0E\u5386\u53F2\u8BB0\u5F55",
-              onClick: () => getStudioBridge()?.openClassicChat(),
-              children: "\u{1F4AC} \u4F1A\u8BDD"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: isPlugins ? style_default.runtimeBtnActive : style_default.runtimeBtn,
-              title: "\u7BA1\u7406\u5F71\u89C6\u6280\u80FD\u4E0E\u5E95\u5C42\u63D2\u4EF6",
-              onClick: () => getStudioBridge()?.openPlugins(),
-              children: "\u{1F9E9} \u63D2\u4EF6"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.runtimeBtn,
-              title: "\u914D\u7F6E\u6A21\u578B\u3001API Key \u4E0E\u504F\u597D\u8BBE\u7F6E",
-              onClick: () => getStudioBridge()?.openSettings(),
-              children: "\u2699 \u8BBE\u7F6E"
-            }
-          )
-        ] })
-      ] })
-    ] }) }),
-    shell.createModalOpen && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.railModalRoot, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      CreateProjectModal,
-      {
-        onClose: () => patchAppShellState({ createModalOpen: false }),
-        onImport: () => {
-          patchAppShellState({ createModalOpen: false });
-          importInputRef.current?.click();
-        },
-        onSubmit: (payload) => void handleCreateProject(payload)
-      }
-    ) }),
-    shell.mediaConfigTab !== null && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.railModalRoot, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      MediaConfigModal,
-      {
-        initialTab: shell.mediaConfigTab,
-        onClose: () => patchAppShellState({ mediaConfigTab: null })
-      }
-    ) })
-  ] });
-}
-function FullscreenStudioPage({ renderSlot }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-    StudioShell,
-    {
-      mode: "fullscreen",
-      renderDirectorChat: () => renderSlot("mujing.director.chat", {})
-    }
-  );
-}
-function RightSidebarStudioPane() {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StudioShell, { mode: "split" });
-}
-function StudioShell({ mode, renderDirectorChat }) {
-  const initialDesired = getDesiredStudioState();
-  const isSplit = mode === "split";
-  const shell = useAppShell();
-  const { projects, projectsLoaded, activeId, showHub, media } = shell;
-  const [project, setProject] = (0, import_react2.useState)(null);
-  const [tab, setTabState] = (0, import_react2.useState)(initialDesired.tab);
-  const [directorOpen, setDirectorOpen] = (0, import_react2.useState)(false);
-  const [directorEverOpened, setDirectorEverOpened] = (0, import_react2.useState)(false);
-  const [renamingTitle, setRenamingTitle] = (0, import_react2.useState)(null);
-  const [err, setErr] = (0, import_react2.useState)(null);
-  const [toast, setToast] = (0, import_react2.useState)(null);
-  const openDirectorDrawer = (0, import_react2.useCallback)(() => {
-    setDirectorEverOpened(true);
-    setDirectorOpen(true);
-  }, []);
-  const toggleDirectorDrawer = (0, import_react2.useCallback)(() => {
-    setDirectorEverOpened(true);
-    setDirectorOpen((v) => !v);
-  }, []);
-  const setTab = (0, import_react2.useCallback)((next) => {
-    setTabState(next);
-    patchAppShellState({ showHub: false });
-    emitStudioIntent({ tab: next });
-  }, []);
-  const notify = (0, import_react2.useCallback)((msg) => {
-    setToast(msg);
-    setTimeout(() => setToast((prev) => prev === msg ? null : prev), 3800);
-  }, []);
-  (0, import_react2.useEffect)(() => {
-    if (!projectsLoaded) {
-      refreshAppProjects().catch((e) => setErr(e.message));
-    }
-  }, [projectsLoaded]);
-  const selectProject = (0, import_react2.useCallback)(async (id) => {
-    setRenamingTitle(null);
-    await selectAppProject(id, { focusStudio: !isSplit });
-  }, [isSplit]);
-  (0, import_react2.useEffect)(() => {
-    return subscribeStudioIntent((intent) => {
-      if (intent.tab) setTabState(intent.tab);
-      if (intent.openDirector && !isSplit) {
-        setDirectorEverOpened(true);
-        setDirectorOpen(true);
-      }
-      if (intent.exitHub) patchAppShellState({ showHub: false });
-      if (intent.reloadProjects) {
-        void refreshAppProjects().then(() => {
-          if (intent.projectId) void selectProject(intent.projectId);
-        }).catch(() => {
-        });
-      } else if (intent.projectId) {
-        void selectProject(intent.projectId);
-      }
-    });
-  }, [isSplit, selectProject]);
-  (0, import_react2.useEffect)(() => {
-    if (activeId !== null && !(directorOpen && showHub)) return;
-    const timer = setInterval(() => {
-      void refreshAppProjects({ autoSelectNew: directorOpen }).catch(() => {
-      });
-    }, 2500);
-    return () => clearInterval(timer);
-  }, [activeId, directorOpen, showHub]);
-  (0, import_react2.useEffect)(() => {
-    if (!activeId) {
-      setProject(null);
+  }, [project.id, onError]);
+  const toWorld = (0, import_react2.useCallback)((cx, cy) => {
+    const r = stageRef.current?.getBoundingClientRect();
+    return { x: (cx - (r?.left ?? 0) - view.x) / view.z, y: (cy - (r?.top ?? 0) - view.y) / view.z };
+  }, [view]);
+  const fitAllNodes = (0, import_react2.useCallback)(() => {
+    const el = stageRef.current;
+    if (!el || project.nodes.length === 0) {
+      setView({ x: 32, y: 32, z: 0.85 });
       return;
     }
-    let closed = false;
-    const es = new EventSource(`${API}/projects/${activeId}/events`, { withCredentials: true });
-    es.addEventListener("snapshot", (e) => {
-      if (closed) return;
-      const snap = JSON.parse(e.data);
-      setProject(snap);
-      upsertAppProjectSummary(summarizeProject(snap));
+    const minX = Math.min(...project.nodes.map((n) => n.x));
+    const minY = Math.min(...project.nodes.map((n) => n.y));
+    const maxX = Math.max(...project.nodes.map((n) => n.x + n.width));
+    const maxY = Math.max(...project.nodes.map((n) => n.y + n.height));
+    const padX = 96;
+    const padY = 128;
+    const contentW = Math.max(320, maxX - minX + padX);
+    const contentH = Math.max(240, maxY - minY + padY);
+    const z = Math.min(1, Math.max(0.24, Math.min(el.clientWidth / contentW, (el.clientHeight - 48) / contentH)));
+    setView({
+      z,
+      x: Math.round((el.clientWidth - (maxX - minX) * z) / 2 - minX * z),
+      y: Math.round(Math.max(28, (el.clientHeight - 48 - (maxY - minY) * z) / 2) - minY * z)
     });
-    es.addEventListener("deleted", () => {
-      if (!closed) {
-        setProject(null);
-        void refreshAppProjects();
-      }
-    });
-    return () => {
-      closed = true;
-      es.close();
-    };
-  }, [activeId]);
-  const undo = (0, import_react2.useCallback)(async () => {
-    if (!project) return;
-    try {
-      const r = await call(`/projects/${project.id}/undo`, { method: "POST" });
-      if (r.changed) setProject({ ...r.project, history: r.history });
-    } catch (e) {
-      setErr(e.message);
-    }
-  }, [project]);
-  const redo = (0, import_react2.useCallback)(async () => {
-    if (!project) return;
-    try {
-      const r = await call(`/projects/${project.id}/redo`, { method: "POST" });
-      if (r.changed) setProject({ ...r.project, history: r.history });
-    } catch (e) {
-      setErr(e.message);
-    }
-  }, [project]);
+  }, [project.nodes]);
   (0, import_react2.useEffect)(() => {
-    const onKeyDown = (e) => {
-      if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== "z") return;
-      const target = e.target;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT" || target.isContentEditable)) {
-        return;
-      }
+    if (project.nodes.length === 0 || autoFittedProjectRef.current === project.id) return;
+    autoFittedProjectRef.current = project.id;
+    const raf = requestAnimationFrame(() => fitAllNodes());
+    return () => cancelAnimationFrame(raf);
+  }, [project.id, project.nodes.length, fitAllNodes]);
+  (0, import_react2.useEffect)(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const onWheel = (e) => {
+      if (e.target?.closest("[data-scrollable]")) return;
       e.preventDefault();
-      if (e.shiftKey) void redo();
-      else void undo();
+      if (e.ctrlKey || e.metaKey) {
+        const r = el.getBoundingClientRect();
+        const mx = e.clientX - r.left, my = e.clientY - r.top;
+        setView((v) => {
+          const z = Math.min(2.5, Math.max(0.22, v.z * Math.exp(-e.deltaY * 2e-3)));
+          return { z, x: mx - (mx - v.x) / v.z * z, y: my - (my - v.y) / v.z * z };
+        });
+      } else {
+        setView((v) => ({ ...v, x: v.x - e.deltaX, y: v.y - e.deltaY }));
+      }
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [undo, redo]);
-  const saveRenamedTitle = async () => {
-    if (!project || renamingTitle === null) return;
-    const next = renamingTitle.trim();
-    setRenamingTitle(null);
-    if (!next || next === project.title) return;
-    try {
-      await call(`/projects/${project.id}`, { method: "PATCH", body: { title: next } });
-      await refreshAppProjects();
-      notify("\u5DF2\u66F4\u65B0\u5267\u76EE\u540D\u79F0");
-    } catch (e) {
-      setErr(e.message);
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+  const onStageDown = (e) => {
+    if (e.target !== e.currentTarget) return;
+    setSelected(null);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setDrag({ kind: "pan", sx: e.clientX, sy: e.clientY, px: view.x, py: view.y });
+  };
+  const onMove = (e) => {
+    if (!drag) return;
+    if (drag.kind === "pan") {
+      setView((v) => ({ ...v, x: drag.px + (e.clientX - drag.sx), y: drag.py + (e.clientY - drag.sy) }));
+    } else if (drag.kind === "node") {
+      const dx = (e.clientX - drag.sx) / view.z, dy = (e.clientY - drag.sy) / view.z;
+      if (!drag.moved && Math.hypot(dx, dy) < 2) return;
+      drag.moved = true;
+      setLocal((l) => ({ ...l, [drag.id]: { x: drag.nx + dx, y: drag.ny + dy } }));
+    } else {
+      setDrag({ ...drag, ...toWorld(e.clientX, e.clientY) });
     }
   };
-  const removeProject = async (id, title) => {
-    if (!window.confirm(`\u5220\u9664\u5267\u76EE\u300C${title}\u300D\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`)) return;
-    try {
-      await call(`/projects/${id}`, { method: "DELETE" });
-      if (activeId === id) patchAppShellState({ activeId: null });
-      await refreshAppProjects();
-    } catch (e) {
-      setErr(e.message);
+  const onUp = async (e) => {
+    const d = drag;
+    setDrag(null);
+    if (d?.kind === "node" && d.moved) {
+      const pos2 = local[d.id];
+      if (pos2 !== void 0) await ops([{ op: "update_node", id: d.id, x: Math.round(pos2.x), y: Math.round(pos2.y) }]);
+      setLocal((l) => {
+        const { [d.id]: _, ...rest } = l;
+        return rest;
+      });
+    } else if (d?.kind === "link") {
+      const p = toWorld(e.clientX, e.clientY);
+      const target = project.nodes.find((n) => n.id !== d.source && p.x >= n.x && p.x <= n.x + n.width && p.y >= n.y && p.y <= n.y + n.height);
+      if (target !== void 0) await ops([{ op: "connect", source: d.source, target: target.id }]);
     }
   };
-  const launchDirectorWithPrompt = (0, import_react2.useCallback)((prompt, targetTab) => {
-    openDirectorDrawer();
-    dispatchDirectorPrompt(prompt, { tab: targetTab });
-  }, [openDirectorDrawer]);
-  const inHubView = !isSplit && (showHub || projectsLoaded && projects.length === 0);
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: `${style_default.page} ${isSplit ? style_default.pageSplit : ""}`, "data-studio-mode": mode, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("section", { className: style_default.stage, children: [
-    err !== null && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.errorBar, onClick: () => setErr(null), children: [
-      err,
-      "\uFF08\u70B9\u51FB\u5173\u95ED\uFF09"
-    ] }),
-    toast !== null && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.toastBar, onClick: () => setToast(null), children: toast }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("header", { className: isSplit ? style_default.topBarSplit : style_default.topBar, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.topBarRow, children: [
-        isSplit ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.splitProjectBar, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-            "select",
-            {
-              className: style_default.projectSelect,
-              "aria-label": "\u9009\u62E9\u5267\u76EE\u5DE5\u7A0B",
-              value: activeId ?? "",
-              onChange: (e) => {
-                if (e.target.value) void selectProject(e.target.value);
-              },
-              children: [
-                projects.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "", children: "\u6682\u65E0\u5267\u76EE\u5DE5\u7A0B" }),
-                projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("option", { value: p.id, children: [
-                  p.title,
-                  p.aspectRatio ? ` (${p.aspectRatio})` : ""
-                ] }, p.id))
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => patchAppShellState({ createModalOpen: true }), title: "\u65B0\u5EFA\u77ED\u5267/\u753B\u5E03\u5DE5\u7A0B", children: "\uFF0B \u65B0\u5EFA" })
-        ] }) : inHubView ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.boardTitle, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F3E0} \u5267\u76EE\u5E7F\u573A" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.ratioTag, children: "AI \u5BFC\u6F14\u9A71\u52A8" })
-        ] }) : project ? renamingTitle !== null ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "input",
-          {
-            className: style_default.renameInput,
-            autoFocus: true,
-            value: renamingTitle,
-            onChange: (e) => setRenamingTitle(e.target.value),
-            onBlur: () => void saveRenamedTitle(),
-            onKeyDown: (e) => {
-              if (e.key === "Enter") void saveRenamedTitle();
-              if (e.key === "Escape") setRenamingTitle(null);
-            }
-          }
-        ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-          "button",
-          {
-            type: "button",
-            className: style_default.boardTitleBtn,
-            title: "\u70B9\u51FB\u91CD\u547D\u540D\u5267\u76EE",
-            onClick: () => setRenamingTitle(project.title),
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: project.title }),
-              project.drama?.aspectRatio && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.ratioTag, children: project.drama.aspectRatio })
-            ]
-          }
-        ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.boardTitle, children: "\u5E55\u5883\u5DE5\u4F5C\u53F0" }),
-        !isSplit && !inHubView && project && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.modeTabs, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: tab === "drama" ? style_default.tabActive : style_default.tabBtn, onClick: () => setTab("drama"), children: [
-            "\u{1F3AC} \u77ED\u5267\u5206\u955C\u53F0 (",
-            project.drama?.episodes.length ?? 0,
-            "\u96C6)"
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: tab === "canvas" ? style_default.tabActive : style_default.tabBtn, onClick: () => setTab("canvas"), children: [
-            "\u2726 \u65E0\u9650\u753B\u5E03 (",
-            project.nodes.length,
-            ")"
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: tab === "timeline" ? style_default.tabActive : style_default.tabBtn, onClick: () => setTab("timeline"), children: [
-            "\u{1F39E} \u6210\u7247\u4E0E\u526A\u6620 (",
-            project.timeline?.clips.length ?? 0,
-            ")"
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.topRight, children: [
-          !inHubView && project && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnIcon, disabled: !project.history?.canUndo, onClick: () => void undo(), title: "\u64A4\u9500 (\u2318Z)", children: "\u21B6" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnIcon, disabled: !project.history?.canRedo, onClick: () => void redo(), title: "\u91CD\u505A (\u21E7\u2318Z)", children: "\u21B7" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { className: style_default.btn, href: `${API}/projects/${project.id}/export`, download: true, title: "\u5BFC\u51FA .mujing.json \u5DE5\u7A0B\u5305", children: "\u5BFC\u51FA" })
-          ] }),
-          isSplit ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.btnAccentGhost,
-              title: "\u8FD4\u56DE\u5168\u5C4F\u5E55\u5883\u5DE5\u4F5C\u53F0",
-              onClick: () => getStudioBridge()?.openFullscreen(),
-              children: "\u26F6 \u72EC\u7ACB\u5DE5\u4F5C\u53F0"
-            }
-          ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-            "button",
-            {
-              type: "button",
-              className: directorOpen ? style_default.btnDirectorActive : style_default.btnDirector,
-              title: directorOpen ? "\u6536\u8D77\u53F3\u4FA7 AI \u5BFC\u6F14\u526F\u9A7E\u62BD\u5C49" : "\u5C55\u5F00\u53F3\u4FA7 AI \u5BFC\u6F14\u526F\u9A7E\uFF0C\u7528\u81EA\u7136\u8BED\u8A00\u7F16\u6392\u77ED\u5267\u3001\u753B\u5E03\u4E0E\u6210\u7247",
-              onClick: toggleDirectorDrawer,
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u2728 AI \u5BFC\u6F14" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.directorBadge, children: directorOpen ? "\u6536\u8D77" : "\u526F\u9A7E" })
-              ]
-            }
-          )
-        ] })
-      ] }),
-      isSplit && project && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.splitNavBar, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: tab === "drama" ? style_default.splitTabActive : style_default.splitTabBtn, onClick: () => setTab("drama"), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F3AC} \u77ED\u5267\u5206\u955C\u53F0" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.tabCount, children: [
-            project.drama?.episodes.length ?? 0,
-            "\u96C6"
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: tab === "canvas" ? style_default.splitTabActive : style_default.splitTabBtn, onClick: () => setTab("canvas"), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u2726 \u65E0\u9650\u753B\u5E03" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.tabCount, children: project.nodes.length })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: tab === "timeline" ? style_default.splitTabActive : style_default.splitTabBtn, onClick: () => setTab("timeline"), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F39E} \u6210\u7247\u4E0E\u526A\u6620" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.tabCount, children: project.timeline?.clips.length ?? 0 })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.studioBody, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.studioMain, children: inHubView ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        ProjectHub,
-        {
-          projects,
-          media,
-          onSelectProject: (id) => void selectProject(id),
-          onDeleteProject: (id, title) => void removeProject(id, title),
-          onCreateProject: () => patchAppShellState({ createModalOpen: true }),
-          onImportJson: () => triggerAppImport(),
-          onRunPrompt: launchDirectorWithPrompt
+  const centerWorld = () => {
+    const el = stageRef.current;
+    return toWorld((el?.getBoundingClientRect().left ?? 0) + (el?.clientWidth ?? 800) / 2 - 160, (el?.getBoundingClientRect().top ?? 0) + (el?.clientHeight ?? 600) / 2 - 120);
+  };
+  const addNode = async (type) => {
+    const c = centerWorld();
+    const res = await ops([{
+      op: "add_node",
+      type,
+      x: Math.round(c.x),
+      y: Math.round(c.y),
+      title: `${TYPE_LABEL[type]}\u8282\u70B9`,
+      ...type === "audio" ? { voice: "alloy" } : {}
+    }]);
+    if (res?.created[0]) setSelected(res.created[0]);
+  };
+  const handleFiles = async (files, dropPoint) => {
+    if (!files || files.length === 0) return;
+    const base = dropPoint ?? centerWorld();
+    let offset = 0;
+    for (const file of Array.from(files)) {
+      try {
+        const isVideo = file.type.startsWith("video/") || /\.(mp4|mov|webm)$/i.test(file.name);
+        const isAudio = file.type.startsWith("audio/") || /\.(mp3|wav|m4a|ogg)$/i.test(file.name);
+        const isText = file.type.startsWith("text/") || /\.(txt|md)$/i.test(file.name);
+        if (isText) {
+          const text = await file.text();
+          await ops([{ op: "add_node", type: "text", x: Math.round(base.x + offset), y: Math.round(base.y + offset * 0.3), width: 380, height: 260, title: file.name, content: text }]);
+        } else {
+          const nodeType = isVideo ? "video" : isAudio ? "audio" : "image";
+          const uploaded = await uploadLocalFile(file);
+          await ops([{
+            op: "add_node",
+            type: nodeType,
+            x: Math.round(base.x + offset),
+            y: Math.round(base.y + offset * 0.3),
+            title: file.name,
+            url: uploaded.url,
+            status: "success",
+            model: "\u672C\u5730\u4E0A\u4F20",
+            ...uploaded.meta?.durationMs ? { durationMs: uploaded.meta.durationMs } : {}
+          }]);
         }
-      ) : activeId === null || project === null ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.emptyStageCard, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.emptyStageIcon, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavIcon, { size: 32 }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h3", { children: "\u6B22\u8FCE\u6765\u5230\u5E55\u5883 AI \u5F71\u89C6\u5DE5\u4F5C\u53F0" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("p", { children: [
-          "\u5BF9\u6807\u4E13\u4E1A\u6F2B\u5267\u4E0E\u77ED\u5267\u5236\u7247\u6D41\u7A0B\uFF1A\u652F\u6301 ",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u89D2\u8272/\u573A\u666F\u4E09\u89C6\u56FE\u8D44\u4EA7\u9501\u5B9A" }),
-          "\u3001",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u5355\u955C\u6545\u4E8B\u677F\u5173\u952E\u5E27\u4E0E\u89D2\u8272 TTS \u914D\u97F3" }),
-          "\u3001",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "FFmpeg \u5C3E\u5E27\u63A5\u9996\u5E27\u65E0\u7F1D\u7EED\u62CD" }),
-          "\uFF0C\u4EE5\u53CA ",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u526A\u6620\u4E13\u4E1A\u7248\u8349\u7A3F\u4E00\u952E\u4EA4\u4ED8" }),
-          "\u3002"
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => patchAppShellState({ createModalOpen: true }), children: "\uFF0B \u65B0\u5EFA\u5F71\u89C6\u5DE5\u7A0B" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => triggerAppImport(), children: "\u5BFC\u5165\u672C\u5730\u5DE5\u7A0B JSON" })
-        ] })
-      ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-        tab === "drama" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DramaView, { project, onError: setErr, onNotify: notify, onSwitchTab: setTab }),
-        tab === "canvas" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoardView, { project, onError: setErr, onNotify: notify }),
-        tab === "timeline" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TimelineView, { project, onError: setErr, onNotify: notify })
-      ] }) }),
-      !isSplit && renderDirectorChat && directorEverOpened && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("aside", { className: directorOpen ? style_default.directorDrawer : style_default.directorDrawerClosed, "aria-label": "AI \u5BFC\u6F14\u526F\u9A7E", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.directorHeader, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.directorTitle, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u2728 AI \u5BFC\u6F14\u526F\u9A7E" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.directorSub, children: "Agent \u7F16\u6392" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.headActions, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-              "button",
+        offset += 360;
+      } catch (e) {
+        onError(e.message);
+      }
+    }
+    if (offset > 0) onNotify("\u7D20\u6750\u5DF2\u4E0A\u4F20\u5E76\u52A0\u5165\u753B\u5E03");
+  };
+  const onDrop = (e) => {
+    e.preventDefault();
+    setDropping(false);
+    if (e.dataTransfer.files?.length) {
+      void handleFiles(e.dataTransfer.files, toWorld(e.clientX, e.clientY));
+    }
+  };
+  const pushNodeToTimeline = async (node) => {
+    if (node.type !== "video" || !node.url) return;
+    try {
+      const existing = project.timeline?.clips ?? [];
+      await call(`/projects/${project.id}/timeline`, {
+        method: "PUT",
+        body: {
+          clips: [
+            ...existing,
+            { nodeId: node.id, title: node.title ?? node.id, url: node.url, durationMs: node.durationMs ?? 5e3 }
+          ]
+        }
+      });
+      onNotify(`\u5DF2\u5C06\u300C${node.title ?? node.id}\u300D\u52A0\u5165\u65F6\u95F4\u7EBF`);
+    } catch (e) {
+      onError(e.message);
+    }
+  };
+  const pos = (n) => local[n.id] ?? n;
+  const byId = new Map(project.nodes.map((n) => [n.id, n]));
+  const selectedNode = selected !== null ? byId.get(selected) : void 0;
+  const svgBounds = (() => {
+    let minX = 0;
+    let minY = 0;
+    let maxX = 2e3;
+    let maxY = 1400;
+    for (const n of project.nodes) {
+      const p = pos(n);
+      if (p.x < minX) minX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.x + n.width > maxX) maxX = p.x + n.width;
+      if (p.y + n.height > maxY) maxY = p.y + n.height;
+    }
+    if (drag?.kind === "link") {
+      if (drag.x < minX) minX = drag.x;
+      if (drag.y < minY) minY = drag.y;
+      if (drag.x > maxX) maxX = drag.x;
+      if (drag.y > maxY) maxY = drag.y;
+    }
+    const pad = 400;
+    const left = Math.floor(minX - pad);
+    const top = Math.floor(minY - pad);
+    const width = Math.max(800, Math.ceil(maxX - minX + pad * 2));
+    const height = Math.max(600, Math.ceil(maxY - minY + pad * 2));
+    return { left, top, width, height };
+  })();
+  const zoomBy = (factor) => {
+    const el = stageRef.current;
+    const cx = (el?.clientWidth ?? 600) / 2;
+    const cy = (el?.clientHeight ?? 480) / 2;
+    setView((v) => {
+      const z = Math.min(2.2, Math.max(0.22, v.z * factor));
+      return { z, x: cx - (cx - v.x) / v.z * z, y: cy - (cy - v.y) / v.z * z };
+    });
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.boardWrap, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { ref: uploadInputRef, type: "file", multiple: true, accept: "image/*,video/*,audio/*,.txt,.md", hidden: true, onChange: (e) => {
+      void handleFiles(e.target.files);
+      e.target.value = "";
+    } }),
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      "div",
+      {
+        ref: stageRef,
+        className: `${style_default.board} ${dropping ? style_default.boardDrop : ""}`,
+        onPointerDown: onStageDown,
+        onPointerMove: onMove,
+        onPointerUp: (e) => void onUp(e),
+        onDragOver: (e) => {
+          e.preventDefault();
+          setDropping(true);
+        },
+        onDragLeave: () => setDropping(false),
+        onDrop,
+        style: { backgroundSize: `${24 * view.z}px ${24 * view.z}px`, backgroundPosition: `${view.x}px ${view.y}px` },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.boardHint, children: "\u62D6\u62FD\u7A7A\u767D\u5E73\u79FB \xB7 \u2318\u6EDA\u8F6E\u7F29\u653E \xB7 \u62D6\u5165\u672C\u5730\u7D20\u6750" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.world, style: { transform: `translate(${view.x}px, ${view.y}px) scale(${view.z})` }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+              "svg",
               {
-                type: "button",
-                className: style_default.btn,
-                title: "\u5F00\u542F\u4E00\u8F6E\u65B0\u7684\u5BFC\u6F14\u5BF9\u8BDD\uFF08\u4FDD\u6301\u5728\u5E55\u5883\u5DE5\u4F5C\u53F0\u5185\uFF09",
-                onClick: () => getStudioBridge()?.newDirectorSession(),
-                children: "\uFF0B \u65B0\u5BF9\u8BDD"
+                className: style_default.edges,
+                style: { left: svgBounds.left, top: svgBounds.top, overflow: "visible" },
+                width: svgBounds.width,
+                height: svgBounds.height,
+                viewBox: `${svgBounds.left} ${svgBounds.top} ${svgBounds.width} ${svgBounds.height}`,
+                children: [
+                  project.edges.map((edge) => {
+                    const s = byId.get(edge.source), t = byId.get(edge.target);
+                    if (!s || !t) return null;
+                    const sp = pos(s), tp = pos(t);
+                    const x1 = sp.x + s.width, y1 = sp.y + s.height / 2, x2 = tp.x, y2 = tp.y + t.height / 2;
+                    const dx = Math.max(60, Math.abs(x2 - x1) * 0.5);
+                    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                      "path",
+                      {
+                        className: style_default.edge,
+                        d: `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`,
+                        onClick: (ev) => {
+                          ev.stopPropagation();
+                          if (window.confirm("\u65AD\u5F00\u8FD9\u6761\u8FDE\u7EBF\uFF1F")) void ops([{ op: "disconnect", source: edge.source, target: edge.target }]);
+                        }
+                      },
+                      edge.id
+                    );
+                  }),
+                  drag?.kind === "link" && (() => {
+                    const s = byId.get(drag.source);
+                    if (!s) return null;
+                    const sp = pos(s), x1 = sp.x + s.width, y1 = sp.y + s.height / 2;
+                    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { className: style_default.edgeDraft, d: `M ${x1} ${y1} L ${drag.x} ${drag.y}` });
+                  })()
+                ]
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-              "button",
-              {
-                type: "button",
-                className: style_default.iconBtn,
-                title: "\u6536\u8D77 AI \u5BFC\u6F14\u526F\u9A7E",
-                onClick: () => setDirectorOpen(false),
-                children: "\xD7"
-              }
-            )
+            project.nodes.map((n) => {
+              const p = pos(n);
+              const styleObj = { left: p.x, top: p.y, width: n.width, height: n.height };
+              return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+                "div",
+                {
+                  style: styleObj,
+                  className: n.id === selected ? style_default.nodeSelected : style_default.node,
+                  onPointerDown: (e) => {
+                    e.stopPropagation();
+                    setSelected(n.id);
+                  },
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+                      "div",
+                      {
+                        className: style_default.nodeHead,
+                        onPointerDown: (e) => {
+                          e.stopPropagation();
+                          setSelected(n.id);
+                          stageRef.current?.setPointerCapture(e.pointerId);
+                          setDrag({ kind: "node", id: n.id, sx: e.clientX, sy: e.clientY, nx: p.x, ny: p.y, moved: false });
+                        },
+                        children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeType, "data-type": n.type, children: TYPE_LABEL[n.type] }),
+                          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeTitle, children: n.title ?? n.id }),
+                          n.type !== "text" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeStatus, "data-status": n.status ?? "idle", children: STATUS_LABEL[n.status ?? "idle"] })
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.nodeBody, "data-scrollable": n.type === "text" ? "1" : void 0, children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NodeBody, { node: n }),
+                      n.model && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeModel, children: n.model })
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                      "div",
+                      {
+                        className: style_default.handle,
+                        title: "\u62D6\u5230\u76EE\u6807\u8282\u70B9\u4EE5\u4F20\u9012\u53C2\u8003\u56FE/\u5267\u672C/\u914D\u97F3",
+                        onPointerDown: (e) => {
+                          e.stopPropagation();
+                          stageRef.current?.setPointerCapture(e.pointerId);
+                          setDrag({ kind: "link", source: n.id, ...toWorld(e.clientX, e.clientY) });
+                        }
+                      }
+                    )
+                  ]
+                },
+                n.id
+              );
+            })
+          ] }),
+          project.nodes.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.boardEmpty, children: "\u753B\u5E03\u8FD8\u662F\u7A7A\u7684\u3002\u53EF\u7528\u4E0B\u65B9\u60AC\u6D6E\u5DE5\u5177\u680F\u6DFB\u52A0\u8282\u70B9\u3001\u76F4\u63A5\u62D6\u5165\u672C\u5730\u56FE\u7247/\u89C6\u9891/\u97F3\u9891/\u5C0F\u8BF4\uFF0C\u6216\u5207\u6362\u5230\u300C\u77ED\u5267\u5206\u955C\u53F0\u300D\u4E00\u952E\u62C6\u96C6\u51FA\u7247\u3002" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.boardDock, onPointerDown: (e) => e.stopPropagation(), children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("text"), children: "\uFF0B \u6587\u672C" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("image"), children: "\uFF0B \u56FE\u7247" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("video"), children: "\uFF0B \u89C6\u9891" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("audio"), children: "\uFF0B \u914D\u97F3" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.sep }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => uploadInputRef.current?.click(), children: "\u2191 \u4E0A\u4F20" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.sep }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockIconBtn, title: "\u7F29\u5C0F", onClick: () => zoomBy(0.84), children: "\uFF0D" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.dockZoom, children: [
+              Math.round(view.z * 100),
+              "%"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockIconBtn, title: "\u653E\u5927", onClick: () => zoomBy(1.18), children: "\uFF0B" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, title: "\u5C45\u4E2D\u9002\u914D\u5168\u90E8\u8282\u70B9", onClick: fitAllNodes, children: "\u22A1 \u9002\u914D" })
           ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.directorBody, children: renderDirectorChat() })
-      ] })
-    ] })
-  ] }) });
+        ]
+      }
+    ),
+    selectedNode !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      Inspector,
+      {
+        project,
+        node: selectedNode,
+        ops,
+        onError,
+        onPushTimeline: () => void pushNodeToTimeline(selectedNode),
+        onClose: () => setSelected(null)
+      },
+      `${selectedNode.id}:${selectedNode.status ?? ""}:${selectedNode.url ?? ""}`
+    )
+  ] });
 }
-function ProjectHub({
-  projects,
-  media,
-  onSelectProject,
-  onDeleteProject,
-  onCreateProject,
-  onImportJson,
-  onRunPrompt
-}) {
-  const [prompt, setPrompt] = (0, import_react2.useState)("");
-  const submitPrompt = () => {
-    const clean = prompt.trim();
-    if (!clean) return;
-    setPrompt("");
-    onRunPrompt(clean, "drama");
+function NodeBody({ node }) {
+  if (node.type === "text") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.textBody, children: node.content || /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("i", { className: style_default.dim, children: "\uFF08\u7A7A\uFF09" }) });
+  if (node.status === "loading") return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.loading, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.spinner }),
+    "\u751F\u6210\u4E2D\u2026"
+  ] });
+  if (node.status === "error") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.errText, children: node.error });
+  if (node.url) {
+    if (node.type === "image") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { className: style_default.media, src: node.url, alt: node.title ?? "", draggable: false });
+    if (node.type === "video") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("video", { className: style_default.media, src: node.url, controls: true, muted: true, playsInline: true });
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.audioBody, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("audio", { className: style_default.audioPlayer, src: node.url, controls: true }),
+      node.prompt && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.audioCaption, title: node.prompt, children: [
+        node.voice ? `[${node.voice}] ` : "",
+        node.prompt
+      ] })
+    ] });
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.promptPreview, children: node.prompt || /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("i", { className: style_default.dim, children: node.type === "audio" ? "\u70B9\u51FB\u8282\u70B9\u586B\u5199\u53F0\u8BCD\u5E76\u9009\u62E9\u97F3\u8272\u751F\u6210\u914D\u97F3" : "\u70B9\u51FB\u8282\u70B9\u586B\u5199\u63D0\u793A\u8BCD\u540E\u751F\u6210" }) });
+}
+function Inspector({ project, node, ops, onError, onPushTimeline, onClose }) {
+  const [title, setTitle] = (0, import_react2.useState)(node.title ?? "");
+  const [content, setContent] = (0, import_react2.useState)(node.content ?? "");
+  const [prompt, setPrompt] = (0, import_react2.useState)(node.prompt ?? "");
+  const [voice, setVoice] = (0, import_react2.useState)(node.voice ?? "alloy");
+  const [ratio, setRatio] = (0, import_react2.useState)(project.drama?.aspectRatio ?? "16:9");
+  const [duration, setDuration] = (0, import_react2.useState)(5);
+  const refs = (0, import_react2.useMemo)(
+    () => project.edges.filter((e) => e.target === node.id).map((e) => project.nodes.find((n) => n.id === e.source)).filter((n) => n !== void 0),
+    [project, node.id]
+  );
+  const mediaRefs = refs.filter((r) => (r.type === "image" || r.type === "video") && r.url);
+  const textRefs = refs.filter((r) => r.type === "text" && r.content);
+  const save = async () => {
+    await ops([{
+      op: "update_node",
+      id: node.id,
+      title,
+      ...node.type === "text" ? { content } : { prompt },
+      ...node.type === "audio" ? { voice } : {}
+    }]);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubWrap, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("section", { className: style_default.hubHero, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubBadge, children: "\u{1F3AC} \u5E55\u5883 AI \u5F71\u89C6\u5DE5\u4F5C\u53F0 \xB7 DeepSeek Harness \u9A71\u52A8" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h2", { className: style_default.hubHeading, children: "\u4E00\u53E5\u8BDD\u6216\u4E00\u6BB5\u5C0F\u8BF4\uFF0C\u5168\u81EA\u52A8\u62CD\u51FA\u591A\u955C\u5934\u6709\u58F0\u77ED\u5267" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: style_default.hubSub, children: "\u4ECE\u5267\u672C\u62C6\u96C6\u3001\u89D2\u8272/\u573A\u666F\u4E09\u89C6\u56FE\u8D44\u4EA7\u9501\u5B9A\u3001\u6545\u4E8B\u677F\u5173\u952E\u5E27\u4E0E\u89D2\u8272\u914D\u97F3\uFF0C\u5230 FFmpeg \u5C3E\u5E27\u7EED\u62CD\u6210\u7247\u4E0E\u526A\u6620\u8349\u7A3F\u4E00\u952E\u4EA4\u4ED8\u3002" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubComposer, children: [
+  const generate = async () => {
+    const fullPrompt = node.type === "audio" ? prompt.trim() || textRefs.map((r) => r.content ?? "").join(LF).trim() : [prompt, ...textRefs.map((r) => r.content ?? "")].filter(Boolean).join(LF + LF);
+    if (!fullPrompt.trim()) {
+      onError(node.type === "audio" ? "\u8BF7\u5148\u586B\u5199\u5F85\u6717\u8BFB\u7684\u53F0\u8BCD\u6216\u65C1\u767D" : "\u8BF7\u5148\u586B\u5199\u63D0\u793A\u8BCD");
+      return;
+    }
+    await save();
+    try {
+      await call(`/projects/${project.id}/generate`, {
+        method: "POST",
+        body: {
+          kind: node.type,
+          nodeId: node.id,
+          prompt: fullPrompt,
+          ...node.type === "audio" ? { voice } : {},
+          ...node.type === "video" ? { ratio, duration } : {},
+          referenceNodeIds: mediaRefs.map((r) => r.id)
+        }
+      });
+    } catch (e) {
+      onError(e.message);
+    }
+  };
+  const actionLabel = node.type === "image" ? "\u56FE\u7247" : node.type === "video" ? "\u89C6\u9891" : "\u914D\u97F3";
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("aside", { className: style_default.inspector, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.inspectorHead, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
+        TYPE_LABEL[node.type],
+        "\u8282\u70B9 \xB7 ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: node.id })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.iconBtn, "aria-label": "\u5173\u95ED", onClick: onClose, children: "\xD7" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      "\u6807\u9898",
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: title, onChange: (e) => setTitle(e.target.value), onBlur: () => void save() })
+    ] }),
+    node.type === "text" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      "\u5185\u5BB9",
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("textarea", { rows: 12, value: content, onChange: (e) => setContent(e.target.value), onBlur: () => void save() })
+    ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+        node.type === "audio" ? "\u6717\u8BFB\u53F0\u8BCD / \u65C1\u767D" : "\u751F\u6210\u63D0\u793A\u8BCD",
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           "textarea",
           {
-            className: style_default.hubPromptInput,
-            rows: 3,
+            rows: 6,
             value: prompt,
             onChange: (e) => setPrompt(e.target.value),
-            onKeyDown: (e) => {
-              if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
-                e.preventDefault();
-                submitPrompt();
-              }
-            },
-            placeholder: "\u8F93\u5165\u4F60\u7684\u77ED\u5267\u7075\u611F\u3001\u5C0F\u8BF4\u6BB5\u843D\u6216\u5206\u955C\u9700\u6C42\uFF0C\u4F8B\u5982\uFF1A\u62CD\u4E00\u90E8 9:16 \u8D5B\u535A\u96E8\u591C\u60AC\u7591\u77ED\u5267\uFF0C\u4FA6\u63A2\u6797\u9ED8\u4E0E\u7EBF\u4EBA\u82CF\u665A\u5728\u84DD\u8C03\u9152\u5427\u63A5\u5934\u906D\u9047\u7EA2\u5916\u72D9\u51FB\u2026\u2026"
+            onBlur: () => void save(),
+            placeholder: node.type === "audio" ? "\u8F93\u5165\u89D2\u8272\u5BF9\u767D\u6216\u753B\u5916\u97F3\u65C1\u767D\u6587\u672C\u2026" : "\u4E3B\u4F53\u3001\u52A8\u4F5C\u3001\u666F\u522B\u3001\u673A\u4F4D\u3001\u5149\u7EBF\u3001\u98CE\u683C\u2026"
           }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubComposerBar, children: [
-          media ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubEngineRow, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.hubEngineLabel, children: "\u6A21\u578B\u5F15\u64CE\uFF1A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-              "button",
-              {
-                type: "button",
-                className: media.image.ready ? style_default.hubEngineChipOk : style_default.hubEngineChipErr,
-                title: "\u70B9\u51FB\u914D\u7F6E\u751F\u56FE\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565",
-                onClick: () => openMediaConfigModal("image"),
-                children: [
-                  "\u25CF \u751F\u56FE \xB7 ",
-                  media.image.ready ? `${media.image.model}${media.image.readyCount > 1 ? ` (${media.image.readyCount}\u63A5\u53E3\xB7${STRATEGY_LABEL[media.image.strategy]})` : ""}` : "\u672A\u914D\u7F6E"
-                ]
-              }
-            ),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-              "button",
-              {
-                type: "button",
-                className: media.video.ready ? style_default.hubEngineChipOk : style_default.hubEngineChipErr,
-                title: "\u70B9\u51FB\u914D\u7F6E\u89C6\u9891\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565",
-                onClick: () => openMediaConfigModal("video"),
-                children: [
-                  "\u25CF \u89C6\u9891 \xB7 ",
-                  media.video.ready ? `${media.video.model}${media.video.readyCount > 1 ? ` (${media.video.readyCount}\u63A5\u53E3\xB7${STRATEGY_LABEL[media.video.strategy]})` : ""}` : "\u672A\u914D\u7F6E"
-                ]
-              }
-            ),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-              "button",
-              {
-                type: "button",
-                className: media.audio.ready ? style_default.hubEngineChipOk : style_default.hubEngineChipErr,
-                title: "\u70B9\u51FB\u914D\u7F6E\u914D\u97F3\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565",
-                onClick: () => openMediaConfigModal("audio"),
-                children: [
-                  "\u25CF \u914D\u97F3 \xB7 ",
-                  media.audio.ready ? `${media.audio.model}${media.audio.readyCount > 1 ? ` (${media.audio.readyCount}\u63A5\u53E3\xB7${STRATEGY_LABEL[media.audio.strategy]})` : ""}` : "\u672A\u914D\u7F6E"
-                ]
-              }
-            )
-          ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.hubComposerHint, children: "\u6309 \u2318/Ctrl + Enter \u76F4\u63A5\u53EC\u5524 AI \u5BFC\u6F14\u526F\u9A7E\u5F00\u62CD" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onCreateProject, children: "\uFF0B \u624B\u52A8\u5EFA\u5DE5\u7A0B" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: !prompt.trim(), onClick: submitPrompt, children: "\u2728 \u8BA9 AI \u5BFC\u6F14\u5F00\u62CD" })
+        )
+      ] }),
+      node.type === "audio" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+        "\u97F3\u8272\uFF08Voice\uFF09",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("select", { value: voice, onChange: (e) => setVoice(e.target.value), children: VOICES.map((v) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: v, children: v }, v)) })
+      ] }),
+      node.type === "video" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+          "\u753B\u5E45",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("select", { value: ratio, onChange: (e) => setRatio(e.target.value), children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F\u77ED\u5267" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u753B\u5E45" })
           ] })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("section", { className: style_default.hubSection, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubSectionHead, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h3", { children: "\u4E00\u952E\u7247\u5355\u6837\u677F" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u70B9\u51FB\u4EFB\u610F\u6837\u677F\u5C06\u81EA\u52A8\u5524\u8D77\u53F3\u4FA7 AI \u5BFC\u6F14\u526F\u9A7E\uFF0C\u5E76\u5B9E\u65F6\u751F\u6210\u89D2\u8272\u8D44\u4EA7\u3001\u5206\u955C\u6545\u4E8B\u677F\u4E0E\u6210\u7247" })
-      ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubGrid3, children: STARTER_TEMPLATES.map((tpl) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-        "button",
-        {
-          type: "button",
-          className: style_default.hubTemplateCard,
-          onClick: () => onRunPrompt(tpl.prompt, tpl.tab),
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubTemplateCover, style: { background: tpl.accent }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.hubTemplateBadge, children: tpl.badge }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.hubTemplateRatio, children: tpl.ratio })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubTemplateBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubTemplateTitle, children: tpl.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubTemplateDesc, children: tpl.desc }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubTemplateCta, children: "\u2728 \u7ACB\u5373\u7531 AI \u5BFC\u6F14\u5F00\u62CD \u2192" })
-            ] })
-          ]
-        },
-        tpl.id
-      )) })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("section", { className: style_default.hubSection, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubSectionHead, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("h3", { children: [
-            "\u6211\u7684\u5267\u76EE\u5DE5\u7A0B (",
-            projects.length,
-            ")"
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u70B9\u51FB\u8FDB\u5165\u5206\u955C\u53F0\u3001\u65E0\u9650\u753B\u5E03\u6216\u6210\u7247\u65F6\u95F4\u7EBF\u7EE7\u7EED\u5236\u4F5C" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onImportJson, children: "\u{1F4E5} \u5BFC\u5165\u5DE5\u7A0B JSON" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: onCreateProject, children: "\uFF0B \u65B0\u5EFA\u7A7A\u767D\u5267\u76EE" })
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+          "\u65F6\u957F\uFF08\u79D2\uFF09",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { type: "number", min: 2, max: 15, value: duration, onChange: (e) => setDuration(Number(e.target.value) || 5) })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubProjectGrid, children: [
-        projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubProjectCard, onClick: () => onSelectProject(p.id), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubProjectCover, children: [
-            p.coverUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: p.coverUrl, alt: p.title, className: style_default.hubProjectCoverImg }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubProjectCoverEmpty, children: "\u{1F3AC}" }),
-            p.aspectRatio && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.hubProjectRatio, children: p.aspectRatio }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-              "button",
-              {
-                type: "button",
-                className: style_default.hubProjectDel,
-                title: "\u5220\u9664\u5267\u76EE",
-                onClick: (e) => {
-                  e.stopPropagation();
-                  onDeleteProject(p.id, p.title);
-                },
-                children: "\xD7"
-              }
-            )
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubProjectInfo, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.hubProjectTitle, children: p.title }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.hubProjectMeta, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                p.castCount ?? 0,
-                " \u8D44\u4EA7"
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                "\xB7 ",
-                p.episodeCount ?? 0,
-                " \u96C6"
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                "\xB7 ",
-                p.nodeCount,
-                " \u8282\u70B9"
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-                "\xB7 ",
-                p.clipCount ?? 0,
-                " \u7247\u6BB5"
-              ] })
-            ] })
-          ] })
-        ] }, p.id)),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: style_default.hubNewCard, onClick: onCreateProject, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.hubNewPlus, children: "\uFF0B" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u65B0\u5EFA\u77ED\u5267 / \u6F2B\u5267\u5DE5\u7A0B" })
-        ] })
-      ] })
-    ] })
+      refs.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.refs, children: [
+        "\u4E0A\u6E38\u8F93\u5165\uFF1A",
+        refs.map((r) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.refChip, children: [
+          TYPE_LABEL[r.type],
+          " \xB7 ",
+          r.title ?? r.id
+        ] }, r.id)),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, children: node.type === "video" ? "\u9996\u5F20\u56FE\u7247/\u89C6\u9891\u4F5C\u4E3A\u9996\u5E27\uFF0C\u5176\u4F59\u4F5C\u4E3A\u89D2\u8272\u4E00\u81F4\u6027\u53C2\u8003\u56FE\u3002" : "\u4E0A\u6E38\u53C2\u8003\u56FE\u4FDD\u6301\u5916\u89C2\u4E00\u81F4\uFF0C\u6587\u672C\u81EA\u52A8\u62FC\u63A5\u3002" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
+        node.status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => void call(`/projects/${project.id}/cancel`, { method: "POST", body: { nodeId: node.id } }), children: "\u53D6\u6D88\u751F\u6210" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: style_default.btnPrimary, onClick: () => void generate(), children: [
+          node.url ? "\u91CD\u65B0\u751F\u6210" : "\u751F\u6210",
+          actionLabel
+        ] }),
+        node.type === "video" && node.url && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onPushTimeline, children: "\uFF0B \u52A0\u5165\u65F6\u95F4\u7EBF" })
+      ] }),
+      node.error && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.errText, children: node.error }),
+      node.url && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { className: style_default.link, href: node.url, target: "_blank", rel: "noreferrer", children: "\u5728\u65B0\u7A97\u53E3\u6253\u5F00\u5A92\u4F53\u8D44\u4EA7" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.actions, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnDanger, onClick: () => {
+      if (window.confirm("\u5220\u9664\u8BE5\u8282\u70B9\uFF1F")) {
+        void ops([{ op: "delete_node", id: node.id }]);
+        onClose();
+      }
+    }, children: "\u5220\u9664\u8282\u70B9" }) })
   ] });
 }
-function CreateProjectModal({ onClose, onImport, onSubmit }) {
-  const [title, setTitle] = (0, import_react2.useState)("\u672A\u547D\u540D\u77ED\u5267\u5DE5\u7A0B");
-  const [aspectRatio, setAspectRatio] = (0, import_react2.useState)("9:16");
-  const [genre, setGenre] = (0, import_react2.useState)(STYLE_PRESETS[0].genre);
-  const [style, setStyle] = (0, import_react2.useState)(STYLE_PRESETS[0].style);
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.modalBackdrop, onClick: onClose, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.modalCard, onClick: (e) => e.stopPropagation(), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.sectionTitle, children: "\u65B0\u5EFA\u5E55\u5883\u5F71\u89C6 / \u77ED\u5267\u5DE5\u7A0B" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.iconBtn, onClick: onClose, children: "\xD7" })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-      "\u5267\u76EE\u540D\u79F0",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: title, onChange: (e) => setTitle(e.target.value), autoFocus: true, placeholder: "\u4F8B\u5982\uFF1A\u300A\u96E8\u591C\u82AF\u7247\u300B\u7B2C\u4E00\u5B63" })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u76EE\u6807\u753B\u5E45\u6BD4\u4F8B" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.pillRow, children: [
-        ["9:16", "9:16 \u7AD6\u5C4F\u77ED\u5267\uFF08\u6296\u97F3/\u7EA2\u679C\uFF09"],
-        ["16:9", "16:9 \u6A2A\u5C4F\u6F2B\u5267/\u7535\u5F71"],
-        ["1:1", "1:1 \u65B9\u5F62\u793E\u5A92\u753B\u5E45"]
-      ].map(([val, label]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        "button",
-        {
-          type: "button",
-          className: aspectRatio === val ? style_default.pillActive : style_default.pillBtn,
-          onClick: () => setAspectRatio(val),
-          children: label
-        },
-        val
-      )) })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u89C6\u89C9\u98CE\u683C\u9884\u8BBE\uFF08\u4E00\u952E\u586B\u5145 Style Bible\uFF09" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.pillRow, children: STYLE_PRESETS.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        "button",
-        {
-          type: "button",
-          className: style === preset.style ? style_default.pillActive : style_default.pillBtn,
-          onClick: () => {
-            setGenre(preset.genre);
-            setStyle(preset.style);
-          },
-          children: preset.label
-        },
-        preset.label
-      )) })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.gridRow, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-      "\u9898\u6750\u7C7B\u578B",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: genre, onChange: (e) => setGenre(e.target.value), placeholder: "\u5982\uFF1A\u60AC\u7591\u77ED\u5267 / \u53E4\u98CE\u4ED9\u4FA0" })
-    ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-      "\u5168\u5267\u7F8E\u672F\u4E0E\u6444\u5F71\u57FA\u51C6\uFF08Style Bible\uFF09",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("textarea", { rows: 2, value: style, onChange: (e) => setStyle(e.target.value) })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.modalFooter, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, style: { marginRight: "auto" }, onClick: onImport, children: "\u5BFC\u5165 .mujing.json" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onClose, children: "\u53D6\u6D88" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        "button",
-        {
-          type: "button",
-          className: style_default.btnPrimary,
-          disabled: !title.trim(),
-          onClick: () => onSubmit({ title: title.trim(), aspectRatio, style: style.trim(), genre: genre.trim() }),
-          children: "\u521B\u5EFA\u5E76\u8FDB\u5165\u5DE5\u4F5C\u53F0"
-        }
-      )
-    ] })
-  ] }) });
-}
-function makeLocalEndpointId(kind) {
-  return `${kind}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
-}
-function toDraft(cfg) {
-  return {
-    image: {
-      strategy: cfg.image.strategy,
-      autoFailover: cfg.image.autoFailover,
-      endpoints: cfg.image.endpoints.map((ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model,
-        size: ep.size,
-        flavor: ep.flavor
-      }))
-    },
-    video: {
-      strategy: cfg.video.strategy,
-      autoFailover: cfg.video.autoFailover,
-      endpoints: cfg.video.endpoints.map((ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model,
-        flavor: ep.flavor,
-        duration: ep.duration,
-        ratio: ep.ratio
-      }))
-    },
-    audio: {
-      strategy: cfg.audio.strategy,
-      autoFailover: cfg.audio.autoFailover,
-      endpoints: cfg.audio.endpoints.map((ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model,
-        voice: ep.voice,
-        format: ep.format
-      }))
-    }
-  };
-}
-var MEDIA_TAB_META = [
-  { key: "image", label: "\u751F\u56FE\u6A21\u578B", icon: "\u{1F5BC}" },
-  { key: "video", label: "\u89C6\u9891\u6A21\u578B", icon: "\u{1F3AC}" },
-  { key: "audio", label: "\u914D\u97F3\u6A21\u578B", icon: "\u{1F399}" }
-];
-var STRATEGY_META = [
-  { key: "round_robin", label: "\u{1F504} \u52A8\u6001\u8F6E\u8BE2", desc: "\u6309\u6743\u91CD\u4F9D\u6B21\u8F6E\u6D41\u5206\u914D\u8BF7\u6C42\uFF0C\u81EA\u52A8\u8DF3\u8FC7\u6545\u969C\u51B7\u5374\u4E2D\u7684\u63A5\u53E3" },
-  { key: "failover", label: "\u{1F6E1} \u4E3B\u5907\u5BB9\u707E", desc: "\u6309\u5217\u8868\u987A\u5E8F\u4F18\u5148\u4F7F\u7528\u4E3B\u63A5\u53E3\uFF0C\u5F02\u5E38\u65F6\u81EA\u52A8\u5207\u5411\u5907\u7528\u63A5\u53E3" },
-  { key: "random", label: "\u{1F3B2} \u968F\u673A\u5747\u8861", desc: "\u6309\u6743\u91CD\u5728\u5065\u5EB7\u63A5\u53E3\u95F4\u968F\u673A\u5206\u6D41\uFF0C\u5355\u70B9\u6545\u969C\u81EA\u52A8\u5207\u6362" }
-];
-function MediaConfigModal({ initialTab, onClose }) {
-  const [tab, setTab] = (0, import_react2.useState)(initialTab);
-  const [details, setDetails] = (0, import_react2.useState)(null);
-  const [draft, setDraft] = (0, import_react2.useState)(null);
-  const [expandedId, setExpandedId] = (0, import_react2.useState)({
-    image: null,
-    video: null,
-    audio: null
-  });
-  const [showKeyIds, setShowKeyIds] = (0, import_react2.useState)({});
-  const [loading, setLoading] = (0, import_react2.useState)(true);
-  const [saving, setSaving] = (0, import_react2.useState)(false);
-  const [err, setErr] = (0, import_react2.useState)(null);
-  const [msg, setMsg] = (0, import_react2.useState)(null);
-  (0, import_react2.useEffect)(() => {
-    setTab(initialTab);
-  }, [initialTab]);
-  (0, import_react2.useEffect)(() => {
-    let alive = true;
-    setLoading(true);
-    setErr(null);
-    void call("/media-config").then((data) => {
-      if (!alive) return;
-      setDetails(data);
-      setDraft(toDraft(data));
-      setExpandedId({
-        image: null,
-        video: null,
-        audio: null
-      });
-    }).catch((e) => {
-      if (!alive) return;
-      setErr(e instanceof Error ? e.message : String(e));
-    }).finally(() => {
-      if (alive) setLoading(false);
-    });
-    return () => {
-      alive = false;
-    };
-  }, []);
-  (0, import_react2.useEffect)(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-  const patchImageEp = (id, fn) => {
-    setDraft((d) => d ? {
-      ...d,
-      image: { ...d.image, endpoints: d.image.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
-    } : d);
-  };
-  const patchVideoEp = (id, fn) => {
-    setDraft((d) => d ? {
-      ...d,
-      video: { ...d.video, endpoints: d.video.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
-    } : d);
-  };
-  const patchAudioEp = (id, fn) => {
-    setDraft((d) => d ? {
-      ...d,
-      audio: { ...d.audio, endpoints: d.audio.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
-    } : d);
-  };
-  const addEndpoint = () => {
-    if (!draft) return;
-    const newId = makeLocalEndpointId(tab);
-    if (tab === "image") {
-      const idx = draft.image.endpoints.length + 1;
-      const next = {
-        id: newId,
-        name: `\u751F\u56FE\u63A5\u53E3 #${idx}`,
-        enabled: true,
-        weight: 1,
-        baseURL: "",
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: "",
-        model: "gpt-image-1",
-        size: "1024x1024",
-        flavor: "openai"
-      };
-      setDraft({ ...draft, image: { ...draft.image, endpoints: [...draft.image.endpoints, next] } });
-    } else if (tab === "video") {
-      const idx = draft.video.endpoints.length + 1;
-      const next = {
-        id: newId,
-        name: `\u89C6\u9891\u63A5\u53E3 #${idx}`,
-        enabled: true,
-        weight: 1,
-        baseURL: "",
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: "",
-        model: "doubao-seedance-1-0-pro-250528",
-        flavor: "ark",
-        duration: 5,
-        ratio: "16:9"
-      };
-      setDraft({ ...draft, video: { ...draft.video, endpoints: [...draft.video.endpoints, next] } });
-    } else {
-      const idx = draft.audio.endpoints.length + 1;
-      const next = {
-        id: newId,
-        name: `\u914D\u97F3\u63A5\u53E3 #${idx}`,
-        enabled: true,
-        weight: 1,
-        baseURL: "",
-        apiKey: "",
-        clearApiKey: false,
-        apiKeyEnv: "",
-        model: "gpt-4o-mini-tts",
-        voice: "alloy",
-        format: "mp3"
-      };
-      setDraft({ ...draft, audio: { ...draft.audio, endpoints: [...draft.audio.endpoints, next] } });
-    }
-    setExpandedId((prev) => ({ ...prev, [tab]: newId }));
-    setMsg(null);
-    setErr(null);
-  };
-  const duplicateEndpoint = (idx) => {
-    if (!draft) return;
-    const newId = makeLocalEndpointId(tab);
-    if (tab === "image") {
-      const src = draft.image.endpoints[idx];
-      if (!src) return;
-      const copy = {
-        ...src,
-        id: newId,
-        name: `${src.name} \u526F\u672C`,
-        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
-      };
-      const next = [...draft.image.endpoints];
-      next.splice(idx + 1, 0, copy);
-      setDraft({ ...draft, image: { ...draft.image, endpoints: next } });
-    } else if (tab === "video") {
-      const src = draft.video.endpoints[idx];
-      if (!src) return;
-      const copy = {
-        ...src,
-        id: newId,
-        name: `${src.name} \u526F\u672C`,
-        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
-      };
-      const next = [...draft.video.endpoints];
-      next.splice(idx + 1, 0, copy);
-      setDraft({ ...draft, video: { ...draft.video, endpoints: next } });
-    } else {
-      const src = draft.audio.endpoints[idx];
-      if (!src) return;
-      const copy = {
-        ...src,
-        id: newId,
-        name: `${src.name} \u526F\u672C`,
-        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
-      };
-      const next = [...draft.audio.endpoints];
-      next.splice(idx + 1, 0, copy);
-      setDraft({ ...draft, audio: { ...draft.audio, endpoints: next } });
-    }
-    setExpandedId((prev) => ({ ...prev, [tab]: newId }));
-  };
-  const moveEndpoint = (idx, delta) => {
-    setDraft((d) => {
-      if (!d) return d;
-      const pool = d[tab];
-      const target = idx + delta;
-      if (target < 0 || target >= pool.endpoints.length) return d;
-      const list = [...pool.endpoints];
-      const [item] = list.splice(idx, 1);
-      list.splice(target, 0, item);
-      return { ...d, [tab]: { ...pool, endpoints: list } };
-    });
-  };
-  const removeEndpoint = (id) => {
-    setDraft((d) => {
-      if (!d) return d;
-      const pool = d[tab];
-      if (pool.endpoints.length <= 1) return d;
-      const nextList = pool.endpoints.filter((ep) => ep.id !== id);
-      if (expandedId[tab] === id) {
-        setExpandedId((prev) => ({ ...prev, [tab]: null }));
-      }
-      return { ...d, [tab]: { ...pool, endpoints: nextList } };
-    });
-  };
-  const handleSave = async () => {
-    if (!draft) return;
-    setSaving(true);
-    setErr(null);
-    setMsg(null);
-    try {
-      const serializeBase = (ep) => ({
-        id: ep.id,
-        name: ep.name,
-        enabled: ep.enabled,
-        weight: ep.weight,
-        baseURL: ep.baseURL,
-        ...ep.clearApiKey ? { clearApiKey: true } : ep.apiKey.trim() ? { apiKey: ep.apiKey.trim() } : ep.cloneKeyFromId ? { cloneKeyFromId: ep.cloneKeyFromId } : {},
-        apiKeyEnv: ep.apiKeyEnv,
-        model: ep.model
-      });
-      const payload = {
-        image: {
-          strategy: draft.image.strategy,
-          autoFailover: draft.image.autoFailover,
-          endpoints: draft.image.endpoints.map((ep) => ({
-            ...serializeBase(ep),
-            size: ep.size,
-            flavor: ep.flavor
-          }))
-        },
-        video: {
-          strategy: draft.video.strategy,
-          autoFailover: draft.video.autoFailover,
-          endpoints: draft.video.endpoints.map((ep) => ({
-            ...serializeBase(ep),
-            flavor: ep.flavor,
-            duration: ep.duration,
-            ratio: ep.ratio
-          }))
-        },
-        audio: {
-          strategy: draft.audio.strategy,
-          autoFailover: draft.audio.autoFailover,
-          endpoints: draft.audio.endpoints.map((ep) => ({
-            ...serializeBase(ep),
-            voice: ep.voice,
-            format: ep.format
-          }))
-        }
-      };
-      const res = await call("/media-config", {
-        method: "PUT",
-        body: payload
-      });
-      setDetails(res.config);
-      setDraft(toDraft(res.config));
-      updateMediaStatus({ image: res.image, video: res.video, audio: res.audio });
-      setMsg("\u591A\u63A5\u53E3\u914D\u7F6E\u4E0E\u8F6E\u8BE2\u7B56\u7565\u5DF2\u4FDD\u5B58\u5E76\u5B9E\u65F6\u751F\u6548");
-    } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
-    } finally {
-      setSaving(false);
-    }
-  };
-  const handleResetTab = async () => {
-    setSaving(true);
-    setErr(null);
-    setMsg(null);
-    try {
-      const res = await call("/media-config/reset", {
-        method: "POST",
-        body: { kind: tab }
-      });
-      setDetails(res.config);
-      setDraft((prev) => {
-        const fresh = toDraft(res.config);
-        if (!prev) return fresh;
-        return { ...prev, [tab]: fresh[tab] };
-      });
-      setExpandedId((prev) => ({ ...prev, [tab]: null }));
-      updateMediaStatus({ image: res.image, video: res.video, audio: res.audio });
-      setMsg("\u5DF2\u6062\u590D\u8BE5\u9879\u9ED8\u8BA4\u914D\u7F6E");
-    } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
-    } finally {
-      setSaving(false);
-    }
-  };
-  const handleResetHealth = async () => {
-    setSaving(true);
-    setErr(null);
-    setMsg(null);
-    try {
-      const res = await call("/media-config/reset-health", {
-        method: "POST",
-        body: { kind: tab }
-      });
-      setDetails(res.config);
-      updateMediaStatus({ image: res.image, video: res.video, audio: res.audio });
-      setMsg("\u5DF2\u6E05\u9664\u7194\u65AD\u51B7\u5374\u4E0E\u8F6E\u8BE2\u7EDF\u8BA1");
-    } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
-    } finally {
-      setSaving(false);
-    }
-  };
-  const curPoolDetail = details ? details[tab] : null;
-  const curPoolDraft = draft ? draft[tab] : null;
-  const curDetailById = (0, import_react2.useMemo)(() => {
-    const map = /* @__PURE__ */ new Map();
-    if (curPoolDetail) {
-      for (const ep of curPoolDetail.endpoints) map.set(ep.id, ep);
-    }
-    return map;
-  }, [curPoolDetail]);
-  const hasAnyStats = Boolean(curPoolDetail?.endpoints.some((ep) => ep.totalRequests > 0 || ep.inCooldown));
-  const curStrategyDesc = STRATEGY_META.find((s) => s.key === (curPoolDraft?.strategy ?? "round_robin"))?.desc ?? "";
-  const toggleShowKey = (id) => {
-    setShowKeyIds((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-  const renderEndpointHeader = (ep, idx, total, saved, onToggleEnabled) => {
-    const isExpanded = expandedId[tab] === ep.id;
-    const hasPendingKey = Boolean(ep.apiKey.trim()) || !ep.clearApiKey && Boolean(saved?.hasApiKey || ep.cloneKeyFromId);
-    const isLocallyReady = ep.enabled && Boolean(ep.baseURL.trim()) && hasPendingKey;
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-        "div",
-        {
-          className: style_default.mediaEndpointHead,
-          onClick: () => setExpandedId((prev) => ({ ...prev, [tab]: isExpanded ? null : ep.id })),
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointHeadLeft, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.mediaEndpointIdx, children: [
-                "#",
-                idx + 1
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: !ep.enabled ? style_default.mediaFieldHint : isLocallyReady ? style_default.mediaTabDotOk : style_default.mediaTabDotErr, children: "\u25CF" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaEndpointName, title: ep.name, children: ep.name || `\u63A5\u53E3 #${idx + 1}` }),
-              ep.model && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaEndpointTag, children: ep.model }),
-              curPoolDraft && curPoolDraft.strategy !== "failover" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.mediaEndpointTag, title: "\u52A8\u6001\u8C03\u5EA6\u6743\u91CD", children: [
-                "\u6743\u91CD \xD7",
-                ep.weight
-              ] }),
-              saved?.inCooldown ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.mediaEndpointTagWarn, title: saved.lastError ?? "\u5931\u8D25\u51B7\u5374\u4E2D", children: [
-                "\u51B7\u5374 ",
-                Math.ceil(saved.cooldownRemainingMs / 1e3),
-                "s"
-              ] }) : !ep.enabled ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaEndpointTag, children: "\u5DF2\u505C\u7528" }) : isLocallyReady ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaEndpointTagOk, children: "\u5C31\u7EEA" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaEndpointTagErr, children: "\u672A\u914D\u7F6E" }),
-              saved && saved.totalRequests > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.mediaEndpointTag, title: `\u603B\u8BF7\u6C42 ${saved.totalRequests}\uFF0C\u6210\u529F ${saved.successCount}\uFF0C\u5931\u8D25 ${saved.failCount}`, children: [
-                "\u8C03\u7528 ",
-                saved.successCount,
-                "/",
-                saved.totalRequests
-              ] })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointHeadActions, onClick: (e) => e.stopPropagation(), children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                "button",
-                {
-                  type: "button",
-                  "data-ep-toggle": ep.id,
-                  className: ep.enabled ? style_default.mediaMiniToggle : style_default.mediaMiniToggleOff,
-                  title: ep.enabled ? "\u70B9\u51FB\u505C\u7528\u6B64\u63A5\u53E3" : "\u70B9\u51FB\u542F\u7528\u6B64\u63A5\u53E3",
-                  onClick: onToggleEnabled,
-                  children: ep.enabled ? "\u542F\u7528" : "\u505C\u7528"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  title: "\u4E0A\u79FB\u4F18\u5148\u7EA7",
-                  disabled: idx === 0,
-                  onClick: () => moveEndpoint(idx, -1),
-                  children: "\u2191"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  title: "\u4E0B\u79FB\u4F18\u5148\u7EA7",
-                  disabled: idx === total - 1,
-                  onClick: () => moveEndpoint(idx, 1),
-                  children: "\u2193"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  title: "\u590D\u5236\u63A5\u53E3\u914D\u7F6E",
-                  onClick: () => duplicateEndpoint(idx),
-                  children: "\u590D\u5236"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtnDanger,
-                  title: total <= 1 ? "\u81F3\u5C11\u4FDD\u7559\u4E00\u4E2A\u63A5\u53E3\uFF08\u53EF\u6E05\u7A7A\u914D\u7F6E\uFF09" : "\u5220\u9664\u6B64\u63A5\u53E3",
-                  disabled: total <= 1,
-                  onClick: () => removeEndpoint(ep.id),
-                  children: "\u5220\u9664"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: style_default.miniBtn,
-                  onClick: () => setExpandedId((prev) => ({ ...prev, [tab]: isExpanded ? null : ep.id })),
-                  children: isExpanded ? "\u6536\u8D77" : "\u5C55\u5F00"
-                }
-              )
-            ] })
-          ]
-        }
-      ),
-      !isExpanded && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointSummary, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.mediaEndpointUrl, title: ep.baseURL || "\u672A\u586B\u5199\u5730\u5740", children: [
-          "\u5730\u5740\uFF1A",
-          ep.baseURL || "\u672A\u586B\u5199"
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-          "\u5BC6\u94A5\uFF1A",
-          ep.clearApiKey ? "\u5F85\u6E05\u9664" : ep.apiKey.trim() ? "\u5DF2\u586B\u5199\u65B0\u5BC6\u94A5\uFF08\u5F85\u4FDD\u5B58\uFF09" : saved?.hasApiKey ? saved.apiKeyMasked : "\u672A\u914D\u7F6E"
-        ] })
-      ] })
-    ] });
-  };
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.modalBackdrop, onClick: onClose, "data-media-modal": "1", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaModalCard, onClick: (e) => e.stopPropagation(), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.sectionTitle, children: "\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E \xB7 \u591A\u63A5\u53E3\u52A8\u6001\u8F6E\u8BE2" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaModalSub, children: "\u53EF\u4E3A\u751F\u56FE\u3001\u89C6\u9891\u3001\u914D\u97F3\u5206\u522B\u914D\u7F6E\u591A\u4E2A\u4E0A\u6E38\u63A5\u53E3\uFF0C\u652F\u6301\u6743\u91CD\u52A8\u6001\u8F6E\u8BE2\u4E0E\u5931\u8D25\u81EA\u52A8\u5207\u6362" })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.iconBtn, title: "\u5173\u95ED", onClick: onClose, children: "\xD7" })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaTabRow, role: "tablist", children: MEDIA_TAB_META.map((item) => {
-      const p = details ? details[item.key] : null;
-      const isReady = Boolean(p?.ready);
-      return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-        "button",
-        {
-          type: "button",
-          role: "tab",
-          "aria-selected": tab === item.key,
-          "data-media-tab": item.key,
-          className: tab === item.key ? style_default.mediaTabActive : style_default.mediaTab,
-          onClick: () => {
-            setTab(item.key);
-            setMsg(null);
-            setErr(null);
-          },
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: isReady ? style_default.mediaTabDotOk : style_default.mediaTabDotErr, children: "\u25CF" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-              item.icon,
-              " ",
-              item.label
-            ] }),
-            p && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.mediaTabCount, children: [
-              p.readyCount,
-              "/",
-              p.totalCount
-            ] })
-          ]
-        },
-        item.key
-      );
-    }) }),
-    loading || !draft || !curPoolDetail || !curPoolDraft ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaLoadingBox, children: "\u6B63\u5728\u8BFB\u53D6\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E\u2026" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: curPoolDetail.ready ? style_default.mediaStatusOk : style_default.mediaStatusErr, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaStatusBar, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: curPoolDetail.ready ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-          "\u25CF \u5DF2\u5C31\u7EEA \xB7 ",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("strong", { children: [
-            curPoolDetail.readyCount,
-            "/",
-            curPoolDetail.totalCount
-          ] }),
-          " \u4E2A\u63A5\u53E3\u53EF\u7528 \xB7 \u5F53\u524D\u7B56\u7565\uFF1A",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("strong", { children: STRATEGY_LABEL[curPoolDetail.strategy] }),
-          curPoolDetail.autoFailover ? "\uFF08\u6545\u969C\u81EA\u52A8\u5207\u6362\uFF09" : ""
-        ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: "\u25CF \u5F53\u524D\u65E0\u53EF\u7528\u63A5\u53E3 \xB7 \u8BF7\u81F3\u5C11\u4E3A\u4E00\u4E2A\u5DF2\u542F\u7528\u63A5\u53E3\u586B\u5199 Base URL \u4E0E\u6709\u6548 API Key \u540E\u4FDD\u5B58" }) }),
-        hasAnyStats && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: saving, onClick: () => void handleResetHealth(), children: "\u91CD\u7F6E\u7194\u65AD/\u7EDF\u8BA1" })
-      ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaPoolBar, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaPoolHead, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaPoolTitle, children: "\u591A\u63A5\u53E3\u8C03\u5EA6\u7B56\u7565" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "button",
-            {
-              type: "button",
-              className: style_default.btnPrimary,
-              "data-media-add-endpoint": "1",
-              onClick: addEndpoint,
-              children: "\uFF0B \u6DFB\u52A0\u63A5\u53E3"
-            }
-          )
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaStrategyRow, children: STRATEGY_META.map((st) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "button",
-          {
-            type: "button",
-            "data-media-strategy": st.key,
-            className: curPoolDraft.strategy === st.key ? style_default.pillActive : style_default.pillBtn,
-            onClick: () => setDraft((d) => d ? { ...d, [tab]: { ...d[tab], strategy: st.key } } : d),
-            children: st.label
-          },
-          st.key
-        )) }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaFieldHint, children: curStrategyDesc }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.mediaCheckRow, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "input",
-            {
-              type: "checkbox",
-              "data-media-autofailover": "1",
-              checked: curPoolDraft.autoFailover,
-              onChange: (e) => setDraft((d) => d ? { ...d, [tab]: { ...d[tab], autoFailover: e.target.checked } } : d)
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u5931\u8D25\u81EA\u52A8\u5207\u6362\u4E0B\u4E00\u63A5\u53E3\uFF08\u5355\u63A5\u53E3\u62A5\u9519\u65F6\u81EA\u52A8\u7194\u65AD\u51B7\u5374 15\u201360s\uFF0C\u51B7\u5374\u7ED3\u675F\u540E\u81EA\u52A8\u6062\u590D\u53C2\u4E0E\u8F6E\u8BE2\uFF09" })
-        ] })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointList, "data-media-endpoint-list": tab, children: [
-        tab === "image" && draft.image.endpoints.map((ep, idx) => {
-          const saved = curDetailById.get(ep.id);
-          const isExpanded = expandedId.image === ep.id;
-          const showKey = Boolean(showKeyIds[ep.id]);
-          return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
-            renderEndpointHeader(
-              ep,
-              idx,
-              draft.image.endpoints.length,
-              saved,
-              () => patchImageEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
-            ),
-            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaPresetRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "openai", baseURL: "https://api.openai.com/v1", model: "gpt-image-1", size: "1024x1024" })),
-                    children: "OpenAI Images"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedream-3-0-t2i-250415", size: "1024x1024" })),
-                    children: "\u706B\u5C71\u65B9\u821F Seedream"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
-                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u63A5\u53E3\u540D\u79F0",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "name",
-                      value: ep.name,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B OpenAI / \u5907\u7528\u65B9\u821F"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "weight",
-                      type: "number",
-                      min: 1,
-                      max: 10,
-                      value: ep.weight,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.pillRow, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "openai" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "openai" })),
-                      children: "OpenAI \u517C\u5BB9\uFF08/images/generations\uFF09"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "ark" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "ark" })),
-                      children: "\u706B\u5C71\u65B9\u821F Seedream"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "baseURL",
-                    value: ep.baseURL,
-                    onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
-                    placeholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1 \u6216 https://ark.cn-beijing.volces.com/api/v3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.secretInputWrap, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "apiKey",
-                      type: showKey ? "text" : "password",
-                      value: ep.apiKey,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
-                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key\uFF08\u5982 sk-...\uFF09"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
-                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: style_default.secretToggleBtn,
-                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
-                      children: "\u6E05\u9664"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "model",
-                      value: ep.model,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1Agpt-image-1"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u5206\u8FA8\u7387\uFF08Size\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "size",
-                      value: ep.size,
-                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, size: e.target.value })),
-                      placeholder: "1024x1024"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "apiKeyEnv",
-                    value: ep.apiKeyEnv,
-                    onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
-                    placeholder: "MUJING_IMAGE_API_KEY"
-                  }
-                )
-              ] }),
-              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
-                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
-                saved.lastError
-              ] })
-            ] })
-          ] }, ep.id);
-        }),
-        tab === "video" && draft.video.endpoints.map((ep, idx) => {
-          const saved = curDetailById.get(ep.id);
-          const isExpanded = expandedId.video === ep.id;
-          const showKey = Boolean(showKeyIds[ep.id]);
-          return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
-            renderEndpointHeader(
-              ep,
-              idx,
-              draft.video.endpoints.length,
-              saved,
-              () => patchVideoEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
-            ),
-            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaPresetRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedance-1-0-pro-250528" })),
-                    children: "\u706B\u5C71\u65B9\u821F Seedance"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "openai", baseURL: "https://api.openai.com/v1", model: "sora-2" })),
-                    children: "OpenAI Videos"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
-                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u63A5\u53E3\u540D\u79F0",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "name",
-                      value: ep.name,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u65B9\u821F / \u5907\u7528 Sora"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "weight",
-                      type: "number",
-                      min: 1,
-                      max: 10,
-                      value: ep.weight,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.pillRow, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "ark" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "ark" })),
-                      children: "\u706B\u5C71\u65B9\u821F Seedance\uFF08\u9996\u5E27 + \u591A\u53C2\u8003\u56FE\uFF09"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: ep.flavor === "openai" ? style_default.pillActive : style_default.pillBtn,
-                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "openai" })),
-                      children: "OpenAI Videos\uFF08/videos\uFF09"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "baseURL",
-                    value: ep.baseURL,
-                    onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
-                    placeholder: "\u4F8B\u5982\uFF1Ahttps://ark.cn-beijing.volces.com/api/v3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.secretInputWrap, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "apiKey",
-                      type: showKey ? "text" : "password",
-                      value: ep.apiKey,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
-                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
-                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: style_default.secretToggleBtn,
-                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
-                      children: "\u6E05\u9664"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "model",
-                      value: ep.model,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
-                      placeholder: "doubao-seedance-1-0-pro-250528"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u65F6\u957F\uFF08\u79D2\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "duration",
-                      type: "number",
-                      min: 2,
-                      max: 20,
-                      value: ep.duration,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, duration: Number(e.target.value) || 5 }))
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u753B\u5E45",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-                    "select",
-                    {
-                      "data-media-field": "ratio",
-                      value: ep.ratio,
-                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, ratio: e.target.value })),
-                      children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u5F62" })
-                      ]
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "apiKeyEnv",
-                    value: ep.apiKeyEnv,
-                    onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
-                    placeholder: "MUJING_VIDEO_API_KEY"
-                  }
-                )
-              ] }),
-              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
-                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
-                saved.lastError
-              ] })
-            ] })
-          ] }, ep.id);
-        }),
-        tab === "audio" && draft.audio.endpoints.map((ep, idx) => {
-          const saved = curDetailById.get(ep.id);
-          const isExpanded = expandedId.audio === ep.id;
-          const showKey = Boolean(showKeyIds[ep.id]);
-          const firstImageBase = draft.image.endpoints[0]?.baseURL ?? "";
-          return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
-            renderEndpointHeader(
-              ep,
-              idx,
-              draft.audio.endpoints.length,
-              saved,
-              () => patchAudioEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
-            ),
-            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaPresetRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: "https://api.openai.com/v1", model: "gpt-4o-mini-tts", voice: "alloy", format: "mp3" })),
-                    children: "OpenAI TTS"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: firstImageBase || cur.baseURL })),
-                    children: "\u590D\u7528\u751F\u56FE\u63A5\u53E3\u5730\u5740"
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "button",
-                  {
-                    type: "button",
-                    className: style_default.pillBtn,
-                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
-                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u63A5\u53E3\u540D\u79F0",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "name",
-                      value: ep.name,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
-                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u914D\u97F3 / \u5907\u7528\u914D\u97F3"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "weight",
-                      type: "number",
-                      min: 1,
-                      max: 10,
-                      value: ep.weight,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF0COpenAI \u517C\u5BB9 /audio/speech\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "baseURL",
-                    value: ep.baseURL,
-                    onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
-                    placeholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.secretInputWrap, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "apiKey",
-                      type: showKey ? "text" : "password",
-                      value: ep.apiKey,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
-                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key"
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
-                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "button",
-                    {
-                      type: "button",
-                      className: style_default.secretToggleBtn,
-                      onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
-                      children: "\u6E05\u9664"
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaFieldRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "model",
-                      value: ep.model,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
-                      placeholder: "gpt-4o-mini-tts"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u9ED8\u8BA4\u97F3\u8272\uFF08Voice\uFF09",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                    "input",
-                    {
-                      "data-media-field": "voice",
-                      value: ep.voice,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, voice: e.target.value })),
-                      placeholder: "alloy / nova / shimmer"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                  "\u8F93\u51FA\u683C\u5F0F",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-                    "select",
-                    {
-                      "data-media-field": "format",
-                      value: ep.format,
-                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, format: e.target.value === "wav" ? "wav" : "mp3" })),
-                      children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "mp3", children: "MP3" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "wav", children: "WAV" })
-                      ]
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "input",
-                  {
-                    "data-media-field": "apiKeyEnv",
-                    value: ep.apiKeyEnv,
-                    onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
-                    placeholder: "MUJING_AUDIO_API_KEY"
-                  }
-                )
-              ] }),
-              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
-                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
-                saved.lastError
-              ] })
-            ] })
-          ] }, ep.id);
-        })
-      ] }),
-      err && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaInlineMsgErr, children: err }),
-      msg && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.mediaInlineMsgOk, children: msg })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.modalFooter, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        "button",
-        {
-          type: "button",
-          className: style_default.btn,
-          style: { marginRight: "auto" },
-          disabled: loading || saving,
-          onClick: () => void handleResetTab(),
-          children: "\u6062\u590D\u9ED8\u8BA4\u914D\u7F6E"
-        }
-      ),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onClose, children: "\u5173\u95ED" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-        "button",
-        {
-          type: "button",
-          className: style_default.btnPrimary,
-          "data-media-save": "1",
-          disabled: loading || saving || !draft,
-          onClick: () => void handleSave(),
-          children: saving ? "\u4FDD\u5B58\u4E2D\u2026" : "\u4FDD\u5B58\u5E76\u751F\u6548"
-        }
-      )
-    ] })
-  ] }) });
-}
+
+// src/client/DramaView.tsx
+var import_react3 = require("react");
+var import_jsx_runtime3 = require("react/jsx-runtime");
 function DramaView({ project, onError, onNotify, onSwitchTab }) {
   const drama = project.drama;
-  const [style, setStyle] = (0, import_react2.useState)(drama?.style ?? STYLE_PRESETS[0].style);
-  const [aspectRatio, setAspectRatio] = (0, import_react2.useState)(drama?.aspectRatio ?? "9:16");
-  const [segmentTargetSec, setSegmentTargetSec] = (0, import_react2.useState)(drama?.segmentTargetSec ?? 10);
-  const [novelText, setNovelText] = (0, import_react2.useState)(drama?.novelText ?? "");
-  const [busy, setBusy] = (0, import_react2.useState)(null);
-  const [showBible, setShowBible] = (0, import_react2.useState)(false);
-  const [addingCast, setAddingCast] = (0, import_react2.useState)(false);
-  const [castKind, setCastKind] = (0, import_react2.useState)("character");
-  const [castName, setCastName] = (0, import_react2.useState)("");
-  const [castRole, setCastRole] = (0, import_react2.useState)("");
-  const [castVoice, setCastVoice] = (0, import_react2.useState)("nova");
-  const [castAppearance, setCastAppearance] = (0, import_react2.useState)("");
-  const [editingShotKey, setEditingShotKey] = (0, import_react2.useState)(null);
-  const [shotDraft, setShotDraft] = (0, import_react2.useState)({ scene: "", shotSize: "\u4E2D\u666F", camera: "\u7F13\u63A8", action: "", speaker: "", dialogue: "", durationSec: 3.5 });
-  const [editingSegKey, setEditingSegKey] = (0, import_react2.useState)(null);
-  const [segPromptDraft, setSegPromptDraft] = (0, import_react2.useState)("");
-  (0, import_react2.useEffect)(() => {
+  const [style, setStyle] = (0, import_react3.useState)(drama?.style ?? STYLE_PRESETS[0].style);
+  const [aspectRatio, setAspectRatio] = (0, import_react3.useState)(drama?.aspectRatio ?? "9:16");
+  const [segmentTargetSec, setSegmentTargetSec] = (0, import_react3.useState)(drama?.segmentTargetSec ?? 10);
+  const [novelText, setNovelText] = (0, import_react3.useState)(drama?.novelText ?? "");
+  const [busy, setBusy] = (0, import_react3.useState)(null);
+  const [showBible, setShowBible] = (0, import_react3.useState)(false);
+  const [addingCast, setAddingCast] = (0, import_react3.useState)(false);
+  const [castKind, setCastKind] = (0, import_react3.useState)("character");
+  const [castName, setCastName] = (0, import_react3.useState)("");
+  const [castRole, setCastRole] = (0, import_react3.useState)("");
+  const [castVoice, setCastVoice] = (0, import_react3.useState)("nova");
+  const [castAppearance, setCastAppearance] = (0, import_react3.useState)("");
+  const [editingShotKey, setEditingShotKey] = (0, import_react3.useState)(null);
+  const [shotDraft, setShotDraft] = (0, import_react3.useState)({ scene: "", shotSize: "\u4E2D\u666F", camera: "\u7F13\u63A8", action: "", speaker: "", dialogue: "", durationSec: 3.5 });
+  const [editingSegKey, setEditingSegKey] = (0, import_react3.useState)(null);
+  const [segPromptDraft, setSegPromptDraft] = (0, import_react3.useState)("");
+  (0, import_react3.useEffect)(() => {
     setStyle(project.drama?.style ?? STYLE_PRESETS[0].style);
     setAspectRatio(project.drama?.aspectRatio ?? "9:16");
     setSegmentTargetSec(project.drama?.segmentTargetSec ?? 10);
@@ -6758,19 +5034,19 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
   const lockedCount = casts.filter((c) => c.locked && c.imageUrl).length;
   const totalShots = episodes.reduce((sum, ep) => sum + ep.shots.length, 0);
   const bibleExpanded = showBible || casts.length === 0 && episodes.length === 0;
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.panelScroll, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.panelInner, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.sectionCard, children: !bibleExpanded ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.bibleBar, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.bibleBarLeft, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.ratioTag, children: aspectRatio }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badge, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.panelScroll, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.panelInner, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.sectionCard, children: !bibleExpanded ? /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.bibleBar, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.bibleBarLeft, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.ratioTag, children: aspectRatio }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.badge, children: [
           "\u5355\u6BB5 ",
           segmentTargetSec,
           "s"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.bibleStyleText, title: style, children: style || "\u672A\u8BBE\u7F6E\u7EDF\u4E00\u89C6\u89C9\u98CE\u683C" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.bibleStyleText, title: style, children: style || "\u672A\u8BBE\u7F6E\u7EDF\u4E00\u89C6\u89C9\u98CE\u683C" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.bibleBarRight, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.bibleStats, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.bibleBarRight, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.bibleStats, children: [
           lockedCount,
           "/",
           casts.length,
@@ -6780,43 +5056,43 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
           totalShots,
           " \u955C"
         ] }),
-        busy && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.badgeAccent, children: busy }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setShowBible(true), children: "\u270E \u5267\u672C\u4E0E\u753B\u98CE" })
+        busy && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.badgeAccent, children: busy }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setShowBible(true), children: "\u270E \u5267\u672C\u4E0E\u753B\u98CE" })
       ] })
-    ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionTitle, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.stepNum, children: "1" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u5267\u672C\u539F\u7A3F\u4E0E\u5168\u5267\u7F8E\u672F\u8BBE\u5B9A\uFF08Style Bible\uFF09" }),
-          busy && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.badgeAccent, children: busy })
+    ] }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionHead, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionTitle, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.stepNum, children: "1" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u5267\u672C\u539F\u7A3F\u4E0E\u5168\u5267\u7F8E\u672F\u8BBE\u5B9A\uFF08Style Bible\uFF09" }),
+          busy && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.badgeAccent, children: busy })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-          episodes.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, disabled: busy !== null, onClick: () => void loadDemoDrama(), children: "\u2728 \u8F7D\u5165\u300A\u96E8\u591C\u82AF\u7247\u300B\u6837\u7247" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: busy !== null, onClick: () => void saveMeta(), children: "\u4FDD\u5B58\u8BBE\u5B9A" }),
-          (casts.length > 0 || episodes.length > 0) && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setShowBible(false), children: "\u6536\u8D77" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+          episodes.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, disabled: busy !== null, onClick: () => void loadDemoDrama(), children: "\u2728 \u8F7D\u5165\u300A\u96E8\u591C\u82AF\u7247\u300B\u6837\u7247" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: busy !== null, onClick: () => void saveMeta(), children: "\u4FDD\u5B58\u8BBE\u5B9A" }),
+          (casts.length > 0 || episodes.length > 0) && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setShowBible(false), children: "\u6536\u8D77" })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.gridRow, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
           "\u5168\u5267\u7EDF\u4E00\u89C6\u89C9\u98CE\u683C\uFF08Style Bible\uFF09",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: style, onChange: (e) => setStyle(e.target.value), placeholder: "\u5982\uFF1A\u7535\u5F71\u7EA7\u51B7\u8C03\u5199\u5B9E / \u56FD\u98CE3D\u52A8\u753B\u2026" })
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { value: style, onChange: (e) => setStyle(e.target.value), placeholder: "\u5982\uFF1A\u7535\u5F71\u7EA7\u51B7\u8C03\u5199\u5B9E / \u56FD\u98CE3D\u52A8\u753B\u2026" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
           "\u76EE\u6807\u753B\u5E45",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("select", { value: aspectRatio, onChange: (e) => setAspectRatio(e.target.value), children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F\u77ED\u5267\uFF08\u6296\u97F3/\u7EA2\u679C\uFF09" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F\u6F2B\u5267/\u5F71\u89C6" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u5F62\u753B\u5E45" })
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("select", { value: aspectRatio, onChange: (e) => setAspectRatio(e.target.value), children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F\u77ED\u5267\uFF08\u6296\u97F3/\u7EA2\u679C\uFF09" }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F\u6F2B\u5267/\u5F71\u89C6" }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u5F62\u753B\u5E45" })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
           "\u5355\u6BB5\u89C6\u9891\u4E0A\u9650\uFF08\u79D2\uFF09",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { type: "number", min: 4, max: 15, value: segmentTargetSec, onChange: (e) => setSegmentTargetSec(Number(e.target.value) || 10) })
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { type: "number", min: 4, max: 15, value: segmentTargetSec, onChange: (e) => setSegmentTargetSec(Number(e.target.value) || 10) })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u5C0F\u8BF4\u539F\u6587 / \u6545\u4E8B\u6897\u6982\uFF08\u5728\u5DE6\u4FA7\u53D1\u9001\u7ED9\u300C\u5E55\u5883\u5BFC\u6F14\u300D\u5373\u53EF\u5168\u81EA\u52A8\u62C6\u96C6\u3001\u9501\u5B9A\u89D2\u8272\u4E09\u89C6\u56FE\u5E76\u751F\u6210\u6210\u7247\uFF09",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
           "textarea",
           {
             rows: 3,
@@ -6827,109 +5103,109 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionCard, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionTitle, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.stepNum, children: "2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u89D2\u8272\u4E0E\u573A\u666F\u8D44\u4EA7\u9501\u5B9A" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badge, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionCard, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionHead, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionTitle, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.stepNum, children: "2" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u89D2\u8272\u4E0E\u573A\u666F\u8D44\u4EA7\u9501\u5B9A" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.badge, children: [
             lockedCount,
             "/",
             casts.length,
             " \u5DF2\u9501\u5B9A"
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setAddingCast((v) => !v), children: addingCast ? "\u6536\u8D77" : "\uFF0B \u6DFB\u52A0\u8D44\u4EA7" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: casts.length === 0 || busy !== null, onClick: () => void generateCasts(), children: "\u6279\u91CF\u9501\u5B9A\u8BBE\u5B9A\u56FE" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setAddingCast((v) => !v), children: addingCast ? "\u6536\u8D77" : "\uFF0B \u6DFB\u52A0\u8D44\u4EA7" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: casts.length === 0 || busy !== null, onClick: () => void generateCasts(), children: "\u6279\u91CF\u9501\u5B9A\u8BBE\u5B9A\u56FE" })
         ] })
       ] }),
-      addingCast && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.inlineEditorBox, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      addingCast && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.inlineEditorBox, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.gridRow, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
             "\u8D44\u4EA7\u7C7B\u578B",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("select", { value: castKind, onChange: (e) => setCastKind(e.target.value), children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "character", children: "\u{1F464} \u6838\u5FC3\u89D2\u8272\uFF08\u4E09\u89C6\u56FE\uFF09" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "scene", children: "\u{1F3DB}\uFE0F \u5E38\u9A7B\u573A\u666F\uFF08\u7A7A\u955C\u951A\u70B9\uFF09" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "prop", children: "\u{1F5E1}\uFE0F \u5173\u952E\u9053\u5177\uFF08\u7279\u5199\u8BBE\u5B9A\uFF09" })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("select", { value: castKind, onChange: (e) => setCastKind(e.target.value), children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "character", children: "\u{1F464} \u6838\u5FC3\u89D2\u8272\uFF08\u4E09\u89C6\u56FE\uFF09" }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "scene", children: "\u{1F3DB}\uFE0F \u5E38\u9A7B\u573A\u666F\uFF08\u7A7A\u955C\u951A\u70B9\uFF09" }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "prop", children: "\u{1F5E1}\uFE0F \u5173\u952E\u9053\u5177\uFF08\u7279\u5199\u8BBE\u5B9A\uFF09" })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
             "\u540D\u79F0",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: castName, onChange: (e) => setCastName(e.target.value), placeholder: "\u5982\uFF1A\u6C88\u6E05\u8F9E / \u98CE\u96EA\u57CE\u697C\xB7\u591C" })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { value: castName, onChange: (e) => setCastName(e.target.value), placeholder: "\u5982\uFF1A\u6C88\u6E05\u8F9E / \u98CE\u96EA\u57CE\u697C\xB7\u591C" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
             "\u8EAB\u4EFD\u5B9A\u4F4D",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: castRole, onChange: (e) => setCastRole(e.target.value), placeholder: "\u5982\uFF1A\u5973\u4E3B\xB7\u4EA1\u56FD\u516C\u4E3B" })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { value: castRole, onChange: (e) => setCastRole(e.target.value), placeholder: "\u5982\uFF1A\u5973\u4E3B\xB7\u4EA1\u56FD\u516C\u4E3B" })
           ] }),
-          castKind === "character" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+          castKind === "character" && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
             "\u7ED1\u5B9A\u97F3\u8272\uFF08TTS\uFF09",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("select", { value: castVoice, onChange: (e) => setCastVoice(e.target.value), children: VOICES.map((v) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: v, children: v }, v)) })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("select", { value: castVoice, onChange: (e) => setCastVoice(e.target.value), children: VOICES.map((v) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: v, children: v }, v)) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
           "\u56FA\u5B9A\u89C6\u89C9\u5916\u8C8C / \u573A\u666F\u5149\u5F71\u951A\u70B9\u63CF\u8FF0",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: castAppearance, onChange: (e) => setCastAppearance(e.target.value), placeholder: "\u5E74\u9F84\u3001\u53D1\u578B\u53D1\u8272\u3001\u6807\u5FD7\u6027\u670D\u9970\u6750\u8D28\uFF0C\u6216\u5EFA\u7B51\u5149\u5F71\u6C1B\u56F4\u2026" })
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { value: castAppearance, onChange: (e) => setCastAppearance(e.target.value), placeholder: "\u5E74\u9F84\u3001\u53D1\u578B\u53D1\u8272\u3001\u6807\u5FD7\u6027\u670D\u9970\u6750\u8D28\uFF0C\u6216\u5EFA\u7B51\u5149\u5F71\u6C1B\u56F4\u2026" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: busy !== null, onClick: () => void submitAddCast(), children: "\u4FDD\u5B58\u8D44\u4EA7" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setAddingCast(false), children: "\u53D6\u6D88" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: busy !== null, onClick: () => void submitAddCast(), children: "\u4FDD\u5B58\u8D44\u4EA7" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setAddingCast(false), children: "\u53D6\u6D88" })
         ] })
       ] }),
-      casts.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, children: "\u6682\u65E0\u89C6\u89C9\u8BBE\u5B9A\u5361\u3002\u70B9\u51FB\u4E0A\u65B9\u300C\u8F7D\u5165\u6837\u7247\u300D\u6216\u5728\u5DE6\u4FA7\u8BA9\u300C\u5E55\u5883\u5BFC\u6F14\u300D\u81EA\u52A8\u63D0\u70BC\u3002" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.castGrid, children: casts.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.castCard, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.castPreview, children: [
-          c.imageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: c.imageUrl, alt: c.name }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u5F85\u751F\u6210\u8BBE\u5B9A\u56FE" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.castOverlayKind, "data-kind": c.kind, children: CAST_KIND_LABEL[c.kind] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: c.locked && c.imageUrl ? style_default.castOverlayLock : style_default.castOverlayPending, children: c.locked && c.imageUrl ? "\u2713 \u5DF2\u9501\u5B9A" : "\u5F85\u51FA\u56FE" })
+      casts.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.dim, children: "\u6682\u65E0\u89C6\u89C9\u8BBE\u5B9A\u5361\u3002\u70B9\u51FB\u4E0A\u65B9\u300C\u8F7D\u5165\u6837\u7247\u300D\u6216\u5728\u5DE6\u4FA7\u8BA9\u300C\u5E55\u5883\u5BFC\u6F14\u300D\u81EA\u52A8\u63D0\u70BC\u3002" }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.castGrid, children: casts.map((c) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.castCard, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.castPreview, children: [
+          c.imageUrl ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: c.imageUrl, alt: c.name }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u5F85\u751F\u6210\u8BBE\u5B9A\u56FE" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.castOverlayKind, "data-kind": c.kind, children: CAST_KIND_LABEL[c.kind] }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: c.locked && c.imageUrl ? style_default.castOverlayLock : style_default.castOverlayPending, children: c.locked && c.imageUrl ? "\u2713 \u5DF2\u9501\u5B9A" : "\u5F85\u51FA\u56FE" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.castMetaBody, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.castHeadLine, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { className: style_default.castName, children: c.name }),
-            c.voice && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.voiceTag, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.castMetaBody, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.castHeadLine, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { className: style_default.castName, children: c.name }),
+            c.voice && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.voiceTag, children: [
               "\u{1F399} ",
               c.voice
             ] })
           ] }),
-          c.role && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.castRoleLine, children: c.role }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.castAppearanceText, title: c.appearance, children: c.appearance }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.castFootActions, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: busy !== null, onClick: () => void generateCasts(c.id), children: c.imageUrl ? "\u21BB \u91CD\u7ED8" : "\u751F\u6210" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtnDanger, disabled: busy !== null, onClick: () => void removeCast(c.id), children: "\u79FB\u9664" })
+          c.role && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.castRoleLine, children: c.role }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.castAppearanceText, title: c.appearance, children: c.appearance }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.castFootActions, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: busy !== null, onClick: () => void generateCasts(c.id), children: c.imageUrl ? "\u21BB \u91CD\u7ED8" : "\u751F\u6210" }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.miniBtnDanger, disabled: busy !== null, onClick: () => void removeCast(c.id), children: "\u79FB\u9664" })
           ] })
         ] })
       ] }, c.id)) })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionCard, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.sectionHead, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionTitle, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.stepNum, children: "3" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u5206\u955C\u6545\u4E8B\u677F\u4E0E\u8FDE\u7EED\u51FA\u7247" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badge, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionCard, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.sectionHead, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionTitle, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.stepNum, children: "3" }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u5206\u955C\u6545\u4E8B\u677F\u4E0E\u8FDE\u7EED\u51FA\u7247" }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.badge, children: [
           episodes.length,
           " \u96C6"
         ] })
       ] }) }),
-      episodes.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, children: "\u6682\u65E0\u5206\u96C6\u5206\u955C\u3002\u8BA9\u5DE6\u4FA7\u300C\u5E55\u5883\u5BFC\u6F14\u300D\u81EA\u52A8\u89C4\u5212\u5206\u955C\uFF0C\u6216\u70B9\u51FB\u4E0A\u65B9\u8F7D\u5165\u6837\u7247\u3002" }) : episodes.map((ep) => {
+      episodes.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.dim, children: "\u6682\u65E0\u5206\u96C6\u5206\u955C\u3002\u8BA9\u5DE6\u4FA7\u300C\u5E55\u5883\u5BFC\u6F14\u300D\u81EA\u52A8\u89C4\u5212\u5206\u955C\uFF0C\u6216\u70B9\u51FB\u4E0A\u65B9\u8F7D\u5165\u6837\u7247\u3002" }) : episodes.map((ep) => {
         const hasDialogues = ep.shots.some((s) => Boolean(s.dialogue?.trim()));
         const isPortrait = aspectRatio === "9:16";
-        return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epCard, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionTitle, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
+        return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epCard, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionHead, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionTitle, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { children: [
                 "\u7B2C ",
                 ep.number,
                 " \u96C6 \xB7 \u300A",
                 ep.title,
                 "\u300B"
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badge, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.badge, children: [
                 ep.shots.length,
                 " \u955C \xB7 ",
                 ep.segments.length,
                 " \u6BB5"
               ] })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                 "button",
                 {
                   type: "button",
@@ -6939,7 +5215,7 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                   children: "\u25B6 \u5C3E\u5E27\u63A5\u7EED\u51FA\u7247"
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                 "button",
                 {
                   type: "button",
@@ -6951,8 +5227,8 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
               )
             ] })
           ] }),
-          ep.finalVideoUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epHeroCard, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          ep.finalVideoUrl ? /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epHeroCard, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
               "video",
               {
                 className: isPortrait ? style_default.epHeroVideoPortrait : style_default.epHeroVideoLandscape,
@@ -6961,58 +5237,58 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                 playsInline: true
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epHeroInfo, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badgeOk, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epHeroInfo, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionHead, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.badgeOk, children: [
                   "\u2713 \u7B2C ",
                   ep.number,
                   " \u96C6\u6210\u7247\u5DF2\u5C31\u7EEA"
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.dim, style: { fontSize: 11 }, children: "FFmpeg \u97F3\u753B\u6DF7\u6D41 + SRT \u5B57\u5E55" })
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.dim, style: { fontSize: 11 }, children: "FFmpeg \u97F3\u753B\u6DF7\u6D41 + SRT \u5B57\u5E55" })
               ] }),
-              ep.synopsis && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.epHeroSynopsis, children: ep.synopsis }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epHeroTags, children: [
-                ep.hook && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epTagLine, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u26A1 \u94A9\u5B50" }),
+              ep.synopsis && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.epHeroSynopsis, children: ep.synopsis }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epHeroTags, children: [
+                ep.hook && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epTagLine, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u26A1 \u94A9\u5B50" }),
                   ep.hook
                 ] }),
-                ep.cliffhanger && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epTagLine, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u{1F525} \u60AC\u5FF5" }),
+                ep.cliffhanger && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epTagLine, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u{1F525} \u60AC\u5FF5" }),
                   ep.cliffhanger
                 ] })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, style: { marginTop: "auto" }, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => onSwitchTab("timeline"), children: "\u53BB\u65F6\u95F4\u7EBF / \u5BFC\u51FA\u526A\u6620 \u2197" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { className: style_default.btn, href: ep.finalVideoUrl, download: `${project.title}-EP${ep.number}.mp4`, children: "\u4E0B\u8F7D MP4" })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, style: { marginTop: "auto" }, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => onSwitchTab("timeline"), children: "\u53BB\u65F6\u95F4\u7EBF / \u5BFC\u51FA\u526A\u6620 \u2197" }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("a", { className: style_default.btn, href: ep.finalVideoUrl, download: `${project.title}-EP${ep.number}.mp4`, children: "\u4E0B\u8F7D MP4" })
               ] })
             ] })
-          ] }) : ep.synopsis || ep.hook || ep.cliffhanger ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epMetaBanner, children: [
-            ep.synopsis && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u5267\u60C5\u6897\u6982\uFF1A" }),
+          ] }) : ep.synopsis || ep.hook || ep.cliffhanger ? /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epMetaBanner, children: [
+            ep.synopsis && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { children: "\u5267\u60C5\u6897\u6982\uFF1A" }),
               ep.synopsis
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.epHookRow, children: [
-              ep.hook && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.epHookRow, children: [
+              ep.hook && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { children: [
                 "\u26A1 ",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u5F00\u573A\u94A9\u5B50\uFF1A" }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { children: "\u5F00\u573A\u94A9\u5B50\uFF1A" }),
                 ep.hook
               ] }),
-              ep.cliffhanger && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
+              ep.cliffhanger && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { children: [
                 "\u{1F525} ",
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u96C6\u5C3E\u60AC\u5FF5\uFF1A" }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { children: "\u96C6\u5C3E\u60AC\u5FF5\uFF1A" }),
                 ep.cliffhanger
               ] })
             ] })
           ] }) : null,
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.subSectionHeader, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("b", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.subSectionHeader, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("b", { children: [
               "\u5206\u955C\u6545\u4E8B\u677F\uFF08",
               ep.shots.length,
               " \u955C\uFF09"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, onClick: () => startEditShot(ep.number), children: "\uFF0B \u52A0\u955C" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.miniBtn, onClick: () => startEditShot(ep.number), children: "\uFF0B \u52A0\u955C" }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                 "button",
                 {
                   type: "button",
@@ -7022,7 +5298,7 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                   children: "\u{1F5BC} \u5168\u90E8\u5173\u952E\u5E27"
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                 "button",
                 {
                   type: "button",
@@ -7034,7 +5310,7 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
               )
             ] })
           ] }),
-          editingShotKey === `${ep.number}:new` && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          editingShotKey === `${ep.number}:new` && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
             ShotEditorForm,
             {
               draft: shotDraft,
@@ -7046,10 +5322,10 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
               onCancel: () => setEditingShotKey(null)
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.shotStripList, children: ep.shots.map((sh, idx) => {
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.shotStripList, children: ep.shots.map((sh, idx) => {
             const isEditing = editingShotKey === `${ep.number}:${sh.id}`;
             if (isEditing) {
-              return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                 ShotEditorForm,
                 {
                   draft: shotDraft,
@@ -7063,16 +5339,16 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                 sh.id
               );
             }
-            return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotStrip, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotStripThumbCol, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotKfBox, children: [
-                  sh.keyframeUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: sh.keyframeUrl, alt: `\u955C${idx + 1}\u5173\u952E\u5E27` }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.shotKfEmpty, children: "\u672A\u51FA\u56FE" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.shotThumbBadge, children: [
+            return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotStrip, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotStripThumbCol, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotKfBox, children: [
+                  sh.keyframeUrl ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: sh.keyframeUrl, alt: `\u955C${idx + 1}\u5173\u952E\u5E27` }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.shotKfEmpty, children: "\u672A\u51FA\u56FE" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.shotThumbBadge, children: [
                     "#",
                     idx + 1
                   ] })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                   "button",
                   {
                     type: "button",
@@ -7084,13 +5360,13 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotStripBody, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotCardTop, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.shotIdxBadge, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotStripBody, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotCardTop, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.shotIdxBadge, children: [
                     "S",
                     sh.segmentIndex + 1
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.shotCameraMeta, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.shotCameraMeta, children: [
                     sh.shotSize,
                     " \xB7 ",
                     sh.camera,
@@ -7098,20 +5374,20 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                     (sh.durationMs / 1e3).toFixed(1),
                     "s"
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.shotSceneChip, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.shotSceneChip, children: [
                     "\u{1F4CD} ",
                     sh.scene
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotMiniBtns, children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, onClick: () => startEditShot(ep.number, sh), children: "\u7F16\u8F91" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtnDanger, onClick: () => void deleteShot(ep.number, sh.id), children: "\xD7" })
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotMiniBtns, children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.miniBtn, onClick: () => startEditShot(ep.number, sh), children: "\u7F16\u8F91" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.miniBtnDanger, onClick: () => void deleteShot(ep.number, sh.id), children: "\xD7" })
                   ] })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.shotActionText, children: sh.action }),
-                sh.dialogue ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotDialogueBox, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotDialogueRow, children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.shotDialogueText, children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("b", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.shotActionText, children: sh.action }),
+                sh.dialogue ? /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotDialogueBox, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.shotDialogueRow, children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: style_default.shotDialogueText, children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("b", { children: [
                         sh.speaker || "\u89D2\u8272",
                         "\uFF1A"
                       ] }),
@@ -7119,7 +5395,7 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                       sh.dialogue,
                       "\u300D"
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                       "button",
                       {
                         type: "button",
@@ -7130,54 +5406,54 @@ function DramaView({ project, onError, onNotify, onSwitchTab }) {
                       }
                     )
                   ] }),
-                  sh.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("audio", { src: sh.audioUrl, controls: true, className: style_default.shotAudioPlayer })
-                ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, style: { fontSize: 11 }, children: "\uFF08\u65E0\u53F0\u8BCD \xB7 \u7EAF\u52A8\u4F5C\u955C\u5934\uFF09" })
+                  sh.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("audio", { src: sh.audioUrl, controls: true, className: style_default.shotAudioPlayer })
+                ] }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.dim, style: { fontSize: 11 }, children: "\uFF08\u65E0\u53F0\u8BCD \xB7 \u7EAF\u52A8\u4F5C\u955C\u5934\uFF09" })
               ] })
             ] }, sh.id);
           }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.subSectionHeader, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u8FDE\u7EED\u89C6\u9891\u6BB5\uFF08FFmpeg \u5C3E\u5E27\u63A5\u7EED\uFF09" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.dim, style: { fontSize: 11 }, children: "\u540C\u573A\u666F\u81EA\u52A8\u62BD\u4E0A\u6BB5\u5C3E\u5E27\u63A5\u7EED\u9996\u5E27" })
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.subSectionHeader, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { children: "\u8FDE\u7EED\u89C6\u9891\u6BB5\uFF08FFmpeg \u5C3E\u5E27\u63A5\u7EED\uFF09" }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.dim, style: { fontSize: 11 }, children: "\u540C\u573A\u666F\u81EA\u52A8\u62BD\u4E0A\u6BB5\u5C3E\u5E27\u63A5\u7EED\u9996\u5E27" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.segList, children: ep.segments.map((seg) => {
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.segList, children: ep.segments.map((seg) => {
             const vNode = seg.videoNodeId ? project.nodes.find((n) => n.id === seg.videoNodeId) : void 0;
             const videoUrl = vNode?.url;
             const segKey = `${ep.id}:${seg.index}`;
             const isEditingPrompt = editingSegKey === segKey;
-            return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.segCard, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { style: { fontSize: 12.5 }, children: seg.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: seg.status === "success" ? style_default.badgeOk : style_default.badge, children: [
+            return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.segCard, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.sectionHead, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { style: { fontSize: 12.5 }, children: seg.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: seg.status === "success" ? style_default.badgeOk : style_default.badge, children: [
                   STATUS_LABEL[seg.status],
                   " \xB7 ",
                   (seg.durationMs / 1e3).toFixed(1),
                   "s"
                 ] })
               ] }),
-              videoUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("video", { className: style_default.segVideo, src: videoUrl, controls: true, muted: true, playsInline: true }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.segPlaceholder, children: seg.firstFrameUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: seg.firstFrameUrl, alt: "\u627F\u63A5\u9996\u5E27" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u5F85\u751F\u6210\u8FDE\u7EED\u89C6\u9891\u6BB5" }) }),
-              seg.index > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.segHandoffRow, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.dim, style: { fontSize: 11 }, children: "\u8854\u63A5\uFF1A" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              videoUrl ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("video", { className: style_default.segVideo, src: videoUrl, controls: true, muted: true, playsInline: true }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.segPlaceholder, children: seg.firstFrameUrl ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: seg.firstFrameUrl, alt: "\u627F\u63A5\u9996\u5E27" }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u5F85\u751F\u6210\u8FDE\u7EED\u89C6\u9891\u6BB5" }) }),
+              seg.index > 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.segHandoffRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: style_default.dim, style: { fontSize: 11 }, children: "\u8854\u63A5\uFF1A" }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                   "select",
                   {
                     className: style_default.segHandoffSelect,
                     value: seg.handoff,
                     onChange: (e) => void saveSegmentPatch(ep, seg.index, { handoff: e.target.value }),
-                    children: Object.entries(HANDOFF_LABEL).map(([k, label]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: k, children: label }, k))
+                    children: Object.entries(HANDOFF_LABEL).map(([k, label]) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: k, children: label }, k))
                   }
                 )
               ] }),
-              isEditingPrompt ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.field, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("textarea", { rows: 3, value: segPromptDraft, onChange: (e) => setSegPromptDraft(e.target.value) }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => void saveSegmentPatch(ep, seg.index, { prompt: segPromptDraft }), children: "\u4FDD\u5B58" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setEditingSegKey(null), children: "\u53D6\u6D88" })
+              isEditingPrompt ? /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.field, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("textarea", { rows: 3, value: segPromptDraft, onChange: (e) => setSegPromptDraft(e.target.value) }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => void saveSegmentPatch(ep, seg.index, { prompt: segPromptDraft }), children: "\u4FDD\u5B58" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, onClick: () => setEditingSegKey(null), children: "\u53D6\u6D88" })
                 ] })
-              ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.segPromptPreview, title: seg.prompt, children: seg.prompt }),
-              seg.error && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.errText, children: seg.error }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, style: { marginTop: "auto" }, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: busy !== null, onClick: () => void runEpisode(ep.number, seg.index), children: videoUrl ? "\u21BB \u91CD\u8DD1\u6B64\u6BB5" : "\u25B6 \u751F\u6210\u6B64\u6BB5" }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.segPromptPreview, title: seg.prompt, children: seg.prompt }),
+              seg.error && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: style_default.errText, children: seg.error }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, style: { marginTop: "auto" }, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: busy !== null, onClick: () => void runEpisode(ep.number, seg.index), children: videoUrl ? "\u21BB \u91CD\u8DD1\u6B64\u6BB5" : "\u25B6 \u751F\u6210\u6B64\u6BB5" }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                   "button",
                   {
                     type: "button",
@@ -7207,34 +5483,34 @@ function ShotEditorForm({
   onCancel
 }) {
   const charNames = casts.filter((c) => c.kind === "character").map((c) => c.name);
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.inlineEditorBox, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: title }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.inlineEditorBox, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("b", { children: title }),
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.gridRow, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u573A\u666F\u5730\u70B9\u4E0E\u5149\u5F71",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: draft.scene, onChange: (e) => onChange({ ...draft, scene: e.target.value }), placeholder: "\u540C\u573A\u666F\u540D\u4F1A\u81EA\u52A8\u89E6\u53D1\u5C3E\u5E27\u7EED\u62CD" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { value: draft.scene, onChange: (e) => onChange({ ...draft, scene: e.target.value }), placeholder: "\u540C\u573A\u666F\u540D\u4F1A\u81EA\u52A8\u89E6\u53D1\u5C3E\u5E27\u7EED\u62CD" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u666F\u522B",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("select", { value: draft.shotSize, onChange: (e) => onChange({ ...draft, shotSize: e.target.value }), children: SHOT_SIZES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: s, children: s }, s)) })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("select", { value: draft.shotSize, onChange: (e) => onChange({ ...draft, shotSize: e.target.value }), children: SHOT_SIZES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: s, children: s }, s)) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u8FD0\u955C\u65B9\u5F0F",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("select", { value: draft.camera, onChange: (e) => onChange({ ...draft, camera: e.target.value }), children: CAMERA_MOVES.map((m) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: m, children: m }, m)) })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("select", { value: draft.camera, onChange: (e) => onChange({ ...draft, camera: e.target.value }), children: CAMERA_MOVES.map((m) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: m, children: m }, m)) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u5355\u955C\u65F6\u957F\uFF08\u79D2\uFF09",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { type: "number", step: "0.5", min: 1.5, max: 12, value: draft.durationSec, onChange: (e) => onChange({ ...draft, durationSec: Number(e.target.value) || 3.5 }) })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { type: "number", step: "0.5", min: 1.5, max: 12, value: draft.durationSec, onChange: (e) => onChange({ ...draft, durationSec: Number(e.target.value) || 3.5 }) })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
       "\u753B\u9762\u52A8\u4F5C\u4E0E\u8868\u6F14\u7EC6\u8282\uFF08\u5FC5\u586B\uFF09",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("textarea", { rows: 2, value: draft.action, onChange: (e) => onChange({ ...draft, action: e.target.value }), placeholder: "\u63CF\u8FF0\u89D2\u8272\u795E\u6001\u3001\u80A2\u4F53\u52A8\u4F5C\u4E0E\u73AF\u5883\u5149\u5F71\u53D8\u5316\u2026" })
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("textarea", { rows: 2, value: draft.action, onChange: (e) => onChange({ ...draft, action: e.target.value }), placeholder: "\u63CF\u8FF0\u89D2\u8272\u795E\u6001\u3001\u80A2\u4F53\u52A8\u4F5C\u4E0E\u73AF\u5883\u5149\u5F71\u53D8\u5316\u2026" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.gridRow, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u8BF4\u8BDD\u89D2\u8272\uFF08\u53EF\u9009\uFF0C\u5339\u914D\u89D2\u8272\u5361\u81EA\u52A8\u9009\u7528\u5BF9\u5E94\u97F3\u8272\uFF09",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
           "input",
           {
             list: "mj-cast-speakers",
@@ -7243,505 +5519,1458 @@ function ShotEditorForm({
             placeholder: "\u5982\uFF1A\u6797\u9ED8 / \u65C1\u767D"
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("datalist", { id: "mj-cast-speakers", children: [
-          charNames.map((n) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: n }, n)),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "\u65C1\u767D" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("datalist", { id: "mj-cast-speakers", children: [
+          charNames.map((n) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: n }, n)),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("option", { value: "\u65C1\u767D" })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { className: style_default.field, children: [
         "\u89D2\u8272\u53F0\u8BCD / \u753B\u5916\u97F3\uFF08\u5C06\u81EA\u52A8\u751F\u6210\u914D\u97F3\u4E0E SRT \u5B57\u5E55\uFF09",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: draft.dialogue, onChange: (e) => onChange({ ...draft, dialogue: e.target.value }), placeholder: "\u65E0\u53F0\u8BCD\u53EF\u7559\u7A7A" })
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", { value: draft.dialogue, onChange: (e) => onChange({ ...draft, dialogue: e.target.value }), placeholder: "\u65E0\u53F0\u8BCD\u53EF\u7559\u7A7A" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: busy, onClick: onSave, children: "\u4FDD\u5B58\u5206\u955C" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onCancel, children: "\u53D6\u6D88" })
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: style_default.actions, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: busy, onClick: onSave, children: "\u4FDD\u5B58\u5206\u955C" }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { type: "button", className: style_default.btn, onClick: onCancel, children: "\u53D6\u6D88" })
     ] })
   ] });
 }
-function BoardView({ project, onError, onNotify }) {
-  const [selected, setSelected] = (0, import_react2.useState)(null);
-  const [view, setView] = (0, import_react2.useState)({ x: 32, y: 32, z: 0.78 });
-  const [drag, setDrag] = (0, import_react2.useState)(null);
-  const [local, setLocal] = (0, import_react2.useState)({});
-  const [dropping, setDropping] = (0, import_react2.useState)(false);
-  const stageRef = (0, import_react2.useRef)(null);
-  const uploadInputRef = (0, import_react2.useRef)(null);
-  const autoFittedProjectRef = (0, import_react2.useRef)(null);
-  (0, import_react2.useEffect)(() => {
-    setSelected(null);
-    setLocal({});
-    autoFittedProjectRef.current = null;
-  }, [project.id]);
-  const ops = (0, import_react2.useCallback)(async (list) => {
-    try {
-      return await call(`/projects/${project.id}/ops`, { method: "POST", body: { ops: list } });
-    } catch (e) {
-      onError(e.message);
-      return void 0;
-    }
-  }, [project.id, onError]);
-  const toWorld = (0, import_react2.useCallback)((cx, cy) => {
-    const r = stageRef.current?.getBoundingClientRect();
-    return { x: (cx - (r?.left ?? 0) - view.x) / view.z, y: (cy - (r?.top ?? 0) - view.y) / view.z };
-  }, [view]);
-  const fitAllNodes = (0, import_react2.useCallback)(() => {
-    const el = stageRef.current;
-    if (!el || project.nodes.length === 0) {
-      setView({ x: 32, y: 32, z: 0.85 });
-      return;
-    }
-    const minX = Math.min(...project.nodes.map((n) => n.x));
-    const minY = Math.min(...project.nodes.map((n) => n.y));
-    const maxX = Math.max(...project.nodes.map((n) => n.x + n.width));
-    const maxY = Math.max(...project.nodes.map((n) => n.y + n.height));
-    const padX = 96;
-    const padY = 128;
-    const contentW = Math.max(320, maxX - minX + padX);
-    const contentH = Math.max(240, maxY - minY + padY);
-    const z = Math.min(1, Math.max(0.24, Math.min(el.clientWidth / contentW, (el.clientHeight - 48) / contentH)));
-    setView({
-      z,
-      x: Math.round((el.clientWidth - (maxX - minX) * z) / 2 - minX * z),
-      y: Math.round(Math.max(28, (el.clientHeight - 48 - (maxY - minY) * z) / 2) - minY * z)
-    });
-  }, [project.nodes]);
-  (0, import_react2.useEffect)(() => {
-    if (project.nodes.length === 0 || autoFittedProjectRef.current === project.id) return;
-    autoFittedProjectRef.current = project.id;
-    const raf = requestAnimationFrame(() => fitAllNodes());
-    return () => cancelAnimationFrame(raf);
-  }, [project.id, project.nodes.length, fitAllNodes]);
-  (0, import_react2.useEffect)(() => {
-    const el = stageRef.current;
-    if (!el) return;
-    const onWheel = (e) => {
-      if (e.target?.closest("[data-scrollable]")) return;
-      e.preventDefault();
-      if (e.ctrlKey || e.metaKey) {
-        const r = el.getBoundingClientRect();
-        const mx = e.clientX - r.left, my = e.clientY - r.top;
-        setView((v) => {
-          const z = Math.min(2.5, Math.max(0.22, v.z * Math.exp(-e.deltaY * 2e-3)));
-          return { z, x: mx - (mx - v.x) / v.z * z, y: my - (my - v.y) / v.z * z };
-        });
-      } else {
-        setView((v) => ({ ...v, x: v.x - e.deltaX, y: v.y - e.deltaY }));
-      }
-    };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, []);
-  const onStageDown = (e) => {
-    if (e.target !== e.currentTarget) return;
-    setSelected(null);
-    e.currentTarget.setPointerCapture(e.pointerId);
-    setDrag({ kind: "pan", sx: e.clientX, sy: e.clientY, px: view.x, py: view.y });
-  };
-  const onMove = (e) => {
-    if (!drag) return;
-    if (drag.kind === "pan") {
-      setView((v) => ({ ...v, x: drag.px + (e.clientX - drag.sx), y: drag.py + (e.clientY - drag.sy) }));
-    } else if (drag.kind === "node") {
-      const dx = (e.clientX - drag.sx) / view.z, dy = (e.clientY - drag.sy) / view.z;
-      if (!drag.moved && Math.hypot(dx, dy) < 2) return;
-      drag.moved = true;
-      setLocal((l) => ({ ...l, [drag.id]: { x: drag.nx + dx, y: drag.ny + dy } }));
-    } else {
-      setDrag({ ...drag, ...toWorld(e.clientX, e.clientY) });
+
+// src/client/MediaConfigModal.tsx
+var import_react4 = require("react");
+var import_jsx_runtime4 = require("react/jsx-runtime");
+function makeLocalEndpointId(kind) {
+  return `${kind}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+}
+function toDraft(cfg) {
+  return {
+    image: {
+      strategy: cfg.image.strategy,
+      autoFailover: cfg.image.autoFailover,
+      endpoints: cfg.image.endpoints.map((ep) => ({
+        id: ep.id,
+        name: ep.name,
+        enabled: ep.enabled,
+        weight: ep.weight,
+        baseURL: ep.baseURL,
+        apiKey: "",
+        clearApiKey: false,
+        apiKeyEnv: ep.apiKeyEnv,
+        model: ep.model,
+        size: ep.size,
+        flavor: ep.flavor
+      }))
+    },
+    video: {
+      strategy: cfg.video.strategy,
+      autoFailover: cfg.video.autoFailover,
+      endpoints: cfg.video.endpoints.map((ep) => ({
+        id: ep.id,
+        name: ep.name,
+        enabled: ep.enabled,
+        weight: ep.weight,
+        baseURL: ep.baseURL,
+        apiKey: "",
+        clearApiKey: false,
+        apiKeyEnv: ep.apiKeyEnv,
+        model: ep.model,
+        flavor: ep.flavor,
+        duration: ep.duration,
+        ratio: ep.ratio
+      }))
+    },
+    audio: {
+      strategy: cfg.audio.strategy,
+      autoFailover: cfg.audio.autoFailover,
+      endpoints: cfg.audio.endpoints.map((ep) => ({
+        id: ep.id,
+        name: ep.name,
+        enabled: ep.enabled,
+        weight: ep.weight,
+        baseURL: ep.baseURL,
+        apiKey: "",
+        clearApiKey: false,
+        apiKeyEnv: ep.apiKeyEnv,
+        model: ep.model,
+        voice: ep.voice,
+        format: ep.format
+      }))
     }
   };
-  const onUp = async (e) => {
-    const d = drag;
-    setDrag(null);
-    if (d?.kind === "node" && d.moved) {
-      const pos2 = local[d.id];
-      if (pos2 !== void 0) await ops([{ op: "update_node", id: d.id, x: Math.round(pos2.x), y: Math.round(pos2.y) }]);
-      setLocal((l) => {
-        const { [d.id]: _, ...rest } = l;
-        return rest;
+}
+var MEDIA_TAB_META = [
+  { key: "image", label: "\u751F\u56FE\u6A21\u578B", icon: "\u{1F5BC}" },
+  { key: "video", label: "\u89C6\u9891\u6A21\u578B", icon: "\u{1F3AC}" },
+  { key: "audio", label: "\u914D\u97F3\u6A21\u578B", icon: "\u{1F399}" }
+];
+var STRATEGY_META = [
+  { key: "round_robin", label: "\u{1F504} \u52A8\u6001\u8F6E\u8BE2", desc: "\u6309\u6743\u91CD\u4F9D\u6B21\u8F6E\u6D41\u5206\u914D\u8BF7\u6C42\uFF0C\u81EA\u52A8\u8DF3\u8FC7\u6545\u969C\u51B7\u5374\u4E2D\u7684\u63A5\u53E3" },
+  { key: "failover", label: "\u{1F6E1} \u4E3B\u5907\u5BB9\u707E", desc: "\u6309\u5217\u8868\u987A\u5E8F\u4F18\u5148\u4F7F\u7528\u4E3B\u63A5\u53E3\uFF0C\u5F02\u5E38\u65F6\u81EA\u52A8\u5207\u5411\u5907\u7528\u63A5\u53E3" },
+  { key: "random", label: "\u{1F3B2} \u968F\u673A\u5747\u8861", desc: "\u6309\u6743\u91CD\u5728\u5065\u5EB7\u63A5\u53E3\u95F4\u968F\u673A\u5206\u6D41\uFF0C\u5355\u70B9\u6545\u969C\u81EA\u52A8\u5207\u6362" }
+];
+function MediaConfigModal({ initialTab, onClose }) {
+  const [tab, setTab] = (0, import_react4.useState)(initialTab);
+  const [details, setDetails] = (0, import_react4.useState)(null);
+  const [draft, setDraft] = (0, import_react4.useState)(null);
+  const [expandedId, setExpandedId] = (0, import_react4.useState)({
+    image: null,
+    video: null,
+    audio: null
+  });
+  const [showKeyIds, setShowKeyIds] = (0, import_react4.useState)({});
+  const [loading, setLoading] = (0, import_react4.useState)(true);
+  const [saving, setSaving] = (0, import_react4.useState)(false);
+  const [err, setErr] = (0, import_react4.useState)(null);
+  const [msg, setMsg] = (0, import_react4.useState)(null);
+  (0, import_react4.useEffect)(() => {
+    setTab(initialTab);
+  }, [initialTab]);
+  (0, import_react4.useEffect)(() => {
+    let alive = true;
+    setLoading(true);
+    setErr(null);
+    void call("/media-config").then((data) => {
+      if (!alive) return;
+      setDetails(data);
+      setDraft(toDraft(data));
+      setExpandedId({
+        image: null,
+        video: null,
+        audio: null
       });
-    } else if (d?.kind === "link") {
-      const p = toWorld(e.clientX, e.clientY);
-      const target = project.nodes.find((n) => n.id !== d.source && p.x >= n.x && p.x <= n.x + n.width && p.y >= n.y && p.y <= n.y + n.height);
-      if (target !== void 0) await ops([{ op: "connect", source: d.source, target: target.id }]);
+    }).catch((e) => {
+      if (!alive) return;
+      setErr(e instanceof Error ? e.message : String(e));
+    }).finally(() => {
+      if (alive) setLoading(false);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+  (0, import_react4.useEffect)(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  const patchImageEp = (id, fn) => {
+    setDraft((d) => d ? {
+      ...d,
+      image: { ...d.image, endpoints: d.image.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
+    } : d);
+  };
+  const patchVideoEp = (id, fn) => {
+    setDraft((d) => d ? {
+      ...d,
+      video: { ...d.video, endpoints: d.video.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
+    } : d);
+  };
+  const patchAudioEp = (id, fn) => {
+    setDraft((d) => d ? {
+      ...d,
+      audio: { ...d.audio, endpoints: d.audio.endpoints.map((ep) => ep.id === id ? fn(ep) : ep) }
+    } : d);
+  };
+  const addEndpoint = () => {
+    if (!draft) return;
+    const newId = makeLocalEndpointId(tab);
+    if (tab === "image") {
+      const idx = draft.image.endpoints.length + 1;
+      const next = {
+        id: newId,
+        name: `\u751F\u56FE\u63A5\u53E3 #${idx}`,
+        enabled: true,
+        weight: 1,
+        baseURL: "",
+        apiKey: "",
+        clearApiKey: false,
+        apiKeyEnv: "",
+        model: "gpt-image-1",
+        size: "1024x1024",
+        flavor: "openai"
+      };
+      setDraft({ ...draft, image: { ...draft.image, endpoints: [...draft.image.endpoints, next] } });
+    } else if (tab === "video") {
+      const idx = draft.video.endpoints.length + 1;
+      const next = {
+        id: newId,
+        name: `\u89C6\u9891\u63A5\u53E3 #${idx}`,
+        enabled: true,
+        weight: 1,
+        baseURL: "",
+        apiKey: "",
+        clearApiKey: false,
+        apiKeyEnv: "",
+        model: "doubao-seedance-1-0-pro-250528",
+        flavor: "ark",
+        duration: 5,
+        ratio: "16:9"
+      };
+      setDraft({ ...draft, video: { ...draft.video, endpoints: [...draft.video.endpoints, next] } });
+    } else {
+      const idx = draft.audio.endpoints.length + 1;
+      const next = {
+        id: newId,
+        name: `\u914D\u97F3\u63A5\u53E3 #${idx}`,
+        enabled: true,
+        weight: 1,
+        baseURL: "",
+        apiKey: "",
+        clearApiKey: false,
+        apiKeyEnv: "",
+        model: "gpt-4o-mini-tts",
+        voice: "alloy",
+        format: "mp3"
+      };
+      setDraft({ ...draft, audio: { ...draft.audio, endpoints: [...draft.audio.endpoints, next] } });
     }
+    setExpandedId((prev) => ({ ...prev, [tab]: newId }));
+    setMsg(null);
+    setErr(null);
   };
-  const centerWorld = () => {
-    const el = stageRef.current;
-    return toWorld((el?.getBoundingClientRect().left ?? 0) + (el?.clientWidth ?? 800) / 2 - 160, (el?.getBoundingClientRect().top ?? 0) + (el?.clientHeight ?? 600) / 2 - 120);
+  const duplicateEndpoint = (idx) => {
+    if (!draft) return;
+    const newId = makeLocalEndpointId(tab);
+    if (tab === "image") {
+      const src = draft.image.endpoints[idx];
+      if (!src) return;
+      const copy = {
+        ...src,
+        id: newId,
+        name: `${src.name} \u526F\u672C`,
+        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
+      };
+      const next = [...draft.image.endpoints];
+      next.splice(idx + 1, 0, copy);
+      setDraft({ ...draft, image: { ...draft.image, endpoints: next } });
+    } else if (tab === "video") {
+      const src = draft.video.endpoints[idx];
+      if (!src) return;
+      const copy = {
+        ...src,
+        id: newId,
+        name: `${src.name} \u526F\u672C`,
+        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
+      };
+      const next = [...draft.video.endpoints];
+      next.splice(idx + 1, 0, copy);
+      setDraft({ ...draft, video: { ...draft.video, endpoints: next } });
+    } else {
+      const src = draft.audio.endpoints[idx];
+      if (!src) return;
+      const copy = {
+        ...src,
+        id: newId,
+        name: `${src.name} \u526F\u672C`,
+        cloneKeyFromId: src.clearApiKey ? void 0 : src.cloneKeyFromId ?? src.id
+      };
+      const next = [...draft.audio.endpoints];
+      next.splice(idx + 1, 0, copy);
+      setDraft({ ...draft, audio: { ...draft.audio, endpoints: next } });
+    }
+    setExpandedId((prev) => ({ ...prev, [tab]: newId }));
   };
-  const addNode = async (type) => {
-    const c = centerWorld();
-    const res = await ops([{
-      op: "add_node",
-      type,
-      x: Math.round(c.x),
-      y: Math.round(c.y),
-      title: `${TYPE_LABEL[type]}\u8282\u70B9`,
-      ...type === "audio" ? { voice: "alloy" } : {}
-    }]);
-    if (res?.created[0]) setSelected(res.created[0]);
+  const moveEndpoint = (idx, delta) => {
+    setDraft((d) => {
+      if (!d) return d;
+      const pool = d[tab];
+      const target = idx + delta;
+      if (target < 0 || target >= pool.endpoints.length) return d;
+      const list = [...pool.endpoints];
+      const [item] = list.splice(idx, 1);
+      list.splice(target, 0, item);
+      return { ...d, [tab]: { ...pool, endpoints: list } };
+    });
   };
-  const handleFiles = async (files, dropPoint) => {
-    if (!files || files.length === 0) return;
-    const base = dropPoint ?? centerWorld();
-    let offset = 0;
-    for (const file of Array.from(files)) {
-      try {
-        const isVideo = file.type.startsWith("video/") || /\.(mp4|mov|webm)$/i.test(file.name);
-        const isAudio = file.type.startsWith("audio/") || /\.(mp3|wav|m4a|ogg)$/i.test(file.name);
-        const isText = file.type.startsWith("text/") || /\.(txt|md)$/i.test(file.name);
-        if (isText) {
-          const text = await file.text();
-          await ops([{ op: "add_node", type: "text", x: Math.round(base.x + offset), y: Math.round(base.y + offset * 0.3), width: 380, height: 260, title: file.name, content: text }]);
-        } else {
-          const nodeType = isVideo ? "video" : isAudio ? "audio" : "image";
-          const uploaded = await uploadLocalFile(file);
-          await ops([{
-            op: "add_node",
-            type: nodeType,
-            x: Math.round(base.x + offset),
-            y: Math.round(base.y + offset * 0.3),
-            title: file.name,
-            url: uploaded.url,
-            status: "success",
-            model: "\u672C\u5730\u4E0A\u4F20",
-            ...uploaded.meta?.durationMs ? { durationMs: uploaded.meta.durationMs } : {}
-          }]);
-        }
-        offset += 360;
-      } catch (e) {
-        onError(e.message);
+  const removeEndpoint = (id) => {
+    setDraft((d) => {
+      if (!d) return d;
+      const pool = d[tab];
+      if (pool.endpoints.length <= 1) return d;
+      const nextList = pool.endpoints.filter((ep) => ep.id !== id);
+      if (expandedId[tab] === id) {
+        setExpandedId((prev) => ({ ...prev, [tab]: null }));
       }
-    }
-    if (offset > 0) onNotify("\u7D20\u6750\u5DF2\u4E0A\u4F20\u5E76\u52A0\u5165\u753B\u5E03");
+      return { ...d, [tab]: { ...pool, endpoints: nextList } };
+    });
   };
-  const onDrop = (e) => {
-    e.preventDefault();
-    setDropping(false);
-    if (e.dataTransfer.files?.length) {
-      void handleFiles(e.dataTransfer.files, toWorld(e.clientX, e.clientY));
-    }
-  };
-  const pushNodeToTimeline = async (node) => {
-    if (node.type !== "video" || !node.url) return;
+  const handleSave = async () => {
+    if (!draft) return;
+    setSaving(true);
+    setErr(null);
+    setMsg(null);
     try {
-      const existing = project.timeline?.clips ?? [];
-      await call(`/projects/${project.id}/timeline`, {
+      const serializeBase = (ep) => ({
+        id: ep.id,
+        name: ep.name,
+        enabled: ep.enabled,
+        weight: ep.weight,
+        baseURL: ep.baseURL,
+        ...ep.clearApiKey ? { clearApiKey: true } : ep.apiKey.trim() ? { apiKey: ep.apiKey.trim() } : ep.cloneKeyFromId ? { cloneKeyFromId: ep.cloneKeyFromId } : {},
+        apiKeyEnv: ep.apiKeyEnv,
+        model: ep.model
+      });
+      const payload = {
+        image: {
+          strategy: draft.image.strategy,
+          autoFailover: draft.image.autoFailover,
+          endpoints: draft.image.endpoints.map((ep) => ({
+            ...serializeBase(ep),
+            size: ep.size,
+            flavor: ep.flavor
+          }))
+        },
+        video: {
+          strategy: draft.video.strategy,
+          autoFailover: draft.video.autoFailover,
+          endpoints: draft.video.endpoints.map((ep) => ({
+            ...serializeBase(ep),
+            flavor: ep.flavor,
+            duration: ep.duration,
+            ratio: ep.ratio
+          }))
+        },
+        audio: {
+          strategy: draft.audio.strategy,
+          autoFailover: draft.audio.autoFailover,
+          endpoints: draft.audio.endpoints.map((ep) => ({
+            ...serializeBase(ep),
+            voice: ep.voice,
+            format: ep.format
+          }))
+        }
+      };
+      const res = await call("/media-config", {
         method: "PUT",
-        body: {
-          clips: [
-            ...existing,
-            { nodeId: node.id, title: node.title ?? node.id, url: node.url, durationMs: node.durationMs ?? 5e3 }
+        body: payload
+      });
+      setDetails(res.config);
+      setDraft(toDraft(res.config));
+      updateMediaStatus({ image: res.image, video: res.video, audio: res.audio });
+      setMsg("\u591A\u63A5\u53E3\u914D\u7F6E\u4E0E\u8F6E\u8BE2\u7B56\u7565\u5DF2\u4FDD\u5B58\u5E76\u5B9E\u65F6\u751F\u6548");
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSaving(false);
+    }
+  };
+  const handleResetTab = async () => {
+    setSaving(true);
+    setErr(null);
+    setMsg(null);
+    try {
+      const res = await call("/media-config/reset", {
+        method: "POST",
+        body: { kind: tab }
+      });
+      setDetails(res.config);
+      setDraft((prev) => {
+        const fresh = toDraft(res.config);
+        if (!prev) return fresh;
+        return { ...prev, [tab]: fresh[tab] };
+      });
+      setExpandedId((prev) => ({ ...prev, [tab]: null }));
+      updateMediaStatus({ image: res.image, video: res.video, audio: res.audio });
+      setMsg("\u5DF2\u6062\u590D\u8BE5\u9879\u9ED8\u8BA4\u914D\u7F6E");
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSaving(false);
+    }
+  };
+  const handleResetHealth = async () => {
+    setSaving(true);
+    setErr(null);
+    setMsg(null);
+    try {
+      const res = await call("/media-config/reset-health", {
+        method: "POST",
+        body: { kind: tab }
+      });
+      setDetails(res.config);
+      updateMediaStatus({ image: res.image, video: res.video, audio: res.audio });
+      setMsg("\u5DF2\u6E05\u9664\u7194\u65AD\u51B7\u5374\u4E0E\u8F6E\u8BE2\u7EDF\u8BA1");
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSaving(false);
+    }
+  };
+  const curPoolDetail = details ? details[tab] : null;
+  const curPoolDraft = draft ? draft[tab] : null;
+  const curDetailById = (0, import_react4.useMemo)(() => {
+    const map = /* @__PURE__ */ new Map();
+    if (curPoolDetail) {
+      for (const ep of curPoolDetail.endpoints) map.set(ep.id, ep);
+    }
+    return map;
+  }, [curPoolDetail]);
+  const hasAnyStats = Boolean(curPoolDetail?.endpoints.some((ep) => ep.totalRequests > 0 || ep.inCooldown));
+  const curStrategyDesc = STRATEGY_META.find((s) => s.key === (curPoolDraft?.strategy ?? "round_robin"))?.desc ?? "";
+  const toggleShowKey = (id) => {
+    setShowKeyIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+  const renderEndpointHeader = (ep, idx, total, saved, onToggleEnabled) => {
+    const isExpanded = expandedId[tab] === ep.id;
+    const hasPendingKey = Boolean(ep.apiKey.trim()) || !ep.clearApiKey && Boolean(saved?.hasApiKey || ep.cloneKeyFromId);
+    const isLocallyReady = ep.enabled && Boolean(ep.baseURL.trim()) && hasPendingKey;
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+        "div",
+        {
+          className: style_default.mediaEndpointHead,
+          onClick: () => setExpandedId((prev) => ({ ...prev, [tab]: isExpanded ? null : ep.id })),
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHeadLeft, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointIdx, children: [
+                "#",
+                idx + 1
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: !ep.enabled ? style_default.mediaFieldHint : isLocallyReady ? style_default.mediaTabDotOk : style_default.mediaTabDotErr, children: "\u25CF" }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointName, title: ep.name, children: ep.name || `\u63A5\u53E3 #${idx + 1}` }),
+              ep.model && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTag, children: ep.model }),
+              curPoolDraft && curPoolDraft.strategy !== "failover" && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTag, title: "\u52A8\u6001\u8C03\u5EA6\u6743\u91CD", children: [
+                "\u6743\u91CD \xD7",
+                ep.weight
+              ] }),
+              saved?.inCooldown ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTagWarn, title: saved.lastError ?? "\u5931\u8D25\u51B7\u5374\u4E2D", children: [
+                "\u51B7\u5374 ",
+                Math.ceil(saved.cooldownRemainingMs / 1e3),
+                "s"
+              ] }) : !ep.enabled ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTag, children: "\u5DF2\u505C\u7528" }) : isLocallyReady ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTagOk, children: "\u5C31\u7EEA" }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaEndpointTagErr, children: "\u672A\u914D\u7F6E" }),
+              saved && saved.totalRequests > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointTag, title: `\u603B\u8BF7\u6C42 ${saved.totalRequests}\uFF0C\u6210\u529F ${saved.successCount}\uFF0C\u5931\u8D25 ${saved.failCount}`, children: [
+                "\u8C03\u7528 ",
+                saved.successCount,
+                "/",
+                saved.totalRequests
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointHeadActions, onClick: (e) => e.stopPropagation(), children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "button",
+                {
+                  type: "button",
+                  "data-ep-toggle": ep.id,
+                  className: ep.enabled ? style_default.mediaMiniToggle : style_default.mediaMiniToggleOff,
+                  title: ep.enabled ? "\u70B9\u51FB\u505C\u7528\u6B64\u63A5\u53E3" : "\u70B9\u51FB\u542F\u7528\u6B64\u63A5\u53E3",
+                  onClick: onToggleEnabled,
+                  children: ep.enabled ? "\u542F\u7528" : "\u505C\u7528"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "button",
+                {
+                  type: "button",
+                  className: style_default.miniBtn,
+                  title: "\u4E0A\u79FB\u4F18\u5148\u7EA7",
+                  disabled: idx === 0,
+                  onClick: () => moveEndpoint(idx, -1),
+                  children: "\u2191"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "button",
+                {
+                  type: "button",
+                  className: style_default.miniBtn,
+                  title: "\u4E0B\u79FB\u4F18\u5148\u7EA7",
+                  disabled: idx === total - 1,
+                  onClick: () => moveEndpoint(idx, 1),
+                  children: "\u2193"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "button",
+                {
+                  type: "button",
+                  className: style_default.miniBtn,
+                  title: "\u590D\u5236\u63A5\u53E3\u914D\u7F6E",
+                  onClick: () => duplicateEndpoint(idx),
+                  children: "\u590D\u5236"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "button",
+                {
+                  type: "button",
+                  className: style_default.miniBtnDanger,
+                  title: total <= 1 ? "\u81F3\u5C11\u4FDD\u7559\u4E00\u4E2A\u63A5\u53E3\uFF08\u53EF\u6E05\u7A7A\u914D\u7F6E\uFF09" : "\u5220\u9664\u6B64\u63A5\u53E3",
+                  disabled: total <= 1,
+                  onClick: () => removeEndpoint(ep.id),
+                  children: "\u5220\u9664"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "button",
+                {
+                  type: "button",
+                  className: style_default.miniBtn,
+                  onClick: () => setExpandedId((prev) => ({ ...prev, [tab]: isExpanded ? null : ep.id })),
+                  children: isExpanded ? "\u6536\u8D77" : "\u5C55\u5F00"
+                }
+              )
+            ] })
           ]
         }
-      });
-      onNotify(`\u5DF2\u5C06\u300C${node.title ?? node.id}\u300D\u52A0\u5165\u65F6\u95F4\u7EBF`);
-    } catch (e) {
-      onError(e.message);
-    }
-  };
-  const pos = (n) => local[n.id] ?? n;
-  const byId = new Map(project.nodes.map((n) => [n.id, n]));
-  const selectedNode = selected !== null ? byId.get(selected) : void 0;
-  const zoomBy = (factor) => {
-    const el = stageRef.current;
-    const cx = (el?.clientWidth ?? 600) / 2;
-    const cy = (el?.clientHeight ?? 480) / 2;
-    setView((v) => {
-      const z = Math.min(2.2, Math.max(0.22, v.z * factor));
-      return { z, x: cx - (cx - v.x) / v.z * z, y: cy - (cy - v.y) / v.z * z };
-    });
-  };
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.boardWrap, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { ref: uploadInputRef, type: "file", multiple: true, accept: "image/*,video/*,audio/*,.txt,.md", hidden: true, onChange: (e) => {
-      void handleFiles(e.target.files);
-      e.target.value = "";
-    } }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-      "div",
-      {
-        ref: stageRef,
-        className: `${style_default.board} ${dropping ? style_default.boardDrop : ""}`,
-        onPointerDown: onStageDown,
-        onPointerMove: onMove,
-        onPointerUp: (e) => void onUp(e),
-        onDragOver: (e) => {
-          e.preventDefault();
-          setDropping(true);
-        },
-        onDragLeave: () => setDropping(false),
-        onDrop,
-        style: { backgroundSize: `${24 * view.z}px ${24 * view.z}px`, backgroundPosition: `${view.x}px ${view.y}px` },
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.boardHint, children: "\u62D6\u62FD\u7A7A\u767D\u5E73\u79FB \xB7 \u2318\u6EDA\u8F6E\u7F29\u653E \xB7 \u62D6\u5165\u672C\u5730\u7D20\u6750" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.world, style: { transform: `translate(${view.x}px, ${view.y}px) scale(${view.z})` }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { className: style_default.edges, width: "8000", height: "8000", children: [
-              project.edges.map((edge) => {
-                const s = byId.get(edge.source), t = byId.get(edge.target);
-                if (!s || !t) return null;
-                const sp = pos(s), tp = pos(t);
-                const x1 = sp.x + s.width, y1 = sp.y + s.height / 2, x2 = tp.x, y2 = tp.y + t.height / 2;
-                const dx = Math.max(60, Math.abs(x2 - x1) * 0.5);
-                return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                  "path",
-                  {
-                    className: style_default.edge,
-                    d: `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`,
-                    onClick: (ev) => {
-                      ev.stopPropagation();
-                      if (window.confirm("\u65AD\u5F00\u8FD9\u6761\u8FDE\u7EBF\uFF1F")) void ops([{ op: "disconnect", source: edge.source, target: edge.target }]);
-                    }
-                  },
-                  edge.id
-                );
-              }),
-              drag?.kind === "link" && (() => {
-                const s = byId.get(drag.source);
-                if (!s) return null;
-                const sp = pos(s), x1 = sp.x + s.width, y1 = sp.y + s.height / 2;
-                return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { className: style_default.edgeDraft, d: `M ${x1} ${y1} L ${drag.x} ${drag.y}` });
-              })()
-            ] }),
-            project.nodes.map((n) => {
-              const p = pos(n);
-              const styleObj = { left: p.x, top: p.y, width: n.width, height: n.height };
-              return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-                "div",
-                {
-                  style: styleObj,
-                  className: n.id === selected ? style_default.nodeSelected : style_default.node,
-                  onPointerDown: (e) => {
-                    e.stopPropagation();
-                    setSelected(n.id);
-                  },
-                  children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-                      "div",
-                      {
-                        className: style_default.nodeHead,
-                        onPointerDown: (e) => {
-                          e.stopPropagation();
-                          setSelected(n.id);
-                          stageRef.current?.setPointerCapture(e.pointerId);
-                          setDrag({ kind: "node", id: n.id, sx: e.clientX, sy: e.clientY, nx: p.x, ny: p.y, moved: false });
-                        },
-                        children: [
-                          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeType, "data-type": n.type, children: TYPE_LABEL[n.type] }),
-                          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeTitle, children: n.title ?? n.id }),
-                          n.type !== "text" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeStatus, "data-status": n.status ?? "idle", children: STATUS_LABEL[n.status ?? "idle"] })
-                        ]
-                      }
-                    ),
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.nodeBody, "data-scrollable": n.type === "text" ? "1" : void 0, children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NodeBody, { node: n }),
-                      n.model && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.nodeModel, children: n.model })
-                    ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                      "div",
-                      {
-                        className: style_default.handle,
-                        title: "\u62D6\u5230\u76EE\u6807\u8282\u70B9\u4EE5\u4F20\u9012\u53C2\u8003\u56FE/\u5267\u672C/\u914D\u97F3",
-                        onPointerDown: (e) => {
-                          e.stopPropagation();
-                          stageRef.current?.setPointerCapture(e.pointerId);
-                          setDrag({ kind: "link", source: n.id, ...toWorld(e.clientX, e.clientY) });
-                        }
-                      }
-                    )
-                  ]
-                },
-                n.id
-              );
-            })
-          ] }),
-          project.nodes.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.boardEmpty, children: "\u753B\u5E03\u8FD8\u662F\u7A7A\u7684\u3002\u53EF\u7528\u4E0B\u65B9\u60AC\u6D6E\u5DE5\u5177\u680F\u6DFB\u52A0\u8282\u70B9\u3001\u76F4\u63A5\u62D6\u5165\u672C\u5730\u56FE\u7247/\u89C6\u9891/\u97F3\u9891/\u5C0F\u8BF4\uFF0C\u6216\u5207\u6362\u5230\u300C\u77ED\u5267\u5206\u955C\u53F0\u300D\u4E00\u952E\u62C6\u96C6\u51FA\u7247\u3002" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.boardDock, onPointerDown: (e) => e.stopPropagation(), children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("text"), children: "\uFF0B \u6587\u672C" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("image"), children: "\uFF0B \u56FE\u7247" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("video"), children: "\uFF0B \u89C6\u9891" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => void addNode("audio"), children: "\uFF0B \u914D\u97F3" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.sep }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, onClick: () => uploadInputRef.current?.click(), children: "\u2191 \u4E0A\u4F20" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.sep }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockIconBtn, title: "\u7F29\u5C0F", onClick: () => zoomBy(0.84), children: "\uFF0D" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.dockZoom, children: [
-              Math.round(view.z * 100),
-              "%"
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockIconBtn, title: "\u653E\u5927", onClick: () => zoomBy(1.18), children: "\uFF0B" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.dockBtn, title: "\u5C45\u4E2D\u9002\u914D\u5168\u90E8\u8282\u70B9", onClick: fitAllNodes, children: "\u22A1 \u9002\u914D" })
-          ] })
-        ]
-      }
-    ),
-    selectedNode !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      Inspector,
-      {
-        project,
-        node: selectedNode,
-        ops,
-        onError,
-        onPushTimeline: () => void pushNodeToTimeline(selectedNode),
-        onClose: () => setSelected(null)
-      },
-      `${selectedNode.id}:${selectedNode.status ?? ""}:${selectedNode.url ?? ""}`
-    )
-  ] });
-}
-function NodeBody({ node }) {
-  if (node.type === "text") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.textBody, children: node.content || /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("i", { className: style_default.dim, children: "\uFF08\u7A7A\uFF09" }) });
-  if (node.status === "loading") return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.loading, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.spinner }),
-    "\u751F\u6210\u4E2D\u2026"
-  ] });
-  if (node.status === "error") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.errText, children: node.error });
-  if (node.url) {
-    if (node.type === "image") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { className: style_default.media, src: node.url, alt: node.title ?? "", draggable: false });
-    if (node.type === "video") return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("video", { className: style_default.media, src: node.url, controls: true, muted: true, playsInline: true });
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.audioBody, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("audio", { className: style_default.audioPlayer, src: node.url, controls: true }),
-      node.prompt && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.audioCaption, title: node.prompt, children: [
-        node.voice ? `[${node.voice}] ` : "",
-        node.prompt
+      ),
+      !isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointSummary, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaEndpointUrl, title: ep.baseURL || "\u672A\u586B\u5199\u5730\u5740", children: [
+          "\u5730\u5740\uFF1A",
+          ep.baseURL || "\u672A\u586B\u5199"
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { children: [
+          "\u5BC6\u94A5\uFF1A",
+          ep.clearApiKey ? "\u5F85\u6E05\u9664" : ep.apiKey.trim() ? "\u5DF2\u586B\u5199\u65B0\u5BC6\u94A5\uFF08\u5F85\u4FDD\u5B58\uFF09" : saved?.hasApiKey ? saved.apiKeyMasked : "\u672A\u914D\u7F6E"
+        ] })
       ] })
     ] });
-  }
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.promptPreview, children: node.prompt || /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("i", { className: style_default.dim, children: node.type === "audio" ? "\u70B9\u51FB\u8282\u70B9\u586B\u5199\u53F0\u8BCD\u5E76\u9009\u62E9\u97F3\u8272\u751F\u6210\u914D\u97F3" : "\u70B9\u51FB\u8282\u70B9\u586B\u5199\u63D0\u793A\u8BCD\u540E\u751F\u6210" }) });
-}
-function Inspector({ project, node, ops, onError, onPushTimeline, onClose }) {
-  const [title, setTitle] = (0, import_react2.useState)(node.title ?? "");
-  const [content, setContent] = (0, import_react2.useState)(node.content ?? "");
-  const [prompt, setPrompt] = (0, import_react2.useState)(node.prompt ?? "");
-  const [voice, setVoice] = (0, import_react2.useState)(node.voice ?? "alloy");
-  const [ratio, setRatio] = (0, import_react2.useState)(project.drama?.aspectRatio ?? "16:9");
-  const [duration, setDuration] = (0, import_react2.useState)(5);
-  const refs = (0, import_react2.useMemo)(
-    () => project.edges.filter((e) => e.target === node.id).map((e) => project.nodes.find((n) => n.id === e.source)).filter((n) => n !== void 0),
-    [project, node.id]
-  );
-  const mediaRefs = refs.filter((r) => (r.type === "image" || r.type === "video") && r.url);
-  const textRefs = refs.filter((r) => r.type === "text" && r.content);
-  const save = async () => {
-    await ops([{
-      op: "update_node",
-      id: node.id,
-      title,
-      ...node.type === "text" ? { content } : { prompt },
-      ...node.type === "audio" ? { voice } : {}
-    }]);
   };
-  const generate = async () => {
-    const fullPrompt = node.type === "audio" ? prompt.trim() || textRefs.map((r) => r.content ?? "").join(LF).trim() : [prompt, ...textRefs.map((r) => r.content ?? "")].filter(Boolean).join(LF + LF);
-    if (!fullPrompt.trim()) {
-      onError(node.type === "audio" ? "\u8BF7\u5148\u586B\u5199\u5F85\u6717\u8BFB\u7684\u53F0\u8BCD\u6216\u65C1\u767D" : "\u8BF7\u5148\u586B\u5199\u63D0\u793A\u8BCD");
-      return;
-    }
-    await save();
-    try {
-      await call(`/projects/${project.id}/generate`, {
-        method: "POST",
-        body: {
-          kind: node.type,
-          nodeId: node.id,
-          prompt: fullPrompt,
-          ...node.type === "audio" ? { voice } : {},
-          ...node.type === "video" ? { ratio, duration } : {},
-          referenceNodeIds: mediaRefs.map((r) => r.id)
-        }
-      });
-    } catch (e) {
-      onError(e.message);
-    }
-  };
-  const actionLabel = node.type === "image" ? "\u56FE\u7247" : node.type === "video" ? "\u89C6\u9891" : "\u914D\u97F3";
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("aside", { className: style_default.inspector, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.inspectorHead, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
-        TYPE_LABEL[node.type],
-        "\u8282\u70B9 \xB7 ",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: node.id })
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.modalBackdrop, onClick: onClose, "data-media-modal": "1", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaModalCard, onClick: (e) => e.stopPropagation(), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.sectionHead, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.sectionTitle, children: "\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E \xB7 \u591A\u63A5\u53E3\u52A8\u6001\u8F6E\u8BE2" }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaModalSub, children: "\u53EF\u4E3A\u751F\u56FE\u3001\u89C6\u9891\u3001\u914D\u97F3\u5206\u522B\u914D\u7F6E\u591A\u4E2A\u4E0A\u6E38\u63A5\u53E3\uFF0C\u652F\u6301\u6743\u91CD\u52A8\u6001\u8F6E\u8BE2\u4E0E\u5931\u8D25\u81EA\u52A8\u5207\u6362" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.iconBtn, "aria-label": "\u5173\u95ED", onClick: onClose, children: "\xD7" })
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.iconBtn, title: "\u5173\u95ED", onClick: onClose, children: "\xD7" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-      "\u6807\u9898",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: title, onChange: (e) => setTitle(e.target.value), onBlur: () => void save() })
-    ] }),
-    node.type === "text" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-      "\u5185\u5BB9",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("textarea", { rows: 12, value: content, onChange: (e) => setContent(e.target.value), onBlur: () => void save() })
-    ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-        node.type === "audio" ? "\u6717\u8BFB\u53F0\u8BCD / \u65C1\u767D" : "\u751F\u6210\u63D0\u793A\u8BCD",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "textarea",
-          {
-            rows: 6,
-            value: prompt,
-            onChange: (e) => setPrompt(e.target.value),
-            onBlur: () => void save(),
-            placeholder: node.type === "audio" ? "\u8F93\u5165\u89D2\u8272\u5BF9\u767D\u6216\u753B\u5916\u97F3\u65C1\u767D\u6587\u672C\u2026" : "\u4E3B\u4F53\u3001\u52A8\u4F5C\u3001\u666F\u522B\u3001\u673A\u4F4D\u3001\u5149\u7EBF\u3001\u98CE\u683C\u2026"
-          }
-        )
-      ] }),
-      node.type === "audio" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-        "\u97F3\u8272\uFF08Voice\uFF09",
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("select", { value: voice, onChange: (e) => setVoice(e.target.value), children: VOICES.map((v) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: v, children: v }, v)) })
-      ] }),
-      node.type === "video" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-          "\u753B\u5E45",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("select", { value: ratio, onChange: (e) => setRatio(e.target.value), children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F\u77ED\u5267" }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u753B\u5E45" })
-          ] })
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaTabRow, role: "tablist", children: MEDIA_TAB_META.map((item) => {
+      const p = details ? details[item.key] : null;
+      const isReady = Boolean(p?.ready);
+      return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+        "button",
+        {
+          type: "button",
+          role: "tab",
+          "aria-selected": tab === item.key,
+          "data-media-tab": item.key,
+          className: tab === item.key ? style_default.mediaTabActive : style_default.mediaTab,
+          onClick: () => {
+            setTab(item.key);
+            setMsg(null);
+            setErr(null);
+          },
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: isReady ? style_default.mediaTabDotOk : style_default.mediaTabDotErr, children: "\u25CF" }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { children: [
+              item.icon,
+              " ",
+              item.label
+            ] }),
+            p && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: style_default.mediaTabCount, children: [
+              p.readyCount,
+              "/",
+              p.totalCount
+            ] })
+          ]
+        },
+        item.key
+      );
+    }) }),
+    loading || !draft || !curPoolDetail || !curPoolDraft ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaLoadingBox, children: "\u6B63\u5728\u8BFB\u53D6\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E\u2026" }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: curPoolDetail.ready ? style_default.mediaStatusOk : style_default.mediaStatusErr, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaStatusBar, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: curPoolDetail.ready ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
+          "\u25CF \u5DF2\u5C31\u7EEA \xB7 ",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("strong", { children: [
+            curPoolDetail.readyCount,
+            "/",
+            curPoolDetail.totalCount
+          ] }),
+          " \u4E2A\u63A5\u53E3\u53EF\u7528 \xB7 \u5F53\u524D\u7B56\u7565\uFF1A",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("strong", { children: STRATEGY_LABEL[curPoolDetail.strategy] }),
+          curPoolDetail.autoFailover ? "\uFF08\u6545\u969C\u81EA\u52A8\u5207\u6362\uFF09" : ""
+        ] }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, { children: "\u25CF \u5F53\u524D\u65E0\u53EF\u7528\u63A5\u53E3 \xB7 \u8BF7\u81F3\u5C11\u4E3A\u4E00\u4E2A\u5DF2\u542F\u7528\u63A5\u53E3\u586B\u5199 Base URL \u4E0E\u6709\u6548 API Key \u540E\u4FDD\u5B58" }) }),
+        hasAnyStats && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: saving, onClick: () => void handleResetHealth(), children: "\u91CD\u7F6E\u7194\u65AD/\u7EDF\u8BA1" })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPoolBar, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPoolHead, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaPoolTitle, children: "\u591A\u63A5\u53E3\u8C03\u5EA6\u7B56\u7565" }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.btnPrimary,
+              "data-media-add-endpoint": "1",
+              onClick: addEndpoint,
+              children: "\uFF0B \u6DFB\u52A0\u63A5\u53E3"
+            }
+          )
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-          "\u65F6\u957F\uFF08\u79D2\uFF09",
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { type: "number", min: 2, max: 15, value: duration, onChange: (e) => setDuration(Number(e.target.value) || 5) })
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaStrategyRow, children: STRATEGY_META.map((st) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            "data-media-strategy": st.key,
+            className: curPoolDraft.strategy === st.key ? style_default.pillActive : style_default.pillBtn,
+            onClick: () => setDraft((d) => d ? { ...d, [tab]: { ...d[tab], strategy: st.key } } : d),
+            children: st.label
+          },
+          st.key
+        )) }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaFieldHint, children: curStrategyDesc }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.mediaCheckRow, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            "input",
+            {
+              type: "checkbox",
+              "data-media-autofailover": "1",
+              checked: curPoolDraft.autoFailover,
+              onChange: (e) => setDraft((d) => d ? { ...d, [tab]: { ...d[tab], autoFailover: e.target.checked } } : d)
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u5931\u8D25\u81EA\u52A8\u5207\u6362\u4E0B\u4E00\u63A5\u53E3\uFF08\u5355\u63A5\u53E3\u62A5\u9519\u65F6\u81EA\u52A8\u7194\u65AD\u51B7\u5374 15\u201360s\uFF0C\u51B7\u5374\u7ED3\u675F\u540E\u81EA\u52A8\u6062\u590D\u53C2\u4E0E\u8F6E\u8BE2\uFF09" })
         ] })
       ] }),
-      refs.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.refs, children: [
-        "\u4E0A\u6E38\u8F93\u5165\uFF1A",
-        refs.map((r) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.refChip, children: [
-          TYPE_LABEL[r.type],
-          " \xB7 ",
-          r.title ?? r.id
-        ] }, r.id)),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, children: node.type === "video" ? "\u9996\u5F20\u56FE\u7247/\u89C6\u9891\u4F5C\u4E3A\u9996\u5E27\uFF0C\u5176\u4F59\u4F5C\u4E3A\u89D2\u8272\u4E00\u81F4\u6027\u53C2\u8003\u56FE\u3002" : "\u4E0A\u6E38\u53C2\u8003\u56FE\u4FDD\u6301\u5916\u89C2\u4E00\u81F4\uFF0C\u6587\u672C\u81EA\u52A8\u62FC\u63A5\u3002" })
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointList, "data-media-endpoint-list": tab, children: [
+        tab === "image" && draft.image.endpoints.map((ep, idx) => {
+          const saved = curDetailById.get(ep.id);
+          const isExpanded = expandedId.image === ep.id;
+          const showKey = Boolean(showKeyIds[ep.id]);
+          return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
+            renderEndpointHeader(
+              ep,
+              idx,
+              draft.image.endpoints.length,
+              saved,
+              () => patchImageEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
+            ),
+            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "openai", baseURL: "https://api.openai.com/v1", model: "gpt-image-1", size: "1024x1024" })),
+                    children: "OpenAI Images"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedream-3-0-t2i-250415", size: "1024x1024" })),
+                    children: "\u706B\u5C71\u65B9\u821F Seedream"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
+                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u63A5\u53E3\u540D\u79F0",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "name",
+                      value: ep.name,
+                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
+                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B OpenAI / \u5907\u7528\u65B9\u821F"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "weight",
+                      type: "number",
+                      min: 1,
+                      max: 10,
+                      value: ep.weight,
+                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.pillRow, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: ep.flavor === "openai" ? style_default.pillActive : style_default.pillBtn,
+                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "openai" })),
+                      children: "OpenAI \u517C\u5BB9\uFF08/images/generations\uFF09"
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: ep.flavor === "ark" ? style_default.pillActive : style_default.pillBtn,
+                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, flavor: "ark" })),
+                      children: "\u706B\u5C71\u65B9\u821F Seedream"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "input",
+                  {
+                    "data-media-field": "baseURL",
+                    value: ep.baseURL,
+                    onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
+                    placeholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1 \u6216 https://ark.cn-beijing.volces.com/api/v3"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "apiKey",
+                      type: showKey ? "text" : "password",
+                      value: ep.apiKey,
+                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
+                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key\uFF08\u5982 sk-...\uFF09"
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
+                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: style_default.secretToggleBtn,
+                      onClick: () => patchImageEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
+                      children: "\u6E05\u9664"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "model",
+                      value: ep.model,
+                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
+                      placeholder: "\u4F8B\u5982\uFF1Agpt-image-1"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u9ED8\u8BA4\u5206\u8FA8\u7387\uFF08Size\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "size",
+                      value: ep.size,
+                      onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, size: e.target.value })),
+                      placeholder: "1024x1024"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "input",
+                  {
+                    "data-media-field": "apiKeyEnv",
+                    value: ep.apiKeyEnv,
+                    onChange: (e) => patchImageEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
+                    placeholder: "MUJING_IMAGE_API_KEY"
+                  }
+                )
+              ] }),
+              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
+                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
+                saved.lastError
+              ] })
+            ] })
+          ] }, ep.id);
+        }),
+        tab === "video" && draft.video.endpoints.map((ep, idx) => {
+          const saved = curDetailById.get(ep.id);
+          const isExpanded = expandedId.video === ep.id;
+          const showKey = Boolean(showKeyIds[ep.id]);
+          return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
+            renderEndpointHeader(
+              ep,
+              idx,
+              draft.video.endpoints.length,
+              saved,
+              () => patchVideoEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
+            ),
+            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "ark", baseURL: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-seedance-1-0-pro-250528" })),
+                    children: "\u706B\u5C71\u65B9\u821F Seedance"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "openai", baseURL: "https://api.openai.com/v1", model: "sora-2" })),
+                    children: "OpenAI Videos"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
+                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u63A5\u53E3\u540D\u79F0",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "name",
+                      value: ep.name,
+                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
+                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u65B9\u821F / \u5907\u7528 Sora"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "weight",
+                      type: "number",
+                      min: 1,
+                      max: 10,
+                      value: ep.weight,
+                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u63A5\u53E3\u534F\u8BAE" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.pillRow, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: ep.flavor === "ark" ? style_default.pillActive : style_default.pillBtn,
+                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "ark" })),
+                      children: "\u706B\u5C71\u65B9\u821F Seedance\uFF08\u9996\u5E27 + \u591A\u53C2\u8003\u56FE\uFF09"
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: ep.flavor === "openai" ? style_default.pillActive : style_default.pillBtn,
+                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, flavor: "openai" })),
+                      children: "OpenAI Videos\uFF08/videos\uFF09"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF09",
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "input",
+                  {
+                    "data-media-field": "baseURL",
+                    value: ep.baseURL,
+                    onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
+                    placeholder: "\u4F8B\u5982\uFF1Ahttps://ark.cn-beijing.volces.com/api/v3"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "apiKey",
+                      type: showKey ? "text" : "password",
+                      value: ep.apiKey,
+                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
+                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key"
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
+                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: style_default.secretToggleBtn,
+                      onClick: () => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
+                      children: "\u6E05\u9664"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "model",
+                      value: ep.model,
+                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
+                      placeholder: "doubao-seedance-1-0-pro-250528"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u9ED8\u8BA4\u65F6\u957F\uFF08\u79D2\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "duration",
+                      type: "number",
+                      min: 2,
+                      max: 20,
+                      value: ep.duration,
+                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, duration: Number(e.target.value) || 5 }))
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u9ED8\u8BA4\u753B\u5E45",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                    "select",
+                    {
+                      "data-media-field": "ratio",
+                      value: ep.ratio,
+                      onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, ratio: e.target.value })),
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "9:16", children: "9:16 \u7AD6\u5C4F" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "16:9", children: "16:9 \u6A2A\u5C4F" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "1:1", children: "1:1 \u65B9\u5F62" })
+                      ]
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "input",
+                  {
+                    "data-media-field": "apiKeyEnv",
+                    value: ep.apiKeyEnv,
+                    onChange: (e) => patchVideoEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
+                    placeholder: "MUJING_VIDEO_API_KEY"
+                  }
+                )
+              ] }),
+              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
+                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
+                saved.lastError
+              ] })
+            ] })
+          ] }, ep.id);
+        }),
+        tab === "audio" && draft.audio.endpoints.map((ep, idx) => {
+          const saved = curDetailById.get(ep.id);
+          const isExpanded = expandedId.audio === ep.id;
+          const showKey = Boolean(showKeyIds[ep.id]);
+          const firstImageBase = draft.image.endpoints[0]?.baseURL ?? "";
+          return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { "data-media-endpoint": ep.id, className: ep.enabled ? style_default.mediaEndpointCard : style_default.mediaEndpointCardDisabled, children: [
+            renderEndpointHeader(
+              ep,
+              idx,
+              draft.audio.endpoints.length,
+              saved,
+              () => patchAudioEp(ep.id, (cur) => ({ ...cur, enabled: !cur.enabled }))
+            ),
+            isExpanded && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointBody, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaPresetRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: style_default.mediaFieldHint, children: "\u5FEB\u901F\u586B\u5145\uFF1A" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: "https://api.openai.com/v1", model: "gpt-4o-mini-tts", voice: "alloy", format: "mp3" })),
+                    children: "OpenAI TTS"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: firstImageBase || cur.baseURL })),
+                    children: "\u590D\u7528\u751F\u56FE\u63A5\u53E3\u5730\u5740"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: style_default.pillBtn,
+                    onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: "", apiKey: "", clearApiKey: true, cloneKeyFromId: void 0, apiKeyEnv: "" })),
+                    children: "\u6E05\u7A7A\u6B64\u63A5\u53E3"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u63A5\u53E3\u540D\u79F0",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "name",
+                      value: ep.name,
+                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, name: e.target.value })),
+                      placeholder: "\u4F8B\u5982\uFF1A\u4E3B\u529B\u914D\u97F3 / \u5907\u7528\u914D\u97F3"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u8F6E\u8BE2\u6743\u91CD\uFF081-10\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "weight",
+                      type: "number",
+                      min: 1,
+                      max: 10,
+                      value: ep.weight,
+                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, weight: Math.max(1, Math.min(10, Number(e.target.value) || 1)) }))
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                "\u63A5\u53E3\u5730\u5740\uFF08Base URL\uFF0COpenAI \u517C\u5BB9 /audio/speech\uFF09",
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "input",
+                  {
+                    "data-media-field": "baseURL",
+                    value: ep.baseURL,
+                    onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, baseURL: e.target.value })),
+                    placeholder: "\u4F8B\u5982\uFF1Ahttps://api.openai.com/v1"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.field, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "API Key\uFF08\u7559\u7A7A\u5219\u4FDD\u6301\u73B0\u6709\u5BC6\u94A5\uFF09" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.secretInputWrap, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "apiKey",
+                      type: showKey ? "text" : "password",
+                      value: ep.apiKey,
+                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKey: e.target.value, clearApiKey: false })),
+                      placeholder: ep.clearApiKey ? "\u5DF2\u6807\u8BB0\u6E05\u9664\u81EA\u5B9A\u4E49\u5BC6\u94A5" : saved?.hasApiKey ? `\u5DF2\u914D\u7F6E\uFF08${saved.apiKeyMasked}\uFF09\uFF0C\u8F93\u5165\u65B0\u5BC6\u94A5\u4EE5\u66FF\u6362` : ep.cloneKeyFromId ? "\u7559\u7A7A\u5C06\u6CBF\u7528\u539F\u63A5\u53E3\u5BC6\u94A5\uFF0C\u6216\u8F93\u5165\u65B0\u5BC6\u94A5" : "\u8BF7\u8F93\u5165 API Key"
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.secretToggleBtn, onClick: () => toggleShowKey(ep.id), children: showKey ? "\u9690\u85CF" : "\u663E\u793A" }),
+                  saved?.apiKeySource === "custom" && !ep.clearApiKey && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "button",
+                    {
+                      type: "button",
+                      className: style_default.secretToggleBtn,
+                      onClick: () => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKey: "", clearApiKey: true, cloneKeyFromId: void 0 })),
+                      children: "\u6E05\u9664"
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaFieldRow, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u6A21\u578B\u540D\u79F0\uFF08Model\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "model",
+                      value: ep.model,
+                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, model: e.target.value })),
+                      placeholder: "gpt-4o-mini-tts"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u9ED8\u8BA4\u97F3\u8272\uFF08Voice\uFF09",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    "input",
+                    {
+                      "data-media-field": "voice",
+                      value: ep.voice,
+                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, voice: e.target.value })),
+                      placeholder: "alloy / nova / shimmer"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                  "\u8F93\u51FA\u683C\u5F0F",
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                    "select",
+                    {
+                      "data-media-field": "format",
+                      value: ep.format,
+                      onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, format: e.target.value === "wav" ? "wav" : "mp3" })),
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "mp3", children: "MP3" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("option", { value: "wav", children: "WAV" })
+                      ]
+                    }
+                  )
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("label", { className: style_default.field, children: [
+                "\u5907\u7528\u73AF\u5883\u53D8\u91CF\u540D\uFF08\u5F53\u672A\u586B\u5199\u4E0A\u65B9 API Key \u65F6\u8BFB\u53D6\uFF09",
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                  "input",
+                  {
+                    "data-media-field": "apiKeyEnv",
+                    value: ep.apiKeyEnv,
+                    onChange: (e) => patchAudioEp(ep.id, (cur) => ({ ...cur, apiKeyEnv: e.target.value })),
+                    placeholder: "MUJING_AUDIO_API_KEY"
+                  }
+                )
+              ] }),
+              saved?.lastError && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.mediaEndpointErrNote, children: [
+                "\u6700\u8FD1\u5F02\u5E38\uFF1A",
+                saved.lastError
+              ] })
+            ] })
+          ] }, ep.id);
+        })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-        node.status === "loading" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: () => void call(`/projects/${project.id}/cancel`, { method: "POST", body: { nodeId: node.id } }), children: "\u53D6\u6D88\u751F\u6210" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: style_default.btnPrimary, onClick: () => void generate(), children: [
-          node.url ? "\u91CD\u65B0\u751F\u6210" : "\u751F\u6210",
-          actionLabel
-        ] }),
-        node.type === "video" && node.url && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btn, onClick: onPushTimeline, children: "\uFF0B \u52A0\u5165\u65F6\u95F4\u7EBF" })
-      ] }),
-      node.error && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.errText, children: node.error }),
-      node.url && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { className: style_default.link, href: node.url, target: "_blank", rel: "noreferrer", children: "\u5728\u65B0\u7A97\u53E3\u6253\u5F00\u5A92\u4F53\u8D44\u4EA7" })
+      err && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaInlineMsgErr, children: err }),
+      msg && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: style_default.mediaInlineMsgOk, children: msg })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.actions, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnDanger, onClick: () => {
-      if (window.confirm("\u5220\u9664\u8BE5\u8282\u70B9\uFF1F")) {
-        void ops([{ op: "delete_node", id: node.id }]);
-        onClose();
-      }
-    }, children: "\u5220\u9664\u8282\u70B9" }) })
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: style_default.modalFooter, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+        "button",
+        {
+          type: "button",
+          className: style_default.btn,
+          style: { marginRight: "auto" },
+          disabled: loading || saving,
+          onClick: () => void handleResetTab(),
+          children: "\u6062\u590D\u9ED8\u8BA4\u914D\u7F6E"
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("button", { type: "button", className: style_default.btn, onClick: onClose, children: "\u5173\u95ED" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+        "button",
+        {
+          type: "button",
+          className: style_default.btnPrimary,
+          "data-media-save": "1",
+          disabled: loading || saving || !draft,
+          onClick: () => void handleSave(),
+          children: saving ? "\u4FDD\u5B58\u4E2D\u2026" : "\u4FDD\u5B58\u5E76\u751F\u6548"
+        }
+      )
+    ] })
+  ] }) });
+}
+
+// src/client/ProjectHub.tsx
+var import_react5 = require("react");
+var import_jsx_runtime5 = require("react/jsx-runtime");
+function ProjectHub({
+  projects,
+  media,
+  onSelectProject,
+  onDeleteProject,
+  onCreateProject,
+  onImportJson,
+  onRunPrompt
+}) {
+  const [prompt, setPrompt] = (0, import_react5.useState)("");
+  const submitPrompt = () => {
+    const clean = prompt.trim();
+    if (!clean) return;
+    setPrompt("");
+    onRunPrompt(clean, "drama");
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubWrap, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("section", { className: style_default.hubHero, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubBadge, children: "\u{1F3AC} \u5E55\u5883 AI \u5F71\u89C6\u5DE5\u4F5C\u53F0 \xB7 DeepSeek Harness \u9A71\u52A8" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: style_default.hubHeading, children: "\u4E00\u53E5\u8BDD\u6216\u4E00\u6BB5\u5C0F\u8BF4\uFF0C\u5168\u81EA\u52A8\u62CD\u51FA\u591A\u955C\u5934\u6709\u58F0\u77ED\u5267" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: style_default.hubSub, children: "\u4ECE\u5267\u672C\u62C6\u96C6\u3001\u89D2\u8272/\u573A\u666F\u4E09\u89C6\u56FE\u8D44\u4EA7\u9501\u5B9A\u3001\u6545\u4E8B\u677F\u5173\u952E\u5E27\u4E0E\u89D2\u8272\u914D\u97F3\uFF0C\u5230 FFmpeg \u5C3E\u5E27\u7EED\u62CD\u6210\u7247\u4E0E\u526A\u6620\u8349\u7A3F\u4E00\u952E\u4EA4\u4ED8\u3002" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubComposer, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+          "textarea",
+          {
+            className: style_default.hubPromptInput,
+            rows: 3,
+            value: prompt,
+            onChange: (e) => setPrompt(e.target.value),
+            onKeyDown: (e) => {
+              if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+                e.preventDefault();
+                submitPrompt();
+              }
+            },
+            placeholder: "\u8F93\u5165\u4F60\u7684\u77ED\u5267\u7075\u611F\u3001\u5C0F\u8BF4\u6BB5\u843D\u6216\u5206\u955C\u9700\u6C42\uFF0C\u4F8B\u5982\uFF1A\u62CD\u4E00\u90E8 9:16 \u8D5B\u535A\u96E8\u591C\u60AC\u7591\u77ED\u5267\uFF0C\u4FA6\u63A2\u6797\u9ED8\u4E0E\u7EBF\u4EBA\u82CF\u665A\u5728\u84DD\u8C03\u9152\u5427\u63A5\u5934\u906D\u9047\u7EA2\u5916\u72D9\u51FB\u2026\u2026"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubComposerBar, children: [
+          media ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubEngineRow, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.hubEngineLabel, children: "\u6A21\u578B\u5F15\u64CE\uFF1A" }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+              "button",
+              {
+                type: "button",
+                className: media.image.ready ? style_default.hubEngineChipOk : style_default.hubEngineChipErr,
+                title: "\u70B9\u51FB\u914D\u7F6E\u751F\u56FE\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565",
+                onClick: () => openMediaConfigModal("image"),
+                children: [
+                  "\u25CF \u751F\u56FE \xB7 ",
+                  media.image.ready ? `${media.image.model}${media.image.readyCount > 1 ? ` (${media.image.readyCount}\u63A5\u53E3\xB7${STRATEGY_LABEL[media.image.strategy]})` : ""}` : "\u672A\u914D\u7F6E"
+                ]
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+              "button",
+              {
+                type: "button",
+                className: media.video.ready ? style_default.hubEngineChipOk : style_default.hubEngineChipErr,
+                title: "\u70B9\u51FB\u914D\u7F6E\u89C6\u9891\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565",
+                onClick: () => openMediaConfigModal("video"),
+                children: [
+                  "\u25CF \u89C6\u9891 \xB7 ",
+                  media.video.ready ? `${media.video.model}${media.video.readyCount > 1 ? ` (${media.video.readyCount}\u63A5\u53E3\xB7${STRATEGY_LABEL[media.video.strategy]})` : ""}` : "\u672A\u914D\u7F6E"
+                ]
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+              "button",
+              {
+                type: "button",
+                className: media.audio.ready ? style_default.hubEngineChipOk : style_default.hubEngineChipErr,
+                title: "\u70B9\u51FB\u914D\u7F6E\u914D\u97F3\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565",
+                onClick: () => openMediaConfigModal("audio"),
+                children: [
+                  "\u25CF \u914D\u97F3 \xB7 ",
+                  media.audio.ready ? `${media.audio.model}${media.audio.readyCount > 1 ? ` (${media.audio.readyCount}\u63A5\u53E3\xB7${STRATEGY_LABEL[media.audio.strategy]})` : ""}` : "\u672A\u914D\u7F6E"
+                ]
+              }
+            )
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.hubComposerHint, children: "\u6309 \u2318/Ctrl + Enter \u76F4\u63A5\u53EC\u5524 AI \u5BFC\u6F14\u526F\u9A7E\u5F00\u62CD" }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.actions, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.btn, onClick: onCreateProject, children: "\uFF0B \u624B\u52A8\u5EFA\u5DE5\u7A0B" }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: !prompt.trim(), onClick: submitPrompt, children: "\u2728 \u8BA9 AI \u5BFC\u6F14\u5F00\u62CD" })
+          ] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("section", { className: style_default.hubSection, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubSectionHead, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { children: "\u4E00\u952E\u7247\u5355\u6837\u677F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u70B9\u51FB\u4EFB\u610F\u6837\u677F\u5C06\u81EA\u52A8\u5524\u8D77\u53F3\u4FA7 AI \u5BFC\u6F14\u526F\u9A7E\uFF0C\u5E76\u5B9E\u65F6\u751F\u6210\u89D2\u8272\u8D44\u4EA7\u3001\u5206\u955C\u6545\u4E8B\u677F\u4E0E\u6210\u7247" })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubGrid3, children: STARTER_TEMPLATES.map((tpl) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+        "button",
+        {
+          type: "button",
+          className: style_default.hubTemplateCard,
+          onClick: () => onRunPrompt(tpl.prompt, tpl.tab),
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubTemplateCover, style: { background: tpl.accent }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.hubTemplateBadge, children: tpl.badge }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.hubTemplateRatio, children: tpl.ratio })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubTemplateBody, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubTemplateTitle, children: tpl.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubTemplateDesc, children: tpl.desc }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubTemplateCta, children: "\u2728 \u7ACB\u5373\u7531 AI \u5BFC\u6F14\u5F00\u62CD \u2192" })
+            ] })
+          ]
+        },
+        tpl.id
+      )) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("section", { className: style_default.hubSection, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubSectionHead, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("h3", { children: [
+            "\u6211\u7684\u5267\u76EE\u5DE5\u7A0B (",
+            projects.length,
+            ")"
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u70B9\u51FB\u8FDB\u5165\u5206\u955C\u53F0\u3001\u65E0\u9650\u753B\u5E03\u6216\u6210\u7247\u65F6\u95F4\u7EBF\u7EE7\u7EED\u5236\u4F5C" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.actions, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.btn, onClick: onImportJson, children: "\u{1F4E5} \u5BFC\u5165\u5DE5\u7A0B JSON" }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: onCreateProject, children: "\uFF0B \u65B0\u5EFA\u7A7A\u767D\u5267\u76EE" })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubProjectGrid, children: [
+        projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubProjectCard, onClick: () => onSelectProject(p.id), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubProjectCover, children: [
+            p.coverUrl ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("img", { src: p.coverUrl, alt: p.title, className: style_default.hubProjectCoverImg }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubProjectCoverEmpty, children: "\u{1F3AC}" }),
+            p.aspectRatio && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.hubProjectRatio, children: p.aspectRatio }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+              "button",
+              {
+                type: "button",
+                className: style_default.hubProjectDel,
+                title: "\u5220\u9664\u5267\u76EE",
+                onClick: (e) => {
+                  e.stopPropagation();
+                  onDeleteProject(p.id, p.title);
+                },
+                children: "\xD7"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubProjectInfo, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.hubProjectTitle, children: p.title }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.hubProjectMeta, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { children: [
+                p.castCount ?? 0,
+                " \u8D44\u4EA7"
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { children: [
+                "\xB7 ",
+                p.episodeCount ?? 0,
+                " \u96C6"
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { children: [
+                "\xB7 ",
+                p.nodeCount,
+                " \u8282\u70B9"
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { children: [
+                "\xB7 ",
+                p.clipCount ?? 0,
+                " \u7247\u6BB5"
+              ] })
+            ] })
+          ] })
+        ] }, p.id)),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("button", { type: "button", className: style_default.hubNewCard, onClick: onCreateProject, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.hubNewPlus, children: "\uFF0B" }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u65B0\u5EFA\u77ED\u5267 / \u6F2B\u5267\u5DE5\u7A0B" })
+        ] })
+      ] })
+    ] })
   ] });
 }
+function CreateProjectModal({ onClose, onImport, onSubmit }) {
+  const [title, setTitle] = (0, import_react5.useState)("\u672A\u547D\u540D\u77ED\u5267\u5DE5\u7A0B");
+  const [aspectRatio, setAspectRatio] = (0, import_react5.useState)("9:16");
+  const [genre, setGenre] = (0, import_react5.useState)(STYLE_PRESETS[0].genre);
+  const [style, setStyle] = (0, import_react5.useState)(STYLE_PRESETS[0].style);
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.modalBackdrop, onClick: onClose, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.modalCard, onClick: (e) => e.stopPropagation(), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.sectionHead, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: style_default.sectionTitle, children: "\u65B0\u5EFA\u5E55\u5883\u5F71\u89C6 / \u77ED\u5267\u5DE5\u7A0B" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.iconBtn, onClick: onClose, children: "\xD7" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("label", { className: style_default.field, children: [
+      "\u5267\u76EE\u540D\u79F0",
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("input", { value: title, onChange: (e) => setTitle(e.target.value), autoFocus: true, placeholder: "\u4F8B\u5982\uFF1A\u300A\u96E8\u591C\u82AF\u7247\u300B\u7B2C\u4E00\u5B63" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u76EE\u6807\u753B\u5E45\u6BD4\u4F8B" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.pillRow, children: [
+        ["9:16", "9:16 \u7AD6\u5C4F\u77ED\u5267\uFF08\u6296\u97F3/\u7EA2\u679C\uFF09"],
+        ["16:9", "16:9 \u6A2A\u5C4F\u6F2B\u5267/\u7535\u5F71"],
+        ["1:1", "1:1 \u65B9\u5F62\u793E\u5A92\u753B\u5E45"]
+      ].map(([val, label]) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+        "button",
+        {
+          type: "button",
+          className: aspectRatio === val ? style_default.pillActive : style_default.pillBtn,
+          onClick: () => setAspectRatio(val),
+          children: label
+        },
+        val
+      )) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.field, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u89C6\u89C9\u98CE\u683C\u9884\u8BBE\uFF08\u4E00\u952E\u586B\u5145 Style Bible\uFF09" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.pillRow, children: STYLE_PRESETS.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+        "button",
+        {
+          type: "button",
+          className: style === preset.style ? style_default.pillActive : style_default.pillBtn,
+          onClick: () => {
+            setGenre(preset.genre);
+            setStyle(preset.style);
+          },
+          children: preset.label
+        },
+        preset.label
+      )) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: style_default.gridRow, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("label", { className: style_default.field, children: [
+      "\u9898\u6750\u7C7B\u578B",
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("input", { value: genre, onChange: (e) => setGenre(e.target.value), placeholder: "\u5982\uFF1A\u60AC\u7591\u77ED\u5267 / \u53E4\u98CE\u4ED9\u4FA0" })
+    ] }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("label", { className: style_default.field, children: [
+      "\u5168\u5267\u7F8E\u672F\u4E0E\u6444\u5F71\u57FA\u51C6\uFF08Style Bible\uFF09",
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("textarea", { rows: 2, value: style, onChange: (e) => setStyle(e.target.value) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: style_default.modalFooter, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.btn, style: { marginRight: "auto" }, onClick: onImport, children: "\u5BFC\u5165 .mujing.json" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: style_default.btn, onClick: onClose, children: "\u53D6\u6D88" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+        "button",
+        {
+          type: "button",
+          className: style_default.btnPrimary,
+          disabled: !title.trim(),
+          onClick: () => onSubmit({ title: title.trim(), aspectRatio, style: style.trim(), genre: genre.trim() }),
+          children: "\u521B\u5EFA\u5E76\u8FDB\u5165\u5DE5\u4F5C\u53F0"
+        }
+      )
+    ] })
+  ] }) });
+}
+
+// src/client/TimelineView.tsx
+var import_react6 = require("react");
+var import_jsx_runtime6 = require("react/jsx-runtime");
 function TimelineView({ project, onError, onNotify }) {
   const clips = project.timeline?.clips ?? [];
   const videoNodes = project.nodes.filter((n) => n.type === "video" && n.url);
   const audioNodes = project.nodes.filter((n) => n.type === "audio" && n.url);
-  const [busy, setBusy] = (0, import_react2.useState)(null);
-  const [draftRoot, setDraftRoot] = (0, import_react2.useState)("");
-  const [draftName, setDraftName] = (0, import_react2.useState)("");
-  const [draftResult, setDraftResult] = (0, import_react2.useState)(null);
-  const saveClips = async (next) => {
+  const [busy, setBusy] = (0, import_react6.useState)(null);
+  const [draftRoot, setDraftRoot] = (0, import_react6.useState)("");
+  const [draftName, setDraftName] = (0, import_react6.useState)("");
+  const [draftResult, setDraftResult] = (0, import_react6.useState)(null);
+  const burnSubtitles = Boolean(project.timeline?.burnSubtitles);
+  const saveClips = async (next, nextBurn) => {
     try {
-      await call(`/projects/${project.id}/timeline`, { method: "PUT", body: { clips: next } });
+      await call(`/projects/${project.id}/timeline`, {
+        method: "PUT",
+        body: {
+          clips: next,
+          ...nextBurn !== void 0 ? { burnSubtitles: nextBurn } : {}
+        }
+      });
     } catch (e) {
       onError(e.message);
     }
@@ -7801,7 +7030,12 @@ function TimelineView({ project, onError, onNotify }) {
         }
       });
       setDraftResult(res);
-      onNotify(`\u526A\u6620\u8349\u7A3F\u5BFC\u51FA\u6210\u529F\uFF08${res.clipCount} \u6BB5\u89C6\u9891\uFF0C${res.captionCount} \u6761\u5B57\u5E55\uFF09`);
+      if (!res.writtenToDisk) {
+        onError(`\u526A\u6620\u8349\u7A3F\u672A\u5199\u5165\u672C\u673A\u78C1\u76D8\uFF1A${res.reason ?? "\u8BF7\u586B\u5199\u4E0E\u5F53\u524D\u670D\u52A1\u5668\u64CD\u4F5C\u7CFB\u7EDF\u5339\u914D\u7684\u7EDD\u5BF9\u8DEF\u5F84"}`);
+      } else {
+        const audioPart = res.audioCount ? `\u3001${res.audioCount} \u6761\u914D\u97F3` : "";
+        onNotify(`\u526A\u6620\u8349\u7A3F\u5BFC\u51FA\u6210\u529F\uFF08${res.clipCount} \u6BB5\u89C6\u9891${audioPart}\uFF0C${res.captionCount} \u6761\u5B57\u5E55\uFF09`);
+      }
     } catch (e) {
       onError(e.message);
     } finally {
@@ -7810,70 +7044,70 @@ function TimelineView({ project, onError, onNotify }) {
   };
   const totalMs = clips.reduce((acc, c) => acc + (c.durationMs || 5e3), 0);
   const totalSec = (totalMs / 1e3).toFixed(1);
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.panelScroll, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.panelInner, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.timelineLayout, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `${style_default.sectionCard} ${style_default.timelineTracksCol}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionTitle, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u591A\u8F68\u65F6\u95F4\u7EBF\u7F16\u6392" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badge, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.panelScroll, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.panelInner, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.timelineLayout, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: `${style_default.sectionCard} ${style_default.timelineTracksCol}`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.sectionHead, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.sectionTitle, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u591A\u8F68\u65F6\u95F4\u7EBF\u7F16\u6392" }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: style_default.badge, children: [
             clips.length,
             " \u7247\u6BB5 \xB7 ",
             totalSec,
             "s"
           ] }),
-          busy && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.badgeAccent, children: busy })
+          busy && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: style_default.badgeAccent, children: busy })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("button", { type: "button", className: style_default.btn, onClick: () => void addAllCanvasVideos(), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.actions, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", className: style_default.btn, onClick: () => void addAllCanvasVideos(), children: [
             "\uFF0B \u5BFC\u5165\u753B\u5E03\u89C6\u9891 (",
             videoNodes.length,
             ")"
           ] }),
-          clips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnDanger, onClick: () => void saveClips([]), children: "\u6E05\u7A7A" })
+          clips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", className: style_default.btnDanger, onClick: () => void saveClips([]), children: "\u6E05\u7A7A" })
         ] })
       ] }),
-      clips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.filmstripBar, title: "\u5404\u5206\u6BB5\u89C6\u9891\u65F6\u957F\u5360\u6BD4\u53EF\u89C6\u5316\u65F6\u95F4\u8F74", children: clips.map((c, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      clips.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.filmstripBar, title: "\u5404\u5206\u6BB5\u89C6\u9891\u65F6\u957F\u5360\u6BD4\u53EF\u89C6\u5316\u65F6\u95F4\u8F74", children: clips.map((c, i) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
         "div",
         {
           className: style_default.filmstripSeg,
           style: { flexGrow: Math.max(1, c.durationMs || 5e3) },
           title: `#${i + 1} ${c.title} (${((c.durationMs || 5e3) / 1e3).toFixed(1)}s)`,
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
               "#",
               i + 1,
               " \xB7 ",
               ((c.durationMs || 5e3) / 1e3).toFixed(1),
               "s"
             ] }),
-            c.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: style_default.filmstripAudioDot, title: "\u5DF2\u7ED1\u5B9A\u914D\u97F3\u97F3\u8F68" })
+            c.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: style_default.filmstripAudioDot, title: "\u5DF2\u7ED1\u5B9A\u914D\u97F3\u97F3\u8F68" })
           ]
         },
         c.id
       )) }),
-      clips.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, children: "\u65F6\u95F4\u7EBF\u4E3A\u7A7A\u3002\u53EF\u5728\u300C\u77ED\u5267\u5206\u955C\u53F0\u300D\u4E00\u952E\u5408\u6210\u6574\u96C6\u63A8\u9001\uFF0C\u6216\u70B9\u51FB\u4E0A\u65B9\u300C\u5BFC\u5165\u753B\u5E03\u89C6\u9891\u300D\u3002" }) : clips.map((clip, idx) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.clipRow, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.clipThumbWrap, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("video", { className: style_default.clipThumb, src: clip.url, muted: true, playsInline: true }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.shotThumbBadge, children: [
+      clips.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.dim, children: "\u65F6\u95F4\u7EBF\u4E3A\u7A7A\u3002\u53EF\u5728\u300C\u77ED\u5267\u5206\u955C\u53F0\u300D\u4E00\u952E\u5408\u6210\u6574\u96C6\u63A8\u9001\uFF0C\u6216\u70B9\u51FB\u4E0A\u65B9\u300C\u5BFC\u5165\u753B\u5E03\u89C6\u9891\u300D\u3002" }) : clips.map((clip, idx) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.clipRow, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.clipThumbWrap, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("video", { className: style_default.clipThumb, src: clip.url, muted: true, playsInline: true }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: style_default.shotThumbBadge, children: [
             "#",
             idx + 1
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.clipInfo, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.clipTopLine, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { className: style_default.clipTitle, children: clip.title }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: style_default.badge, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.clipInfo, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.clipTopLine, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("b", { className: style_default.clipTitle, children: clip.title }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: style_default.badge, children: [
               ((clip.durationMs || 5e3) / 1e3).toFixed(1),
               "s"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.shotMiniBtns, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: idx === 0, onClick: () => void moveClip(idx, -1), children: "\u2191" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: idx === clips.length - 1, onClick: () => void moveClip(idx, 1), children: "\u2193" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.miniBtnDanger, onClick: () => void removeClip(idx), children: "\xD7" })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.shotMiniBtns, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: idx === 0, onClick: () => void moveClip(idx, -1), children: "\u2191" }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", className: style_default.miniBtn, disabled: idx === clips.length - 1, onClick: () => void moveClip(idx, 1), children: "\u2193" }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", className: style_default.miniBtnDanger, onClick: () => void removeClip(idx), children: "\xD7" })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.clipFieldRow, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.clipFieldRow, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               "input",
               {
                 className: style_default.clipInlineInput,
@@ -7884,7 +7118,7 @@ function TimelineView({ project, onError, onNotify }) {
                 }
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
               "select",
               {
                 className: style_default.clipAudioSelect,
@@ -7894,8 +7128,8 @@ function TimelineView({ project, onError, onNotify }) {
                   void updateClipField(idx, { audioNodeId: aNode?.id, audioUrl: aNode?.url });
                 },
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("option", { value: "", children: "\u539F\u58F0 / \u9759\u97F3\u8F68" }),
-                  audioNodes.map((a) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("option", { value: a.id, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("option", { value: "", children: "\u539F\u58F0 / \u9759\u97F3\u8F68" }),
+                  audioNodes.map((a) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("option", { value: a.id, children: [
                     "\u{1F399} ",
                     a.title ?? a.id
                   ] }, a.id))
@@ -7903,61 +7137,934 @@ function TimelineView({ project, onError, onNotify }) {
               }
             )
           ] }),
-          clip.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("audio", { src: clip.audioUrl, controls: true, className: style_default.shotAudioPlayer })
+          clip.audioUrl && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("audio", { src: clip.audioUrl, controls: true, className: style_default.shotAudioPlayer })
         ] })
       ] }, clip.id))
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.timelineMonitorCol, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionCard, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.sectionTitle, children: "\u6210\u7247\u76D1\u89C6\u5668 \xB7 FFmpeg \u5408\u6210" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: clips.length === 0 || busy !== null, onClick: () => void renderMp4(), children: "\u5408\u6210 MP4 \u6210\u7247" })
-        ] }),
-        project.timeline?.error && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.errText, children: project.timeline.error }),
-        project.timeline?.outputUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("video", { className: style_default.monitorVideo, src: project.timeline.outputUrl, controls: true, playsInline: true }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.actions, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { className: style_default.btnPrimary, href: project.timeline.outputUrl, download: `${project.title}-\u6210\u7247.mp4`, children: "\u4E0B\u8F7D\u6210\u7247 MP4" }),
-            project.timeline.subtitleAssetUrl && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { className: style_default.btn, href: project.timeline.subtitleAssetUrl, download: `${project.title}.srt`, children: "\u4E0B\u8F7D SRT \u5B57\u5E55" })
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.timelineMonitorCol, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.sectionCard, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.sectionHead, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.sectionTitle, children: "\u6210\u7247\u76D1\u89C6\u5668 \xB7 FFmpeg \u5408\u6210" }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.actions, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("label", { style: { display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, cursor: "pointer" }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                "input",
+                {
+                  type: "checkbox",
+                  checked: burnSubtitles,
+                  onChange: (e) => void saveClips(clips, e.target.checked)
+                }
+              ),
+              "\u786C\u70E7\u5F55\u5B57\u5E55"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: clips.length === 0 || busy !== null, onClick: () => void renderMp4(), children: "\u5408\u6210 MP4 \u6210\u7247" })
           ] })
-        ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.dim, children: "\u70B9\u51FB\u53F3\u4E0A\u89D2\u300C\u5408\u6210 MP4 \u6210\u7247\u300D\uFF0C\u7CFB\u7EDF\u5C06\u901A\u8FC7\u672C\u5730 FFmpeg \u7EDF\u4E00\u5206\u8FA8\u7387\u4E0E\u5E27\u7387\u3001\u6DF7\u6D41\u914D\u97F3\u5E76\u751F\u6210 SRT \u5B57\u5E55\u3002" }),
-        project.timeline?.subtitleSrt && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("details", { className: style_default.srtDetails, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("summary", { className: style_default.srtSummary, children: "\u5C55\u5F00\u67E5\u770B SRT \u5B57\u5E55\u8F68\u9053" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("pre", { className: style_default.srtBox, children: project.timeline.subtitleSrt })
+        ] }),
+        project.timeline?.error && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.errText, children: project.timeline.error }),
+        project.timeline?.outputUrl ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("video", { className: style_default.monitorVideo, src: project.timeline.outputUrl, controls: true, playsInline: true }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.actions, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("a", { className: style_default.btnPrimary, href: project.timeline.outputUrl, download: `${project.title}-\u6210\u7247.mp4`, children: "\u4E0B\u8F7D\u6210\u7247 MP4" }),
+            project.timeline.subtitleAssetUrl && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("a", { className: style_default.btn, href: project.timeline.subtitleAssetUrl, download: `${project.title}.srt`, children: "\u4E0B\u8F7D SRT \u5B57\u5E55" })
+          ] })
+        ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.dim, children: "\u70B9\u51FB\u53F3\u4E0A\u89D2\u300C\u5408\u6210 MP4 \u6210\u7247\u300D\uFF0C\u7CFB\u7EDF\u5C06\u901A\u8FC7\u672C\u5730 FFmpeg \u7EDF\u4E00\u5206\u8FA8\u7387\u4E0E\u5E27\u7387\u3001\u6DF7\u6D41\u914D\u97F3\u5E76\u751F\u6210 SRT \u5B57\u5E55\u3002" }),
+        project.timeline?.subtitleSrt && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("details", { className: style_default.srtDetails, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("summary", { className: style_default.srtSummary, children: "\u5C55\u5F00\u67E5\u770B SRT \u5B57\u5E55\u8F68\u9053" }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("pre", { className: style_default.srtBox, children: project.timeline.subtitleSrt })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionCard, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.sectionHead, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: style_default.sectionTitle, children: "\u526A\u6620\u4E13\u4E1A\u7248\u8349\u7A3F\u5BFC\u51FA\uFF08JianyingPro\uFF09" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: clips.length === 0 || busy !== null, onClick: () => void exportJianying(), children: "\u4E00\u952E\u5BFC\u51FA\u5230\u526A\u6620" })
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.sectionCard, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.sectionHead, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: style_default.sectionTitle, children: "\u526A\u6620\u4E13\u4E1A\u7248\u8349\u7A3F\u5BFC\u51FA\uFF08JianyingPro\uFF09" }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", className: style_default.btnPrimary, disabled: clips.length === 0 || busy !== null, onClick: () => void exportJianying(), children: "\u4E00\u952E\u5BFC\u51FA\u5230\u526A\u6620" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.gridRow, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: style_default.gridRow, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("label", { className: style_default.field, children: [
             "\u8349\u7A3F\u540D\u79F0\uFF08\u53EF\u9009\uFF09",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: draftName, onChange: (e) => setDraftName(e.target.value), placeholder: `${project.title}-\u5E55\u5883\u8349\u7A3F` })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("input", { value: draftName, onChange: (e) => setDraftName(e.target.value), placeholder: `${project.title}-\u5E55\u5883\u8349\u7A3F` })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { className: style_default.field, children: [
-            "\u526A\u6620\u8349\u7A3F\u76EE\u5F55\uFF08\u7559\u7A7A\u5199\u9ED8\u8BA4\u76EE\u5F55\uFF09",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("input", { value: draftRoot, onChange: (e) => setDraftRoot(e.target.value), placeholder: "~/Movies/JianyingPro/.../com.lveditor.draft" })
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("label", { className: style_default.field, children: [
+            "\u526A\u6620\u8349\u7A3F\u76EE\u5F55\uFF08\u7559\u7A7A\u5199\u5F53\u524D\u7CFB\u7EDF\u9ED8\u8BA4\u76EE\u5F55\uFF09",
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("input", { value: draftRoot, onChange: (e) => setDraftRoot(e.target.value), placeholder: "\u7559\u7A7A\u81EA\u52A8\u4F7F\u7528\u672C\u673A\u526A\u6620\u8349\u7A3F\u76EE\u5F55\uFF08\u652F\u6301 macOS / Windows\uFF09" })
           ] })
         ] }),
-        draftResult && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: style_default.tip, style: { margin: 0 }, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("b", { children: "\u2713 \u5BFC\u51FA\u5B8C\u6210\uFF1A" }),
+        draftResult && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: draftResult.writtenToDisk === false ? style_default.errText : style_default.tip, style: { margin: 0 }, children: [
+          draftResult.writtenToDisk === false ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("b", { children: "\u26A0 \u672A\u5199\u5165\u78C1\u76D8\uFF1A" }),
+            draftResult.reason ?? "\u76EE\u6807\u8DEF\u5F84\u4E0E\u670D\u52A1\u5668\u64CD\u4F5C\u7CFB\u7EDF\u4E0D\u5339\u914D\uFF0C\u8BF7\u68C0\u67E5\u8349\u7A3F\u76EE\u5F55\u683C\u5F0F\u3002"
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("b", { children: "\u2713 \u5BFC\u51FA\u5B8C\u6210\uFF1A" }),
             "\u5199\u5165 ",
             draftResult.clipCount,
-            " \u6BB5\u89C6\u9891\u3001",
+            " \u6BB5\u89C6\u9891",
+            draftResult.audioCount ? `\u3001${draftResult.audioCount} \u6761\u914D\u97F3\u8F68` : "",
+            "\u3001",
             draftResult.captionCount,
             " \u6761\u5B57\u5E55\u8F68\u3002"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { style: { wordBreak: "break-all", marginTop: 4 }, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { style: { wordBreak: "break-all", marginTop: 4 }, children: [
             "\u8DEF\u5F84\uFF1A",
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: draftResult.draftDir })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("code", { children: draftResult.draftDir })
           ] })
         ] })
       ] })
     ] })
   ] }) }) });
+}
+
+// src/client/index.tsx
+var import_jsx_runtime7 = require("react/jsx-runtime");
+function useAppShell() {
+  return (0, import_react7.useSyncExternalStore)(subscribeAppShell, getAppShellState, getAppShellState);
+}
+function NavIcon({ size = 18 }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("rect", { x: "3", y: "4", width: "18", height: "16", rx: "2.5" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("polygon", { points: "10.5,9.5 14.5,12 10.5,14.5", fill: "currentColor", stroke: "none" })
+  ] });
+}
+function MujingBrandMark({ size = 24 }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.brandSlotMark, style: { width: size, height: size }, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(NavIcon, { size: Math.max(14, Math.round(size * 0.64)) }) });
+}
+function MujingBrandName() {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.brandSlotName, children: "\u5E55\u5883 \xB7 Mujing" });
+}
+function FixedChatConversationView(props) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_jsx_runtime7.Fragment, { children: props.renderSlot("conversation.session", { view: "chat" }) });
+}
+function MujingDirectorChat(props) {
+  const {
+    sessionId,
+    useSession,
+    useConversation,
+    useSessions,
+    inputActions,
+    renderFactorySlot,
+    openWorkspace
+  } = props;
+  const session = useSession((s) => s);
+  const conversation = useConversation((c) => c);
+  const sessionsState = useSessions((state) => state);
+  const summaryBlank = sessionId === void 0 ? void 0 : sessionsState.byId[sessionId]?.blank;
+  const recentSessions = (0, import_react7.useMemo)(() => {
+    const items = [];
+    for (const id of sessionsState.ids) {
+      const row = sessionsState.byId[id];
+      if (!row || row.origin === "subagent") continue;
+      if (row.blank && row.id !== sessionId) continue;
+      items.push(row);
+    }
+    return items.slice(0, 20);
+  }, [sessionsState, sessionId]);
+  (0, import_react7.useEffect)(() => {
+    if (!inputActions || sessionId === void 0) {
+      registerDirectorSender(null);
+      return () => registerDirectorSender(null);
+    }
+    registerDirectorSender((text) => {
+      try {
+        inputActions.setDraft(text);
+        setTimeout(() => {
+          try {
+            inputActions.submit();
+          } catch {
+          }
+        }, 40);
+        return true;
+      } catch {
+        return false;
+      }
+    });
+    return () => registerDirectorSender(null);
+  }, [inputActions, sessionId]);
+  const active = session !== void 0 && conversation !== void 0 && (conversation.activeTargets.size > 0 || !session.blank && !session.awaitingFirstTurn || session.running);
+  const shellPhase = session === void 0 || conversation === void 0 ? "blank" : active ? "active" : session.promptAttempted ? "engaging" : "blank";
+  const openState = session?.openState;
+  const settling = sessionId !== void 0 && shellPhase === "blank" && openState === "loading" && summaryBlank !== true;
+  const hero = sessionId === void 0 || shellPhase === "blank" && (openState === "open" || summaryBlank === true);
+  const phase = settling ? "settling" : hero ? "hero" : "active";
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.directorChatHost, "data-phase": phase, children: [
+    recentSessions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.directorSessionBar, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      "select",
+      {
+        className: style_default.directorSessionSelect,
+        "aria-label": "\u5207\u6362\u5386\u53F2\u5BFC\u6F14\u4F1A\u8BDD",
+        value: sessionId ?? "",
+        onChange: (e) => {
+          if (e.target.value) getStudioBridge()?.openSessionInStudio(e.target.value);
+        },
+        children: recentSessions.map((item) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("option", { value: item.id, children: item.blank ? "\u2728 \u5F53\u524D\u65B0\u5BF9\u8BDD" : (item.title || item.displayTitle || item.id).slice(0, 32) }, item.id))
+      }
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.directorChatInner, children: renderFactorySlot(
+      "conversation.content",
+      {
+        variant: "embedded",
+        phase,
+        hero,
+        onWorkspaceSelected: openWorkspace
+      },
+      {
+        slots: { views: FixedChatConversationView }
+      }
+    ) })
+  ] });
+}
+function MujingAppRail({ usePanelInfo, useSessions }) {
+  const activePanelId = usePanelInfo((info) => info.activePanelId);
+  const sessionsState = useSessions((state) => state);
+  const shell = useAppShell();
+  const importInputRef = (0, import_react7.useRef)(null);
+  const [railErr, setRailErr] = (0, import_react7.useState)(null);
+  const panelKind = activePanelId === PANEL_ID ? "studio" : activePanelId === "plugins" ? "plugins" : activePanelId === null ? "chat" : "other";
+  (0, import_react7.useEffect)(() => {
+    document.documentElement.dataset.mujingRail = shell.railCollapsed ? "collapsed" : "expanded";
+  }, [shell.railCollapsed]);
+  (0, import_react7.useEffect)(() => {
+    document.documentElement.dataset.mujingPanel = panelKind;
+    const title = panelKind === "plugins" ? "\u6280\u80FD\u4E0E\u63D2\u4EF6 \xB7 \u5E55\u5883\u5DE5\u4F5C\u53F0" : panelKind === "chat" ? "\u5BFC\u6F14\u4F1A\u8BDD \xB7 \u5E55\u5883\u5DE5\u4F5C\u53F0" : "\u5E55\u5883 \xB7 AI \u5F71\u89C6\u5DE5\u4F5C\u53F0";
+    document.title = title;
+    const timer = setTimeout(() => {
+      document.title = title;
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [panelKind]);
+  (0, import_react7.useEffect)(() => {
+    refreshAppProjects().catch((e) => setRailErr(e.message));
+    registerImportTrigger(() => importInputRef.current?.click());
+    return () => registerImportTrigger(null);
+  }, []);
+  const visibleSessions = (0, import_react7.useMemo)(() => {
+    const items = [];
+    for (const id of sessionsState.ids) {
+      const row = sessionsState.byId[id];
+      if (!row || row.origin === "subagent" || row.blank) continue;
+      items.push(row);
+    }
+    return items.slice(0, 12);
+  }, [sessionsState]);
+  const activeSessionId = (0, import_react7.useMemo)(() => {
+    for (const id of sessionsState.ids) {
+      const row = sessionsState.byId[id];
+      if (row && (row.retainedBy?.mainView ?? 0) > 0) return row.id;
+    }
+    return void 0;
+  }, [sessionsState]);
+  const handleCreateProject = async (payload) => {
+    try {
+      const created = await call("/projects", { method: "POST", body: payload });
+      patchAppShellState({ createModalOpen: false, showHub: false });
+      await refreshAppProjects();
+      await selectAppProject(created.id, { focusStudio: true });
+      emitStudioIntent({ tab: "drama", projectId: created.id, exitHub: true, openFullscreen: true });
+    } catch (e) {
+      setRailErr(e.message);
+    }
+  };
+  const removeProject = async (id, title) => {
+    if (!window.confirm(`\u5220\u9664\u5267\u76EE\u300C${title}\u300D\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`)) return;
+    try {
+      await call(`/projects/${id}`, { method: "DELETE" });
+      if (shell.activeId === id) patchAppShellState({ activeId: null });
+      await refreshAppProjects();
+    } catch (e) {
+      setRailErr(e.message);
+    }
+  };
+  const onImportJson = async (e) => {
+    const f = e.target.files?.[0];
+    e.target.value = "";
+    if (!f) return;
+    try {
+      const parsed = JSON.parse(await f.text());
+      const imported = await call("/projects/import", { method: "POST", body: { project: parsed } });
+      await refreshAppProjects();
+      await selectAppProject(imported.id, { focusStudio: true });
+      emitStudioIntent({ projectId: imported.id, exitHub: true, openFullscreen: true });
+    } catch (ex) {
+      setRailErr(`\u5BFC\u5165\u5931\u8D25\uFF1A${ex.message}`);
+    }
+  };
+  const isStudio = panelKind === "studio";
+  const isPlugins = panelKind === "plugins";
+  const isChat = panelKind === "chat";
+  const inHub = isStudio && (shell.showHub || shell.projectsLoaded && shell.projects.length === 0);
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("input", { ref: importInputRef, type: "file", accept: ".json,application/json", hidden: true, onChange: (e) => void onImportJson(e) }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("aside", { className: shell.railCollapsed ? style_default.appRailCollapsed : style_default.appRail, "aria-label": "\u5E55\u5883\u4E3B\u5BFC\u822A", children: shell.railCollapsed ? /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railCollapsedTop, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.brandBadgeBtn,
+            title: "\u5C55\u5F00\u5E55\u5883\u5DE6\u4FA7\u680F",
+            onClick: () => patchAppShellState({ railCollapsed: false }),
+            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(NavIcon, { size: 16 })
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.railIconBtn,
+            title: "\u5C55\u5F00\u5DE6\u4FA7\u680F",
+            onClick: () => patchAppShellState({ railCollapsed: false }),
+            children: "\u25B7"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: inHub ? style_default.railIconBtnActive : style_default.railIconBtn,
+            title: "\u5267\u76EE\u5E7F\u573A \xB7 \u6A21\u677F\u5F00\u62CD",
+            onClick: () => openAppHub(),
+            children: "\u{1F3E0}"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.railIconBtn,
+            title: "\u65B0\u5EFA\u5267\u76EE\u5DE5\u7A0B",
+            onClick: () => patchAppShellState({ createModalOpen: true }),
+            children: "\uFF0B"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.railCollapsedProjects, children: shell.projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        "button",
+        {
+          type: "button",
+          className: isStudio && !inHub && p.id === shell.activeId ? style_default.railIconProjActive : style_default.railIconProj,
+          title: p.title,
+          onClick: () => void selectAppProject(p.id, { focusStudio: true }),
+          children: p.coverUrl ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: p.coverUrl, alt: "", className: style_default.railIconThumb }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u{1F3AC}" })
+        },
+        p.id
+      )) }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railCollapsedFoot, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: isChat ? style_default.railIconBtnActive : style_default.railIconBtn,
+            title: "\u5BFC\u6F14\u4F1A\u8BDD\u8BB0\u5F55",
+            onClick: () => getStudioBridge()?.openClassicChat(),
+            children: "\u{1F4AC}"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: isPlugins ? style_default.railIconBtnActive : style_default.railIconBtn,
+            title: "\u6280\u80FD\u4E0E\u63D2\u4EF6\u4E2D\u5FC3",
+            onClick: () => getStudioBridge()?.openPlugins(),
+            children: "\u{1F9E9}"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: shell.media && (!shell.media.image.ready || !shell.media.video.ready || !shell.media.audio.ready) ? style_default.railIconBtnErr : style_default.railIconBtn,
+            title: shell.media ? `\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E
+\u751F\u56FE\uFF1A${shell.media.image.ready ? shell.media.image.model : "\u672A\u914D\u7F6E"}
+\u89C6\u9891\uFF1A${shell.media.video.ready ? shell.media.video.model : "\u672A\u914D\u7F6E"}
+\u914D\u97F3\uFF1A${shell.media.audio.ready ? shell.media.audio.model : "\u672A\u914D\u7F6E"}` : "\u914D\u7F6E\u751F\u56FE / \u89C6\u9891 / \u914D\u97F3\u6A21\u578B",
+            onClick: () => openMediaConfigModal(
+              shell.media && !shell.media.image.ready ? "image" : shell.media && !shell.media.video.ready ? "video" : shell.media && !shell.media.audio.ready ? "audio" : "image"
+            ),
+            children: "\u{1F39B}"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.railIconBtn,
+            title: "\u7CFB\u7EDF\u8BBE\u7F6E",
+            onClick: () => getStudioBridge()?.openSettings(),
+            children: "\u2699"
+          }
+        )
+      ] })
+    ] }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.projectsHead, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.brandWrap, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.brandBadge, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(NavIcon, { size: 15 }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.brandTextCol, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.brand, children: "\u5E55\u5883\u5DE5\u4F5C\u53F0" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.brandSub, children: "AI \u5F71\u89C6\u4E0E\u6F2B\u5267\u5236\u7247" })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.headActions, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.btnPrimary,
+              onClick: () => patchAppShellState({ createModalOpen: true }),
+              title: "\u65B0\u5EFA\u5267\u76EE\u6216\u65E0\u9650\u753B\u5E03\u5DE5\u7A0B",
+              children: "\uFF0B \u65B0\u5EFA"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.iconBtn,
+              title: "\u6536\u8D77\u5DE6\u4FA7\u5BFC\u822A\u680F",
+              onClick: () => patchAppShellState({ railCollapsed: true }),
+              children: "\u25C1"
+            }
+          )
+        ] })
+      ] }),
+      railErr && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railErrBar, onClick: () => setRailErr(null), children: [
+        railErr,
+        " \xD7"
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railNavGroup, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: inHub ? style_default.railNavBtnActive : style_default.railNavBtn,
+            onClick: () => openAppHub(),
+            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u{1F3E0} \u5267\u76EE\u5E7F\u573A \xB7 \u6A21\u677F\u5F00\u62CD" })
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "button",
+          {
+            type: "button",
+            className: style_default.railNavBtn,
+            onClick: () => importInputRef.current?.click(),
+            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u{1F4E5} \u5BFC\u5165 .mujing.json \u5DE5\u7A0B" })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railSectionLabel, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u6211\u7684\u5267\u76EE\u5DE5\u7A0B" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: shell.projects.length })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("ul", { className: style_default.projectList, children: [
+        shell.projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("li", { className: isStudio && !inHub && p.id === shell.activeId ? style_default.projectActive : style_default.projectItem, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.projectMain, onClick: () => void selectAppProject(p.id, { focusStudio: true }), children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.projectRowTop, children: [
+            p.coverUrl ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: p.coverUrl, alt: "", className: style_default.projectThumb }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.projectThumbEmpty, children: "\u{1F3AC}" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.projectTextCol, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.projectTitle, children: p.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: style_default.projectMeta, children: [
+                p.aspectRatio && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.ratioTag, children: p.aspectRatio }),
+                Boolean(p.castCount) && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
+                  p.castCount,
+                  "\u8D44\u4EA7"
+                ] }),
+                Boolean(p.episodeCount) && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
+                  "\xB7 ",
+                  p.episodeCount,
+                  "\u96C6"
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
+                  "\xB7 ",
+                  p.nodeCount,
+                  "\u8282\u70B9"
+                ] })
+              ] })
+            ] })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.iconBtn, title: "\u5220\u9664\u5267\u76EE", "aria-label": "\u5220\u9664\u5267\u76EE", onClick: () => void removeProject(p.id, p.title), children: "\xD7" })
+        ] }, p.id)),
+        shell.projectsLoaded && shell.projects.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("li", { className: style_default.empty, children: "\u6682\u65E0\u5DE5\u7A0B\uFF0C\u53EF\u5728\u53F3\u4FA7\u300C\u5267\u76EE\u5E7F\u573A\u300D\u8F93\u5165\u521B\u610F\u6216\u4E00\u952E\u9009\u7528\u6A21\u677F\u5F00\u62CD\u3002" })
+      ] }),
+      isChat && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railSessionsBox, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railSessionsHead, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u5BFC\u6F14\u5386\u53F2\u4F1A\u8BDD" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.linkBtn,
+              onClick: () => getStudioBridge()?.newChatSession(),
+              children: "\uFF0B \u65B0\u4F1A\u8BDD"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railSessionsList, children: [
+          visibleSessions.map((s) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: s.id === activeSessionId ? style_default.railSessionBtnActive : style_default.railSessionBtn,
+              title: s.title || s.displayTitle || s.id,
+              onClick: () => getStudioBridge()?.openSessionInChat(s.id),
+              children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.railSessionTitle, children: s.title || s.displayTitle || s.id })
+            },
+            s.id
+          )),
+          visibleSessions.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.railSessionEmpty, children: "\u6682\u65E0\u5386\u53F2\u5BF9\u8BDD" })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.railFooter, children: [
+        shell.media && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.engineBar, role: "group", "aria-label": "\u591A\u6A21\u6001\u6A21\u578B\u914D\u7F6E\u5165\u53E3", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+            "button",
+            {
+              type: "button",
+              "data-media-kind": "image",
+              "data-media-ready": shell.media.image.ready ? "1" : "0",
+              className: shell.media.image.ready ? style_default.engineBtnOk : style_default.engineBtnErr,
+              title: shell.media.image.ready ? `\u751F\u56FE\u6A21\u578B\u5DF2\u5C31\u7EEA\uFF1A${shell.media.image.model}\uFF08${shell.media.image.readyCount}/${shell.media.image.totalCount} \u4E2A\u63A5\u53E3 \xB7 ${STRATEGY_LABEL[shell.media.image.strategy]}\uFF09
+\u70B9\u51FB\u914D\u7F6E\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565` : "\u751F\u56FE\u6A21\u578B\u672A\u914D\u7F6E\n\u70B9\u51FB\u914D\u7F6E\u63A5\u53E3\u5730\u5740\u4E0E API Key",
+              onClick: () => openMediaConfigModal("image"),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u25CF \u751F\u56FE" }),
+                shell.media.image.readyCount > 1 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.engineCount, children: shell.media.image.readyCount })
+              ]
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+            "button",
+            {
+              type: "button",
+              "data-media-kind": "video",
+              "data-media-ready": shell.media.video.ready ? "1" : "0",
+              className: shell.media.video.ready ? style_default.engineBtnOk : style_default.engineBtnErr,
+              title: shell.media.video.ready ? `\u89C6\u9891\u6A21\u578B\u5DF2\u5C31\u7EEA\uFF1A${shell.media.video.model}\uFF08${shell.media.video.readyCount}/${shell.media.video.totalCount} \u4E2A\u63A5\u53E3 \xB7 ${STRATEGY_LABEL[shell.media.video.strategy]}\uFF09
+\u70B9\u51FB\u914D\u7F6E\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565` : "\u89C6\u9891\u6A21\u578B\u672A\u914D\u7F6E\n\u70B9\u51FB\u914D\u7F6E\u63A5\u53E3\u5730\u5740\u4E0E API Key",
+              onClick: () => openMediaConfigModal("video"),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u25CF \u89C6\u9891" }),
+                shell.media.video.readyCount > 1 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.engineCount, children: shell.media.video.readyCount })
+              ]
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+            "button",
+            {
+              type: "button",
+              "data-media-kind": "audio",
+              "data-media-ready": shell.media.audio.ready ? "1" : "0",
+              className: shell.media.audio.ready ? style_default.engineBtnOk : style_default.engineBtnErr,
+              title: shell.media.audio.ready ? `\u914D\u97F3\u6A21\u578B\u5DF2\u5C31\u7EEA\uFF1A${shell.media.audio.model}\uFF08${shell.media.audio.readyCount}/${shell.media.audio.totalCount} \u4E2A\u63A5\u53E3 \xB7 ${STRATEGY_LABEL[shell.media.audio.strategy]}\uFF09
+\u70B9\u51FB\u914D\u7F6E\u591A\u63A5\u53E3\u4E0E\u8F6E\u8BE2\u7B56\u7565` : "\u914D\u97F3\u6A21\u578B\u672A\u914D\u7F6E\n\u70B9\u51FB\u914D\u7F6E\u63A5\u53E3\u5730\u5740\u4E0E API Key",
+              onClick: () => openMediaConfigModal("audio"),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u25CF \u914D\u97F3" }),
+                shell.media.audio.readyCount > 1 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.engineCount, children: shell.media.audio.readyCount })
+              ]
+            }
+          )
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.runtimeBar, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: isChat ? style_default.runtimeBtnActive : style_default.runtimeBtn,
+              title: "\u67E5\u770B\u5B8C\u6574 AI \u5BFC\u6F14\u4F1A\u8BDD\u4E0E\u5386\u53F2\u8BB0\u5F55",
+              onClick: () => getStudioBridge()?.openClassicChat(),
+              children: "\u{1F4AC} \u4F1A\u8BDD"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: isPlugins ? style_default.runtimeBtnActive : style_default.runtimeBtn,
+              title: "\u7BA1\u7406\u5F71\u89C6\u6280\u80FD\u4E0E\u5E95\u5C42\u63D2\u4EF6",
+              onClick: () => getStudioBridge()?.openPlugins(),
+              children: "\u{1F9E9} \u63D2\u4EF6"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.runtimeBtn,
+              title: "\u914D\u7F6E\u6A21\u578B\u3001API Key \u4E0E\u504F\u597D\u8BBE\u7F6E",
+              onClick: () => getStudioBridge()?.openSettings(),
+              children: "\u2699 \u8BBE\u7F6E"
+            }
+          )
+        ] })
+      ] })
+    ] }) }),
+    shell.createModalOpen && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.railModalRoot, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      CreateProjectModal,
+      {
+        onClose: () => patchAppShellState({ createModalOpen: false }),
+        onImport: () => {
+          patchAppShellState({ createModalOpen: false });
+          importInputRef.current?.click();
+        },
+        onSubmit: (payload) => void handleCreateProject(payload)
+      }
+    ) }),
+    shell.mediaConfigTab !== null && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.railModalRoot, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      MediaConfigModal,
+      {
+        initialTab: shell.mediaConfigTab,
+        onClose: () => patchAppShellState({ mediaConfigTab: null })
+      }
+    ) })
+  ] });
+}
+function FullscreenStudioPage({ renderSlot }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    StudioShell,
+    {
+      mode: "fullscreen",
+      renderDirectorChat: () => renderSlot("mujing.director.chat", {})
+    }
+  );
+}
+function RightSidebarStudioPane() {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(StudioShell, { mode: "split" });
+}
+function StudioShell({ mode, renderDirectorChat }) {
+  const initialDesired = getDesiredStudioState();
+  const isSplit = mode === "split";
+  const shell = useAppShell();
+  const { projects, projectsLoaded, activeId, showHub, media } = shell;
+  const [project, setProject] = (0, import_react7.useState)(null);
+  const [tab, setTabState] = (0, import_react7.useState)(initialDesired.tab);
+  const [directorOpen, setDirectorOpen] = (0, import_react7.useState)(false);
+  const [directorEverOpened, setDirectorEverOpened] = (0, import_react7.useState)(false);
+  const [renamingTitle, setRenamingTitle] = (0, import_react7.useState)(null);
+  const [err, setErr] = (0, import_react7.useState)(null);
+  const [toast, setToast] = (0, import_react7.useState)(null);
+  const openDirectorDrawer = (0, import_react7.useCallback)(() => {
+    setDirectorEverOpened(true);
+    setDirectorOpen(true);
+  }, []);
+  const toggleDirectorDrawer = (0, import_react7.useCallback)(() => {
+    setDirectorEverOpened(true);
+    setDirectorOpen((v) => !v);
+  }, []);
+  const setTab = (0, import_react7.useCallback)((next) => {
+    setTabState(next);
+    patchAppShellState({ showHub: false });
+    emitStudioIntent({ tab: next });
+  }, []);
+  const notify = (0, import_react7.useCallback)((msg) => {
+    setToast(msg);
+    setTimeout(() => setToast((prev) => prev === msg ? null : prev), 3800);
+  }, []);
+  (0, import_react7.useEffect)(() => {
+    if (!projectsLoaded) {
+      refreshAppProjects().catch((e) => setErr(e.message));
+    }
+  }, [projectsLoaded]);
+  const selectProject = (0, import_react7.useCallback)(async (id) => {
+    setRenamingTitle(null);
+    await selectAppProject(id, { focusStudio: !isSplit });
+  }, [isSplit]);
+  (0, import_react7.useEffect)(() => {
+    return subscribeStudioIntent((intent) => {
+      if (intent.tab) setTabState(intent.tab);
+      if (intent.openDirector && !isSplit) {
+        setDirectorEverOpened(true);
+        setDirectorOpen(true);
+      }
+      if (intent.exitHub) patchAppShellState({ showHub: false });
+      if (intent.reloadProjects) {
+        void refreshAppProjects().then(() => {
+          if (intent.projectId) void selectProject(intent.projectId);
+        }).catch(() => {
+        });
+      } else if (intent.projectId) {
+        void selectProject(intent.projectId);
+      }
+    });
+  }, [isSplit, selectProject]);
+  (0, import_react7.useEffect)(() => {
+    if (activeId !== null && !(directorOpen && showHub)) return;
+    const timer = setInterval(() => {
+      void refreshAppProjects({ autoSelectNew: directorOpen }).catch(() => {
+      });
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [activeId, directorOpen, showHub]);
+  (0, import_react7.useEffect)(() => {
+    if (!activeId) {
+      setProject(null);
+      return;
+    }
+    let closed = false;
+    const es = new EventSource(`${API}/projects/${activeId}/events`, { withCredentials: true });
+    es.addEventListener("snapshot", (e) => {
+      if (closed) return;
+      const snap = JSON.parse(e.data);
+      setProject(snap);
+      upsertAppProjectSummary(summarizeProject(snap));
+    });
+    es.addEventListener("deleted", () => {
+      if (!closed) {
+        setProject(null);
+        void refreshAppProjects();
+      }
+    });
+    return () => {
+      closed = true;
+      es.close();
+    };
+  }, [activeId]);
+  const undo = (0, import_react7.useCallback)(async () => {
+    if (!project) return;
+    try {
+      const r = await call(`/projects/${project.id}/undo`, { method: "POST" });
+      if (r.changed ?? r.undone) setProject({ ...r.project, history: r.history });
+    } catch (e) {
+      setErr(e.message);
+    }
+  }, [project]);
+  const redo = (0, import_react7.useCallback)(async () => {
+    if (!project) return;
+    try {
+      const r = await call(`/projects/${project.id}/redo`, { method: "POST" });
+      if (r.changed ?? r.redone) setProject({ ...r.project, history: r.history });
+    } catch (e) {
+      setErr(e.message);
+    }
+  }, [project]);
+  (0, import_react7.useEffect)(() => {
+    const onKeyDown = (e) => {
+      if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== "z") return;
+      const target = e.target;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT" || target.isContentEditable)) {
+        return;
+      }
+      e.preventDefault();
+      if (e.shiftKey) void redo();
+      else void undo();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [undo, redo]);
+  const saveRenamedTitle = async () => {
+    if (!project || renamingTitle === null) return;
+    const next = renamingTitle.trim();
+    setRenamingTitle(null);
+    if (!next || next === project.title) return;
+    try {
+      await call(`/projects/${project.id}`, { method: "PATCH", body: { title: next } });
+      await refreshAppProjects();
+      notify("\u5DF2\u66F4\u65B0\u5267\u76EE\u540D\u79F0");
+    } catch (e) {
+      setErr(e.message);
+    }
+  };
+  const removeProject = async (id, title) => {
+    if (!window.confirm(`\u5220\u9664\u5267\u76EE\u300C${title}\u300D\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`)) return;
+    try {
+      await call(`/projects/${id}`, { method: "DELETE" });
+      if (activeId === id) patchAppShellState({ activeId: null });
+      await refreshAppProjects();
+    } catch (e) {
+      setErr(e.message);
+    }
+  };
+  const launchDirectorWithPrompt = (0, import_react7.useCallback)((prompt, targetTab) => {
+    openDirectorDrawer();
+    dispatchDirectorPrompt(prompt, { tab: targetTab });
+  }, [openDirectorDrawer]);
+  const inHubView = !isSplit && (showHub || projectsLoaded && projects.length === 0);
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: `${style_default.page} ${isSplit ? style_default.pageSplit : ""}`, "data-studio-mode": mode, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("section", { className: style_default.stage, children: [
+    err !== null && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.errorBar, onClick: () => setErr(null), children: [
+      err,
+      "\uFF08\u70B9\u51FB\u5173\u95ED\uFF09"
+    ] }),
+    toast !== null && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.toastBar, onClick: () => setToast(null), children: toast }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("header", { className: isSplit ? style_default.topBarSplit : style_default.topBar, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.topBarRow, children: [
+        isSplit ? /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.splitProjectBar, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+            "select",
+            {
+              className: style_default.projectSelect,
+              "aria-label": "\u9009\u62E9\u5267\u76EE\u5DE5\u7A0B",
+              value: activeId ?? "",
+              onChange: (e) => {
+                if (e.target.value) void selectProject(e.target.value);
+              },
+              children: [
+                projects.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("option", { value: "", children: "\u6682\u65E0\u5267\u76EE\u5DE5\u7A0B" }),
+                projects.map((p) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("option", { value: p.id, children: [
+                  p.title,
+                  p.aspectRatio ? ` (${p.aspectRatio})` : ""
+                ] }, p.id))
+              ]
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => patchAppShellState({ createModalOpen: true }), title: "\u65B0\u5EFA\u77ED\u5267/\u753B\u5E03\u5DE5\u7A0B", children: "\uFF0B \u65B0\u5EFA" })
+        ] }) : inHubView ? /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.boardTitle, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u{1F3E0} \u5267\u76EE\u5E7F\u573A" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.ratioTag, children: "AI \u5BFC\u6F14\u9A71\u52A8" })
+        ] }) : project ? renamingTitle !== null ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "input",
+          {
+            className: style_default.renameInput,
+            autoFocus: true,
+            value: renamingTitle,
+            onChange: (e) => setRenamingTitle(e.target.value),
+            onBlur: () => void saveRenamedTitle(),
+            onKeyDown: (e) => {
+              if (e.key === "Enter") void saveRenamedTitle();
+              if (e.key === "Escape") setRenamingTitle(null);
+            }
+          }
+        ) : /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+          "button",
+          {
+            type: "button",
+            className: style_default.boardTitleBtn,
+            title: "\u70B9\u51FB\u91CD\u547D\u540D\u5267\u76EE",
+            onClick: () => setRenamingTitle(project.title),
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: project.title }),
+              project.drama?.aspectRatio && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.ratioTag, children: project.drama.aspectRatio })
+            ]
+          }
+        ) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.boardTitle, children: "\u5E55\u5883\u5DE5\u4F5C\u53F0" }),
+        !isSplit && !inHubView && project && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.modeTabs, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { type: "button", className: tab === "drama" ? style_default.tabActive : style_default.tabBtn, onClick: () => setTab("drama"), children: [
+            "\u{1F3AC} \u77ED\u5267\u5206\u955C\u53F0 (",
+            project.drama?.episodes.length ?? 0,
+            "\u96C6)"
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { type: "button", className: tab === "canvas" ? style_default.tabActive : style_default.tabBtn, onClick: () => setTab("canvas"), children: [
+            "\u2726 \u65E0\u9650\u753B\u5E03 (",
+            project.nodes.length,
+            ")"
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { type: "button", className: tab === "timeline" ? style_default.tabActive : style_default.tabBtn, onClick: () => setTab("timeline"), children: [
+            "\u{1F39E} \u6210\u7247\u4E0E\u526A\u6620 (",
+            project.timeline?.clips.length ?? 0,
+            ")"
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.topRight, children: [
+          !inHubView && project && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.btnIcon, disabled: !project.history?.canUndo, onClick: () => void undo(), title: "\u64A4\u9500 (\u2318Z)", children: "\u21B6" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.btnIcon, disabled: !project.history?.canRedo, onClick: () => void redo(), title: "\u91CD\u505A (\u21E7\u2318Z)", children: "\u21B7" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("a", { className: style_default.btn, href: `${API}/projects/${project.id}/export`, download: true, title: "\u5BFC\u51FA .mujing.json \u5DE5\u7A0B\u5305", children: "\u5BFC\u51FA" })
+          ] }),
+          isSplit ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            "button",
+            {
+              type: "button",
+              className: style_default.btnAccentGhost,
+              title: "\u8FD4\u56DE\u5168\u5C4F\u5E55\u5883\u5DE5\u4F5C\u53F0",
+              onClick: () => getStudioBridge()?.openFullscreen(),
+              children: "\u26F6 \u72EC\u7ACB\u5DE5\u4F5C\u53F0"
+            }
+          ) : /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: directorOpen ? style_default.btnDirectorActive : style_default.btnDirector,
+              title: directorOpen ? "\u6536\u8D77\u53F3\u4FA7 AI \u5BFC\u6F14\u526F\u9A7E\u62BD\u5C49" : "\u5C55\u5F00\u53F3\u4FA7 AI \u5BFC\u6F14\u526F\u9A7E\uFF0C\u7528\u81EA\u7136\u8BED\u8A00\u7F16\u6392\u77ED\u5267\u3001\u753B\u5E03\u4E0E\u6210\u7247",
+              onClick: toggleDirectorDrawer,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u2728 AI \u5BFC\u6F14" }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.directorBadge, children: directorOpen ? "\u6536\u8D77" : "\u526F\u9A7E" })
+              ]
+            }
+          )
+        ] })
+      ] }),
+      isSplit && project && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.splitNavBar, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { type: "button", className: tab === "drama" ? style_default.splitTabActive : style_default.splitTabBtn, onClick: () => setTab("drama"), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u{1F3AC} \u77ED\u5267\u5206\u955C\u53F0" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: style_default.tabCount, children: [
+            project.drama?.episodes.length ?? 0,
+            "\u96C6"
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { type: "button", className: tab === "canvas" ? style_default.splitTabActive : style_default.splitTabBtn, onClick: () => setTab("canvas"), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u2726 \u65E0\u9650\u753B\u5E03" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.tabCount, children: project.nodes.length })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { type: "button", className: tab === "timeline" ? style_default.splitTabActive : style_default.splitTabBtn, onClick: () => setTab("timeline"), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u{1F39E} \u6210\u7247\u4E0E\u526A\u6620" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.tabCount, children: project.timeline?.clips.length ?? 0 })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.studioBody, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.studioMain, children: inHubView ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        ProjectHub,
+        {
+          projects,
+          media,
+          onSelectProject: (id) => void selectProject(id),
+          onDeleteProject: (id, title) => void removeProject(id, title),
+          onCreateProject: () => patchAppShellState({ createModalOpen: true }),
+          onImportJson: () => triggerAppImport(),
+          onRunPrompt: launchDirectorWithPrompt
+        }
+      ) : activeId === null || project === null ? /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.emptyStageCard, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.emptyStageIcon, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(NavIcon, { size: 32 }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { children: "\u6B22\u8FCE\u6765\u5230\u5E55\u5883 AI \u5F71\u89C6\u5DE5\u4F5C\u53F0" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("p", { children: [
+          "\u5BF9\u6807\u4E13\u4E1A\u6F2B\u5267\u4E0E\u77ED\u5267\u5236\u7247\u6D41\u7A0B\uFF1A\u652F\u6301 ",
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("b", { children: "\u89D2\u8272/\u573A\u666F\u4E09\u89C6\u56FE\u8D44\u4EA7\u9501\u5B9A" }),
+          "\u3001",
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("b", { children: "\u5355\u955C\u6545\u4E8B\u677F\u5173\u952E\u5E27\u4E0E\u89D2\u8272 TTS \u914D\u97F3" }),
+          "\u3001",
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("b", { children: "FFmpeg \u5C3E\u5E27\u63A5\u9996\u5E27\u65E0\u7F1D\u7EED\u62CD" }),
+          "\uFF0C\u4EE5\u53CA ",
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("b", { children: "\u526A\u6620\u4E13\u4E1A\u7248\u8349\u7A3F\u4E00\u952E\u4EA4\u4ED8" }),
+          "\u3002"
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.actions, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.btnPrimary, onClick: () => patchAppShellState({ createModalOpen: true }), children: "\uFF0B \u65B0\u5EFA\u5F71\u89C6\u5DE5\u7A0B" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { type: "button", className: style_default.btn, onClick: () => triggerAppImport(), children: "\u5BFC\u5165\u672C\u5730\u5DE5\u7A0B JSON" })
+        ] })
+      ] }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+        tab === "drama" && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DramaView, { project, onError: setErr, onNotify: notify, onSwitchTab: setTab }),
+        tab === "canvas" && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(BoardView, { project, onError: setErr, onNotify: notify }),
+        tab === "timeline" && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(TimelineView, { project, onError: setErr, onNotify: notify })
+      ] }) }),
+      !isSplit && renderDirectorChat && directorEverOpened && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("aside", { className: directorOpen ? style_default.directorDrawer : style_default.directorDrawerClosed, "aria-label": "AI \u5BFC\u6F14\u526F\u9A7E", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.directorHeader, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.directorTitle, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u2728 AI \u5BFC\u6F14\u526F\u9A7E" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: style_default.directorSub, children: "Agent \u7F16\u6392" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: style_default.headActions, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              "button",
+              {
+                type: "button",
+                className: style_default.btn,
+                title: "\u5F00\u542F\u4E00\u8F6E\u65B0\u7684\u5BFC\u6F14\u5BF9\u8BDD\uFF08\u4FDD\u6301\u5728\u5E55\u5883\u5DE5\u4F5C\u53F0\u5185\uFF09",
+                onClick: () => getStudioBridge()?.newDirectorSession(),
+                children: "\uFF0B \u65B0\u5BF9\u8BDD"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              "button",
+              {
+                type: "button",
+                className: style_default.iconBtn,
+                title: "\u6536\u8D77 AI \u5BFC\u6F14\u526F\u9A7E",
+                onClick: () => setDirectorOpen(false),
+                children: "\xD7"
+              }
+            )
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: style_default.directorBody, children: renderDirectorChat() })
+      ] })
+    ] })
+  ] }) });
 }
 function triggerDshSettingsDialog(shortcuts) {
   const entry = shortcuts?.catalog?.getSnapshot().find((item) => item.id === "settings.open");
